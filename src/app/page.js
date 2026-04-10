@@ -11,7 +11,7 @@ const copy = {
     heroTitleB: "sistemi che generano richieste",
     heroSubtitle:
       "Prima capisco la tua situazione reale — target, struttura, processi. Poi propongo quello che serve davvero, non quello che funziona per tutti. Per essere trovato dalle persone giuste, nel momento giusto.",
-    heroBtn1: "📱 Scrivimi su WhatsApp",
+    heroBtn1: "Scrivimi su WhatsApp",
     heroBtn2: "Come lavoro →",
     approach: "Il mio approccio",
     quote:
@@ -161,7 +161,7 @@ const copy = {
     heroTitleB: "systems that generate qualified leads",
     heroSubtitle:
       "First I understand your real situation — target, structure, processes. Then I propose what you actually need, not what works for everyone. So you can be found by the right people, at the right time.",
-    heroBtn1: "📱 Message me on WhatsApp",
+    heroBtn1: "Message me on WhatsApp",
     heroBtn2: "How I work →",
     approach: "My approach",
     quote:

@@ -1,6 +1,12 @@
 "use client";
 
+import { useForm } from "@formspree/react";
 import { useEffect, useState } from "react";
+
+function hasFormspreeSubmissionErrors(errors) {
+  if (!errors) return false;
+  return errors.getFormErrors().length > 0 || errors.getAllFieldErrors().length > 0;
+}
 
 const copy = {
   it: {
@@ -146,6 +152,8 @@ const copy = {
       budget: "Seleziona budget",
       msg: "Scrivi qui il tuo messaggio",
       submit: "Invia richiesta",
+      success: "Messaggio inviato! Ti rispondo entro 24 ore.",
+      error: "Qualcosa è andato storto. Riprova o scrivimi su WhatsApp.",
     },
     footerRight:
       "Aviano (PN) · Lavoro anche da remoto / UX · SEO Locale · Automazioni AI / Privacy Policy",
@@ -296,6 +304,8 @@ const copy = {
       budget: "Select budget",
       msg: "Write your message here",
       submit: "Send request",
+      success: "Message sent! I'll get back to you within 24 hours.",
+      error: "Something went wrong. Try again or message me on WhatsApp.",
     },
     footerRight:
       "Aviano (PN), Italy · Also working remotely / UX · Local SEO · AI Automations / Privacy Policy",
@@ -328,6 +338,7 @@ export default function Home() {
   const [isNarrowMobile, setIsNarrowMobile] = useState(false);
 
   const t = copy[lang];
+  const [formState, handleFormSubmit] = useForm("xbdpngvd");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -956,23 +967,82 @@ export default function Home() {
             </a>
           </div>
 
-          <form style={{ marginTop: 34, borderRadius: 18, border: `1px solid ${colors.line}`, background: "#fff", padding: isMobile ? 20 : 28 }}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 14 }}>
-              <input style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15 }} placeholder={t.form.name} />
-              <input style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15 }} type="email" placeholder={t.form.email} />
-              <input style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: isMobile ? "auto" : "1 / 3" }} placeholder={t.form.activity} />
-              <select style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: isMobile ? "auto" : "1 / 3" }} defaultValue="">
-                <option value="" disabled>{t.form.budget}</option>
-                <option>€250-500</option>
-                <option>€800-1.600</option>
-                <option>€2.700-5.000</option>
-                <option>Oltre €5.000</option>
-              </select>
-              <textarea style={{ minHeight: 144, border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: isMobile ? "auto" : "1 / 3" }} placeholder={t.form.msg} />
-            </div>
-            <button style={{ marginTop: 16, border: "none", borderRadius: 999, background: colors.navy, color: "#fff", padding: "12px 24px", fontWeight: 700, cursor: "pointer" }}>
-              {t.form.submit}
-            </button>
+          <form
+            onSubmit={handleFormSubmit}
+            style={{ marginTop: 34, borderRadius: 18, border: `1px solid ${colors.line}`, background: "#fff", padding: isMobile ? 20 : 28 }}
+          >
+            {formState.succeeded ? (
+              <p style={{ margin: 0, color: colors.teal, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>
+                {t.form.success}
+              </p>
+            ) : (
+              <>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 14 }}>
+                  <input
+                    name="nome"
+                    type="text"
+                    required
+                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15 }}
+                    placeholder={t.form.name}
+                  />
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15 }}
+                    placeholder={t.form.email}
+                  />
+                  <input
+                    name="tipo_attivita"
+                    type="text"
+                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: isMobile ? "auto" : "1 / 3" }}
+                    placeholder={t.form.activity}
+                  />
+                  <select
+                    name="budget"
+                    required
+                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: isMobile ? "auto" : "1 / 3" }}
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      {t.form.budget}
+                    </option>
+                    <option value="€250-500">€250-500</option>
+                    <option value="€800-1.600">€800-1.600</option>
+                    <option value="€2.700-5.000">€2.700-5.000</option>
+                    <option value="Oltre €5.000">Oltre €5.000</option>
+                  </select>
+                  <textarea
+                    name="messaggio"
+                    required
+                    style={{ minHeight: 144, border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: isMobile ? "auto" : "1 / 3" }}
+                    placeholder={t.form.msg}
+                  />
+                </div>
+                {hasFormspreeSubmissionErrors(formState.errors) && (
+                  <p style={{ margin: "14px 0 0", color: "#c0392b", fontSize: 14, lineHeight: 1.5 }}>
+                    {t.form.error}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={formState.submitting}
+                  style={{
+                    marginTop: 16,
+                    border: "none",
+                    borderRadius: 999,
+                    background: colors.navy,
+                    color: "#fff",
+                    padding: "12px 24px",
+                    fontWeight: 700,
+                    cursor: formState.submitting ? "not-allowed" : "pointer",
+                    opacity: formState.submitting ? 0.65 : 1,
+                  }}
+                >
+                  {t.form.submit}
+                </button>
+              </>
+            )}
           </form>
         </div>
       </section>

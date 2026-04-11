@@ -1086,7 +1086,12 @@ export default function Home() {
             <p style={{ margin: "4px 0 0", color: "rgba(255,255,255,0.3)", fontSize: 12 }}>
               UX · SEO Locale · Automazioni AI
             </p>
-            <a href="#" style={{ display: "inline-block", marginTop: 6, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>
+            <a
+              href="https://www.iubenda.com/privacy-policy/65493035"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "inline-block", marginTop: 6, color: "rgba(255,255,255,0.3)", fontSize: 12 }}
+            >
               Privacy Policy
             </a>
           </div>

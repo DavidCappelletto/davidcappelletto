@@ -900,6 +900,12 @@ export default function Home() {
                 {t.featured}
               </span>
               <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: "rgba(255,255,255,.9)" }}>{t.pricing[1]}</p>
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: "rgba(255,255,255,.9)" }}>
+                Per chi ha un problema specifico da risolvere
+              </p>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: "#3DBFB2", fontWeight: 500 }}>
+                → Ideale se hai già un sito ma non ti porta clienti.
+              </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[1]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10, color: "rgba(255,255,255,.95)" }}>
                 {t.pricingItems[1].map((item) => (

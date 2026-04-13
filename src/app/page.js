@@ -600,7 +600,7 @@ export default function Home() {
             width: "min(1200px, 92vw)",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "1fr",
             gap: 40,
             alignItems: "start",
             position: "relative",
@@ -635,7 +635,7 @@ export default function Home() {
                 {t.heroBadge}
               </span>
             </div>
-            <h1 className="hero-title" style={{ fontSize: 56, lineHeight: 1.1, margin: 0, fontWeight: 800 }}>
+            <h1 className="hero-title" style={{ fontSize: 38, lineHeight: 1.1, margin: 0, fontWeight: 800 }}>
               {t.heroTitleA} <span style={{ color: colors.teal }}>{t.heroTitleB}</span>.
             </h1>
             <p style={{ marginTop: 24, maxWidth: 640, fontSize: 20, lineHeight: 1.55, color: "rgba(255,255,255,.9)" }}>
@@ -704,10 +704,10 @@ export default function Home() {
       </section>
 
       <section style={{ background: colors.navyDeep, color: "#fff", padding: "96px 0" }}>
-        <div className="problem-grid" style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36 }}>
+        <div className="problem-grid" style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr", gap: 36 }}>
           <div>
             <span style={{ display: "inline-block", background: "rgba(43,168,154,.2)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.problemTag}</span>
-            <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 46, lineHeight: 1.1 }}>{t.problemTitle}</h2>
+            <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.1 }}>{t.problemTitle}</h2>
             <p style={{ marginTop: 24, lineHeight: 1.65, color: "rgba(255,255,255,.9)" }}>
               {t.problemText}
             </p>
@@ -750,11 +750,11 @@ export default function Home() {
       <section id="come-lavoro" style={{ background: "#fff", padding: "96px 0" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.workTag}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 46, lineHeight: 1.15 }}>{t.workTitle}</h2>
+          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.workTitle}</h2>
           <p style={{ marginTop: 16, maxWidth: 900, color: colors.inkMuted, lineHeight: 1.6 }}>
             {t.workIntro}
           </p>
-          <div className="three-col-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr 1fr 1fr" }}>
+          <div className="steps-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
             {t.steps.map((step, idx) => (
               <article
                 key={step[0]}
@@ -786,8 +786,8 @@ export default function Home() {
       <section id="casi-reali" style={{ background: colors.bg, padding: "96px 0" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.casesTag}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 46, lineHeight: 1.15 }}>{t.casesTitle}</h2>
-          <div className="three-col-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr 1fr 1fr" }}>
+          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.casesTitle}</h2>
+          <div className="cases-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
               <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
               <h3 style={{ margin: "18px 0 0", fontSize: 28 }}>{t.case1}</h3>
@@ -831,9 +831,9 @@ export default function Home() {
       <section id="servizi" style={{ background: "#fff", padding: "96px 0" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.servicesTag}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 46, lineHeight: 1.15 }}>{t.servicesTitle}</h2>
+          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.servicesTitle}</h2>
 
-          <div style={{ marginTop: 40, display: "grid", gap: 12 }}>
+          <div className="services-cards-grid" style={{ marginTop: 40, display: "grid", gap: 12, gridTemplateColumns: "1fr" }}>
             {t.serviceAccordions.map((item, idx) => {
               const isOpen = openServiceAccordion === idx;
               return (
@@ -870,7 +870,7 @@ export default function Home() {
             })}
           </div>
 
-          <div className="three-col-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr 1fr 1fr" }}>
+          <div className="prices-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
               <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[0]}</p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
@@ -916,7 +916,7 @@ export default function Home() {
       <section id="mini-audit" style={{ background: "linear-gradient(140deg, #1C2E4A, #111E30)", color: "#fff", textAlign: "center", padding: "96px 0" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "rgba(255,255,255,.14)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.firstStep}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 46, lineHeight: 1.15 }}>{t.miniTitle}</h2>
+          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.miniTitle}</h2>
           <p style={{ margin: "16px auto 0", maxWidth: 860, color: "rgba(255,255,255,.88)", lineHeight: 1.6 }}>{t.miniText}</p>
           <div style={{ marginTop: 30, display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
             <a href="https://wa.me/393481151160" style={{ background: "#fff", color: colors.ink, borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}>
@@ -932,7 +932,7 @@ export default function Home() {
       <section id="contatti" style={{ background: colors.bg, padding: "96px 0" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.contacts}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 46 }}>{t.talk}</h2>
+          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34 }}>{t.talk}</h2>
           <p style={{ marginTop: 10, color: colors.inkMuted }}>{t.talkSub}</p>
 
           <div style={{ marginTop: 24, display: "flex", flexWrap: "wrap", gap: 14 }}>
@@ -1016,7 +1016,7 @@ export default function Home() {
           <form
             className="contact-form"
             onSubmit={handleFormSubmit}
-            style={{ marginTop: 34, borderRadius: 18, border: `1px solid ${colors.line}`, background: "#fff", padding: 28 }}
+            style={{ marginTop: 34, borderRadius: 18, border: `1px solid ${colors.line}`, background: "#fff", padding: 20 }}
           >
             {formState.succeeded ? (
               <p style={{ margin: 0, color: colors.teal, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>
@@ -1024,7 +1024,7 @@ export default function Home() {
               </p>
             ) : (
               <>
-                <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
                   <input
                     name="nome"
                     type="text"
@@ -1043,14 +1043,14 @@ export default function Home() {
                     className="contact-span-full"
                     name="tipo_attivita"
                     type="text"
-                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "1 / 3" }}
+                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "auto" }}
                     placeholder={t.form.activity}
                   />
                   <select
                     className="contact-span-full"
                     name="budget"
                     required
-                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "1 / 3" }}
+                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "auto" }}
                     defaultValue=""
                   >
                     <option value="" disabled>
@@ -1065,7 +1065,7 @@ export default function Home() {
                     className="contact-span-full"
                     name="messaggio"
                     required
-                    style={{ minHeight: 144, border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "1 / 3" }}
+                    style={{ minHeight: 144, border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "auto" }}
                     placeholder={t.form.msg}
                   />
                 </div>
@@ -1104,9 +1104,9 @@ export default function Home() {
             width: "min(1200px, 92vw)",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "1fr auto 1fr",
+            gridTemplateColumns: "1fr",
             gap: 20,
-            alignItems: "center",
+            alignItems: "flex-start",
           }}
         >
           <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
@@ -1130,7 +1130,7 @@ export default function Home() {
             <a href="#contatti" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.contacts}</a>
           </div>
 
-          <div className="footer-right" style={{ justifySelf: "end", textAlign: "right" }}>
+          <div className="footer-right" style={{ justifySelf: "start", textAlign: "left" }}>
             <p style={{ margin: 0, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>
               Aviano (PN) · Lavoro anche da remoto
             </p>
@@ -1225,11 +1225,14 @@ export default function Home() {
         html {
           scroll-behavior: smooth;
         }
-        .mobile-toggle {
+        .desktop-nav {
           display: none;
         }
+        .mobile-toggle {
+          display: block;
+        }
         .mobile-menu-panel {
-          display: none;
+          display: block;
         }
         @keyframes pulse {
           0% {
@@ -1242,38 +1245,58 @@ export default function Home() {
             box-shadow: 0 0 0 0 rgba(43, 168, 154, 0);
           }
         }
-        @media (max-width: 767px) {
+        @media (min-width: 768px) {
           .desktop-nav {
-            display: none !important;
+            display: flex !important;
           }
           .mobile-toggle {
-            display: block !important;
+            display: none !important;
           }
           .mobile-menu-panel {
-            display: block !important;
+            display: none !important;
           }
           .hero-grid,
-          .problem-grid,
-          .three-col-grid,
-          .contact-grid,
+          .problem-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .steps-grid,
+          .prices-grid {
+            grid-template-columns: 1fr 1fr 1fr !important;
+          }
+          .cases-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .services-cards-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .contact-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
           .footer-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr auto 1fr !important;
+            align-items: center !important;
           }
           .hero-title {
-            font-size: 38px !important;
+            font-size: 56px !important;
           }
           .section-title {
-            font-size: 34px !important;
+            font-size: 46px !important;
           }
           .contact-form {
-            padding: 20px !important;
+            padding: 28px !important;
           }
           .contact-span-full {
-            grid-column: auto !important;
+            grid-column: 1 / 3 !important;
           }
           .footer-right {
-            justify-self: start !important;
-            text-align: left !important;
+            justify-self: end !important;
+            text-align: right !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          .cases-grid,
+          .services-cards-grid {
+            grid-template-columns: 1fr 1fr 1fr !important;
           }
         }
       `}</style>

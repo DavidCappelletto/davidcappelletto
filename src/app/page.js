@@ -16,7 +16,7 @@ const copy = {
     heroTitleA: "Trasformo siti confusi in",
     heroTitleB: "sistemi che generano richieste",
     heroSubtitle:
-      "Prima capisco la tua situazione reale — target, struttura, processi. Poi propongo quello che serve davvero, non quello che funziona per tutti. Per essere trovato dalle persone giuste, nel momento giusto.",
+      "Trasformo siti confusi in sistemi che generano richieste. Per professionisti e PMI italiane — con metodo, non con template.",
     heroBtn1: "Scrivimi su WhatsApp",
     heroBtn2: "Come lavoro →",
     approach: "Il mio approccio",
@@ -57,8 +57,10 @@ const copy = {
     ],
     casesTag: "Casi Reali",
     casesTitle: "Non esempi ipotetici. Cose già fatte.",
-    case1: "Professionista sanitaria",
-    case1Place: "Friuli-Venezia Giulia",
+    case1Tag: "Libera Professione · Settore Sanitario",
+    case1: "Infermiera Althea",
+    case1Place: "📍 Pordenone e provincia",
+    case1Link: "https://www.infermiera-althea.com/",
     case1Results: [
       "Tra i primi risultati organici locali per query di settore",
       "PageSpeed 100% desktop & mobile",
@@ -87,6 +89,11 @@ const copy = {
       "Selettore lingua IT/EN integrato",
       "Costruito interamente con workflow AI-assisted",
     ],
+    aboutTag: "Chi sono",
+    aboutTitle: "David Cappelletto",
+    aboutSubtitle: "Consulente Digitale Freelance · Friuli-Venezia Giulia",
+    aboutText:
+      "Mi chiamo David, sono un consulente digitale freelance con base in Friuli-Venezia Giulia. Ho un background in design industriale che mi ha insegnato una cosa: la forma segue la funzione, non il contrario.\n\nLavoro con professionisti e PMI che hanno già un sito ma non vedono risultati. Prima di toccare qualsiasi strumento, analizzo la situazione reale — target, struttura, processi. Solo dopo propongo cosa fare.\n\nNon gestisco decine di clienti in parallelo. Lavoro con pochi progetti alla volta — e parli sempre direttamente con me, senza intermediari.",
     servicesTag: "Cosa Puoi Chiedermi",
     servicesTitle: "Le competenze che porto. Applicate dove servono.",
     serviceAccordions: [
@@ -182,7 +189,7 @@ const copy = {
     heroTitleA: "I turn confusing websites into",
     heroTitleB: "systems that generate qualified leads",
     heroSubtitle:
-      "First I understand your real situation — target, structure, processes. Then I propose what you actually need, not what works for everyone. So you can be found by the right people, at the right time.",
+      "I turn confusing websites into systems that generate qualified leads. For Italian professionals and SMEs — with method, not templates.",
     heroBtn1: "Message me on WhatsApp",
     heroBtn2: "How I work →",
     approach: "My approach",
@@ -223,8 +230,10 @@ const copy = {
     ],
     casesTag: "Real Cases",
     casesTitle: "No hypothetical examples. Real work already delivered.",
-    case1: "Healthcare professional",
-    case1Place: "Friuli-Venezia Giulia",
+    case1Tag: "Independent Professional · Healthcare",
+    case1: "Nurse Althea",
+    case1Place: "📍 Pordenone area",
+    case1Link: "https://www.infermiera-althea.com/",
     case1Results: [
       "Among the first local organic results for niche queries",
       "PageSpeed 100% on desktop and mobile",
@@ -253,6 +262,11 @@ const copy = {
       "Integrated IT/EN language switcher",
       "Built end-to-end with an AI-assisted workflow",
     ],
+    aboutTag: "About",
+    aboutTitle: "David Cappelletto",
+    aboutSubtitle: "Freelance Digital Consultant · Friuli-Venezia Giulia",
+    aboutText:
+      "I'm David, a freelance digital consultant based in Friuli-Venezia Giulia. I come from an industrial design background that taught me one key principle: form follows function, never the other way around.\n\nI work with professionals and SMEs that already have a website but are not getting results. Before touching any tool, I analyze the real situation — target, structure, and processes. Only then do I define what to do.\n\nI do not handle dozens of clients in parallel. I work with a limited number of projects at a time — and you always speak directly with me, with no middle layers.",
     servicesTag: "What You Can Ask For",
     servicesTitle: "The skills I bring. Applied where they matter.",
     serviceAccordions: [
@@ -802,7 +816,19 @@ export default function Home() {
           <div className="cases-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
               <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
-              <h3 style={{ margin: "18px 0 0", fontSize: 28 }}>{t.case1}</h3>
+              <p style={{ margin: "14px 0 0", color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
+                {t.case1Tag}
+              </p>
+              <h3 style={{ margin: "10px 0 0", fontSize: 28 }}>
+                <a
+                  href={t.case1Link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: colors.ink, textDecoration: "none" }}
+                >
+                  {t.case1}
+                </a>
+              </h3>
               <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{t.case1Place}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
                 {t.case1Results.map((result) => (
@@ -836,6 +862,43 @@ export default function Home() {
                 ))}
               </ul>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ background: "#fff", padding: "96px 0" }}>
+        <div className="about-grid" style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr", gap: 28, alignItems: "center" }}>
+          <div className="about-photo-wrap" style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="/profile.png"
+              alt="David Cappelletto"
+              style={{ width: 280, height: 280, borderRadius: "50%", objectFit: "cover" }}
+            />
+          </div>
+          <div>
+            <span
+              style={{
+                display: "inline-block",
+                borderLeft: `3px solid ${colors.teal}`,
+                paddingLeft: 10,
+                color: colors.teal,
+                textTransform: "uppercase",
+                letterSpacing: ".08em",
+                fontSize: 12,
+                fontWeight: 700,
+              }}
+            >
+              {t.aboutTag}
+            </span>
+            <h2 className="section-title" style={{ margin: "14px 0 0", fontSize: 34, lineHeight: 1.2 }}>
+              {t.aboutTitle}
+            </h2>
+            <p style={{ margin: "8px 0 0", color: colors.inkMuted, fontWeight: 600 }}>
+              {t.aboutSubtitle}
+            </p>
+            <p style={{ margin: "14px 0 0", color: colors.inkMuted, lineHeight: 1.7, whiteSpace: "pre-line" }}>
+              {t.aboutText}
+            </p>
           </div>
         </div>
       </section>
@@ -1278,6 +1341,12 @@ export default function Home() {
           .cases-grid {
             grid-template-columns: 1fr 1fr !important;
           }
+          .about-grid {
+            grid-template-columns: 280px 1fr !important;
+          }
+          .about-photo-wrap {
+            justify-content: flex-start !important;
+          }
           .services-cards-grid {
             grid-template-columns: 1fr 1fr !important;
           }
@@ -1309,6 +1378,9 @@ export default function Home() {
           .cases-grid,
           .services-cards-grid {
             grid-template-columns: 1fr 1fr 1fr !important;
+          }
+          .about-grid {
+            grid-template-columns: 280px 1fr !important;
           }
         }
       `}</style>

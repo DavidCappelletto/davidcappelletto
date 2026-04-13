@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it" className="h-full">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-MBWPX09G1C"

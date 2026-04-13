@@ -74,6 +74,19 @@ const copy = {
       "Landing pages dedicate per ogni campagna",
       "Struttura SEO on-page costruita prima del CMS",
     ],
+    case3Tag: "Progetto Personale · Consulenza Digitale",
+    case3: "davidcappelletto.it",
+    case3Place: "📍 Aviano (PN)",
+    case3Text:
+      "Ho progettato e sviluppato il mio sito personale come sistema digitale completo — non un biglietto da visita, ma uno strumento che genera richieste. Ho ragionato prima su struttura, target e posizionamento. Poi ho costruito.",
+    case3Results: [
+      "Architettura SEO on-page prima del codice",
+      "Stack Next.js + Tailwind, deploy su Netlify",
+      "Analytics, Search Console e GMB collegati",
+      "Form contatti funzionante con Formspree",
+      "Selettore lingua IT/EN integrato",
+      "Costruito interamente con workflow AI-assisted",
+    ],
     servicesTag: "Cosa Puoi Chiedermi",
     servicesTitle: "Le competenze che porto. Applicate dove servono.",
     serviceAccordions: [
@@ -226,6 +239,19 @@ const copy = {
       "Mobile-first architecture with target-based UX segmentation",
       "Dedicated landing pages for each campaign",
       "On-page SEO structure built before the CMS",
+    ],
+    case3Tag: "Personal Project · Digital Consulting",
+    case3: "davidcappelletto.it",
+    case3Place: "📍 Aviano (PN)",
+    case3Text:
+      "I designed and developed my personal site as a complete digital system — not a business card, but a tool built to generate requests. I first worked on structure, target and positioning. Then I built it.",
+    case3Results: [
+      "On-page SEO architecture defined before coding",
+      "Next.js + Tailwind stack, deployed on Netlify",
+      "Analytics, Search Console and GMB connected",
+      "Working contact form with Formspree",
+      "Integrated IT/EN language switcher",
+      "Built end-to-end with an AI-assisted workflow",
     ],
     servicesTag: "What You Can Ask For",
     servicesTitle: "The skills I bring. Applied where they matter.",
@@ -775,7 +801,7 @@ export default function Home() {
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.casesTag}</span>
           <h2 style={{ margin: "20px 0 0", fontSize: isMobile ? 34 : 46, lineHeight: 1.15 }}>{t.casesTitle}</h2>
-          <div style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr" }}>
+          <div style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr" }}>
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
               <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
               <h3 style={{ margin: "18px 0 0", fontSize: 28 }}>{t.case1}</h3>
@@ -793,6 +819,21 @@ export default function Home() {
               <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{t.case2Place}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
                 {t.case2Results.map((result) => (
+                  <li key={result}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
+                ))}
+              </ul>
+            </article>
+
+            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
+              <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
+              <p style={{ margin: "14px 0 0", color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
+                {t.case3Tag}
+              </p>
+              <h3 style={{ margin: "10px 0 0", fontSize: 28 }}>{t.case3}</h3>
+              <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{t.case3Place}</p>
+              <p style={{ margin: "14px 0 0", color: colors.inkMuted, lineHeight: 1.6 }}>{t.case3Text}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
+                {t.case3Results.map((result) => (
                   <li key={result}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
                 ))}
               </ul>

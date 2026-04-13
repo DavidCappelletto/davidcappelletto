@@ -160,6 +160,7 @@ const copy = {
     cookie:
       "Questo sito utilizza cookie tecnici per migliorare l'esperienza di navigazione.",
     accept: "Accetta",
+    reject: "Rifiuta",
   },
   en: {
     navLinks: ["How I work", "Real cases", "Services"],
@@ -311,6 +312,7 @@ const copy = {
       "Aviano (PN), Italy · Also working remotely / UX · Local SEO · AI Automations / Privacy Policy",
     cookie: "This website uses technical cookies to improve browsing experience.",
     accept: "Accept",
+    reject: "Reject",
   },
 };
 
@@ -348,7 +350,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (window.localStorage.getItem("dc_cookie_ok") === "1") return;
+    if (
+      window.localStorage.getItem("cookieConsent") ||
+      window.localStorage.getItem("dc_cookie_ok") === "1"
+    ) {
+      return;
+    }
     const timer = window.setTimeout(() => setShowCookie(true), 800);
     return () => window.clearTimeout(timer);
   }, []);
@@ -364,7 +371,13 @@ export default function Home() {
   }, []);
 
   const acceptCookie = () => {
+    window.localStorage.setItem("cookieConsent", "accepted");
     window.localStorage.setItem("dc_cookie_ok", "1");
+    setShowCookie(false);
+  };
+
+  const rejectCookie = () => {
+    window.localStorage.setItem("cookieConsent", "rejected");
     setShowCookie(false);
   };
 
@@ -1133,12 +1146,40 @@ export default function Home() {
           <p style={{ margin: 0, color: colors.inkMuted, fontSize: 14, lineHeight: 1.55 }}>
             {t.cookie}
           </p>
-          <button
-            onClick={acceptCookie}
-            style={{ marginTop: 12, border: "none", borderRadius: 999, background: colors.navy, color: "#fff", padding: "10px 14px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
-          >
-            {t.accept}
-          </button>
+          <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
+            <button
+              onClick={acceptCookie}
+              style={{
+                border: "none",
+                borderRadius: 999,
+                background: "#2BA89A",
+                color: "#fff",
+                padding: "10px 16px",
+                fontSize: 14,
+                fontWeight: 700,
+                cursor: "pointer",
+                minWidth: 96,
+              }}
+            >
+              {t.accept}
+            </button>
+            <button
+              onClick={rejectCookie}
+              style={{
+                border: "1px solid #2BA89A",
+                borderRadius: 999,
+                background: "transparent",
+                color: "#2BA89A",
+                padding: "10px 16px",
+                fontSize: 14,
+                fontWeight: 700,
+                cursor: "pointer",
+                minWidth: 96,
+              }}
+            >
+              {t.reject}
+            </button>
+          </div>
         </div>
       )}
 

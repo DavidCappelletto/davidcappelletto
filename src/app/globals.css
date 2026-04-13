@@ -15,3 +15,15 @@ body {
   font-family: 'DM Sans', system-ui, sans-serif;
   overflow-x: hidden;
 }
+
+@media (max-width: 767px) {
+  .nav-links-desktop { display: none !important; }
+  .nav-lang-desktop { display: none !important; }
+  .nav-hamburger { display: flex !important; }
+}
+
+@media (min-width: 768px) {
+  .nav-links-desktop { display: flex !important; }
+  .nav-lang-desktop { display: flex !important; }
+  .nav-hamburger { display: none !important; }
+}

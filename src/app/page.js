@@ -446,8 +446,8 @@ export default function Home() {
             <span>David Cappelletto</span>
           </a>
 
-          <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 28 }}>
-              <div style={{ border: "1px solid rgba(255,255,255,.4)", borderRadius: 999, padding: 4, fontSize: 13 }}>
+          <div className="desktop-nav nav-links-desktop" style={{ display: "flex", alignItems: "center", gap: 28 }}>
+              <div className="nav-lang-desktop" style={{ border: "1px solid rgba(255,255,255,.4)", borderRadius: 999, padding: 4, fontSize: 13 }}>
                 <button
                   style={{
                     border: "none",
@@ -501,7 +501,7 @@ export default function Home() {
             </div>
 
           <button
-            className="mobile-toggle"
+            className="mobile-toggle nav-hamburger"
             style={{
               border: "none",
               background: "transparent",

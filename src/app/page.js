@@ -502,7 +502,19 @@ export default function Home() {
 
           <button
             className="mobile-toggle"
-              style={{ border: "none", background: "transparent", color: "#fff", fontSize: 30, cursor: "pointer" }}
+            style={{
+              border: "none",
+              background: "transparent",
+              color: "#fff",
+              fontSize: 28,
+              cursor: "pointer",
+              width: 40,
+              height: 40,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 0,
+            }}
               onClick={() => setMobileMenuOpen((v) => !v)}
               aria-label="Apri menu"
           >

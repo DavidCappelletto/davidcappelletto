@@ -1,5 +1,6 @@
 import "./globals.css";
 import Script from "next/script";
+import ClarityInit from "./ClarityInit";
 
 export const metadata = {
   title: "David Cappelletto | Consulenza Digitale",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body className="min-h-full flex flex-col antialiased">
+        <ClarityInit />
         {children}
       </body>
     </html>

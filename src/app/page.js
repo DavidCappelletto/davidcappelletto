@@ -2,6 +2,7 @@
 
 import { useForm } from "@formspree/react";
 import { useEffect, useState } from "react";
+import { trackEvent } from "./analytics";
 
 function hasFormspreeSubmissionErrors(errors) {
   if (!errors) return false;
@@ -380,11 +381,30 @@ export default function Home() {
   const t = copy[lang];
   const [formState, handleFormSubmit] = useForm("xbdpngvd");
 
+  const handleTrackedFormSubmit = async (event) => {
+    await handleFormSubmit(event);
+    trackEvent("form_inviato");
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      [25, 50, 75, 90].forEach((threshold) => {
+        if (scrollPercent >= threshold && !window[`scrollTracked${threshold}`]) {
+          window[`scrollTracked${threshold}`] = true;
+          trackEvent(`scroll_depth_${threshold}`);
+        }
+      });
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -679,7 +699,11 @@ export default function Home() {
                   fontWeight: 700,
                   cursor: "pointer",
                 }}
-                onClick={() => window.open("https://wa.me/393481151160", "_blank")}
+                onClick={() => {
+                  trackEvent("click_whatsapp");
+                  trackEvent("click_audit_gratuito");
+                  window.open("https://wa.me/393481151160", "_blank");
+                }}
               >
                 {t.heroBtn1}
               </button>
@@ -994,7 +1018,11 @@ export default function Home() {
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.miniTitle}</h2>
           <p style={{ margin: "16px auto 0", maxWidth: 860, color: "rgba(255,255,255,.88)", lineHeight: 1.6 }}>{t.miniText}</p>
           <div style={{ marginTop: 30, display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
-            <a href="https://wa.me/393481151160" style={{ background: "#fff", color: colors.ink, borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}>
+            <a
+              href="https://wa.me/393481151160"
+              onClick={() => trackEvent("click_whatsapp")}
+              style={{ background: "#fff", color: colors.ink, borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}
+            >
               {t.heroBtn1}
             </a>
             <a href="#contatti" style={{ border: "1px solid rgba(255,255,255,.6)", color: "#fff", borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}>
@@ -1013,6 +1041,7 @@ export default function Home() {
           <div style={{ marginTop: 24, display: "flex", flexWrap: "wrap", gap: 14 }}>
             <a
               href="https://wa.me/393481151160"
+              onClick={() => trackEvent("click_whatsapp")}
               onMouseEnter={() => setHoveredContact(0)}
               onMouseLeave={() => setHoveredContact(null)}
               style={{
@@ -1090,7 +1119,7 @@ export default function Home() {
 
           <form
             className="contact-form"
-            onSubmit={handleFormSubmit}
+            onSubmit={handleTrackedFormSubmit}
             style={{ marginTop: 34, borderRadius: 18, border: `1px solid ${colors.line}`, background: "#fff", padding: 20 }}
           >
             {formState.succeeded ? (
@@ -1232,6 +1261,7 @@ export default function Home() {
 
       <a
         href="https://wa.me/393481151160"
+        onClick={() => trackEvent("click_whatsapp")}
         style={{
           position: "fixed",
           right: 20,

@@ -58,37 +58,57 @@ const copy = {
     ],
     casesTag: "Casi Reali",
     casesTitle: "Non esempi ipotetici. Cose già fatte.",
-    case1Tag: "Libera Professione · Settore Sanitario",
-    case1: "Infermiera Althea",
-    case1Place: "📍 Pordenone e provincia",
-    case1Link: "https://www.infermiera-althea.com/",
-    case1Results: [
-      "Tra i primi risultati organici locali per query di settore",
-      "PageSpeed 100% desktop & mobile",
-      "Accessibilità 95% — Google Lighthouse",
-      "Citata da AI assistant per ricerche locali",
-      "Stabile da oltre un anno senza manutenzione",
-    ],
-    case2: "Azienda impiantistica HVAC",
-    case2Place: "Piemonte",
-    case2Results: [
-      "Separazione organico / ADS per massimizzare conversioni",
-      "Architettura mobile-first con UX segmentata per target",
-      "Landing pages dedicate per ogni campagna",
-      "Struttura SEO on-page costruita prima del CMS",
-    ],
-    case3Tag: "Progetto Personale · Consulenza Digitale",
-    case3: "davidcappelletto.it",
-    case3Place: "📍 Aviano (PN)",
-    case3Text:
-      "Ho progettato e sviluppato il mio sito personale come sistema digitale completo — non un biglietto da visita, ma uno strumento che genera richieste. Ho ragionato prima su struttura, target e posizionamento. Poi ho costruito.",
-    case3Results: [
-      "Architettura SEO on-page prima del codice",
-      "Stack Next.js + Tailwind, deploy su Netlify",
-      "Analytics, Search Console e GMB collegati",
-      "Form contatti funzionante con Formspree",
-      "Selettore lingua IT/EN integrato",
-      "Costruito interamente con workflow AI-assisted",
+    casesReadMore: "Leggi il caso studio →",
+    casesAllBtn: "Tutti i casi studio →",
+    caseCards: [
+      {
+        slug: "azienda-hvac",
+        tag: "Progetto Cliente · Impiantistica HVAC",
+        title: "Sito aziendale completo, dalla diagnosi al deploy",
+        place: "Nord Italia",
+        results: [
+          "Sito statico veloce e sicuro, CMS headless per l'autonomia del cliente",
+          "Stack tracking completo (GA4 + GTM + Meta Pixel) conforme GDPR",
+          "Migrazione DNS senza downtime",
+          "Consegna con walkthrough e documentazione",
+        ],
+      },
+      {
+        slug: "infermiera-althea",
+        tag: "Libera Professione · Settore Sanitario",
+        title: "Infermiera Althea",
+        place: "📍 Pordenone e provincia",
+        results: [
+          "SEO locale senza budget pubblicitario",
+          "Posizionamento organico solido per le ricerche che contano",
+          "Piattaforma scelta per sostenibilità nel tempo",
+          "Redesign in corso proteggendo la SEO esistente",
+        ],
+      },
+      {
+        slug: "geofire",
+        tag: "Progetto Personale · Metodo",
+        title: "Geo·FIRE — globo 3D interattivo",
+        place: "Web app nel browser",
+        results: [
+          "Territorio tecnico nuovo affrontato con metodo",
+          "AI usata come tutor accelerato, decisioni mie",
+          "Iterazione rapida su prototipi",
+          "Il processo è il prodotto: caso studio di metodo",
+        ],
+      },
+      {
+        slug: "maybes-shop",
+        tag: "Progetto Sperimentale · Infrastruttura",
+        title: "Maybe's Shop — e-commerce automatizzato",
+        place: "Shopify + print-on-demand",
+        results: [
+          "Flusso ordine → stampa → spedizione senza interventi manuali",
+          "Brand e infrastruttura curati entrambi da zero",
+          "Testato con un ordine reale completato",
+          "Sistemi, non solo interfacce",
+        ],
+      },
     ],
     aboutTag: "Chi sono",
     aboutTitle: "David Cappelletto",
@@ -231,37 +251,57 @@ const copy = {
     ],
     casesTag: "Real Cases",
     casesTitle: "No hypothetical examples. Real work already delivered.",
-    case1Tag: "Independent Professional · Healthcare",
-    case1: "Nurse Althea",
-    case1Place: "📍 Pordenone area",
-    case1Link: "https://www.infermiera-althea.com/",
-    case1Results: [
-      "Among the first local organic results for niche queries",
-      "PageSpeed 100% on desktop and mobile",
-      "95% accessibility score — Google Lighthouse",
-      "Referenced by AI assistants for local searches",
-      "Stable for over a year without maintenance",
-    ],
-    case2: "HVAC installation company",
-    case2Place: "Piedmont",
-    case2Results: [
-      "Organic / ADS separation to maximize conversions",
-      "Mobile-first architecture with target-based UX segmentation",
-      "Dedicated landing pages for each campaign",
-      "On-page SEO structure built before the CMS",
-    ],
-    case3Tag: "Personal Project · Digital Consulting",
-    case3: "davidcappelletto.it",
-    case3Place: "📍 Aviano (PN)",
-    case3Text:
-      "I designed and developed my personal site as a complete digital system — not a business card, but a tool built to generate requests. I first worked on structure, target and positioning. Then I built it.",
-    case3Results: [
-      "On-page SEO architecture defined before coding",
-      "Next.js + Tailwind stack, deployed on Netlify",
-      "Analytics, Search Console and GMB connected",
-      "Working contact form with Formspree",
-      "Integrated IT/EN language switcher",
-      "Built end-to-end with an AI-assisted workflow",
+    casesReadMore: "Read the case study →",
+    casesAllBtn: "All case studies →",
+    caseCards: [
+      {
+        slug: "azienda-hvac",
+        tag: "Client Project · HVAC Installations",
+        title: "Full company website, from diagnosis to deploy",
+        place: "Northern Italy",
+        results: [
+          "Fast, secure static site with a headless CMS for client autonomy",
+          "Full tracking stack (GA4 + GTM + Meta Pixel), GDPR compliant",
+          "DNS migration with zero downtime",
+          "Delivered with walkthrough and documentation",
+        ],
+      },
+      {
+        slug: "infermiera-althea",
+        tag: "Independent Professional · Healthcare",
+        title: "Nurse Althea",
+        place: "📍 Pordenone area",
+        results: [
+          "Local SEO with zero ad budget",
+          "Solid organic ranking for the searches that matter",
+          "Platform chosen for long-term sustainability",
+          "Redesign in progress while protecting existing SEO",
+        ],
+      },
+      {
+        slug: "geofire",
+        tag: "Personal Project · Method",
+        title: "Geo·FIRE — interactive 3D globe",
+        place: "In-browser web app",
+        results: [
+          "New technical territory tackled with method",
+          "AI used as an accelerated tutor, decisions stayed mine",
+          "Fast iteration over prototypes",
+          "The process is the product: a case study of method",
+        ],
+      },
+      {
+        slug: "maybes-shop",
+        tag: "Experimental Project · Infrastructure",
+        title: "Maybe's Shop — automated e-commerce",
+        place: "Shopify + print-on-demand",
+        results: [
+          "Order → print → ship flow with no manual steps",
+          "Brand and infrastructure both built from scratch",
+          "Validated with a real completed order",
+          "Systems, not just interfaces",
+        ],
+      },
     ],
     aboutTag: "About",
     aboutTitle: "David Cappelletto",
@@ -838,54 +878,44 @@ export default function Home() {
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.casesTag}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.casesTitle}</h2>
           <div className="cases-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
-            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
-              <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
-              <p style={{ margin: "14px 0 0", color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
-                {t.case1Tag}
-              </p>
-              <h3 style={{ margin: "10px 0 0", fontSize: 28 }}>
-                <a
-                  href={t.case1Link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: colors.ink, textDecoration: "none" }}
-                >
-                  {t.case1}
-                </a>
-              </h3>
-              <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{t.case1Place}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                {t.case1Results.map((result) => (
-                  <li key={result}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
-                ))}
-              </ul>
-            </article>
-
-            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
-              <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
-              <h3 style={{ margin: "18px 0 0", fontSize: 28 }}>{t.case2}</h3>
-              <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{t.case2Place}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                {t.case2Results.map((result) => (
-                  <li key={result}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
-                ))}
-              </ul>
-            </article>
-
-            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
-              <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
-              <p style={{ margin: "14px 0 0", color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
-                {t.case3Tag}
-              </p>
-              <h3 style={{ margin: "10px 0 0", fontSize: 28 }}>{t.case3}</h3>
-              <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{t.case3Place}</p>
-              <p style={{ margin: "14px 0 0", color: colors.inkMuted, lineHeight: 1.6 }}>{t.case3Text}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                {t.case3Results.map((result) => (
-                  <li key={result}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
-                ))}
-              </ul>
-            </article>
+            {t.caseCards.map((card) => (
+              <a
+                key={card.slug}
+                href={`/casi-studio/${card.slug}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24, height: "100%" }}>
+                  <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
+                  <p style={{ margin: "14px 0 0", color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
+                    {card.tag}
+                  </p>
+                  <h3 style={{ margin: "10px 0 0", fontSize: 26, lineHeight: 1.25 }}>{card.title}</h3>
+                  <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{card.place}</p>
+                  <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
+                    {card.results.map((result) => (
+                      <li key={result}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
+                    ))}
+                  </ul>
+                  <p style={{ margin: "18px 0 0", color: colors.teal, fontWeight: 700 }}>{t.casesReadMore}</p>
+                </article>
+              </a>
+            ))}
+          </div>
+          <div style={{ marginTop: 32, textAlign: "center" }}>
+            <a
+              href="/casi-studio"
+              style={{
+                display: "inline-block",
+                background: colors.navy,
+                color: "#fff",
+                padding: "12px 24px",
+                borderRadius: 10,
+                textDecoration: "none",
+                fontWeight: 700,
+              }}
+            >
+              {t.casesAllBtn}
+            </a>
           </div>
         </div>
       </section>

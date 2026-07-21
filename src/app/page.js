@@ -11,7 +11,7 @@ function hasFormspreeSubmissionErrors(errors) {
 
 const copy = {
   it: {
-    navLinks: ["Come lavoro", "Casi reali", "Servizi"],
+    navLinks: ["Casi reali", "Come lavoro", "Servizi"],
     ctaMini: "Mini Audit Gratuito",
     heroBadge: "Consulenza Digitale su Misura",
     heroTitleA: "Trasformo siti confusi in",
@@ -210,7 +210,7 @@ const copy = {
     reject: "Rifiuta",
   },
   en: {
-    navLinks: ["How I work", "Real cases", "Services"],
+    navLinks: ["Real cases", "How I work", "Services"],
     ctaMini: "Free Mini Audit",
     heroBadge: "Tailored Digital Consulting",
     heroTitleA: "I turn confusing websites into",
@@ -482,8 +482,8 @@ export default function Home() {
   };
 
   const navLinks = [
-    { href: "#come-lavoro", label: t.navLinks[0] },
-    { href: "#casi-reali", label: t.navLinks[1] },
+    { href: "#casi-reali", label: t.navLinks[0] },
+    { href: "#come-lavoro", label: t.navLinks[1] },
     { href: "#servizi", label: t.navLinks[2] },
   ];
 
@@ -849,42 +849,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="come-lavoro" style={{ background: "#fff", padding: "96px 0" }}>
-        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
-          <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.workTag}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.workTitle}</h2>
-          <p style={{ marginTop: 16, maxWidth: 900, color: colors.inkMuted, lineHeight: 1.6 }}>
-            {t.workIntro}
-          </p>
-          <div className="steps-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
-            {t.steps.map((step, idx) => (
-              <article
-                key={step[0]}
-                onMouseEnter={() => setHoveredStep(idx)}
-                onMouseLeave={() => setHoveredStep(null)}
-                style={{
-                  border: `1px solid ${colors.line}`,
-                  borderRadius: 12,
-                  padding: 24,
-                  background: "#fff",
-                  borderLeft:
-                    hoveredStep === idx
-                      ? `3px solid ${colors.teal}`
-                      : "3px solid transparent",
-                  transform:
-                    hoveredStep === idx ? "translateY(-3px)" : "translateY(0)",
-                  transition: "transform .2s ease, border-left-color .2s ease",
-                }}
-              >
-                <p style={{ margin: 0, fontSize: 56, fontWeight: 800, color: colors.line }}>{step[0]}</p>
-                <h3 style={{ margin: "16px 0 0", fontSize: 26 }}>{step[1]}</h3>
-                <p style={{ margin: "12px 0 0", color: colors.inkMuted, lineHeight: 1.6 }}>{step[2]}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="casi-reali" style={{ background: colors.bg, padding: "96px 0" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.casesTag}</span>
@@ -1008,129 +972,101 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ background: "#fff", padding: "96px 0" }}>
-        <div className="about-grid" style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr", gap: 28, alignItems: "center" }}>
-          <div className="about-photo-wrap" style={{ display: "flex", justifyContent: "center" }}>
-            <img
-              src="/profile.png"
-              alt="David Cappelletto"
-              style={{ width: 280, height: 280, borderRadius: "50%", objectFit: "cover" }}
-            />
+      <section id="come-lavoro" style={{ background: "#fff", padding: "96px 0 56px" }}>
+        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
+          <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.workTag}</span>
+          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.workTitle}</h2>
+          <p style={{ marginTop: 16, maxWidth: 900, color: colors.inkMuted, lineHeight: 1.6 }}>
+            {t.workIntro}
+          </p>
+
+          <div className="method-combined-wrap" style={{ marginTop: 44, position: "relative" }}>
+            <div className="method-combined" style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr", gap: 32 }}>
+              <div className="method-photo-col">
+                <div className="about-photo-wrap" style={{ display: "flex", justifyContent: "center" }}>
+                  <img
+                    src="/profile.png"
+                    alt="David Cappelletto"
+                    style={{ width: 200, height: 200, borderRadius: "50%", objectFit: "cover" }}
+                  />
+                </div>
+                <div className="method-photo-text" style={{ marginTop: 20, textAlign: "center" }}>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      borderLeft: `3px solid ${colors.teal}`,
+                      paddingLeft: 10,
+                      color: colors.teal,
+                      textTransform: "uppercase",
+                      letterSpacing: ".08em",
+                      fontSize: 12,
+                      fontWeight: 700,
+                    }}
+                  >
+                    {t.aboutTag}
+                  </span>
+                  <h2 className="section-title" style={{ margin: "14px 0 0", fontSize: 28, lineHeight: 1.2 }}>
+                    {t.aboutTitle}
+                  </h2>
+                  <p style={{ margin: "8px 0 0", color: colors.inkMuted, fontWeight: 600 }}>
+                    {t.aboutSubtitle}
+                  </p>
+                  <p style={{ margin: "14px 0 0", color: colors.inkMuted, lineHeight: 1.7, whiteSpace: "pre-line", textAlign: "left" }}>
+                    {t.aboutText}
+                  </p>
+                </div>
+              </div>
+
+              <div className="method-steps-col" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                {t.steps.map((step, idx) => (
+                  <article
+                    key={step[0]}
+                    onMouseEnter={() => setHoveredStep(idx)}
+                    onMouseLeave={() => setHoveredStep(null)}
+                    style={{
+                      border: `1px solid ${colors.line}`,
+                      borderRadius: 12,
+                      padding: 22,
+                      background: colors.bg,
+                      borderLeft:
+                        hoveredStep === idx
+                          ? `3px solid ${colors.teal}`
+                          : "3px solid transparent",
+                      transform:
+                        hoveredStep === idx ? "translateY(-3px)" : "translateY(0)",
+                      transition: "transform .2s ease, border-left-color .2s ease",
+                    }}
+                  >
+                    <p style={{ margin: 0, fontSize: 48, fontWeight: 800, color: colors.teal }}>{step[0]}</p>
+                    <h3 style={{ margin: "14px 0 0", fontSize: 24 }}>{step[1]}</h3>
+                    <p style={{ margin: "10px 0 0", color: colors.inkMuted, lineHeight: 1.6 }}>{step[2]}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
-          <div>
-            <span
+          <div style={{ marginTop: 48, textAlign: "center" }}>
+            <a
+              href="#contatti"
+              className="cta-hover-lift"
               style={{
                 display: "inline-block",
-                borderLeft: `3px solid ${colors.teal}`,
-                paddingLeft: 10,
-                color: colors.teal,
-                textTransform: "uppercase",
-                letterSpacing: ".08em",
-                fontSize: 12,
+                background: colors.navy,
+                color: "#fff",
+                padding: "14px 28px",
+                borderRadius: 999,
+                textDecoration: "none",
                 fontWeight: 700,
+                fontSize: 15,
               }}
             >
-              {t.aboutTag}
-            </span>
-            <h2 className="section-title" style={{ margin: "14px 0 0", fontSize: 34, lineHeight: 1.2 }}>
-              {t.aboutTitle}
-            </h2>
-            <p style={{ margin: "8px 0 0", color: colors.inkMuted, fontWeight: 600 }}>
-              {t.aboutSubtitle}
-            </p>
-            <p style={{ margin: "14px 0 0", color: colors.inkMuted, lineHeight: 1.7, whiteSpace: "pre-line" }}>
-              {t.aboutText}
-            </p>
+              Parliamo del tuo progetto →
+            </a>
           </div>
         </div>
       </section>
 
-      <section id="servizi" style={{ background: "#fff", padding: "96px 0" }}>
-        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
-          <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.servicesTag}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.servicesTitle}</h2>
-
-          <div className="services-cards-grid" style={{ marginTop: 40, display: "grid", gap: 12, gridTemplateColumns: "1fr" }}>
-            {t.serviceAccordions.map((item, idx) => {
-              const isOpen = openServiceAccordion === idx;
-              return (
-                <div key={item.title} style={{ overflow: "hidden", borderRadius: 12, border: `1px solid ${colors.line}`, background: colors.bg }}>
-                  <button
-                    style={{
-                      width: "100%",
-                      border: "none",
-                      borderLeft: `4px solid ${colors.teal}`,
-                      background: "transparent",
-                      textAlign: "left",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "16px 20px",
-                      color: colors.ink,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setOpenServiceAccordion(isOpen ? -1 : idx)}
-                  >
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
-                      <img src={item.iconSrc} width="40" height="40" alt={item.title} />
-                      <span style={{ fontWeight: 700 }}>{item.title}</span>
-                    </span>
-                    <span style={{ fontSize: 28, transform: isOpen ? "rotate(45deg)" : "rotate(0deg)", transition: "transform .25s ease" }}>+</span>
-                  </button>
-                  <div style={{ display: isOpen ? "block" : "none" }}>
-                    <p style={{ margin: 0, padding: "0 20px 20px", fontSize: 14, lineHeight: 1.6, color: colors.inkMuted }}>
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="prices-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
-            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
-              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[0]}</p>
-              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                {t.pricingItems[0].map((item) => (
-                  <li key={item}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{item}</li>
-                ))}
-              </ul>
-            </article>
-
-            <article style={{ position: "relative", borderRadius: 12, border: `1px solid ${colors.navy}`, background: colors.navy, color: "#fff", padding: 24 }}>
-              <span style={{ position: "absolute", left: 18, top: -12, borderRadius: 999, background: colors.teal, color: "#fff", fontSize: 12, fontWeight: 700, padding: "6px 10px" }}>
-                {t.featured}
-              </span>
-              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: "rgba(255,255,255,.9)" }}>{t.pricing[1]}</p>
-              <p style={{ margin: "8px 0 0", fontSize: 14, color: "rgba(255,255,255,.9)" }}>
-                Per chi ha un problema specifico da risolvere
-              </p>
-              <p style={{ margin: "6px 0 12px", fontSize: 13, color: "#3DBFB2", fontWeight: 500 }}>
-                → Ideale se hai già un sito ma non ti porta clienti.
-              </p>
-              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[1]}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10, color: "rgba(255,255,255,.95)" }}>
-                {t.pricingItems[1].map((item) => (
-                  <li key={item}><span style={{ color: colors.tealLight, marginRight: 8 }}>✓</span>{item}</li>
-                ))}
-              </ul>
-            </article>
-
-            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24 }}>
-              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[2]}</p>
-              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[2]}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                {t.pricingItems[2].map((item) => (
-                  <li key={item}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{item}</li>
-                ))}
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="mini-audit" style={{ background: "linear-gradient(140deg, #1C2E4A, #111E30)", color: "#fff", textAlign: "center", padding: "96px 0" }}>
+      <section id="mini-audit" style={{ background: "linear-gradient(140deg, #1C2E4A, #111E30)", color: "#fff", textAlign: "center", padding: "56px 0 96px" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "rgba(255,255,255,.14)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.firstStep}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.miniTitle}</h2>
@@ -1150,172 +1086,225 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contatti" style={{ background: colors.bg, padding: "96px 0" }}>
+      <section id="servizi" style={{ background: "#fff", padding: "96px 0" }}>
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
-          <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.contacts}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34 }}>{t.talk}</h2>
-          <p style={{ marginTop: 10, color: colors.inkMuted }}>{t.talkSub}</p>
+          <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.servicesTag}</span>
+          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.servicesTitle}</h2>
 
-          <div style={{ marginTop: 24, display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a
-              href="https://wa.me/393481151160"
-              onClick={() => trackEvent("click_whatsapp")}
-              onMouseEnter={() => setHoveredContact(0)}
-              onMouseLeave={() => setHoveredContact(null)}
-              style={{
-                width: 80,
-                height: 80,
-                borderRadius: 999,
-                background: "#25D366",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                textDecoration: "none",
-                transform: hoveredContact === 0 ? "translateY(-4px)" : "translateY(0)",
-                boxShadow:
-                  hoveredContact === 0
-                    ? "0 16px 28px rgba(0,0,0,.24)"
-                    : "0 8px 16px rgba(0,0,0,.12)",
-                transition: "transform .2s ease, box-shadow .2s ease",
-              }}
-            >
-              <svg viewBox="0 0 24 24" width="26" height="26" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.886a.5.5 0 0 0 .619.608l6.188-1.615A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.52-5.17-1.428l-.36-.214-3.733.974.999-3.648-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-            </a>
-            <a
-              href="mailto:cappellettodavid@gmail.com"
-              onMouseEnter={() => setHoveredContact(1)}
-              onMouseLeave={() => setHoveredContact(null)}
-              style={{
-                width: 80,
-                height: 80,
-                borderRadius: 999,
-                background: colors.navy,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                textDecoration: "none",
-                fontSize: 28,
-                transform: hoveredContact === 1 ? "translateY(-4px)" : "translateY(0)",
-                boxShadow:
-                  hoveredContact === 1
-                    ? "0 16px 28px rgba(0,0,0,.24)"
-                    : "0 8px 16px rgba(0,0,0,.12)",
-                transition: "transform .2s ease, box-shadow .2s ease",
-              }}
-            >
-              ✉️
-            </a>
-            <a
-              href="https://www.linkedin.com/in/david-cappelletto-703832306/"
-              onMouseEnter={() => setHoveredContact(2)}
-              onMouseLeave={() => setHoveredContact(null)}
-              style={{
-                width: 80,
-                height: 80,
-                borderRadius: 999,
-                background: "#0A66C2",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                textDecoration: "none",
-                fontSize: 24,
-                fontWeight: 700,
-                transform: hoveredContact === 2 ? "translateY(-4px)" : "translateY(0)",
-                boxShadow:
-                  hoveredContact === 2
-                    ? "0 16px 28px rgba(0,0,0,.24)"
-                    : "0 8px 16px rgba(0,0,0,.12)",
-                transition: "transform .2s ease, box-shadow .2s ease",
-              }}
-            >
-              in
-            </a>
+          <div className="services-cards-grid" style={{ marginTop: 40, display: "grid", gap: 12, gridTemplateColumns: "1fr" }}>
+            {t.serviceAccordions.map((item, idx) => {
+              const isOpen = openServiceAccordion === idx;
+              return (
+                <div key={item.title} style={{ overflow: "hidden", borderRadius: 12, border: `1px solid ${isOpen ? colors.navy : colors.line}`, background: isOpen ? colors.navy : colors.bg, transition: "background .2s ease, border-color .2s ease" }}>
+                  <button
+                    style={{
+                      width: "100%",
+                      border: "none",
+                      borderLeft: `4px solid ${colors.teal}`,
+                      background: "transparent",
+                      textAlign: "left",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "16px 20px",
+                      color: isOpen ? "#fff" : colors.ink,
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setOpenServiceAccordion(isOpen ? -1 : idx)}
+                  >
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
+                      <img src={item.iconSrc} width="40" height="40" alt={item.title} style={{ filter: isOpen ? "invert(1)" : "none", transition: "filter .2s ease" }} />
+                      <span style={{ fontWeight: 700 }}>{item.title}</span>
+                    </span>
+                    <span style={{ fontSize: 28, transform: isOpen ? "rotate(45deg)" : "rotate(0deg)", transition: "transform .25s ease" }}>+</span>
+                  </button>
+                  <div style={{ display: isOpen ? "block" : "none" }}>
+                    <p style={{ margin: 0, padding: "0 20px 20px", fontSize: 14, lineHeight: 1.6, color: isOpen ? "rgba(255,255,255,.85)" : colors.inkMuted }}>
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          <form
-            className="contact-form"
-            onSubmit={handleTrackedFormSubmit}
-            style={{ marginTop: 34, borderRadius: 18, border: `1px solid ${colors.line}`, background: "#fff", padding: 20 }}
-          >
-            {formState.succeeded ? (
-              <p style={{ margin: 0, color: colors.teal, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>
-                {t.form.success}
+          <div className="prices-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
+            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
+            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
+              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[0]}</p>
+              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
+                {t.pricingItems[0].map((item) => (
+                  <li key={item}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{item}</li>
+                ))}
+              </ul>
+            </article>
+            </a>
+
+            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
+            <article style={{ position: "relative", borderRadius: 12, border: `1px solid ${colors.navy}`, background: colors.navy, color: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
+              <span style={{ position: "absolute", left: 18, top: -12, borderRadius: 999, background: colors.teal, color: "#fff", fontSize: 12, fontWeight: 700, padding: "6px 10px" }}>
+                {t.featured}
+              </span>
+              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: "rgba(255,255,255,.9)" }}>{t.pricing[1]}</p>
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: "rgba(255,255,255,.9)" }}>
+                Per chi ha un problema specifico da risolvere
               </p>
-            ) : (
-              <>
-                <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
-                  <input
-                    name="nome"
-                    type="text"
-                    required
-                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15 }}
-                    placeholder={t.form.name}
-                  />
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15 }}
-                    placeholder={t.form.email}
-                  />
-                  <input
-                    className="contact-span-full"
-                    name="tipo_attivita"
-                    type="text"
-                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "auto" }}
-                    placeholder={t.form.activity}
-                  />
-                  <select
-                    className="contact-span-full"
-                    name="budget"
-                    required
-                    style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "auto" }}
-                    defaultValue=""
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: "#3DBFB2", fontWeight: 500 }}>
+                → Ideale se hai già un sito ma non ti porta clienti.
+              </p>
+              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[1]}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10, color: "rgba(255,255,255,.95)" }}>
+                {t.pricingItems[1].map((item) => (
+                  <li key={item}><span style={{ color: colors.tealLight, marginRight: 8 }}>✓</span>{item}</li>
+                ))}
+              </ul>
+            </article>
+            </a>
+
+            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
+            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
+              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[2]}</p>
+              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[2]}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
+                {t.pricingItems[2].map((item) => (
+                  <li key={item}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{item}</li>
+                ))}
+              </ul>
+            </article>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="contatti"
+        style={{
+          backgroundImage: `linear-gradient(rgba(17,30,48,0.78), rgba(17,30,48,0.78)), url(/contact-bg.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          padding: "96px 0",
+        }}
+      >
+        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
+          <div style={{ marginTop: 24, maxWidth: 640, margin: "24px auto 0", background: "#fff", border: `1px solid ${colors.line}`, borderRadius: 18, padding: 28 }}>
+            <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.contacts}</span>
+            <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34 }}>{t.talk}</h2>
+            <p style={{ marginTop: 10, color: colors.inkMuted }}>{t.talkSub}</p>
+
+            <div style={{ display: "flex", marginTop: 24, justifyContent: "center", gap: 32, paddingBottom: 22, marginBottom: 22, borderBottom: `1px solid ${colors.line}` }}>
+              <a
+                href="https://wa.me/393481151160"
+                onClick={() => trackEvent("click_whatsapp")}
+                aria-label="WhatsApp"
+                style={{ color: "#25D366", display: "inline-flex", opacity: 0.85, transition: "opacity .2s ease" }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
+              >
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.886a.5.5 0 0 0 .619.608l6.188-1.615A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.52-5.17-1.428l-.36-.214-3.733.974.999-3.648-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              </a>
+              <a
+                href="mailto:cappellettodavid@gmail.com"
+                aria-label="Email"
+                style={{ color: colors.navy, display: "inline-flex", opacity: 0.85, transition: "opacity .2s ease" }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
+              >
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 6-10 7L2 6" /></svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/david-cappelletto-703832306/"
+                aria-label="LinkedIn"
+                style={{ color: "#0A66C2", display: "inline-flex", opacity: 0.85, transition: "opacity .2s ease" }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
+              >
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.94v5.666H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+
+            <form
+              className="contact-form"
+              onSubmit={handleTrackedFormSubmit}
+            >
+              {formState.succeeded ? (
+                <p style={{ margin: 0, color: colors.teal, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>
+                  {t.form.success}
+                </p>
+              ) : (
+                <>
+                  <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
+                    <input
+                      name="nome"
+                      type="text"
+                      required
+                      style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }}
+                      placeholder={t.form.name}
+                    />
+                    <input
+                      name="email"
+                      type="email"
+                      required
+                      style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }}
+                      placeholder={t.form.email}
+                    />
+                    <input
+                      className="contact-span-full"
+                      name="tipo_attivita"
+                      type="text"
+                      style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box", gridColumn: "auto" }}
+                      placeholder={t.form.activity}
+                    />
+                    <select
+                      className="contact-span-full"
+                      name="budget"
+                      required
+                      style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box", gridColumn: "auto" }}
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        {t.form.budget}
+                      </option>
+                      <option value="€250-500">€250-500</option>
+                      <option value="€800-1.600">€800-1.600</option>
+                      <option value="€2.700-5.000">€2.700-5.000</option>
+                      <option value="Oltre €5.000">Oltre €5.000</option>
+                    </select>
+                    <textarea
+                      className="contact-span-full"
+                      name="messaggio"
+                      required
+                      style={{ minHeight: 144, border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box", gridColumn: "auto" }}
+                      placeholder={t.form.msg}
+                    />
+                  </div>
+                  {hasFormspreeSubmissionErrors(formState.errors) && (
+                    <p style={{ margin: "14px 0 0", color: "#c0392b", fontSize: 14, lineHeight: 1.5 }}>
+                      {t.form.error}
+                    </p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={formState.submitting}
+                    style={{
+                      marginTop: 16,
+                      border: "none",
+                      borderRadius: 999,
+                      background: colors.navy,
+                      color: "#fff",
+                      padding: "12px 24px",
+                      fontWeight: 700,
+                      cursor: formState.submitting ? "not-allowed" : "pointer",
+                      opacity: formState.submitting ? 0.65 : 1,
+                    }}
                   >
-                    <option value="" disabled>
-                      {t.form.budget}
-                    </option>
-                    <option value="€250-500">€250-500</option>
-                    <option value="€800-1.600">€800-1.600</option>
-                    <option value="€2.700-5.000">€2.700-5.000</option>
-                    <option value="Oltre €5.000">Oltre €5.000</option>
-                  </select>
-                  <textarea
-                    className="contact-span-full"
-                    name="messaggio"
-                    required
-                    style={{ minHeight: 144, border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, gridColumn: "auto" }}
-                    placeholder={t.form.msg}
-                  />
-                </div>
-                {hasFormspreeSubmissionErrors(formState.errors) && (
-                  <p style={{ margin: "14px 0 0", color: "#c0392b", fontSize: 14, lineHeight: 1.5 }}>
-                    {t.form.error}
-                  </p>
-                )}
-                <button
-                  type="submit"
-                  disabled={formState.submitting}
-                  style={{
-                    marginTop: 16,
-                    border: "none",
-                    borderRadius: 999,
-                    background: colors.navy,
-                    color: "#fff",
-                    padding: "12px 24px",
-                    fontWeight: 700,
-                    cursor: formState.submitting ? "not-allowed" : "pointer",
-                    opacity: formState.submitting ? 0.65 : 1,
-                  }}
-                >
-                  {t.form.submit}
-                </button>
-              </>
-            )}
-          </form>
+                    {t.form.submit}
+                  </button>
+                </>
+              )}
+            </form>
+          </div>
         </div>
       </section>
 
@@ -1346,8 +1335,8 @@ export default function Home() {
               fontSize: 13,
             }}
           >
-            <a href="#come-lavoro" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[0]}</a>
-            <a href="#casi-reali" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[1]}</a>
+            <a href="#casi-reali" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[0]}</a>
+            <a href="#come-lavoro" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[1]}</a>
             <a href="#servizi" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[2]}</a>
             <a href="#contatti" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.contacts}</a>
           </div>
@@ -1445,6 +1434,14 @@ export default function Home() {
       )}
 
       <style jsx global>{`
+        .cta-hover-lift {
+          display: inline-block;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cta-hover-lift:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(17, 30, 48, 0.18);
+        }
         .case-card-image {
           aspect-ratio: 4 / 3;
           min-height: 0 !important;
@@ -1505,6 +1502,9 @@ export default function Home() {
           }
           .cases-grid {
             grid-template-columns: 1fr 1fr !important;
+            max-width: 760px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
           }
           .about-grid {
             grid-template-columns: 280px 1fr !important;
@@ -1528,9 +1528,6 @@ export default function Home() {
           .section-title {
             font-size: 46px !important;
           }
-          .contact-form {
-            padding: 28px !important;
-          }
           .contact-span-full {
             grid-column: 1 / 3 !important;
           }
@@ -1538,9 +1535,18 @@ export default function Home() {
             justify-self: end !important;
             text-align: right !important;
           }
+          .method-combined {
+            grid-template-columns: 1fr 1fr !important;
+            align-items: start !important;
+          }
+          .method-photo-text {
+            text-align: left !important;
+          }
+          .method-connector-svg {
+            display: block !important;
+          }
         }
         @media (min-width: 1024px) {
-          .cases-grid,
           .services-cards-grid {
             grid-template-columns: 1fr 1fr 1fr !important;
           }

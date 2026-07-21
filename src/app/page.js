@@ -17,14 +17,14 @@ const copy = {
     heroTitleA: "Trasformo siti confusi in",
     heroTitleB: "sistemi che generano richieste",
     heroSubtitle:
-      "Trasformo siti confusi in sistemi che generano richieste. Per professionisti e PMI italiane — con metodo, non con template.",
+      "Per professionisti e PMI italiane che hanno già un sito ma non i risultati che si aspettavano. Metodo, non template.",
     heroBtn1: "Scrivimi su WhatsApp",
     heroBtn2: "Come lavoro →",
     approach: "Il mio approccio",
     quote:
-      "Investi nel digitale, con un ritorno reale e riscontrabile. Non quello che dicono di fare — quello che funziona per il tuo caso specifico.",
+      "Il digitale funziona quando risolve un problema vero, non quando segue una tendenza. Ti dico onestamente cosa serve — anche se la risposta è \"niente, per ora\".",
     stat1: "Il sito carica in meno di 2 secondi su qualsiasi dispositivo",
-    stat2: "Accessibile da tutti, anche con connessione lenta o screen reader",
+    stat2: "Parli sempre con me — non con un account manager, non con un team esterno.",
     problemTag: "Il Problema",
     problemTitle: "Hai risposto a queste domande prima di investire nel tuo digitale?",
     problemText:
@@ -43,8 +43,8 @@ const copy = {
         a: "Un sito efficace accompagna la persona dal dubbio alla richiesta di contatto. Organizzo architettura, pagine e call to action in modo che ogni fase abbia una risposta utile, senza attrito e senza passaggi inutili.",
       },
       {
-        q: "I tuoi processi digitali ti fanno risparmiare tempo o te ne rubano?",
-        a: "Se preventivi, richieste e follow-up sono frammentati, perdi tempo operativo e opportunità. Individuo i passaggi ripetitivi e progetto automazioni semplici, con strumenti sostenibili, per liberare tempo su ciò che conta.",
+        q: "Sai davvero cosa funziona nel tuo digitale, o vai a intuito?",
+        a: "Senza dati chiari su cosa genera contatti reali, ogni decisione è una scommessa. Imposto un tracciamento essenziale — non dashboard inutili — per capire cosa portare avanti e cosa tagliare.",
       },
     ],
     workTag: "Come Lavoro",
@@ -423,6 +423,7 @@ const colors = {
 export default function Home() {
   const [lang, setLang] = useState("it");
   const [scrolled, setScrolled] = useState(false);
+  const [logoRotation, setLogoRotation] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState(0);
   const [openServiceAccordion, setOpenServiceAccordion] = useState(0);
@@ -439,7 +440,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      setLogoRotation(window.scrollY * 0.5);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -528,7 +532,7 @@ export default function Home() {
               gap: 10,
             }}
           >
-            <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 34, width: "auto", filter: "invert(1)" }} />
+            <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
             <span>David Cappelletto</span>
           </a>
 
@@ -1132,6 +1136,12 @@ export default function Home() {
             <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
               <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[0]}</p>
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
+                Per chi vuole capire prima di spendere di più.
+              </p>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.teal, fontWeight: 500 }}>
+                → Ideale se non sai ancora dove intervenire.
+              </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
                 {t.pricingItems[0].map((item) => (
@@ -1165,6 +1175,12 @@ export default function Home() {
             <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
               <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[2]}</p>
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
+                Per chi parte da zero o vuole ripensare tutto.
+              </p>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.teal, fontWeight: 500 }}>
+                → Ideale se il sito attuale non rispecchia più il tuo lavoro.
+              </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[2]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
                 {t.pricingItems[2].map((item) => (

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { caseStudies, colors } from "./_data";
+import { SiteHeader, SiteFooter, ImageWithFallback } from "./_site-parts";
 
 export const metadata = {
   title: "Casi Studio | David Cappelletto — Consulenza Digitale",
@@ -10,12 +11,10 @@ export const metadata = {
 export default function CasiStudioIndex() {
   return (
     <main style={{ background: colors.bg, minHeight: "100vh", fontFamily: "'DM Sans', system-ui, sans-serif", color: colors.ink }}>
-      <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", padding: "64px 0 96px" }}>
-        <Link href="/" style={{ color: colors.inkMuted, textDecoration: "none", fontSize: 14, fontWeight: 600 }}>
-          ← Torna alla home
-        </Link>
+      <SiteHeader />
 
-        <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", marginTop: 32 }}>
+      <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", padding: "56px 0 96px" }}>
+        <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
           Casi Studio
         </span>
         <h1 style={{ margin: "20px 0 0", fontSize: 40, lineHeight: 1.15 }}>
@@ -28,35 +27,48 @@ export default function CasiStudioIndex() {
           Questa pagina cresce: ogni progetto significativo che completo diventa un caso studio.
         </p>
 
-        <div style={{ marginTop: 48, display: "grid", gap: 20 }}>
+        <div className="cs-index-grid" style={{ marginTop: 48, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
           {caseStudies.map((cs) => (
-            <Link
-              key={cs.slug}
-              href={`/casi-studio/${cs.slug}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <article
-                style={{
-                  borderRadius: 12,
-                  border: `1px solid ${colors.line}`,
-                  background: "#fff",
-                  padding: 28,
-                }}
-              >
-                <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
-                <p style={{ margin: "16px 0 0", color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
-                  {cs.tag}
-                </p>
-                <h2 style={{ margin: "10px 0 0", fontSize: 26, lineHeight: 1.25 }}>{cs.title}</h2>
-                <p style={{ margin: "12px 0 0", color: colors.inkMuted, lineHeight: 1.6 }}>{cs.intro}</p>
-                <p style={{ margin: "18px 0 0", color: colors.teal, fontWeight: 700 }}>
-                  Leggi il caso studio →
-                </p>
+            <Link key={cs.slug} href={`/casi-studio/${cs.slug}`} className="cs-index-link" style={{ textDecoration: "none", color: "inherit" }}>
+              <article className="cs-index-card" style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", overflow: "hidden", height: "100%", display: "flex", flexDirection: "column" }}>
+                <div style={{ position: "relative", aspectRatio: "4 / 3", background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})` }}>
+                  <ImageWithFallback
+                    src={cs.imageSrc}
+                    alt={cs.title}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                </div>
+                <div style={{ padding: 24, display: "flex", flexDirection: "column", flex: 1 }}>
+                  <p style={{ margin: 0, color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
+                    {cs.tag}
+                  </p>
+                  <h2 style={{ margin: "10px 0 0", fontSize: 24, lineHeight: 1.25 }}>{cs.title}</h2>
+                  <p style={{ margin: "12px 0 0", color: colors.inkMuted, lineHeight: 1.6, fontSize: 15 }}>{cs.intro}</p>
+                  <p style={{ margin: "18px 0 0", color: colors.teal, fontWeight: 700 }}>Leggi il caso studio →</p>
+                </div>
               </article>
             </Link>
           ))}
         </div>
       </div>
+
+      <SiteFooter />
+
+      <style>{`
+        @media (min-width: 860px) {
+          .cs-index-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+        .cs-index-card {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cs-index-link:hover .cs-index-card,
+        .cs-index-link:focus-visible .cs-index-card {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 28px rgba(17, 30, 48, 0.12);
+        }
+      `}</style>
     </main>
   );
 }

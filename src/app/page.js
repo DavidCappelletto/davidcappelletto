@@ -66,6 +66,7 @@ const copy = {
         tag: "Progetto Cliente · Impiantistica HVAC",
         title: "Sito aziendale completo, dalla diagnosi al deploy",
         place: "Nord Italia",
+        imageSrc: "/case-studies/azienda-hvac.jpg",
         results: [
           "Sito statico veloce e sicuro, CMS headless per l'autonomia del cliente",
           "Stack tracking completo (GA4 + GTM + Meta Pixel) conforme GDPR",
@@ -78,6 +79,7 @@ const copy = {
         tag: "Libera Professione · Settore Sanitario",
         title: "Infermiera Althea",
         place: "📍 Pordenone e provincia",
+        imageSrc: "/case-studies/infermiera-althea.jpg",
         results: [
           "SEO locale senza budget pubblicitario",
           "Posizionamento organico solido per le ricerche che contano",
@@ -90,6 +92,9 @@ const copy = {
         tag: "Progetto Personale · Metodo",
         title: "Geo·FIRE — globo 3D interattivo",
         place: "Web app nel browser",
+        imageSrc: "/case-studies/geofire.jpg",
+        appLink: "https://geofire.davidcappelletto.it",
+        appLinkLabel: "Prova l'app →",
         results: [
           "Territorio tecnico nuovo affrontato con metodo",
           "AI usata come tutor accelerato, decisioni mie",
@@ -102,6 +107,7 @@ const copy = {
         tag: "Progetto Sperimentale · Infrastruttura",
         title: "Maybe's Shop — e-commerce automatizzato",
         place: "Shopify + print-on-demand",
+        imageSrc: "/case-studies/maybes-shop.jpg",
         results: [
           "Flusso ordine → stampa → spedizione senza interventi manuali",
           "Brand e infrastruttura curati entrambi da zero",
@@ -259,6 +265,7 @@ const copy = {
         tag: "Client Project · HVAC Installations",
         title: "Full company website, from diagnosis to deploy",
         place: "Northern Italy",
+        imageSrc: "/case-studies/azienda-hvac.jpg",
         results: [
           "Fast, secure static site with a headless CMS for client autonomy",
           "Full tracking stack (GA4 + GTM + Meta Pixel), GDPR compliant",
@@ -271,6 +278,7 @@ const copy = {
         tag: "Independent Professional · Healthcare",
         title: "Nurse Althea",
         place: "📍 Pordenone area",
+        imageSrc: "/case-studies/infermiera-althea.jpg",
         results: [
           "Local SEO with zero ad budget",
           "Solid organic ranking for the searches that matter",
@@ -283,6 +291,9 @@ const copy = {
         tag: "Personal Project · Method",
         title: "Geo·FIRE — interactive 3D globe",
         place: "In-browser web app",
+        imageSrc: "/case-studies/geofire.jpg",
+        appLink: "https://geofire.davidcappelletto.it",
+        appLinkLabel: "Try the app →",
         results: [
           "New technical territory tackled with method",
           "AI used as an accelerated tutor, decisions stayed mine",
@@ -295,6 +306,7 @@ const copy = {
         tag: "Experimental Project · Infrastructure",
         title: "Maybe's Shop — automated e-commerce",
         place: "Shopify + print-on-demand",
+        imageSrc: "/case-studies/maybes-shop.jpg",
         results: [
           "Order → print → ship flow with no manual steps",
           "Brand and infrastructure both built from scratch",
@@ -878,27 +890,103 @@ export default function Home() {
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.casesTag}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.casesTitle}</h2>
           <div className="cases-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
-            {t.caseCards.map((card) => (
-              <a
+            {t.caseCards.map((card, cardIdx) => (
+              <article
                 key={card.slug}
-                href={`/casi-studio/${card.slug}`}
-                style={{ textDecoration: "none", color: "inherit" }}
+                className="case-card"
+                style={{
+                  position: "relative",
+                  borderRadius: 12,
+                  border: `1px solid ${colors.line}`,
+                  background: "#fff",
+                  overflow: "hidden",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
               >
-                <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 24, height: "100%" }}>
-                  <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
-                  <p style={{ margin: "14px 0 0", color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
+                <a
+                  href={`/casi-studio/${card.slug}`}
+                  aria-label={card.title}
+                  style={{ position: "absolute", inset: 0, zIndex: 1 }}
+                />
+
+                <div
+                  className="case-card-image"
+                  style={{
+                    position: "relative",
+                    minHeight: 180,
+                    background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})`,
+                    flexShrink: 0,
+                  }}
+                >
+                  <img
+                    src={card.imageSrc}
+                    alt={card.title}
+                    loading="lazy"
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      const ph = e.currentTarget.nextSibling;
+                      if (ph) ph.style.display = "flex";
+                    }}
+                  />
+                  <div
+                    style={{
+                      display: "none",
+                      position: "absolute",
+                      inset: 0,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      gap: 6,
+                      color: "rgba(255,255,255,.85)",
+                      textAlign: "center",
+                      padding: 16,
+                    }}
+                  >
+                    <span style={{ fontSize: 32, fontWeight: 800, opacity: 0.5 }}>{String(cardIdx + 1).padStart(2, "0")}</span>
+                    <span style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: ".06em" }}>{card.place}</span>
+                  </div>
+                </div>
+
+                <div className="case-card-body" style={{ padding: 24, display: "flex", flexDirection: "column", flex: 1 }}>
+                  <p style={{ margin: 0, color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
                     {card.tag}
                   </p>
-                  <h3 style={{ margin: "10px 0 0", fontSize: 26, lineHeight: 1.25 }}>{card.title}</h3>
+                  <h3 style={{ margin: "10px 0 0", fontSize: 24, lineHeight: 1.25 }}>{card.title}</h3>
                   <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{card.place}</p>
-                  <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                    {card.results.map((result) => (
-                      <li key={result}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
+                  <ul style={{ margin: "16px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 8 }}>
+                    {card.results.slice(0, 3).map((result) => (
+                      <li key={result} style={{ fontSize: 14 }}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
                     ))}
                   </ul>
-                  <p style={{ margin: "18px 0 0", color: colors.teal, fontWeight: 700 }}>{t.casesReadMore}</p>
-                </article>
-              </a>
+
+                  <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
+                    <span style={{ color: colors.teal, fontWeight: 700 }}>{t.casesReadMore}</span>
+                    {card.appLink && (
+                      <a
+                        href={card.appLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          position: "relative",
+                          zIndex: 2,
+                          background: colors.navy,
+                          color: "#fff",
+                          borderRadius: 999,
+                          textDecoration: "none",
+                          padding: "8px 16px",
+                          fontSize: 13,
+                          fontWeight: 700,
+                        }}
+                      >
+                        {card.appLinkLabel}
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
           <div style={{ marginTop: 32, textAlign: "center" }}>
@@ -1357,6 +1445,23 @@ export default function Home() {
       )}
 
       <style jsx global>{`
+        .case-card-image {
+          aspect-ratio: 4 / 3;
+          min-height: 0 !important;
+        }
+        .case-card {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .case-card:hover,
+        .case-card:focus-within {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 28px rgba(17, 30, 48, 0.12);
+        }
+        .case-card a[aria-label]:focus-visible {
+          outline: 2px solid ${colors.teal};
+          outline-offset: 2px;
+        }
+
         html {
           scroll-behavior: smooth;
         }

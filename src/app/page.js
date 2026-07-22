@@ -134,35 +134,45 @@ const copy = {
         iconSrc: "/icon-siti.svg",
         title: "Progettazione Siti",
         description:
-          "Struttura, UX, contenuti e conversioni. Parto dall'architettura informativa prima di toccare qualsiasi strumento.",
+          "Struttura, UX, contenuti, conversioni — in questo ordine, non al contrario. L'architettura viene prima del design, il design prima del codice.",
       },
       {
         iconSrc: "/icon-seo.svg",
         title: "SEO Locale",
         description:
-          "Essere trovato da chi è vicino a te e sta cercando quello che fai. Senza sprecare budget ads.",
+          "Farti trovare da chi è già vicino a te e sta cercando quello che fai. Zero budget ads, solo struttura fatta bene.",
       },
       {
         iconSrc: "/icon-ai.svg",
         title: "Automazioni AI",
         description:
-          "Elimino processi manuali ripetitivi con n8n e strumenti AI applicati al tuo contesto reale.",
+          "Elimino i processi manuali ripetitivi — preventivi, follow-up, reportistica — con n8n e AI applicati al tuo caso reale, non a un caso da tutorial.",
       },
       {
         iconSrc: "/icon-strategia.svg",
         title: "Strategia Digitale",
         description:
-          "Capire dove sei, dove vuoi andare, e quale percorso ha senso per le tue risorse e i tuoi obiettivi.",
+          "Non ti vendo un piano a 90 giorni fatto di slide. Ti dico, con numeri veri, se conviene investire ora o aspettare — e su cosa, esattamente.",
       },
       {
         iconSrc: "/icon-affiancamento.svg",
         title: "Affiancamento",
         description:
-          "Ti insegno a gestire autonomamente quello che hai — così non dipendi da nessuno per le cose base.",
+          "Ti insegno a usare da solo quello che ti ho costruito — CMS, tracking, automazioni — così non mi richiami per cambiare un titolo o aggiungere una pagina.",
       },
     ],
     pricing: ["Audit Diagnostico", "Intervento Mirato", "Presenza su Misura"],
     pricingValue: ["€250-500", "€800-1.600", "da €2.700"],
+    pricingContext: [
+      "Per chi vuole capire prima di spendere di più.",
+      "Per chi ha un problema specifico da risolvere",
+      "Per chi parte da zero o vuole ripensare tutto.",
+    ],
+    pricingIdeal: [
+      "→ Ideale se non sai ancora dove intervenire.",
+      "→ Ideale se hai già un sito ma non ti porta clienti.",
+      "→ Ideale se il sito attuale non rispecchia più il tuo lavoro.",
+    ],
     pricingItems: [
       [
         "Analisi completa sito e presenza digitale",
@@ -210,20 +220,20 @@ const copy = {
     reject: "Rifiuta",
   },
   en: {
-    navLinks: ["Real cases", "How I work", "Services"],
+    navLinks: ["Projects", "How I work", "Services"],
     ctaMini: "Free Mini Audit",
     heroBadge: "Tailored Digital Consulting",
     heroTitleA: "I turn confusing websites into",
     heroTitleB: "systems that generate qualified leads",
     heroSubtitle:
-      "I turn confusing websites into systems that generate qualified leads. For Italian professionals and SMEs — with method, not templates.",
+      "For Italian professionals and SMEs who already have a website but not the results they expected. Method, not templates.",
     heroBtn1: "Message me on WhatsApp",
     heroBtn2: "How I work →",
     approach: "My approach",
     quote:
-      "Invest in digital with a real, measurable return. Not what people say should work — what works for your specific case.",
+      "Digital works when it solves a real problem, not when it follows a trend. I'll tell you honestly what you need — even if the answer is \"nothing, for now\".",
     stat1: "The site loads in under 2 seconds on any device",
-    stat2: "Accessible to everyone, even on slow connections or with screen readers",
+    stat2: "You always talk to me, never an account manager.",
     problemTag: "The Problem",
     problemTitle: "Have you answered these questions before investing in your digital presence?",
     problemText:
@@ -242,8 +252,8 @@ const copy = {
         a: "An effective website guides people from doubt to contact request. I structure architecture, pages and calls to action so each stage has a useful answer, with less friction and no unnecessary steps.",
       },
       {
-        q: "Do your digital processes save you time or take it away?",
-        a: "If quotes, requests and follow-ups are fragmented, you lose operational time and opportunities. I identify repetitive steps and design simple, sustainable automations to free your time for what matters.",
+        q: "Do you really know what's working in your digital presence, or are you guessing?",
+        a: "Without clear data on what actually generates real contacts, every decision is a bet. I set up essential tracking — not useless dashboards — so you know what to keep doing and what to cut.",
       },
     ],
     workTag: "How I Work",
@@ -255,7 +265,7 @@ const copy = {
       ["02", "I tell you what you really need", "I define clear operational priorities: what to do, why, and expected impact."],
       ["03", "We build it together", "I implement directly or support you step by step, keeping the project aligned with your goals."],
     ],
-    casesTag: "Real Cases",
+    casesTag: "Projects",
     casesTitle: "No hypothetical examples. Real work already delivered.",
     casesReadMore: "Read the case study →",
     casesAllBtn: "All case studies →",
@@ -263,14 +273,14 @@ const copy = {
       {
         slug: "azienda-hvac",
         tag: "Client Project · HVAC Installations",
-        title: "Full company website, from diagnosis to deploy",
-        place: "Northern Italy",
+        title: "HVAC site — faithful to an approved design",
+        place: "Northern Italy · via agency",
         imageSrc: "/case-studies/azienda-hvac.jpg",
         results: [
-          "Fast, secure static site with a headless CMS for client autonomy",
-          "Full tracking stack (GA4 + GTM + Meta Pixel), GDPR compliant",
-          "DNS migration with zero downtime",
-          "Delivered with walkthrough and documentation",
+          "Built faithfully to an approved design, with an external art director",
+          "Headless CMS with a custom Python generation engine",
+          "Tracking stack rebuilt from scratch, GDPR compliant",
+          "Domain migration with no loss of SEO ranking",
         ],
       },
       {
@@ -289,15 +299,15 @@ const copy = {
       {
         slug: "geofire",
         tag: "Personal Project · Method",
-        title: "Geo·FIRE — interactive 3D globe",
-        place: "In-browser web app",
+        title: "Geo·FIRE — a financial freedom globe",
+        place: "3D web app in the browser",
         imageSrc: "/case-studies/geofire.jpg",
         appLink: "https://geofire.davidcappelletto.it",
         appLinkLabel: "Try the app →",
         results: [
-          "New technical territory tackled with method",
-          "AI used as an accelerated tutor, decisions stayed mine",
-          "Fast iteration over prototypes",
+          "Financial calculations verified across 34,000+ combinations",
+          "175 countries, three models of financial freedom",
+          "Flags drawn from scratch for universal compatibility",
           "The process is the product: a case study of method",
         ],
       },
@@ -309,9 +319,9 @@ const copy = {
         imageSrc: "/case-studies/maybes-shop.jpg",
         results: [
           "Order → print → ship flow with no manual steps",
+          "Webhook integration, zero warehouse",
           "Brand and infrastructure both built from scratch",
-          "Validated with a real completed order",
-          "Systems, not just interfaces",
+          "Verified end-to-end, from purchase to delivery",
         ],
       },
     ],
@@ -333,35 +343,45 @@ const copy = {
         iconSrc: "/icon-siti.svg",
         title: "Website Design",
         description:
-          "Structure, UX, content and conversions. I start from information architecture before touching any tool.",
+          "Structure, UX, content, conversions — in this order, not the other way around. Architecture comes before design, design before code.",
       },
       {
         iconSrc: "/icon-seo.svg",
         title: "Local SEO",
         description:
-          "Get found by people near you who are searching for what you do. Without wasting ad budget.",
+          "Get found by people already near you who are searching for what you do. Zero ad budget, just structure done right.",
       },
       {
         iconSrc: "/icon-ai.svg",
         title: "AI Automations",
         description:
-          "I remove repetitive manual processes with n8n and AI tools applied to your real context.",
+          "I remove repetitive manual processes — quotes, follow-ups, reporting — with n8n and AI applied to your actual case, not a generic tutorial case.",
       },
       {
         iconSrc: "/icon-strategia.svg",
         title: "Digital Strategy",
         description:
-          "Understand where you are, where you want to go, and which path makes sense for your resources and goals.",
+          "I won't sell you a 90-day plan made of slides. I'll tell you, with real numbers, whether it's worth investing now or waiting — and on exactly what.",
       },
       {
         iconSrc: "/icon-affiancamento.svg",
         title: "Consulting Support",
         description:
-          "I teach you how to manage the essentials on your own — so you do not depend on anyone for the basics.",
+          "I teach you to run what I built for you on your own — CMS, tracking, automations — so you don't call me back to change a heading or add a page.",
       },
     ],
     pricing: ["Diagnostic Audit", "Targeted Intervention", "Tailored Presence"],
     pricingValue: ["€250-500", "€800-1,600", "from €2,700"],
+    pricingContext: [
+      "For those who want to understand before spending more.",
+      "For those with one specific problem to solve",
+      "For those starting from scratch or rethinking everything.",
+    ],
+    pricingIdeal: [
+      "→ Ideal if you're not sure yet where to start.",
+      "→ Ideal if you already have a site that isn't bringing in clients.",
+      "→ Ideal if your current site no longer reflects your work.",
+    ],
     pricingItems: [
       [
         "Complete website and digital presence analysis",
@@ -1102,7 +1122,6 @@ export default function Home() {
         <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "rgba(255,255,255,.14)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.firstStep}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.miniTitle}</h2>
-          <p style={{ margin: "16px auto 0", maxWidth: 860, color: "rgba(255,255,255,.88)", lineHeight: 1.6 }}>{t.miniText}</p>
           <div style={{ marginTop: 30, display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
             <a
               href="https://wa.me/393481151160"
@@ -1117,7 +1136,7 @@ export default function Home() {
             </a>
           </div>
           <p style={{ margin: "22px auto 0", maxWidth: 560, color: "rgba(255,255,255,.7)", fontSize: 14, lineHeight: 1.6 }}>
-            20 minuti. Nessun impegno. Raccontami la tua situazione — capisco il contesto, ti dico onestamente se e come posso aiutarti.
+            {t.miniText}
           </p>
         </div>
       </section>
@@ -1169,10 +1188,10 @@ export default function Home() {
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
               <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[0]}</p>
               <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
-                Per chi vuole capire prima di spendere di più.
+                {t.pricingContext[0]}
               </p>
               <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.teal, fontWeight: 500 }}>
-                → Ideale se non sai ancora dove intervenire.
+                {t.pricingIdeal[0]}
               </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
@@ -1190,10 +1209,10 @@ export default function Home() {
               </span>
               <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: "rgba(255,255,255,.9)" }}>{t.pricing[1]}</p>
               <p style={{ margin: "8px 0 0", fontSize: 14, color: "rgba(255,255,255,.9)" }}>
-                Per chi ha un problema specifico da risolvere
+                {t.pricingContext[1]}
               </p>
               <p style={{ margin: "6px 0 12px", fontSize: 13, color: "#3DBFB2", fontWeight: 500 }}>
-                → Ideale se hai già un sito ma non ti porta clienti.
+                {t.pricingIdeal[1]}
               </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[1]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10, color: "rgba(255,255,255,.95)" }}>
@@ -1208,10 +1227,10 @@ export default function Home() {
             <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
               <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[2]}</p>
               <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
-                Per chi parte da zero o vuole ripensare tutto.
+                {t.pricingContext[2]}
               </p>
               <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.teal, fontWeight: 500 }}>
-                → Ideale se il sito attuale non rispecchia più il tuo lavoro.
+                {t.pricingIdeal[2]}
               </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[2]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>

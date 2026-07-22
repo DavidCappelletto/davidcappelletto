@@ -51,7 +51,6 @@ export default async function CaseStudyPage({ params }) {
   const idx = caseStudies.findIndex((c) => c.slug === cs.slug);
   const next = caseStudies[(idx + 1) % caseStudies.length];
   const lastIdx = cs.sections.length - 1;
-  const midPoint = Math.floor(cs.sections.length / 2);
 
   return (
     <main style={{ background: colors.bg, minHeight: "100vh", fontFamily: "'DM Sans', system-ui, sans-serif", color: colors.ink }}>
@@ -118,36 +117,35 @@ export default async function CaseStudyPage({ params }) {
           const isLast = i === lastIdx;
           const Icon = sectionIcons[i % sectionIcons.length];
 
-          return (
-            <div key={s.h}>
-              {isLast ? (
-                <section style={{ marginTop: 40, borderRadius: 12, background: colors.navy, color: "#fff", padding: 28, position: "relative" }}>
-                  <span style={{ position: "absolute", top: 18, left: 24, fontSize: 48, lineHeight: 1, color: "rgba(255,255,255,.15)", fontWeight: 800 }}>&rdquo;</span>
-                  <p style={{ margin: 0, fontSize: 12, textTransform: "uppercase", letterSpacing: ".08em", color: colors.tealLight, fontWeight: 700 }}>{s.h}</p>
-                  <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.6, color: "rgba(255,255,255,.95)" }}>{renderFormatted(s.body)}</p>
-                </section>
-              ) : (
-                <section style={{ marginTop: 40, display: "flex", gap: 18, alignItems: "flex-start" }}>
-                  <div style={{ flexShrink: 0, width: 46, height: 46, borderRadius: 10, background: "#fff", border: `1px solid ${colors.line}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    {Icon(colors.teal)}
-                  </div>
-                  <div>
-                    <h2 style={{ margin: 0, fontSize: 24, lineHeight: 1.25 }}>{s.h}</h2>
-                    <p style={{ margin: "12px 0 0", lineHeight: 1.7, color: colors.inkMuted, fontSize: 16.5 }}>{renderFormatted(s.body)}</p>
-                  </div>
-                </section>
-              )}
-
-              {i === midPoint && !isLast && (
-                <div style={{ marginTop: 40, borderRadius: 12, overflow: "hidden", position: "relative", minHeight: 220, background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})` }}>
+          if (isLast) {
+            return (
+              <div key={s.h} className="cs-final-pair" style={{ marginTop: 40 }}>
+                <div style={{ borderRadius: 12, overflow: "hidden", position: "relative", minHeight: 220, background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})` }}>
                   <ImageWithFallback
                     src={cs.imageSrc}
                     alt={cs.title}
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 </div>
-              )}
-            </div>
+                <section style={{ borderRadius: 12, background: colors.navy, color: "#fff", padding: 28, position: "relative" }}>
+                  <span style={{ position: "absolute", top: 18, left: 24, fontSize: 48, lineHeight: 1, color: "rgba(255,255,255,.15)", fontWeight: 800 }}>&rdquo;</span>
+                  <p style={{ margin: 0, fontSize: 12, textTransform: "uppercase", letterSpacing: ".08em", color: colors.tealLight, fontWeight: 700 }}>{s.h}</p>
+                  <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.6, color: "rgba(255,255,255,.95)" }}>{renderFormatted(s.body)}</p>
+                </section>
+              </div>
+            );
+          }
+
+          return (
+            <section key={s.h} style={{ marginTop: 40, display: "flex", gap: 18, alignItems: "flex-start" }}>
+              <div style={{ flexShrink: 0, width: 46, height: 46, borderRadius: 10, background: "#fff", border: `1px solid ${colors.line}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                {Icon(colors.teal)}
+              </div>
+              <div>
+                <h2 style={{ margin: 0, fontSize: 24, lineHeight: 1.25 }}>{s.h}</h2>
+                <p style={{ margin: "12px 0 0", lineHeight: 1.7, color: colors.inkMuted, fontSize: 16.5 }}>{renderFormatted(s.body)}</p>
+              </div>
+            </section>
           );
         })}
 
@@ -179,6 +177,19 @@ export default async function CaseStudyPage({ params }) {
 
       <SiteContactSection />
       <SiteFooter />
+      <style>{`
+        .cs-final-pair {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        @media (min-width: 768px) {
+          .cs-final-pair {
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+          }
+        }
+      `}</style>
     </main>
   );
 }

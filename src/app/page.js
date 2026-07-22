@@ -64,14 +64,14 @@ const copy = {
       {
         slug: "azienda-hvac",
         tag: "Progetto Cliente · Impiantistica HVAC",
-        title: "Sito aziendale completo, dalla diagnosi al deploy",
-        place: "Nord Italia",
+        title: "Sito HVAC — fedele a un design approvato",
+        place: "Nord Italia · via agenzia",
         imageSrc: "/case-studies/azienda-hvac.jpg",
         results: [
-          "Sito statico veloce e sicuro, CMS headless per l'autonomia del cliente",
-          "Stack tracking completo (GA4 + GTM + Meta Pixel) conforme GDPR",
-          "Migrazione DNS senza downtime",
-          "Consegna con walkthrough e documentazione",
+          "Sviluppo fedele a un design approvato, con art director esterna",
+          "CMS headless con motore di generazione custom in Python",
+          "Stack di tracciamento GDPR ricostruito da zero",
+          "Migrazione dominio senza perdita di posizionamento SEO",
         ],
       },
       {
@@ -110,9 +110,9 @@ const copy = {
         imageSrc: "/case-studies/maybes-shop.jpg",
         results: [
           "Flusso ordine → stampa → spedizione senza interventi manuali",
+          "Integrazione via webhook, zero magazzino",
           "Brand e infrastruttura curati entrambi da zero",
-          "Testato con un ordine reale completato",
-          "Sistemi, non solo interfacce",
+          "Verificato end-to-end, dall'acquisto alla consegna",
         ],
       },
     ],

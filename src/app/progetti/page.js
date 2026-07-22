@@ -3,7 +3,7 @@ import { caseStudies, colors } from "./_data";
 import { SiteHeader, SiteFooter, ImageWithFallback } from "./_site-parts";
 
 export const metadata = {
-  title: "Casi Studio | David Cappelletto — Consulenza Digitale",
+  title: "Progetti | David Cappelletto — Consulenza Digitale",
   description:
     "Progetti reali, raccontati per come sono stati fatti: diagnosi, scelte, esecuzione e risultati. UX, SEO locale, sviluppo web e workflow AI.",
 };
@@ -15,7 +15,7 @@ export default function CasiStudioIndex() {
 
       <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", padding: "56px 0 96px" }}>
         <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
-          Casi Studio
+          Progetti
         </span>
         <h1 style={{ margin: "20px 0 0", fontSize: 40, lineHeight: 1.15 }}>
           Non esempi ipotetici. Cose già fatte.
@@ -24,12 +24,12 @@ export default function CasiStudioIndex() {
           Ogni progetto qui è raccontato per come è stato fatto davvero: il problema, le scelte,
           l&apos;esecuzione, il risultato. Uso l&apos;AI come attrezzo da banco in ogni fase — e lo dichiaro,
           perché il valore non sta nello strumento ma in chi decide cosa fargli fare.
-          Questa pagina cresce: ogni progetto significativo che completo diventa un caso studio.
+          Questa pagina cresce: ogni progetto significativo che completo diventa una nuova voce qui.
         </p>
 
         <div className="cs-index-grid" style={{ marginTop: 48, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
           {caseStudies.map((cs) => (
-            <Link key={cs.slug} href={`/casi-studio/${cs.slug}`} className="cs-index-link" style={{ textDecoration: "none", color: "inherit" }}>
+            <Link key={cs.slug} href={`/progetti/${cs.slug}`} className="cs-index-link" style={{ textDecoration: "none", color: "inherit" }}>
               <article className="cs-index-card" style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", overflow: "hidden", height: "100%", display: "flex", flexDirection: "column" }}>
                 <div style={{ position: "relative", aspectRatio: "4 / 3", background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})` }}>
                   <ImageWithFallback
@@ -44,7 +44,7 @@ export default function CasiStudioIndex() {
                   </p>
                   <h2 style={{ margin: "10px 0 0", fontSize: 24, lineHeight: 1.25 }}>{cs.title}</h2>
                   <p style={{ margin: "12px 0 0", color: colors.inkMuted, lineHeight: 1.6, fontSize: 15 }}>{cs.intro}</p>
-                  <p style={{ margin: "18px 0 0", color: colors.teal, fontWeight: 700 }}>Leggi il caso studio →</p>
+                  <p style={{ margin: "18px 0 0", color: colors.teal, fontWeight: 700 }}>Leggi il progetto →</p>
                 </div>
               </article>
             </Link>

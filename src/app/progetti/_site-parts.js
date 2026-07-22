@@ -8,7 +8,7 @@ import { trackEvent } from "../analytics";
 
 const nav = {
   it: {
-    navLinks: ["Casi reali", "Come lavoro", "Servizi"],
+    navLinks: ["Progetti", "Come lavoro", "Servizi"],
     ctaMini: "Mini Audit Gratuito",
     contacts: "Contatti",
     talk: "Parliamoci.",
@@ -51,11 +51,15 @@ function hasFormspreeSubmissionErrors(errors) {
 export function SiteHeader() {
   const [lang, setLang] = useState("it");
   const [scrolled, setScrolled] = useState(false);
+  const [logoRotation, setLogoRotation] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = nav[lang];
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      setLogoRotation(window.scrollY * 0.5);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -80,7 +84,7 @@ export function SiteHeader() {
     >
       <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", height: 80, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/" style={{ fontSize: 19, fontWeight: 700, color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 10 }}>
-          <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 34, width: "auto", filter: "invert(1)" }} />
+          <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
           <span>David Cappelletto</span>
         </Link>
 

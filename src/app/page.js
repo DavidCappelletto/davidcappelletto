@@ -11,7 +11,7 @@ function hasFormspreeSubmissionErrors(errors) {
 
 const copy = {
   it: {
-    navLinks: ["Casi reali", "Come lavoro", "Servizi"],
+    navLinks: ["Progetti", "Come lavoro", "Servizi"],
     ctaMini: "Mini Audit Gratuito",
     heroBadge: "Consulenza Digitale su Misura",
     heroTitleA: "Trasformo siti confusi in",
@@ -24,7 +24,7 @@ const copy = {
     quote:
       "Il digitale funziona quando risolve un problema vero, non quando segue una tendenza. Ti dico onestamente cosa serve — anche se la risposta è \"niente, per ora\".",
     stat1: "Il sito carica in meno di 2 secondi su qualsiasi dispositivo",
-    stat2: "Parli sempre con me — non con un account manager, non con un team esterno.",
+    stat2: "Parli sempre con me, mai con un account manager.",
     problemTag: "Il Problema",
     problemTitle: "Hai risposto a queste domande prima di investire nel tuo digitale?",
     problemText:
@@ -56,10 +56,10 @@ const copy = {
       ["02", "Ti dico cosa serve davvero", "Definisco priorità operative chiare: cosa fare, perché, e con quale impatto atteso."],
       ["03", "Lo costruiamo insieme", "Implemento io o ti affianco passo passo, mantenendo il progetto coerente con gli obiettivi."],
     ],
-    casesTag: "Casi Reali",
+    casesTag: "Progetti",
     casesTitle: "Non esempi ipotetici. Cose già fatte.",
-    casesReadMore: "Leggi il caso studio →",
-    casesAllBtn: "Tutti i casi studio →",
+    casesReadMore: "Leggi il progetto →",
+    casesAllBtn: "Tutti i progetti →",
     caseCards: [
       {
         slug: "azienda-hvac",
@@ -99,7 +99,7 @@ const copy = {
           "Territorio tecnico nuovo affrontato con metodo",
           "AI usata come tutor accelerato, decisioni mie",
           "Iterazione rapida su prototipi",
-          "Il processo è il prodotto: caso studio di metodo",
+          "Il processo è il prodotto: un progetto di metodo",
         ],
       },
       {
@@ -785,24 +785,24 @@ export default function Home() {
               borderRadius: 18,
               border: "1px solid rgba(255,255,255,.2)",
               background: "rgba(255,255,255,.1)",
-              padding: 28,
+              padding: 24,
               backdropFilter: "blur(6px)",
             }}
           >
-            <p style={{ margin: "0 0 16px", textTransform: "uppercase", letterSpacing: ".08em", color: colors.tealLight, fontSize: 12 }}>
+            <p style={{ margin: "0 0 12px", textTransform: "uppercase", letterSpacing: ".08em", color: colors.tealLight, fontSize: 12 }}>
               {t.approach}
             </p>
-            <p style={{ margin: 0, fontSize: 34, lineHeight: 1.4, fontStyle: "italic", fontFamily: "'DM Serif Display', Georgia, serif" }}>
+            <p className="hero-quote" style={{ margin: 0, fontSize: 19, lineHeight: 1.45, fontStyle: "italic", fontFamily: "'DM Serif Display', Georgia, serif" }}>
               {t.quote}
             </p>
-            <div style={{ marginTop: 24, display: "grid", gap: 14 }}>
-              <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 16 }}>
-                <p style={{ margin: 0, fontSize: 34, fontWeight: 800, color: colors.tealLight }}>2s</p>
-                <p style={{ margin: "4px 0 0", fontSize: 14 }}>{t.stat1}</p>
+            <div className="hero-stats-grid" style={{ marginTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>
+                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>2s</p>
+                <p style={{ margin: "4px 0 0", fontSize: 12.5, lineHeight: 1.35 }}>{t.stat1}</p>
               </div>
-              <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 16 }}>
-                <p style={{ margin: 0, fontSize: 34, fontWeight: 800, color: colors.tealLight }}>100%</p>
-                <p style={{ margin: "4px 0 0", fontSize: 14 }}>{t.stat2}</p>
+              <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>
+                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>1:1</p>
+                <p style={{ margin: "4px 0 0", fontSize: 12.5, lineHeight: 1.35 }}>{t.stat2}</p>
               </div>
             </div>
           </div>
@@ -874,7 +874,7 @@ export default function Home() {
                 }}
               >
                 <a
-                  href={`/casi-studio/${card.slug}`}
+                  href={`/progetti/${card.slug}`}
                   aria-label={card.title}
                   style={{ position: "absolute", inset: 0, zIndex: 1 }}
                 />
@@ -959,7 +959,7 @@ export default function Home() {
           </div>
           <div style={{ marginTop: 32, textAlign: "center" }}>
             <a
-              href="/casi-studio"
+              href="/progetti"
               style={{
                 display: "inline-block",
                 background: colors.navy,
@@ -1070,7 +1070,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="mini-audit" style={{ background: "linear-gradient(140deg, #1C2E4A, #111E30)", color: "#fff", textAlign: "center", padding: "56px 0 96px" }}>
+      <section
+        id="mini-audit"
+        style={{
+          backgroundImage: `linear-gradient(rgba(17,30,48,0.78), rgba(17,30,48,0.88)), url(/case-studies/header-case.png)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          color: "#fff",
+          textAlign: "center",
+          padding: "56px 0 96px",
+        }}
+      >
         <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "rgba(255,255,255,.14)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.firstStep}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.miniTitle}</h2>
@@ -1087,6 +1098,9 @@ export default function Home() {
               {t.miniBtn2}
             </a>
           </div>
+          <p style={{ margin: "22px auto 0", maxWidth: 560, color: "rgba(255,255,255,.7)", fontSize: 14, lineHeight: 1.6 }}>
+            20 minuti. Nessun impegno. Raccontami la tua situazione — capisco il contesto, ti dico onestamente se e come posso aiutarti.
+          </p>
         </div>
       </section>
 
@@ -1499,6 +1513,9 @@ export default function Home() {
           }
         }
         @media (min-width: 768px) {
+          .hero-quote {
+            font-size: 28px !important;
+          }
           .desktop-nav {
             display: flex !important;
           }

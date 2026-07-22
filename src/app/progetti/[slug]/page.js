@@ -73,8 +73,8 @@ export default async function CaseStudyPage({ params }) {
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(17,30,48,0.55), rgba(17,30,48,0.82))" }} />
         <div style={{ position: "relative", width: "min(1200px, 92vw)", margin: "0 auto", padding: "48px 0 40px" }}>
-          <Link href="/casi-studio" style={{ color: "rgba(255,255,255,.85)", textDecoration: "none", fontSize: 14, fontWeight: 600 }}>
-            ← Tutti i casi studio
+          <Link href="/progetti" style={{ color: "rgba(255,255,255,.85)", textDecoration: "none", fontSize: 14, fontWeight: 600 }}>
+            ← Tutti i progetti
           </Link>
           <div>
             <span style={{ display: "inline-block", marginTop: 20, background: "rgba(255,255,255,.15)", color: "#fff", padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
@@ -165,7 +165,7 @@ export default async function CaseStudyPage({ params }) {
         </section>
 
         <div style={{ marginTop: 48, display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
-          <Link href={`/casi-studio/${next.slug}`} style={{ color: colors.teal, textDecoration: "none", fontWeight: 700 }}>
+          <Link href={`/progetti/${next.slug}`} style={{ color: colors.teal, textDecoration: "none", fontWeight: 700 }}>
             Prossimo caso: {next.title.split("—")[0].trim()} →
           </Link>
           <Link

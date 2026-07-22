@@ -50,7 +50,7 @@ export const caseStudies = [
   {
     slug: "geofire",
     tag: "Progetto Personale · Metodo",
-    title: "Geo·FIRE — un globo 3D interattivo come caso studio di metodo",
+    title: "Geo·FIRE — un globo 3D interattivo come progetto di metodo",
     client: "Progetto proprio",
     stack: "Web app 3D interattiva nel browser",
     role: "Ideazione, design, sviluppo",

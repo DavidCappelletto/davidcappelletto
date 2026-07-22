@@ -9,13 +9,13 @@ export default function sitemap() {
       priority: 1,
     },
     {
-      url: `${base}/casi-studio`,
+      url: `${base}/progetti`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     ...caseSlugs.map((slug) => ({
-      url: `${base}/casi-studio/${slug}`,
+      url: `${base}/progetti/${slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

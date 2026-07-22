@@ -50,10 +50,10 @@ export const caseStudies = [
   {
     slug: "geofire",
     tag: "Progetto Personale · Metodo",
-    title: "Geo·FIRE — un globo 3D interattivo come progetto di metodo",
+    title: "Geo·FIRE — un mappamondo finanziario come progetto di metodo",
     client: "Progetto proprio",
-    stack: "Web app 3D interattiva nel browser",
-    role: "Ideazione, design, sviluppo",
+    stack: "Web app 3D interattiva nel browser (React, canvas, motore geografico proprietario)",
+    role: "Ideazione, design, sviluppo, iterazione",
     imageSrc: "/case-studies/geofire.jpg",
     appLink: "https://geofire.davidcappelletto.it",
     appLinkLabel: "Prova l'app →",
@@ -62,27 +62,29 @@ export const caseStudies = [
     sections: [
       {
         h: "Perché esiste",
-        body: "Un globo 3D interattivo nel browser è il tipo di progetto che qualche anno fa avrebbe richiesto un team, o almeno competenze verticali di computer graphics che io non ho. Oggi il punto non è più \"sai fare X\", ma **\"sai orchestrare gli strumenti per arrivare a X\"**. Questo progetto è la dimostrazione pratica di quella tesi.",
+        body: "L'idea di partenza era semplice: un mappamondo che ti dice in quali paesi del mondo sei già finanziariamente libero, e in quanti anni lo sarai altrove. Ma \"semplice\" è durato circa cinque minuti. Per farlo bene serviva un motore geografico 3D nel browser, una libreria di calcolo finanziario verificata (non un numero buttato lì), un sistema che reggesse tre definizioni diverse di libertà finanziaria, e — problema che non avevo previsto — bandiere che si vedessero anche su Windows, che le emoji-bandiera non le ha mai avute. Ognuno di questi pezzi, qualche anno fa, sarebbe stato un progetto a sé o una competenza verticale che non avevo. Oggi il punto non è più \"sai fare X\", ma **\"sai orchestrare gli strumenti per arrivare a X, e riconoscere quando X è sbagliato\"**. Geo·FIRE è la dimostrazione pratica di quella tesi, non la teoria.",
       },
       {
         h: "Il metodo, esposto",
-        body: "Ho trattato Geo·FIRE come tratterei un progetto cliente, con una differenza: **qui il processo è il prodotto**. Prima il framing: cosa deve fare, cosa può non fare, quali sono i vincoli (performance nel browser, dispositivi mobili, peso dei dati). Poi l'esplorazione con l'AI: il 3D nel browser era territorio nuovo per me, e l'AI ha fatto da tutor accelerato — non mi ha dato la soluzione, mi ha aiutato a capire abbastanza in fretta da poter prendere decisioni sensate. Poi l'iterazione: prototipi brutti, poi meno brutti, poi buoni. Ogni versione buttata mi ha insegnato qualcosa sulla successiva. Infine la rifinitura a mano: **l'ultimo 20%** — quello che separa \"funziona\" da \"è piacevole\" — non lo genera nessuna AI. Quello è tempo, occhio e gusto.",
+        body: "Ho trattato Geo·FIRE come tratterei un progetto cliente, con una differenza: **qui il processo è il prodotto**. Prima il framing: cosa deve calcolare, con quali assunzioni, dove si ferma la responsabilità dello strumento (non è consulenza finanziaria, e lo dice chiaro). Poi la matematica, prima di qualsiasi interfaccia: le formule di accumulo, decumulo e le tre varianti FIRE — tradizionale, Coast, Barista — verificate non a occhio ma con **oltre 34.000 combinazioni di parametri estremi** confrontate contro simulazioni mese per mese. Un conto è che il numero \"sembri giusto\", un altro è dimostrarlo. Poi la costruzione a strati, ognuno con la sua crisi: il globo che gira fluido con 175 confini reali; il sistema di temi chiaro/scuro che a un certo punto ha rotto il grafico principale perché una variabile locale si chiamava come il tema stesso — bug mio, preso e sistemato, non nascosto; le bandiere, che dopo un giro di tentativi ho finito per disegnare io, forma per forma, perché era l'unico modo di garantirle ovunque, offline, senza dipendere da servizi esterni che potevano non rispondere. Infine il ciclo con cui l'ho rifinita: non un colpo solo, ma iterazioni via screenshot — \"qui è troppo fitto\", \"qui manca il respiro\", \"questo non si capisce\" — corrette una per una, verificate, ridistribuite. **L'ultimo tratto**, quello che rende uno strumento usabile invece che solo funzionante, resta lavoro manuale: nessuna AI decide da sola quanto gap mettere tra due elementi o se un colore comunica davvero \"sei già libero qui\".",
       },
       {
         h: "Il risultato",
-        body: "Un globo 3D esplorabile, fluido, che funziona nel browser. Ma il risultato vero è replicabile: **un metodo per affrontare territori tecnici sconosciuti** senza paralizzarsi e senza delegare il pensiero.",
+        body: "Un mappamondo esplorabile con ricerca, confronto tra paesi, tre modalità di libertà finanziaria, dati modificabili da chi lo usa, e una card condivisibile per i social — tutto verificato, non solo \"che sembra funzionare\". Il progetto oggi vive sul suo dominio, con pipeline di analisi e una roadmap scritta per chi lo svilupperà oltre me. Ma il risultato che conta di più è replicabile altrove: un metodo per affrontare territori tecnici sconosciuti — geografia digitale, finanza personale, rendering — senza paralizzarsi, e senza smettere di controllare quello che si sta costruendo. **Che l'AI abbassa il costo di imparare, non il valore di capire: chi capisce cosa sta costruendo può usare l'AI per andare tre volte più veloce, chi non capisce va tre volte più veloce verso il muro.**",
       },
       {
         h: "Cosa dimostra",
-        body: "Che l'AI abbassa il costo di imparare, non il valore di capire. Chi capisce cosa sta costruendo può usare l'AI per andare tre volte più veloce. Chi non capisce va tre volte più veloce verso il muro.",
+        body: "Che orchestrare bene gli strumenti significa anche sapere quando smettere di fidarsi di un output e verificarlo da soli — coi numeri, non a sensazione. E che l'ultimo 20%, quello che separa \"funziona\" da \"è piacevole da usare\", resta un lavoro umano: tempo, occhio, gusto.",
       },
     ],
     results: [
-      "App 3D interattiva funzionante nel browser",
-      "Territorio tecnico nuovo affrontato con metodo, non a caso",
-      "Framing dei vincoli prima di scrivere codice",
-      "Iterazione rapida: ogni prototipo scartato ha informato il successivo",
-      "Rifinitura manuale dove l'AI non arriva",
+      "App 3D interattiva funzionante nel browser, 175 paesi con confini reali",
+      "Motore di calcolo finanziario verificato su oltre 34.000 combinazioni contro simulazioni reali",
+      "Tre modelli di libertà finanziaria (tradizionale, Coast, Barista), non uno solo",
+      "Bug propri trovati e corretti in corsa, non nascosti nel racconto",
+      "Sistema bandiere disegnato da zero per garantire compatibilità universale",
+      "Iterazione continua guidata da feedback reale, non da un'unica consegna",
+      "Progetto predisposto per sviluppo futuro, non un one-shot chiuso in un cassetto",
     ],
   },
   {

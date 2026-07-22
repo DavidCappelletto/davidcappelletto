@@ -13,7 +13,7 @@ export default function CasiStudioIndex() {
     <main style={{ background: colors.bg, minHeight: "100vh", fontFamily: "'DM Sans', system-ui, sans-serif", color: colors.ink }}>
       <SiteHeader />
 
-      <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", padding: "56px 0 96px" }}>
+      <div style={{ width: "min(1200px, 89vw)", margin: "0 auto", padding: "56px 0 96px" }}>
         <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
           Progetti
         </span>

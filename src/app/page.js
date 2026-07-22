@@ -90,15 +90,15 @@ const copy = {
       {
         slug: "geofire",
         tag: "Progetto Personale · Metodo",
-        title: "Geo·FIRE — globo 3D interattivo",
-        place: "Web app nel browser",
+        title: "Geo·FIRE — mappamondo finanziario",
+        place: "Web app 3D nel browser",
         imageSrc: "/case-studies/geofire.jpg",
         appLink: "https://geofire.davidcappelletto.it",
         appLinkLabel: "Prova l'app →",
         results: [
-          "Territorio tecnico nuovo affrontato con metodo",
-          "AI usata come tutor accelerato, decisioni mie",
-          "Iterazione rapida su prototipi",
+          "Calcoli finanziari verificati su oltre 34.000 combinazioni",
+          "175 paesi, tre modelli di libertà finanziaria",
+          "Bandiere disegnate da zero per compatibilità universale",
           "Il processo è il prodotto: un progetto di metodo",
         ],
       },
@@ -512,7 +512,7 @@ export default function Home() {
       >
         <div
           style={{
-            width: "min(1200px, 92vw)",
+            width: "min(1200px, 89vw)",
             margin: "0 auto",
             height: "80px",
             display: "flex",
@@ -576,6 +576,7 @@ export default function Home() {
               ))}
               <a
                 href="#mini-audit"
+                className="cta-hover-lift"
                 style={{
                   background: colors.teal,
                   color: "#fff",
@@ -614,7 +615,7 @@ export default function Home() {
 
         {mobileMenuOpen && (
           <div className="mobile-menu-panel" style={{ borderTop: "1px solid rgba(255,255,255,.15)", background: "rgba(17,30,48,.97)", paddingBottom: 18 }}>
-            <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "flex", flexDirection: "column", gap: 12, paddingTop: 14 }}>
+            <div style={{ width: "min(1200px, 89vw)", margin: "0 auto", display: "flex", flexDirection: "column", gap: 12, paddingTop: 14 }}>
               <div style={{ border: "1px solid rgba(255,255,255,.4)", borderRadius: 999, padding: 4, fontSize: 13, width: "fit-content" }}>
                 <button
                   style={{
@@ -656,6 +657,7 @@ export default function Home() {
               <a
                 href="#mini-audit"
                 onClick={() => setMobileMenuOpen(false)}
+                className="cta-hover-lift"
                 style={{
                   marginTop: 6,
                   background: colors.teal,
@@ -699,7 +701,7 @@ export default function Home() {
         <div
           className="hero-grid"
           style={{
-            width: "min(1200px, 92vw)",
+            width: "min(1200px, 89vw)",
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "1fr",
@@ -745,6 +747,7 @@ export default function Home() {
             </p>
             <div style={{ marginTop: 34, display: "flex", flexWrap: "wrap", gap: 14 }}>
               <button
+                className="cta-hover-lift"
                 style={{
                   border: "none",
                   borderRadius: 999,
@@ -765,6 +768,7 @@ export default function Home() {
               </button>
               <a
                 href="#come-lavoro"
+                className="cta-hover-lift"
                 style={{
                   borderRadius: 999,
                   border: "1px solid rgba(255,255,255,.45)",
@@ -810,7 +814,7 @@ export default function Home() {
       </section>
 
       <section style={{ background: colors.navyDeep, color: "#fff", padding: "96px 0" }}>
-        <div className="problem-grid" style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr", gap: 36 }}>
+        <div className="problem-grid" style={{ width: "min(1200px, 89vw)", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr", gap: 36 }}>
           <div>
             <span style={{ display: "inline-block", background: "rgba(43,168,154,.2)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.problemTag}</span>
             <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.1 }}>{t.problemTitle}</h2>
@@ -854,7 +858,7 @@ export default function Home() {
       </section>
 
       <section id="casi-reali" style={{ background: colors.bg, padding: "96px 0" }}>
-        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
+        <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.casesTag}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.casesTitle}</h2>
           <div className="cases-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
@@ -960,6 +964,7 @@ export default function Home() {
           <div style={{ marginTop: 32, textAlign: "center" }}>
             <a
               href="/progetti"
+              className="cta-hover-lift"
               style={{
                 display: "inline-block",
                 background: colors.navy,
@@ -976,28 +981,39 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="come-lavoro" style={{ background: "#fff", padding: "96px 0 56px" }}>
-        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
-          <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.workTag}</span>
-          <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.workTitle}</h2>
-          <p style={{ marginTop: 16, maxWidth: 900, color: colors.inkMuted, lineHeight: 1.6 }}>
-            {t.workIntro}
-          </p>
-
-          <div className="method-combined-wrap" style={{ marginTop: 44, position: "relative" }}>
+      <section
+        id="come-lavoro"
+        style={{
+          backgroundImage: `linear-gradient(135deg, rgba(28,46,74,0.45), rgba(43,168,154,0.22)), url(/case-studies/chi-sono-bg.png)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          padding: "96px 0 56px",
+        }}
+      >
+        <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
+          <div className="method-combined-wrap" style={{ position: "relative" }}>
             <div className="method-combined" style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr", gap: 32 }}>
-              <div className="method-photo-col">
-                <div className="about-photo-wrap" style={{ display: "flex", justifyContent: "center" }}>
-                  <img
-                    src="/profile.png"
-                    alt="David Cappelletto"
-                    style={{ width: 200, height: 200, borderRadius: "50%", objectFit: "cover" }}
-                  />
-                </div>
-                <div className="method-photo-text" style={{ marginTop: 20, textAlign: "center" }}>
+              <div
+                className="method-photo-col"
+                style={{
+                  background: "#fff",
+                  borderRadius: 16,
+                  padding: 32,
+                  boxShadow: "0 14px 34px rgba(17,30,48,.16)",
+                }}
+              >
+                <div className="method-photo-text" style={{ textAlign: "center" }}>
+                  <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.workTag}</span>
+                  <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15, textAlign: "left" }}>{t.workTitle}</h2>
+                  <p style={{ marginTop: 16, color: colors.inkMuted, lineHeight: 1.6, textAlign: "left" }}>
+                    {t.workIntro}
+                  </p>
+
                   <span
                     style={{
                       display: "inline-block",
+                      marginTop: 32,
                       borderLeft: `3px solid ${colors.teal}`,
                       paddingLeft: 10,
                       color: colors.teal,
@@ -1032,6 +1048,7 @@ export default function Home() {
                       borderRadius: 12,
                       padding: 22,
                       background: colors.bg,
+                      flex: 1,
                       borderLeft:
                         hoveredStep === idx
                           ? `3px solid ${colors.teal}`
@@ -1082,7 +1099,7 @@ export default function Home() {
           padding: "56px 0 96px",
         }}
       >
-        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
+        <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "rgba(255,255,255,.14)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.firstStep}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.miniTitle}</h2>
           <p style={{ margin: "16px auto 0", maxWidth: 860, color: "rgba(255,255,255,.88)", lineHeight: 1.6 }}>{t.miniText}</p>
@@ -1090,11 +1107,12 @@ export default function Home() {
             <a
               href="https://wa.me/393481151160"
               onClick={() => trackEvent("click_whatsapp")}
+              className="cta-hover-lift"
               style={{ background: "#fff", color: colors.ink, borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}
             >
               {t.heroBtn1}
             </a>
-            <a href="#contatti" style={{ border: "1px solid rgba(255,255,255,.6)", color: "#fff", borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}>
+            <a href="#contatti" className="cta-hover-lift" style={{ border: "1px solid rgba(255,255,255,.6)", color: "#fff", borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}>
               {t.miniBtn2}
             </a>
           </div>
@@ -1105,7 +1123,7 @@ export default function Home() {
       </section>
 
       <section id="servizi" style={{ background: "#fff", padding: "96px 0" }}>
-        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
+        <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: colors.bg, color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.servicesTag}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.servicesTitle}</h2>
 
@@ -1217,7 +1235,7 @@ export default function Home() {
           padding: "96px 0",
         }}
       >
-        <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
+        <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
           <div style={{ marginTop: 24, maxWidth: 640, margin: "24px auto 0", background: "#fff", border: `1px solid ${colors.line}`, borderRadius: 18, padding: 28 }}>
             <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.contacts}</span>
             <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34 }}>{t.talk}</h2>
@@ -1317,6 +1335,7 @@ export default function Home() {
                   <button
                     type="submit"
                     disabled={formState.submitting}
+                    className="cta-hover-lift"
                     style={{
                       marginTop: 16,
                       border: "none",
@@ -1342,7 +1361,7 @@ export default function Home() {
         <div
           className="footer-grid"
           style={{
-            width: "min(1200px, 92vw)",
+            width: "min(1200px, 89vw)",
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "1fr",
@@ -1389,7 +1408,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div style={{ width: "min(1200px, 92vw)", margin: "14px auto 0", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 12 }}>
+        <div style={{ width: "min(1200px, 89vw)", margin: "14px auto 0", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 12 }}>
           <p style={{ margin: 0, color: "rgba(255,255,255,0.35)", fontSize: 12 }}>
             © 2026 David Cappelletto
           </p>
@@ -1399,6 +1418,7 @@ export default function Home() {
       <a
         href="https://wa.me/393481151160"
         onClick={() => trackEvent("click_whatsapp")}
+        className="cta-hover-lift"
         style={{
           position: "fixed",
           right: 20,
@@ -1525,7 +1545,10 @@ export default function Home() {
           .mobile-menu-panel {
             display: none !important;
           }
-          .hero-grid,
+          .hero-grid {
+            grid-template-columns: 1fr 1fr !important;
+            align-items: center !important;
+          }
           .problem-grid {
             grid-template-columns: 1fr 1fr !important;
           }
@@ -1570,7 +1593,7 @@ export default function Home() {
           }
           .method-combined {
             grid-template-columns: 1fr 1fr !important;
-            align-items: start !important;
+            align-items: stretch !important;
           }
           .method-photo-text {
             text-align: left !important;

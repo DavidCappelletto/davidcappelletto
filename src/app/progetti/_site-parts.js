@@ -82,7 +82,7 @@ export function SiteHeader() {
         transition: "all .3s ease",
       }}
     >
-      <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", height: 80, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div style={{ width: "min(1200px, 89vw)", margin: "0 auto", height: 80, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/" style={{ fontSize: 19, fontWeight: 700, color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 10 }}>
           <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
           <span>David Cappelletto</span>
@@ -111,7 +111,7 @@ export function SiteHeader() {
 
       {mobileMenuOpen && (
         <div className="mobile-menu-panel" style={{ borderTop: "1px solid rgba(255,255,255,.15)", background: "rgba(17,30,48,.97)", paddingBottom: 18 }}>
-          <div style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "flex", flexDirection: "column", gap: 12, paddingTop: 14 }}>
+          <div style={{ width: "min(1200px, 89vw)", margin: "0 auto", display: "flex", flexDirection: "column", gap: 12, paddingTop: 14 }}>
             <div style={{ border: "1px solid rgba(255,255,255,.4)", borderRadius: 999, padding: 4, fontSize: 13, width: "fit-content" }}>
               <button style={{ border: "none", borderRadius: 999, padding: "6px 12px", background: lang === "it" ? "#fff" : "transparent", color: lang === "it" ? colors.ink : "#fff", cursor: "pointer" }} onClick={() => setLang("it")}>IT</button>
               <button style={{ border: "none", borderRadius: 999, padding: "6px 12px", background: lang === "en" ? "#fff" : "transparent", color: lang === "en" ? colors.ink : "#fff", cursor: "pointer" }} onClick={() => setLang("en")}>EN</button>
@@ -147,7 +147,7 @@ export function SiteFooter() {
   const t = nav.it;
   return (
     <footer style={{ background: colors.navyDeep, color: "#fff", padding: "34px 0 16px" }}>
-      <div className="footer-grid" style={{ width: "min(1200px, 92vw)", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: 20, alignItems: "center", justifyContent: "space-between" }}>
+      <div className="footer-grid" style={{ width: "min(1200px, 89vw)", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: 20, alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
           <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 28, width: "auto", filter: "invert(1)" }} />
           <span style={{ color: "#fff", fontWeight: 700 }}>David Cappelletto</span>
@@ -167,7 +167,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div style={{ width: "min(1200px, 92vw)", margin: "14px auto 0", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 12 }}>
+      <div style={{ width: "min(1200px, 89vw)", margin: "14px auto 0", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 12 }}>
         <p style={{ margin: 0, color: "rgba(255,255,255,0.35)", fontSize: 12 }}>© 2026 David Cappelletto</p>
       </div>
 
@@ -203,7 +203,7 @@ export function SiteContactSection() {
         padding: "80px 0",
       }}
     >
-      <div style={{ width: "min(1200px, 92vw)", margin: "0 auto" }}>
+      <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
         <div style={{ maxWidth: 640, margin: "0 auto", background: "#fff", border: `1px solid ${colors.line}`, borderRadius: 18, padding: 28 }}>
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.contacts}</span>
           <h2 style={{ margin: "20px 0 0", fontSize: 30, fontWeight: 800 }}>{t.talk}</h2>

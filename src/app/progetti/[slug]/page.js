@@ -72,7 +72,7 @@ export default async function CaseStudyPage({ params }) {
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(17,30,48,0.55), rgba(17,30,48,0.82))" }} />
-        <div style={{ position: "relative", width: "min(1200px, 92vw)", margin: "0 auto", padding: "48px 0 40px" }}>
+        <div style={{ position: "relative", width: "min(1200px, 89vw)", margin: "0 auto", padding: "48px 0 40px" }}>
           <Link href="/progetti" style={{ color: "rgba(255,255,255,.85)", textDecoration: "none", fontSize: 14, fontWeight: 600 }}>
             ← Tutti i progetti
           </Link>
@@ -85,7 +85,7 @@ export default async function CaseStudyPage({ params }) {
         </div>
       </div>
 
-      <div style={{ width: "min(860px, 92vw)", margin: "0 auto", padding: "40px 0 88px" }}>
+      <div style={{ width: "min(860px, 89vw)", margin: "0 auto", padding: "40px 0 88px" }}>
         <div style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: "20px 24px", display: "grid", gap: 8, fontSize: 15 }}>
           <p style={{ margin: 0 }}>
             <strong>Cliente:</strong>{" "}

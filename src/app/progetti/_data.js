@@ -17,6 +17,7 @@ export const caseStudies = [
       tag: "Progetto Cliente · Impiantistica HVAC",
       title: "Un sito aziendale costruito a mano, con l'AI in bottega",
       client: "Azienda impiantistica HVAC · Nord Italia",
+      place: "Nord Italia · via agenzia",
       stack: "HTML/CSS/JS statico · CMS headless (Decap) · Netlify · GA4 + GTM · Meta Pixel",
       role: "Tutto — dalla diagnosi al deploy",
       intro:
@@ -52,6 +53,7 @@ export const caseStudies = [
       tag: "Client Project · HVAC Installations",
       title: "A company website built by hand, with AI on the workbench",
       client: "HVAC installation company · Northern Italy",
+      place: "Northern Italy · via agency",
       stack: "Static HTML/CSS/JS · Headless CMS (Decap) · Netlify · GA4 + GTM · Meta Pixel",
       role: "Everything — from diagnosis to deploy",
       intro:
@@ -92,6 +94,8 @@ export const caseStudies = [
       tag: "Progetto Personale · Metodo",
       title: "Geo·FIRE — un mappamondo finanziario come progetto di metodo",
       client: "Progetto proprio",
+      place: "Web app 3D nel browser",
+      appLinkLabel: "Prova l'app →",
       stack: "Web app 3D interattiva nel browser (React, canvas, motore geografico proprietario)",
       role: "Ideazione, design, sviluppo, iterazione",
       intro:
@@ -128,6 +132,8 @@ export const caseStudies = [
       tag: "Personal Project · Method",
       title: "Geo·FIRE — a financial globe as a method project",
       client: "Own project",
+      place: "3D web app in the browser",
+      appLinkLabel: "Try the app →",
       stack: "Interactive 3D web app in the browser (React, canvas, proprietary geo engine)",
       role: "Concept, design, development, iteration",
       intro:
@@ -169,6 +175,7 @@ export const caseStudies = [
       tag: "Progetto Cliente · Settore Sanitario",
       title: "Althea — SEO locale senza budget pubblicitario",
       client: "Infermiera libera professionista · Pordenone e provincia",
+      place: "📍 Pordenone e provincia",
       stack: "Wix · SEO locale · Content",
       role: "Design, sviluppo, SEO, manutenzione continuativa",
       intro:
@@ -203,6 +210,7 @@ export const caseStudies = [
       tag: "Client Project · Healthcare",
       title: "Althea — local SEO with zero ad budget",
       client: "Independent nurse · Pordenone and surrounding area",
+      place: "📍 Pordenone and surrounding area",
       stack: "Wix · Local SEO · Content",
       role: "Design, development, SEO, ongoing maintenance",
       intro:
@@ -241,6 +249,7 @@ export const caseStudies = [
       tag: "Progetto Sperimentale · Infrastruttura",
       title: "Maybe's Shop — un e-commerce che si gestisce da solo",
       client: "Progetto proprio",
+      place: "Shopify + print-on-demand",
       stack: "Shopify · Integrazione print-on-demand automatica",
       role: "Brand, design del negozio, infrastruttura tecnica",
       intro:
@@ -270,6 +279,7 @@ export const caseStudies = [
       tag: "Experimental Project · Infrastructure",
       title: "Maybe's Shop — an e-commerce that runs itself",
       client: "Own project",
+      place: "Shopify + print-on-demand",
       stack: "Shopify · Automatic print-on-demand integration",
       role: "Brand, store design, technical infrastructure",
       intro:

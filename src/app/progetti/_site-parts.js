@@ -2,6 +2,7 @@
 
 import { useEffect, useState, createContext, useContext } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useForm } from "@formspree/react";
 import { colors } from "./_data";
 import { trackEvent } from "../analytics";
@@ -61,10 +62,12 @@ function hasFormspreeSubmissionErrors(errors) {
 
 export function SiteHeader() {
   const { lang, setLang } = useLang();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [logoRotation, setLogoRotation] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = nav[lang];
+  const miniAuditHref = pathname === "/progetti" ? "#mini-audit" : "/#mini-audit";
 
   useEffect(() => {
     const onScroll = () => {
@@ -107,7 +110,7 @@ export function SiteHeader() {
           {navLinks.map((item) => (
             <a key={item.href} href={item.href} style={{ color: "rgba(255,255,255,.95)", textDecoration: "none", fontSize: 14 }}>{item.label}</a>
           ))}
-          <a href="/#mini-audit" style={{ background: colors.teal, color: "#fff", borderRadius: 999, textDecoration: "none", padding: "12px 20px", fontSize: 14, fontWeight: 700 }}>{t.ctaMini}</a>
+          <a href={miniAuditHref} style={{ background: colors.teal, color: "#fff", borderRadius: 999, textDecoration: "none", padding: "12px 20px", fontSize: 14, fontWeight: 700 }}>{t.ctaMini}</a>
         </div>
 
         <button
@@ -130,7 +133,7 @@ export function SiteHeader() {
             {navLinks.map((item) => (
               <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} style={{ color: "rgba(255,255,255,.95)", textDecoration: "none", fontSize: 16 }}>{item.label}</a>
             ))}
-            <a href="/#mini-audit" onClick={() => setMobileMenuOpen(false)} style={{ marginTop: 6, background: colors.teal, color: "#fff", borderRadius: 999, textDecoration: "none", padding: "12px 20px", fontSize: 14, fontWeight: 700, width: "fit-content" }}>{t.ctaMini}</a>
+            <a href={miniAuditHref} onClick={() => setMobileMenuOpen(false)} style={{ marginTop: 6, background: colors.teal, color: "#fff", borderRadius: 999, textDecoration: "none", padding: "12px 20px", fontSize: 14, fontWeight: 700, width: "fit-content" }}>{t.ctaMini}</a>
           </div>
         </div>
       )}
@@ -195,6 +198,66 @@ export function SiteFooter() {
   );
 }
 
+const firstStepCopy = {
+  it: {
+    firstStep: "Primo Passo",
+    miniTitle: "Inizia dal Mini Audit Gratuito",
+    miniText:
+      "20 minuti. Nessun impegno. Raccontami la tua situazione — capisco il contesto, ti dico onestamente se e come posso aiutarti.",
+    heroBtn1: "Scrivimi su WhatsApp",
+    miniBtn2: "Oppure compila il form →",
+  },
+  en: {
+    firstStep: "First Step",
+    miniTitle: "Start with the Free Mini Audit",
+    miniText:
+      "20 minutes. No commitment. Tell me your situation — I understand the context and honestly tell you if and how I can help.",
+    heroBtn1: "Message me on WhatsApp",
+    miniBtn2: "Or fill in the form →",
+  },
+};
+
+export function SiteFirstStepSection() {
+  const { lang } = useLang();
+  const t = firstStepCopy[lang];
+
+  return (
+    <section
+      id="mini-audit"
+      style={{
+        backgroundImage: `linear-gradient(rgba(17,30,48,0.78), rgba(17,30,48,0.88)), url(/case-studies/header-case.png)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        color: "#fff",
+        textAlign: "center",
+        padding: "56px 0 96px",
+      }}
+    >
+      <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
+        <span style={{ display: "inline-block", background: "rgba(255,255,255,.14)", color: colors.tealLight, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.firstStep}</span>
+        <h2 style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.miniTitle}</h2>
+        <div style={{ marginTop: 30, display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
+          <a
+            href="https://wa.me/393481151160"
+            onClick={() => trackEvent("click_whatsapp")}
+            className="cta-hover-lift"
+            style={{ background: "#fff", color: colors.ink, borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}
+          >
+            {t.heroBtn1}
+          </a>
+          <a href="#contatti" className="cta-hover-lift" style={{ border: "1px solid rgba(255,255,255,.6)", color: "#fff", borderRadius: 999, padding: "14px 26px", textDecoration: "none", fontWeight: 700 }}>
+            {t.miniBtn2}
+          </a>
+        </div>
+        <p style={{ margin: "22px auto 0", maxWidth: 560, color: "rgba(255,255,255,.7)", fontSize: 14, lineHeight: 1.6 }}>
+          {t.miniText}
+        </p>
+      </div>
+    </section>
+  );
+}
+
 export function SiteContactSection() {
   const [formState, handleFormSubmit] = useForm("xbdpngvd");
   const { lang } = useLang();
@@ -213,13 +276,13 @@ export function SiteContactSection() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        padding: "80px 0",
-      }}
-    >
-      <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
-        <div style={{ maxWidth: 640, margin: "0 auto", background: "#fff", border: `1px solid ${colors.line}`, borderRadius: 18, padding: 28 }}>
-          <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.contacts}</span>
-          <h2 style={{ margin: "20px 0 0", fontSize: 30, fontWeight: 800 }}>{t.talk}</h2>
+      padding: "96px 0",
+    }}
+  >
+    <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
+      <div style={{ maxWidth: 640, margin: "0 auto", background: "#fff", border: `1px solid ${colors.line}`, borderRadius: 18, padding: 28 }}>
+        <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.contacts}</span>
+        <h2 style={{ margin: "20px 0 0", fontSize: 34, fontWeight: 800 }}>{t.talk}</h2>
           <p style={{ marginTop: 10, color: colors.inkMuted }}>{t.talkSub}</p>
 
           <div style={{ display: "flex", marginTop: 24, justifyContent: "center", gap: 32, paddingBottom: 22, marginBottom: 22, borderBottom: `1px solid ${colors.line}` }}>

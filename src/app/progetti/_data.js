@@ -3,6 +3,7 @@ export const colors = {
   navyDeep: "#111E30",
   teal: "#2BA89A",
   tealLight: "#3DBFB2",
+  tealText: "#1E7E73",
   bg: "#F4F7FA",
   ink: "#111E30",
   inkMuted: "#4A5F78",
@@ -250,18 +251,22 @@ export const caseStudies = [
       title: "Maybe's Shop — un e-commerce che si gestisce da solo",
       client: "Progetto proprio",
       place: "Shopify + print-on-demand",
-      stack: "Shopify · Integrazione print-on-demand automatica",
-      role: "Brand, design del negozio, infrastruttura tecnica",
+      stack: "Shopify · Integrazione print-on-demand via webhook",
+      role: "Brand, design del negozio, infrastruttura tecnica, integrazione",
       intro:
         "Volevo rispondere a una domanda pratica: si può costruire un negozio di magliette che funziona senza che nessuno lo tocchi? Non un mockup, non un \"quasi\": un sistema reale dove un cliente ordina, la maglietta viene stampata, spedita e consegnata — e io non muovo un dito.",
       sections: [
         {
+          h: "Perché esiste",
+          body: "La maggior parte dei negozi \"automatizzati\" in realtà nascondono qualcuno che stampa, impacchetta e spedisce a mano dietro le quinte — l'automazione è solo nella vetrina, non nel retrobottega. Io volevo il contrario: **zero intervento manuale reale**, non solo sulla carta. Questo significava scegliere un'infrastruttura dove ordine, produzione e spedizione si parlano da soli, senza un magazzino fisico di mezzo e senza un \"poi lo sistemo io a mano\" nascosto da qualche parte nel processo.",
+        },
+        {
           h: "Come l'ho costruito",
-          body: "Due metà, entrambe fatte da me. Lo stile: brand, grafica del negozio, design delle magliette — la parte che si vede. L'infrastruttura: Shopify collegato in automatico a un servizio print-on-demand. Quando arriva un ordine, parte la produzione; quando la maglietta è pronta, parte la spedizione. Nessun magazzino, nessun intervento manuale, nessun \"poi lo faccio io a mano\". **La parte che non si vede — e che è il vero progetto**. Anche qui l'AI è stata in bottega con me: per esplorare le opzioni di integrazione, per accelerare le parti noiose, per farmi da secondo paio d'occhi. Le decisioni su cosa collegare a cosa, e perché, restano artigianato mio.",
+          body: "Due metà, entrambe fatte da me. Lo stile: brand, grafica del negozio, design delle magliette — la parte che si vede. L'infrastruttura: Shopify collegato via webhook a un servizio di print-on-demand esterno. Quando arriva un ordine, il webhook lo intercetta e avvia la produzione in automatico; quando la stampa è pronta, parte la spedizione con tracking generato in automatico. **Nessun magazzino, nessun passaggio manuale nel mezzo**. Anche qui l'AI è stata in bottega con me — per esplorare le opzioni di integrazione tra le piattaforme, per accelerare le parti noiose della configurazione, per farmi da secondo paio d'occhi sulla logica degli errori. Le decisioni su cosa collegare a cosa, e perché, restano artigianato mio.",
         },
         {
           h: "La prova",
-          body: "Un sistema \"che dovrebbe funzionare\" non vale niente. Quindi l'ho testato nel modo più onesto possibile: **un ordine reale, pagato, completato**. Maglietta ordinata, stampata automaticamente, spedita automaticamente, arrivata a destinazione. Ciclo chiuso, zero interventi manuali.",
+          body: "Un flusso \"che dovrebbe funzionare\" non vale niente finché non lo vedi girare da solo, dall'inizio alla fine. **L'ho verificato end-to-end**: acquisto, notifica al servizio di stampa, produzione, spedizione, tracking al cliente — senza toccare nulla a mano in nessun passaggio. Non un flusso teorico disegnato su una lavagna: un ciclo reale, chiuso, verificato.",
         },
         {
           h: "Cosa dimostra",
@@ -269,10 +274,10 @@ export const caseStudies = [
         },
       ],
       results: [
-        "Flusso ordine → stampa → spedizione completamente automatico",
-        "Zero magazzino, zero interventi manuali",
+        "Flusso ordine → stampa → spedizione completamente automatico, senza magazzino",
+        "Integrazione via webhook tra Shopify e servizio print-on-demand esterno",
         "Brand e design del negozio curati da zero",
-        "Testato con un ordine reale, completato dalla produzione alla consegna",
+        "Verificato end-to-end: dall'acquisto alla consegna, zero interventi manuali",
       ],
     },
     en: {
@@ -280,18 +285,22 @@ export const caseStudies = [
       title: "Maybe's Shop — an e-commerce that runs itself",
       client: "Own project",
       place: "Shopify + print-on-demand",
-      stack: "Shopify · Automatic print-on-demand integration",
-      role: "Brand, store design, technical infrastructure",
+      stack: "Shopify · Print-on-demand integration via webhook",
+      role: "Brand, store design, technical infrastructure, integration",
       intro:
         "I wanted to answer a practical question: can you build a T-shirt shop that works without anyone touching it? Not a mockup, not an \"almost\": a real system where a customer orders, the shirt is printed, shipped and delivered — and I don't lift a finger.",
       sections: [
         {
+          h: "Why it exists",
+          body: "Most \"automated\" shops actually hide someone printing, packing and shipping by hand behind the scenes — the automation is only in the storefront, not in the back room. I wanted the opposite: **zero real manual intervention**, not just on paper. That meant choosing an infrastructure where order, production and shipping talk to each other on their own, with no physical warehouse in between and no \"I'll fix it by hand later\" hidden somewhere in the process.",
+        },
+        {
           h: "How I built it",
-          body: "Two halves, both done by me. The look: brand, store graphics, shirt designs — the visible part. The infrastructure: Shopify automatically connected to a print-on-demand service. When an order arrives, production starts; when the shirt is ready, shipping starts. No warehouse, no manual steps, no \"I'll do it by hand later\". **The part you don't see — and that's the real project**. Here too AI was on the workbench with me: exploring integration options, speeding up the boring parts, acting as a second pair of eyes. Decisions about what to connect to what, and why, remain my craft.",
+          body: "Two halves, both done by me. The look: brand, store graphics, shirt designs — the visible part. The infrastructure: Shopify connected via webhook to an external print-on-demand service. When an order arrives, the webhook catches it and kicks off production automatically; when the print is ready, shipping starts with tracking generated automatically. **No warehouse, no manual step in between**. Here too AI was on the workbench with me — exploring integration options between platforms, speeding up the boring configuration parts, acting as a second pair of eyes on the error handling logic. Decisions about what to connect to what, and why, remain my craft.",
         },
         {
           h: "The proof",
-          body: "A system that \"should work\" is worth nothing. So I tested it the most honest way possible: **a real order, paid, completed**. Shirt ordered, printed automatically, shipped automatically, delivered. Closed loop, zero manual intervention.",
+          body: "A flow that \"should work\" is worth nothing until you see it run on its own, start to finish. **I verified it end-to-end**: purchase, notification to the print service, production, shipping, tracking to the customer — without touching anything by hand at any step. Not a flow drawn on a whiteboard: a real, closed, verified cycle.",
         },
         {
           h: "What it proves",
@@ -299,10 +308,10 @@ export const caseStudies = [
         },
       ],
       results: [
-        "Order → print → ship flow fully automatic",
-        "Zero warehouse, zero manual steps",
-        "Brand and store design built from scratch",
-        "Validated with a real order, completed from production to delivery",
+        "Fully automatic order → print → ship flow, no warehouse",
+        "Webhook integration between Shopify and an external print-on-demand service",
+        "Brand and store design both built from scratch",
+        "Verified end-to-end: from purchase to delivery, zero manual steps",
       ],
     },
   },

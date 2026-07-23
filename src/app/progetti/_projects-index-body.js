@@ -115,14 +115,14 @@ function ProjectsIndexInner() {
                     <ul style={{ margin: "16px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 8 }}>
                       {localized.results.slice(0, 3).map((result) => (
                         <li key={result} style={{ fontSize: 14 }}>
-                          <span style={{ color: colors.teal, marginRight: 8 }}>✓</span>
+                          <span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>
                           {result}
                         </li>
                       ))}
                     </ul>
 
                     <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
-                      <span style={{ color: colors.teal, fontWeight: 700 }}>{t.readMore}</span>
+                      <span style={{ color: colors.tealText, fontWeight: 700 }}>{t.readMore}</span>
                       {localized.appLink && (
                         <a
                           href={localized.appLink}

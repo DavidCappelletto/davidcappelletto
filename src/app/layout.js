@@ -1,6 +1,5 @@
 import "./globals.css";
-import Script from "next/script";
-import ClarityInit from "./ClarityInit";
+import ConsentManager from "./ConsentManager";
 
 export const metadata = {
   metadataBase: new URL("https://davidcappelletto.it"),
@@ -33,22 +32,9 @@ export default function RootLayout({ children }) {
     <html lang="it" className="h-full">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-MBWPX09G1C"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-MBWPX09G1C');
-          `}
-        </Script>
       </head>
       <body className="min-h-full flex flex-col antialiased">
-        <ClarityInit />
+        <ConsentManager />
         {children}
       </body>
     </html>

@@ -434,6 +434,7 @@ const colors = {
   navyDeep: "#111E30",
   teal: "#2BA89A",
   tealLight: "#3DBFB2",
+  tealText: "#1E7E73",
   bg: "#F4F7FA",
   ink: "#111E30",
   inkMuted: "#4A5F78",
@@ -449,7 +450,6 @@ export default function Home() {
   const [openServiceAccordion, setOpenServiceAccordion] = useState(0);
   const [hoveredStep, setHoveredStep] = useState(null);
   const [hoveredContact, setHoveredContact] = useState(null);
-  const [showCookie, setShowCookie] = useState(false);
 
   const t = copy[lang];
   const [formState, handleFormSubmit] = useForm("xbdpngvd");
@@ -482,28 +482,6 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (
-      window.localStorage.getItem("cookieConsent") ||
-      window.localStorage.getItem("dc_cookie_ok") === "1"
-    ) {
-      return;
-    }
-    const timer = window.setTimeout(() => setShowCookie(true), 800);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const acceptCookie = () => {
-    window.localStorage.setItem("cookieConsent", "accepted");
-    window.localStorage.setItem("dc_cookie_ok", "1");
-    setShowCookie(false);
-  };
-
-  const rejectCookie = () => {
-    window.localStorage.setItem("cookieConsent", "rejected");
-    setShowCookie(false);
-  };
 
   const navLinks = [
     { href: "#casi-reali", label: t.navLinks[0] },
@@ -552,7 +530,7 @@ export default function Home() {
               gap: 10,
             }}
           >
-            <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
+            <img src="/logo.png" alt="Logo David Cappelletto" width={34} height={34} style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
             <span>David Cappelletto</span>
           </a>
 
@@ -700,7 +678,7 @@ export default function Home() {
       <section
         id="top"
         style={{
-          backgroundImage: "url('/hero-bg.png')",
+          backgroundImage: "url('/hero-bg.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -915,6 +893,8 @@ export default function Home() {
                   <img
                     src={card.imageSrc}
                     alt={card.title}
+                    width={1200}
+                    height={800}
                     loading="lazy"
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                     onError={(e) => {
@@ -950,12 +930,12 @@ export default function Home() {
                   <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{card.place}</p>
                   <ul style={{ margin: "16px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 8 }}>
                     {card.results.slice(0, 3).map((result) => (
-                      <li key={result} style={{ fontSize: 14 }}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{result}</li>
+                      <li key={result} style={{ fontSize: 14 }}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{result}</li>
                     ))}
                   </ul>
 
                   <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
-                    <span style={{ color: colors.teal, fontWeight: 700 }}>{t.casesReadMore}</span>
+                    <span style={{ color: colors.tealText, fontWeight: 700 }}>{t.casesReadMore}</span>
                     {card.appLink && (
                       <a
                         href={card.appLink}
@@ -1004,7 +984,7 @@ export default function Home() {
       <section
         id="come-lavoro"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(28,46,74,0.45), rgba(43,168,154,0.22)), url(/case-studies/chi-sono-bg.png)`,
+          backgroundImage: `linear-gradient(135deg, rgba(28,46,74,0.45), rgba(43,168,154,0.22)), url(/case-studies/chi-sono-bg.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -1036,7 +1016,7 @@ export default function Home() {
                       marginTop: 32,
                       borderLeft: `3px solid ${colors.teal}`,
                       paddingLeft: 10,
-                      color: colors.teal,
+                      color: colors.tealText,
                       textTransform: "uppercase",
                       letterSpacing: ".08em",
                       fontSize: 12,
@@ -1078,7 +1058,7 @@ export default function Home() {
                       transition: "transform .2s ease, border-left-color .2s ease",
                     }}
                   >
-                    <p style={{ margin: 0, fontSize: 48, fontWeight: 800, color: colors.teal }}>{step[0]}</p>
+                    <p style={{ margin: 0, fontSize: 48, fontWeight: 800, color: colors.tealText }}>{step[0]}</p>
                     <h3 style={{ margin: "14px 0 0", fontSize: 24 }}>{step[1]}</h3>
                     <p style={{ margin: "10px 0 0", color: colors.inkMuted, lineHeight: 1.6 }}>{step[2]}</p>
                   </article>
@@ -1110,7 +1090,7 @@ export default function Home() {
       <section
         id="mini-audit"
         style={{
-          backgroundImage: `linear-gradient(rgba(17,30,48,0.78), rgba(17,30,48,0.88)), url(/case-studies/header-case.png)`,
+          backgroundImage: `linear-gradient(rgba(17,30,48,0.78), rgba(17,30,48,0.88)), url(/case-studies/header-case.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -1190,13 +1170,13 @@ export default function Home() {
               <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
                 {t.pricingContext[0]}
               </p>
-              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.teal, fontWeight: 500 }}>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.tealText, fontWeight: 500 }}>
                 {t.pricingIdeal[0]}
               </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
                 {t.pricingItems[0].map((item) => (
-                  <li key={item}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{item}</li>
+                  <li key={item}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{item}</li>
                 ))}
               </ul>
             </article>
@@ -1229,13 +1209,13 @@ export default function Home() {
               <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
                 {t.pricingContext[2]}
               </p>
-              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.teal, fontWeight: 500 }}>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.tealText, fontWeight: 500 }}>
                 {t.pricingIdeal[2]}
               </p>
               <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[2]}</p>
               <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
                 {t.pricingItems[2].map((item) => (
-                  <li key={item}><span style={{ color: colors.teal, marginRight: 8 }}>✓</span>{item}</li>
+                  <li key={item}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{item}</li>
                 ))}
               </ul>
             </article>
@@ -1296,7 +1276,7 @@ export default function Home() {
               onSubmit={handleTrackedFormSubmit}
             >
               {formState.succeeded ? (
-                <p style={{ margin: 0, color: colors.teal, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>
+                <p style={{ margin: 0, color: colors.tealText, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>
                   {t.form.success}
                 </p>
               ) : (
@@ -1326,6 +1306,7 @@ export default function Home() {
                     <select
                       className="contact-span-full"
                       name="budget"
+                      aria-label={t.form.budget}
                       required
                       style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box", gridColumn: "auto" }}
                       defaultValue=""
@@ -1389,7 +1370,7 @@ export default function Home() {
           }}
         >
           <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-            <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 28, width: "auto", filter: "invert(1)" }} />
+            <img src="/logo.png" alt="Logo David Cappelletto" width={28} height={28} style={{ height: 28, width: "auto", filter: "invert(1)" }} />
             <span style={{ color: "#fff", fontWeight: 700 }}>David Cappelletto</span>
           </div>
 
@@ -1459,48 +1440,6 @@ export default function Home() {
       >
         <svg viewBox="0 0 24 24" width="26" height="26" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.886a.5.5 0 0 0 .619.608l6.188-1.615A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.52-5.17-1.428l-.36-.214-3.733.974.999-3.648-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
       </a>
-
-      {showCookie && (
-        <div style={{ position: "fixed", left: 18, bottom: 18, zIndex: 40, maxWidth: 360, borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 16, boxShadow: "0 10px 20px rgba(0,0,0,.12)" }}>
-          <p style={{ margin: 0, color: colors.inkMuted, fontSize: 14, lineHeight: 1.55 }}>
-            {t.cookie}
-          </p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
-            <button
-              onClick={acceptCookie}
-              style={{
-                border: "none",
-                borderRadius: 999,
-                background: "#2BA89A",
-                color: "#fff",
-                padding: "10px 16px",
-                fontSize: 14,
-                fontWeight: 700,
-                cursor: "pointer",
-                minWidth: 96,
-              }}
-            >
-              {t.accept}
-            </button>
-            <button
-              onClick={rejectCookie}
-              style={{
-                border: "1px solid #2BA89A",
-                borderRadius: 999,
-                background: "transparent",
-                color: "#2BA89A",
-                padding: "10px 16px",
-                fontSize: 14,
-                fontWeight: 700,
-                cursor: "pointer",
-                minWidth: 96,
-              }}
-            >
-              {t.reject}
-            </button>
-          </div>
-        </div>
-      )}
 
       <style jsx global>{`
         .cta-hover-lift {

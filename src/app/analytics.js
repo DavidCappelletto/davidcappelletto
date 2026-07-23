@@ -3,12 +3,13 @@
 import Clarity from '@microsoft/clarity';
 
 export function trackEvent(eventName, params = {}) {
-  // GA4
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (typeof window === 'undefined') return;
+  // GA4 — no-op if analytics consent wasn't given (gtag never loaded)
+  if (window.gtag) {
     window.gtag('event', eventName, params);
   }
-  // Clarity
-  if (typeof window !== 'undefined') {
+  // Clarity — no-op if analytics consent wasn't given (Clarity never initialized)
+  if (window.__dcClarityReady) {
     Clarity.event(eventName);
   }
 }

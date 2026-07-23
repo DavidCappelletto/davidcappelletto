@@ -98,7 +98,7 @@ export function SiteHeader() {
     >
       <div style={{ width: "min(1200px, 89vw)", margin: "0 auto", height: 80, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/" style={{ fontSize: 19, fontWeight: 700, color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 10 }}>
-          <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
+          <img src="/logo.png" alt="Logo David Cappelletto" width={34} height={34} style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
           <span>David Cappelletto</span>
         </Link>
 
@@ -164,7 +164,7 @@ export function SiteFooter() {
     <footer style={{ background: colors.navyDeep, color: "#fff", padding: "34px 0 16px" }}>
       <div className="footer-grid" style={{ width: "min(1200px, 89vw)", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: 20, alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-          <img src="/logo.png" alt="Logo David Cappelletto" style={{ height: 28, width: "auto", filter: "invert(1)" }} />
+          <img src="/logo.png" alt="Logo David Cappelletto" width={28} height={28} style={{ height: 28, width: "auto", filter: "invert(1)" }} />
           <span style={{ color: "#fff", fontWeight: 700 }}>David Cappelletto</span>
         </div>
 
@@ -225,7 +225,7 @@ export function SiteFirstStepSection() {
     <section
       id="mini-audit"
       style={{
-        backgroundImage: `linear-gradient(rgba(17,30,48,0.78), rgba(17,30,48,0.88)), url(/case-studies/header-case.png)`,
+        backgroundImage: `linear-gradient(rgba(17,30,48,0.78), rgba(17,30,48,0.88)), url(/case-studies/header-case.jpg)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -299,14 +299,14 @@ export function SiteContactSection() {
 
           <form onSubmit={handleTrackedFormSubmit}>
             {formState.succeeded ? (
-              <p style={{ margin: 0, color: colors.teal, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>{t.form.success}</p>
+              <p style={{ margin: 0, color: colors.tealText, fontSize: 16, fontWeight: 600, lineHeight: 1.5 }}>{t.form.success}</p>
             ) : (
               <>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
                   <input name="nome" type="text" required style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} placeholder={t.form.name} />
                   <input name="email" type="email" required style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} placeholder={t.form.email} />
                   <input name="tipo_attivita" type="text" style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} placeholder={t.form.activity} />
-                  <select name="budget" required style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} defaultValue="">
+                  <select name="budget" aria-label={t.form.budget} required style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} defaultValue="">
                     <option value="" disabled>{t.form.budget}</option>
                     <option value="€250-500">€250-500</option>
                     <option value="€800-1.600">€800-1.600</option>
@@ -330,11 +330,13 @@ export function SiteContactSection() {
   );
 }
 
-export function ImageWithFallback({ src, alt, style }) {
+export function ImageWithFallback({ src, alt, style, width = 1200, height = 800 }) {
   return (
     <img
       src={src}
       alt={alt}
+      width={width}
+      height={height}
       style={style}
       loading="lazy"
       onError={(e) => {

@@ -74,7 +74,7 @@ function ProjectPageInner({ cs, next }) {
         }}
       >
         <ImageWithFallback
-          src="/case-studies/header-case.png"
+          src="/case-studies/header-case.jpg"
           alt=""
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
         />
@@ -97,7 +97,7 @@ function ProjectPageInner({ cs, next }) {
           <p style={{ margin: 0 }}>
             <strong>{t.client}</strong>{" "}
             {localized.link ? (
-              <a href={localized.link} target="_blank" rel="noopener noreferrer" style={{ color: colors.teal }}>
+              <a href={localized.link} target="_blank" rel="noopener noreferrer" style={{ color: colors.tealText }}>
                 {localized.client}
               </a>
             ) : (
@@ -163,7 +163,7 @@ function ProjectPageInner({ cs, next }) {
           <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
             {localized.results.map((r) => (
               <li key={r}>
-                <span style={{ color: colors.teal, marginRight: 8 }}>✓</span>
+                <span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>
                 {r}
               </li>
             ))}
@@ -171,7 +171,7 @@ function ProjectPageInner({ cs, next }) {
         </section>
 
         <div style={{ marginTop: 48, display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
-          <Link href={`/progetti/${localizedNext.slug}`} style={{ color: colors.teal, textDecoration: "none", fontWeight: 700 }}>
+          <Link href={`/progetti/${localizedNext.slug}`} style={{ color: colors.tealText, textDecoration: "none", fontWeight: 700 }}>
             {t.nextProject(localizedNext.title.split("—")[0].trim())}
           </Link>
           <Link

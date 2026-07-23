@@ -83,7 +83,7 @@ export default function ConsentManager() {
           href="https://www.iubenda.com/privacy-policy/65493035"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "#2BA89A" }}
+          style={{ color: "#1E7E73" }}
         >
           Privacy Policy
         </a>
@@ -111,7 +111,7 @@ export default function ConsentManager() {
             border: "1px solid #2BA89A",
             borderRadius: 999,
             background: "transparent",
-            color: "#2BA89A",
+            color: "#1E7E73",
             padding: "10px 16px",
             fontSize: 14,
             fontWeight: 700,

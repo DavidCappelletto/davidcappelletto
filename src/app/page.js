@@ -794,7 +794,7 @@ export default function Home() {
             <p style={{ margin: "0 0 12px", textTransform: "uppercase", letterSpacing: ".08em", color: colors.tealLight, fontSize: 12 }}>
               {t.approach}
             </p>
-            <p className="hero-quote" style={{ margin: 0, fontSize: 19, lineHeight: 1.45, fontStyle: "italic", fontFamily: "'DM Serif Display', Georgia, serif" }}>
+            <p className="hero-quote" style={{ margin: 0, fontSize: 19, lineHeight: 1.45, fontStyle: "italic" }}>
               {t.quote}
             </p>
             <div className="hero-stats-grid" style={{ marginTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
@@ -1380,14 +1380,14 @@ export default function Home() {
               flexWrap: "wrap",
               gap: 14,
               justifyContent: "center",
-              color: "rgba(255,255,255,0.4)",
+              color: "rgba(255,255,255,0.55)",
               fontSize: 13,
             }}
           >
-            <a href="#casi-reali" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[0]}</a>
-            <a href="#come-lavoro" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[1]}</a>
-            <a href="#servizi" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[2]}</a>
-            <a href="#contatti" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.contacts}</a>
+            <a href="#casi-reali" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>{t.navLinks[0]}</a>
+            <a href="#come-lavoro" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>{t.navLinks[1]}</a>
+            <a href="#servizi" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>{t.navLinks[2]}</a>
+            <a href="#contatti" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>{t.contacts}</a>
           </div>
 
           <div className="footer-right" style={{ justifySelf: "start", textAlign: "left" }}>

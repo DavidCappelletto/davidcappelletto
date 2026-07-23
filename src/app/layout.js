@@ -3,12 +3,28 @@ import Script from "next/script";
 import ClarityInit from "./ClarityInit";
 
 export const metadata = {
+  metadataBase: new URL("https://davidcappelletto.it"),
   title: "David Cappelletto | Consulenza Digitale",
   description:
     "Trasformo siti confusi in sistemi che generano richieste con UX, SEO Locale e automazioni AI.",
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
+  },
+  openGraph: {
+    title: "David Cappelletto | Consulenza Digitale",
+    description:
+      "Trasformo siti confusi in sistemi che generano richieste con UX, SEO Locale e automazioni AI.",
+    url: "https://davidcappelletto.it",
+    siteName: "David Cappelletto",
+    locale: "it_IT",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "David Cappelletto | Consulenza Digitale",
+    description:
+      "Trasformo siti confusi in sistemi che generano richieste con UX, SEO Locale e automazioni AI.",
   },
 };
 

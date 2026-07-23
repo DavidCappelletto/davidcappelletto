@@ -26,6 +26,8 @@ body {
   .nav-links-desktop { display: flex !important; }
   .nav-lang-desktop { display: flex !important; }
   .nav-hamburger { display: none !important; }
+  .hero-grid { grid-template-columns: 1fr 1fr !important; align-items: center !important; }
+  .hero-title { font-size: 56px !important; }
 }
 
 .cta-hover-lift {

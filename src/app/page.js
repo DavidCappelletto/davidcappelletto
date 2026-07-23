@@ -1503,10 +1503,6 @@ export default function Home() {
           .mobile-menu-panel {
             display: none !important;
           }
-          .hero-grid {
-            grid-template-columns: 1fr 1fr !important;
-            align-items: center !important;
-          }
           .problem-grid {
             grid-template-columns: 1fr 1fr !important;
           }
@@ -1535,9 +1531,6 @@ export default function Home() {
           .footer-grid {
             grid-template-columns: 1fr auto 1fr !important;
             align-items: center !important;
-          }
-          .hero-title {
-            font-size: 56px !important;
           }
           .section-title {
             font-size: 46px !important;

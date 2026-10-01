@@ -17,14 +17,14 @@ const ui = {
     tag: "Progetti",
     title: "Non esempi ipotetici. Cose già fatte.",
     intro:
-      "Ogni progetto qui è raccontato per come è stato fatto davvero: il problema, le scelte, l'esecuzione, il risultato. Uso l'AI come attrezzo da banco in ogni fase — e lo dichiaro, perché il valore non sta nello strumento ma in chi decide cosa fargli fare. Questa pagina cresce: ogni progetto significativo che completo diventa una nuova voce qui.",
+      "Ogni progetto qui è raccontato per come è stato fatto davvero: il problema, le scelte, l'esecuzione e il risultato. Uso l'AI come attrezzo da banco in ogni fase e lo dichiaro, perché il valore non sta nello strumento ma in chi decide cosa fargli fare. Questa pagina cresce: ogni progetto significativo che completo diventa una nuova voce qui.",
     readMore: "Leggi il progetto →",
   },
   en: {
     tag: "Projects",
     title: "No hypothetical examples. Real work already delivered.",
     intro:
-      "Every project here is told the way it actually happened: the problem, the choices, the execution, the result. I use AI as a hand tool at every stage — and I say so openly, because the value isn't in the tool but in who decides what to do with it. This page grows: every significant project I finish becomes a new entry here.",
+      "Every project here is told the way it actually happened: the problem, the choices, the execution, and the result. I use AI as a hand tool at every stage, and I say so openly because the value isn't in the tool but in who decides what to do with it. This page grows: every significant project I finish becomes a new entry here.",
     readMore: "Read the project →",
   },
 };

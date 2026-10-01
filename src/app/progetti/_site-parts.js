@@ -29,7 +29,6 @@ const nav = {
       name: "Nome e Cognome",
       email: "Email",
       activity: "Tipo di attività",
-      budget: "Seleziona budget",
       msg: "Scrivi qui il tuo messaggio",
       submit: "Invia richiesta",
       success: "Messaggio inviato! Ti rispondo entro 24 ore.",
@@ -46,7 +45,6 @@ const nav = {
       name: "Full name",
       email: "Email",
       activity: "Type of business",
-      budget: "Select budget",
       msg: "Write your message here",
       submit: "Send request",
       success: "Message sent! I'll reply within 24 hours.",
@@ -169,10 +167,10 @@ export function SiteFooter() {
         </div>
 
         <div style={{ display: "inline-flex", flexWrap: "wrap", gap: 14, color: "rgba(255,255,255,0.4)", fontSize: 13 }}>
-          <a href="/#casi-reali" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[0]}</a>
-          <a href="/#come-lavoro" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[1]}</a>
-          <a href="/#servizi" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[2]}</a>
-          <a href="/#contatti" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.contacts}</a>
+          <Link href="/#casi-reali" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[0]}</Link>
+          <Link href="/#come-lavoro" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[1]}</Link>
+          <Link href="/#servizi" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[2]}</Link>
+          <Link href="/#contatti" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.contacts}</Link>
         </div>
 
         <div style={{ textAlign: "left" }}>
@@ -203,7 +201,7 @@ const firstStepCopy = {
     firstStep: "Primo Passo",
     miniTitle: "Inizia dal Mini Audit Gratuito",
     miniText:
-      "20 minuti. Nessun impegno. Raccontami la tua situazione — capisco il contesto, ti dico onestamente se e come posso aiutarti.",
+      "20 minuti, nessun impegno. Raccontami la tua situazione. Capisco il contesto e ti dico onestamente se e come posso aiutarti.",
     heroBtn1: "Scrivimi su WhatsApp",
     miniBtn2: "Oppure compila il form →",
   },
@@ -211,7 +209,7 @@ const firstStepCopy = {
     firstStep: "First Step",
     miniTitle: "Start with the Free Mini Audit",
     miniText:
-      "20 minutes. No commitment. Tell me your situation — I understand the context and honestly tell you if and how I can help.",
+      "20 minutes, no commitment. Tell me your situation. I'll understand the context and honestly tell you if and how I can help.",
     heroBtn1: "Message me on WhatsApp",
     miniBtn2: "Or fill in the form →",
   },
@@ -306,13 +304,6 @@ export function SiteContactSection() {
                   <input name="nome" type="text" required style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} placeholder={t.form.name} />
                   <input name="email" type="email" required style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} placeholder={t.form.email} />
                   <input name="tipo_attivita" type="text" style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} placeholder={t.form.activity} />
-                  <select name="budget" aria-label={t.form.budget} required style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} defaultValue="">
-                    <option value="" disabled>{t.form.budget}</option>
-                    <option value="€250-500">€250-500</option>
-                    <option value="€800-1.600">€800-1.600</option>
-                    <option value="€2.700-5.000">€2.700-5.000</option>
-                    <option value={lang === "en" ? "Over €5,000" : "Oltre €5.000"}>{lang === "en" ? "Over €5,000" : "Oltre €5.000"}</option>
-                  </select>
                   <textarea name="messaggio" required style={{ minHeight: 144, border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box" }} placeholder={t.form.msg} />
                 </div>
                 {hasFormspreeSubmissionErrors(formState.errors) && (

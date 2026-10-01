@@ -34,6 +34,8 @@ export default function ConsentManager() {
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
+    /* localStorage is the external source that determines the initial banner state. */
+    /* eslint-disable react-hooks/set-state-in-effect */
     const saved = window.localStorage.getItem(CONSENT_KEY);
     if (saved === "accepted") {
       loadAnalytics();
@@ -43,6 +45,7 @@ export default function ConsentManager() {
     } else {
       setStatus("pending");
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   const accept = () => {

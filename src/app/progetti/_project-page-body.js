@@ -172,7 +172,7 @@ function ProjectPageInner({ cs, next }) {
 
         <div style={{ marginTop: 48, display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
           <Link href={`/progetti/${localizedNext.slug}`} style={{ color: colors.tealText, textDecoration: "none", fontWeight: 700 }}>
-            {t.nextProject(localizedNext.title.split("—")[0].trim())}
+            {t.nextProject(localizedNext.title.split(/[,:]/)[0].trim())}
           </Link>
           <Link
             href="/#contatti"

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Automazione dei promemoria per appuntamenti sanitari</title>
+  <desc id="desc">Illustrazione astratta di un calendario collegato a messaggi con esiti di conferma, rinvio e cancellazione.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111e30"/><stop offset="1" stop-color="#2ba89a"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-opacity=".2"/></filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="1050" cy="120" r="210" fill="#fff" opacity=".05"/>
+  <circle cx="110" cy="730" r="250" fill="#fff" opacity=".04"/>
+  <g filter="url(#shadow)">
+    <rect x="135" y="150" width="500" height="500" rx="36" fill="#f4f7fa"/>
+    <path d="M135 240h500" stroke="#d0dde8" stroke-width="4"/>
+    <rect x="210" y="112" width="34" height="82" rx="17" fill="#3dbfb2"/>
+    <rect x="520" y="112" width="34" height="82" rx="17" fill="#3dbfb2"/>
+    <g fill="#d0dde8">
+      <rect x="205" y="300" width="82" height="72" rx="12"/><rect x="319" y="300" width="82" height="72" rx="12"/><rect x="433" y="300" width="82" height="72" rx="12"/>
+      <rect x="205" y="404" width="82" height="72" rx="12"/><rect x="433" y="404" width="82" height="72" rx="12"/><rect x="205" y="508" width="82" height="72" rx="12"/><rect x="319" y="508" width="82" height="72" rx="12"/><rect x="433" y="508" width="82" height="72" rx="12"/>
+    </g>
+    <rect x="319" y="404" width="82" height="72" rx="12" fill="#2ba89a"/>
+    <path d="m340 440 13 13 28-31" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="700" y="190" width="360" height="128" rx="30" fill="#fff"/>
+    <circle cx="756" cy="254" r="27" fill="#2ba89a"/><path d="m744 254 9 9 17-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="806" y="229" width="190" height="15" rx="7" fill="#1c2e4a"/><rect x="806" y="260" width="135" height="12" rx="6" fill="#d0dde8"/>
+    <rect x="742" y="352" width="360" height="128" rx="30" fill="#fff"/>
+    <circle cx="798" cy="416" r="27" fill="#f3b64b"/><path d="M787 416h22M798 405v22" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+    <rect x="848" y="391" width="190" height="15" rx="7" fill="#1c2e4a"/><rect x="848" y="422" width="135" height="12" rx="6" fill="#d0dde8"/>
+    <rect x="686" y="514" width="360" height="128" rx="30" fill="#fff"/>
+    <circle cx="742" cy="578" r="27" fill="#dc6b69"/><path d="m730 566 24 24m0-24-24 24" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+    <rect x="792" y="553" width="190" height="15" rx="7" fill="#1c2e4a"/><rect x="792" y="584" width="135" height="12" rx="6" fill="#d0dde8"/>
+  </g>
+</svg>

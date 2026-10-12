@@ -1,14 +1,10 @@
 "use client";
 
-import { useForm } from "@formspree/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { trackEvent } from "./analytics";
 
-function hasFormspreeSubmissionErrors(errors) {
-  if (!errors) return false;
-  return errors.getFormErrors().length > 0 || errors.getAllFieldErrors().length > 0;
-}
+const WEB3FORMS_ACCESS_KEY = "a13ea1d8-0f49-4205-82d6-c1edfb444186";
 
 const copy = {
   it: {
@@ -448,11 +444,31 @@ export default function Home() {
   const [showAllHomeProjects, setShowAllHomeProjects] = useState(false);
 
   const t = copy[lang];
-  const [formState, handleFormSubmit] = useForm("xbdpngvd");
+  const [formState, setFormState] = useState({ succeeded: false, submitting: false, error: false });
 
   const handleTrackedFormSubmit = async (event) => {
-    await handleFormSubmit(event);
-    trackEvent("form_inviato");
+    event.preventDefault();
+    setFormState({ succeeded: false, submitting: true, error: false });
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.append("subject", "Nuova richiesta da davidcappelletto.it");
+    formData.append("from_name", "davidcappelletto.it");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) throw new Error("Invio non riuscito");
+
+      setFormState({ succeeded: true, submitting: false, error: false });
+      trackEvent("form_inviato");
+    } catch {
+      setFormState({ succeeded: false, submitting: false, error: true });
+    }
   };
 
   useEffect(() => {
@@ -1216,7 +1232,7 @@ export default function Home() {
                 <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.886a.5.5 0 0 0 .619.608l6.188-1.615A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.52-5.17-1.428l-.36-.214-3.733.974.999-3.648-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
               </a>
               <a
-                href="mailto:cappellettodavid@gmail.com"
+                href="mailto:contact@davidcappelletto.it"
                 aria-label="Email"
                 style={{ color: colors.navy, display: "inline-flex", opacity: 0.85, transition: "opacity .2s ease" }}
                 onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
@@ -1275,7 +1291,7 @@ export default function Home() {
                       placeholder={t.form.msg}
                     />
                   </div>
-                  {hasFormspreeSubmissionErrors(formState.errors) && (
+                  {formState.error && (
                     <p style={{ margin: "14px 0 0", color: "#c0392b", fontSize: 14, lineHeight: 1.5 }}>
                       {t.form.error}
                     </p>

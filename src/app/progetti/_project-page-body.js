@@ -1,212 +1,95 @@
 "use client";
 
 import Link from "next/link";
-import { colors, localizeCaseStudy } from "./_data";
+import { colors, getStatus, localizeCaseStudy } from "./_data";
 import { SiteHeader, SiteFooter, SiteContactSection, ImageWithFallback, LangProvider, useLang } from "./_site-parts";
-import { renderFormatted } from "./_format";
 
 const ui = {
-  it: {
-    allProjects: "← Tutti i progetti",
-    client: "Cliente:",
-    stack: "Stack:",
-    role: "Ruolo:",
-    tryApp: "Prova l'app →",
-    summary: "In sintesi",
-    nextProject: (title) => `Prossimo caso: ${title} →`,
-    talkCta: "Parliamo del tuo progetto",
-  },
-  en: {
-    allProjects: "← All projects",
-    client: "Client:",
-    stack: "Stack:",
-    role: "Role:",
-    tryApp: "Try the app →",
-    summary: "Summary",
-    nextProject: (title) => `Next project: ${title} →`,
-    talkCta: "Let's talk about your project",
-  },
+  it: { all: "← Tutti i progetti", visit: "Visita il progetto ↗", role: "Ruolo", status: "Stato", stack: "Stack", result: "Il risultato, in breve", next: "Prossimo progetto", contact: "Parliamo del tuo progetto" },
+  en: { all: "← All projects", visit: "Visit project ↗", role: "Role", status: "Status", stack: "Stack", result: "Results at a glance", next: "Next project", contact: "Let's talk about your project" },
 };
 
-const sectionIcons = [
-  (color) => (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round">
-      <circle cx="11" cy="11" r="7" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-    </svg>
-  ),
-  (color) => (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" />
-      <path d="M12 8v4l3 2" />
-    </svg>
-  ),
-  (color) => (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 12l5 5L20 6" />
-    </svg>
-  ),
-  (color) => (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z" />
-    </svg>
-  ),
-];
+const MetaIcon = ({ type }) => {
+  if (type === "role") return <path d="M12 3l2.4 4.9L20 9l-4 3.9.9 5.6L12 16l-4.9 2.5.9-5.6L4 9l5.6-1.1z" />;
+  if (type === "status") return <><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></>;
+  return <><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></>;
+};
 
 function ProjectPageInner({ cs, next }) {
   const { lang } = useLang();
   const t = ui[lang];
-  const localized = localizeCaseStudy(cs, lang);
-  const localizedNext = localizeCaseStudy(next, lang);
-  const lastIdx = localized.sections.length - 1;
+  const project = localizeCaseStudy(cs, lang);
+  const nextProject = localizeCaseStudy(next, lang);
+  const status = getStatus(cs, lang);
+  const outbound = project.appLink || project.link;
 
   return (
-    <main style={{ background: colors.bg, minHeight: "100vh", fontFamily: "'DM Sans', system-ui, sans-serif", color: colors.ink }}>
+    <main className="project-page" style={{ background: colors.bg, color: colors.ink }}>
       <SiteHeader />
 
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          minHeight: 280,
-          background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})`,
-          overflow: "hidden",
-        }}
-      >
-        <ImageWithFallback
-          src="/case-studies/header-case.jpg"
-          alt=""
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(17,30,48,0.65), rgba(17,30,48,0.88))" }} />
-        <div style={{ position: "relative", width: "min(1200px, 89vw)", margin: "0 auto", padding: "48px 0 40px" }}>
-          <Link href="/progetti" style={{ color: "rgba(255,255,255,.85)", textDecoration: "none", fontSize: 14, fontWeight: 600 }}>
-            {t.allProjects}
-          </Link>
+      <section className="project-hero">
+        <div className="project-shell project-hero-grid">
           <div>
-            <span style={{ display: "inline-block", marginTop: 20, background: "rgba(255,255,255,.15)", color: "#fff", padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
-              {localized.tag}
-            </span>
-            <h1 style={{ margin: "16px 0 0", fontSize: 36, lineHeight: 1.15, color: "#fff", maxWidth: 760 }}>{localized.title}</h1>
+            <Link href="/progetti" className="back-link">{t.all}</Link>
+            <p className="project-kicker">{project.tag}</p>
+            <h1>{project.shortTitle || project.title}</h1>
+            <p className="project-intro">{project.intro}</p>
+            {outbound && <a className="project-visit" href={outbound} target="_blank" rel="noopener noreferrer">{project.appLinkLabel || t.visit}</a>}
+          </div>
+          <div className="project-meta">
+            {[
+              { type: "role", label: t.role, value: project.role },
+              { type: "status", label: t.status, value: status.label },
+              { type: "stack", label: t.stack, value: project.stack },
+            ].map((item) => (
+              <div key={item.type}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><MetaIcon type={item.type}/></svg>
+                <small>{item.label}</small>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <div style={{ width: "min(860px, 89vw)", margin: "0 auto", padding: "40px 0 88px" }}>
-        <div style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: "20px 24px", display: "grid", gap: 8, fontSize: 15 }}>
-          <p style={{ margin: 0 }}>
-            <strong>{t.client}</strong>{" "}
-            {localized.link ? (
-              <a href={localized.link} target="_blank" rel="noopener noreferrer" style={{ color: colors.tealText }}>
-                {localized.client}
-              </a>
-            ) : (
-              localized.client
-            )}
-          </p>
-          <p style={{ margin: 0 }}><strong>{t.stack}</strong> {localized.stack}</p>
-          <p style={{ margin: 0 }}><strong>{t.role}</strong> {localized.role}</p>
-        </div>
+      <div className="project-cover"><ImageWithFallback src={project.imageSrc} alt={project.shortTitle || project.title} /></div>
 
-        {localized.appLink && (
-          <a
-            href={localized.appLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "inline-block", marginTop: 20, background: colors.teal, color: "#fff", padding: "12px 24px", borderRadius: 10, textDecoration: "none", fontWeight: 700 }}
-          >
-            {t.tryApp}
-          </a>
-        )}
+      <div className="project-content">
+        {project.sections.map((section, index) => (
+          <section className="process-row" key={`${section.h}-${index}`}>
+            <span className="process-index">{String(index + 1).padStart(2, "0")} · {section.mediaLabel || (lang === "it" ? "Processo" : "Process")}</span>
+            <div className="process-grid">
+              <figure className="process-media">
+                <ImageWithFallback src={section.image || project.imageSrc} alt={section.mediaLabel || section.h} />
+                <figcaption>{section.mediaLabel}</figcaption>
+              </figure>
+              <div className="process-copy"><h2>{section.h}</h2><p>{section.body}</p></div>
+            </div>
+          </section>
+        ))}
 
-        <p style={{ marginTop: 32, fontSize: 19, lineHeight: 1.65, color: colors.ink }}>{renderFormatted(localized.intro)}</p>
-
-        {localized.sections.map((s, i) => {
-          const isLast = i === lastIdx;
-          const Icon = sectionIcons[i % sectionIcons.length];
-
-          if (isLast) {
-            return (
-              <div key={s.h} className="cs-final-pair" style={{ marginTop: 40 }}>
-                <div style={{ borderRadius: 12, overflow: "hidden", position: "relative", minHeight: 220, background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})` }}>
-                  <ImageWithFallback
-                    src={localized.imageSrc}
-                    alt={localized.title}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-                </div>
-                <section style={{ borderRadius: 12, background: colors.navy, color: "#fff", padding: 28, position: "relative" }}>
-                  <span style={{ position: "absolute", top: 18, left: 24, fontSize: 48, lineHeight: 1, color: "rgba(255,255,255,.15)", fontWeight: 800 }}>&rdquo;</span>
-                  <p style={{ margin: 0, fontSize: 12, textTransform: "uppercase", letterSpacing: ".08em", color: colors.tealLight, fontWeight: 700 }}>{s.h}</p>
-                  <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.6, color: "rgba(255,255,255,.95)" }}>{renderFormatted(s.body)}</p>
-                </section>
-              </div>
-            );
-          }
-
-          return (
-            <section key={s.h} style={{ marginTop: 40, display: "flex", gap: 18, alignItems: "flex-start" }}>
-              <div style={{ flexShrink: 0, width: 46, height: 46, borderRadius: 10, background: "#fff", border: `1px solid ${colors.line}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                {Icon(colors.teal)}
-              </div>
-              <div>
-                <h2 style={{ margin: 0, fontSize: 24, lineHeight: 1.25 }}>{s.h}</h2>
-                <p style={{ margin: "12px 0 0", lineHeight: 1.7, color: colors.inkMuted, fontSize: 16.5 }}>{renderFormatted(s.body)}</p>
-              </div>
-            </section>
-          );
-        })}
-
-        <section style={{ marginTop: 48, borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", padding: 28 }}>
-          <div style={{ height: 4, borderRadius: 999, background: "linear-gradient(90deg, #1C2E4A, #2BA89A)" }} />
-          <h2 style={{ margin: "18px 0 0", fontSize: 24 }}>{t.summary}</h2>
-          <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-            {localized.results.map((r) => (
-              <li key={r}>
-                <span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>
-                {r}
-              </li>
-            ))}
-          </ul>
+        <section className="project-results">
+          <h2>{t.result}</h2>
+          <ul>{project.results.map((result) => <li key={result}><span>✓</span>{result}</li>)}</ul>
         </section>
 
-        <div style={{ marginTop: 48, display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center" }}>
-          <Link href={`/progetti/${localizedNext.slug}`} style={{ color: colors.tealText, textDecoration: "none", fontWeight: 700 }}>
-            {t.nextProject(localizedNext.title.split(/[,:]/)[0].trim())}
-          </Link>
-          <Link
-            href="/#contatti"
-            style={{ display: "inline-block", background: colors.navy, color: "#fff", padding: "12px 22px", borderRadius: 10, textDecoration: "none", fontWeight: 700 }}
-          >
-            {t.talkCta}
-          </Link>
-        </div>
+        <nav className="project-next">
+          <Link href={`/progetti/${nextProject.slug}`}><small>{t.next}</small><strong>{nextProject.shortTitle || nextProject.title} →</strong></Link>
+          <Link href="/#contatti" className="project-contact">{t.contact}</Link>
+        </nav>
       </div>
 
       <SiteContactSection />
       <SiteFooter />
 
       <style>{`
-        .cs-final-pair {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 20px;
-        }
-        @media (min-width: 768px) {
-          .cs-final-pair {
-            grid-template-columns: 1fr 1fr;
-            align-items: stretch;
-          }
-        }
+        .project-page{min-height:100vh;font-family:'DM Sans',system-ui,sans-serif}.project-shell{width:min(1180px,90vw);margin:0 auto}.project-hero{padding:52px 0 34px}.project-hero-grid{display:grid;grid-template-columns:1fr .82fr;gap:64px;align-items:end}.back-link{color:${colors.tealText};font-weight:700;text-decoration:none;font-size:13px}.project-kicker{margin:24px 0 0;color:${colors.tealText};font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.project-hero h1{font-size:clamp(46px,6vw,76px);line-height:.98;letter-spacing:-.055em;margin:13px 0 20px}.project-intro{max-width:680px;color:${colors.inkMuted};font-size:19px;line-height:1.6}.project-visit{display:inline-block;margin-top:8px;padding:11px 16px;border-radius:9px;background:${colors.navy};color:#fff;text-decoration:none;font-size:13px;font-weight:800}.project-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.project-meta>div{min-width:0;padding:16px;border:1px solid ${colors.line};border-radius:11px;background:#fff}.project-meta svg{width:21px;height:21px;color:${colors.teal};margin-bottom:12px}.project-meta small{display:block;color:${colors.inkMuted};font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.project-meta strong{display:block;margin-top:5px;font-size:11px;line-height:1.35;overflow-wrap:anywhere}.project-cover{height:min(560px,55vw);min-height:380px;background:${colors.navyDeep};overflow:hidden}.project-cover img{width:100%;height:100%;object-fit:cover;display:block}.project-content{width:min(1040px,90vw);margin:0 auto;padding:72px 0}.process-row{padding:44px 0;border-top:1px solid ${colors.line}}.process-index{display:block;margin-bottom:14px;color:${colors.tealText};font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.process-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.process-row:nth-child(even) .process-media{order:2}.process-media{position:relative;min-height:280px;margin:0;border-radius:15px;background:${colors.navy};overflow:hidden}.process-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.process-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,18,31,.68))}.process-media figcaption{position:absolute;z-index:2;left:16px;bottom:14px;color:#fff;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.process-copy h2{font-size:clamp(27px,3vw,39px);line-height:1.12;letter-spacing:-.035em;margin:0 0 16px}.process-copy p{color:${colors.inkMuted};font-size:16px;line-height:1.72;margin:0}.project-results{margin-top:36px;padding:36px;border-radius:15px;background:${colors.navyDeep};color:#fff}.project-results h2{font-size:31px;margin:0 0 20px}.project-results ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px;list-style:none;padding:0;margin:0}.project-results li{padding-top:10px;border-top:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.8);font-size:14px}.project-results li span{color:${colors.tealLight};margin-right:8px}.project-next{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:40px}.project-next a{text-decoration:none}.project-next small{display:block;color:${colors.inkMuted};font-size:10px;text-transform:uppercase;letter-spacing:.08em}.project-next strong{display:block;margin-top:5px;color:${colors.tealText};font-size:16px}.project-contact{padding:11px 16px;border-radius:9px;background:${colors.navy};color:#fff;font-weight:800;font-size:13px}
+        @media(max-width:767px){.project-shell{width:94vw}.project-hero{padding:22px 0 13px}.project-hero-grid{grid-template-columns:1fr;gap:12px}.project-kicker{margin-top:14px;font-size:8px}.project-hero h1{font-size:38px;margin:8px 0 3px}.project-intro{display:none}.project-visit{margin-top:5px;padding:8px 11px;font-size:10px}.project-meta{gap:5px}.project-meta>div{padding:8px 7px;border-radius:8px}.project-meta svg{width:16px;height:16px;margin-bottom:6px}.project-meta small{font-size:6px}.project-meta strong{font-size:8px;line-height:1.2}.project-cover{height:148px;min-height:148px}.project-content{width:94vw;padding:16px 0 28px}.process-row{padding:18px 0}.process-index{font-size:7px;margin-bottom:8px}.process-grid,.process-row:nth-child(even) .process-grid{grid-template-columns:1fr;gap:11px}.process-row:nth-child(even) .process-media{order:2}.process-row:nth-child(even) .process-copy{order:1}.process-media{height:190px;min-height:0;aspect-ratio:auto;border-radius:9px;background:#e9eef0}.process-media img{object-fit:contain}.process-media figcaption{left:9px;bottom:8px;font-size:7px}.process-copy h2{font-size:21px;margin:0 0 6px}.process-copy p{font-size:12.5px;line-height:1.48}.project-results{margin-top:12px;padding:16px;border-radius:10px}.project-results h2{font-size:22px;margin-bottom:10px}.project-results ul{gap:7px 12px}.project-results li{font-size:10px;padding-top:6px}.project-next{margin-top:20px}.project-next strong{font-size:12px}.project-contact{padding:8px 10px;font-size:9px}}
       `}</style>
     </main>
   );
 }
 
 export default function ProjectPageBody({ cs, next }) {
-  return (
-    <LangProvider>
-      <ProjectPageInner cs={cs} next={next} />
-    </LangProvider>
-  );
+  return <LangProvider><ProjectPageInner cs={cs} next={next} /></LangProvider>;
 }

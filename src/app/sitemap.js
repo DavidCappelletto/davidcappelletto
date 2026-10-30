@@ -1,13 +1,8 @@
+import { caseStudies } from "./progetti/_data";
+
 export default function sitemap() {
   const base = "https://davidcappelletto.it";
-  const caseSlugs = [
-    "automazione-promemoria-appuntamenti",
-    "ordine-pagamento-qr",
-    "azienda-hvac",
-    "infermiera-althea",
-    "geofire",
-    "maybes-shop",
-  ];
+  const caseSlugs = caseStudies.map((project) => project.slug);
   return [
     {
       url: base,

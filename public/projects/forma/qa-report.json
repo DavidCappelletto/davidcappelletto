@@ -1,0 +1,314 @@
+{
+  "passed": 15,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Quest guide 320",
+      "ok": true,
+      "preview": {
+        "width": 255,
+        "height": 191.25
+      },
+      "scrollable": true,
+      "viewportData": {
+        "viewport": 320,
+        "width": 320,
+        "horizontalOverflow": 0,
+        "offenders": [
+          {
+            "selector": "BUTTON.chip.",
+            "right": 411
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 490
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 599
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 346
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 420
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gym Studio 320",
+      "ok": true,
+      "gallery": 16,
+      "viewportData": {
+        "viewport": 320,
+        "width": 320,
+        "horizontalOverflow": 0,
+        "offenders": [
+          {
+            "selector": "BUTTON.side-btn.active",
+            "right": 368
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 431
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 491
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 604
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sync mock 320",
+      "ok": true,
+      "panelCount": 2,
+      "viewportData": {
+        "viewport": 320,
+        "width": 320,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "Quest guide 360",
+      "ok": true,
+      "preview": {
+        "width": 295,
+        "height": 221.25
+      },
+      "scrollable": true,
+      "viewportData": {
+        "viewport": 360,
+        "width": 360,
+        "horizontalOverflow": 0,
+        "offenders": [
+          {
+            "selector": "BUTTON.chip.",
+            "right": 411
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 490
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 599
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 420
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 488
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gym Studio 360",
+      "ok": true,
+      "gallery": 16,
+      "viewportData": {
+        "viewport": 360,
+        "width": 360,
+        "horizontalOverflow": 0,
+        "offenders": [
+          {
+            "selector": "BUTTON.side-btn.active",
+            "right": 368
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 431
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 491
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 604
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sync mock 360",
+      "ok": true,
+      "panelCount": 2,
+      "viewportData": {
+        "viewport": 360,
+        "width": 360,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "Quest guide 390",
+      "ok": true,
+      "preview": {
+        "width": 317.8125,
+        "height": 238.359375
+      },
+      "scrollable": true,
+      "viewportData": {
+        "viewport": 390,
+        "width": 390,
+        "horizontalOverflow": 0,
+        "offenders": [
+          {
+            "selector": "BUTTON.chip.",
+            "right": 411
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 490
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 599
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 420
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 488
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gym Studio 390",
+      "ok": true,
+      "gallery": 16,
+      "viewportData": {
+        "viewport": 390,
+        "width": 390,
+        "horizontalOverflow": 0,
+        "offenders": [
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 431
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 491
+          },
+          {
+            "selector": "BUTTON.side-btn.",
+            "right": 604
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sync mock 390",
+      "ok": true,
+      "panelCount": 2,
+      "viewportData": {
+        "viewport": 390,
+        "width": 390,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "Quest guide 768",
+      "ok": true,
+      "preview": {
+        "width": 431,
+        "height": 320
+      },
+      "scrollable": true,
+      "viewportData": {
+        "viewport": 768,
+        "width": 768,
+        "horizontalOverflow": 0,
+        "offenders": [
+          {
+            "selector": "BUTTON.chip.",
+            "right": 780
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 862
+          },
+          {
+            "selector": "BUTTON.chip.",
+            "right": 931
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gym Studio 768",
+      "ok": true,
+      "gallery": 16,
+      "viewportData": {
+        "viewport": 768,
+        "width": 768,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "Sync mock 768",
+      "ok": true,
+      "panelCount": 2,
+      "viewportData": {
+        "viewport": 768,
+        "width": 768,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "Quest guide 1280",
+      "ok": true,
+      "preview": {
+        "width": 431,
+        "height": 320
+      },
+      "scrollable": true,
+      "viewportData": {
+        "viewport": 1280,
+        "width": 1280,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "Gym Studio 1280",
+      "ok": true,
+      "gallery": 16,
+      "viewportData": {
+        "viewport": 1280,
+        "width": 1280,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "Sync mock 1280",
+      "ok": true,
+      "panelCount": 2,
+      "viewportData": {
+        "viewport": 1280,
+        "width": 1280,
+        "horizontalOverflow": 0,
+        "offenders": []
+      }
+    }
+  ]
+}

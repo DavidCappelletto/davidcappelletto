@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { trackEvent } from "./analytics";
 
 const WEB3FORMS_ACCESS_KEY = "a13ea1d8-0f49-4205-82d6-c1edfb444186";
@@ -11,19 +10,17 @@ const copy = {
     navLinks: ["Progetti", "Come lavoro", "Servizi"],
     ctaMini: "Mini Audit Gratuito",
     heroBadge: "Consulenza Digitale su Misura",
-    heroTitleA: "Aiuto professionisti e PMI a capire cosa non funziona",
-    heroTitleB: "nel loro digitale e a intervenire con priorità chiare",
+    heroTitleA: "Trasformo siti confusi in",
+    heroTitleB: "sistemi che generano richieste",
     heroSubtitle:
-      "Analizzo siti, contenuti e processi prima di proporre una soluzione. Poi progetto e realizzo ciò che serve davvero, senza pacchetti standard.",
+      "Per professionisti e PMI italiane che hanno già un sito ma non i risultati che si aspettavano. Metodo, non template.",
     heroBtn1: "Scrivimi su WhatsApp",
     heroBtn2: "Come lavoro →",
     approach: "Il mio approccio",
     quote:
-      "Il digitale funziona quando risolve un problema vero, non quando segue una tendenza. Prima capisco cosa serve. Poi scelgo strumenti, priorità e investimento.",
-    stat1Value: "Prima il problema",
-    stat1: "Analizzo obiettivi, persone e processi prima di proporre una soluzione.",
-    stat2Value: "Solo ciò che ti serve",
-    stat2: "Ogni intervento parte dal tuo contesto, senza pacchetti standard.",
+      "Il digitale funziona quando risolve un problema vero, non quando segue una tendenza. Ti dico onestamente cosa serve — anche se la risposta è \"niente, per ora\".",
+    stat1: "Il sito carica in meno di 2 secondi su qualsiasi dispositivo",
+    stat2: "Parli sempre con me, mai con un account manager.",
     problemTag: "Il Problema",
     problemTitle: "Hai risposto a queste domande prima di investire nel tuo digitale?",
     problemText:
@@ -43,101 +40,71 @@ const copy = {
       },
       {
         q: "Sai davvero cosa funziona nel tuo digitale, o vai a intuito?",
-        a: "Senza dati chiari su cosa genera contatti reali, ogni decisione è una scommessa. Imposto un tracciamento essenziale, senza dashboard inutili, per capire cosa portare avanti e cosa tagliare.",
+        a: "Senza dati chiari su cosa genera contatti reali, ogni decisione è una scommessa. Imposto un tracciamento essenziale — non dashboard inutili — per capire cosa portare avanti e cosa tagliare.",
       },
     ],
     workTag: "Come Lavoro",
     workTitle: "Non ho soluzioni standard. Ho un metodo.",
     workIntro:
-      "Ogni realtà è diversa. Prima di proporre qualsiasi cosa, analizzo strumenti, target, processi e concorrenza. Solo allora ha senso parlare di soluzioni.",
+      "Ogni realtà è diversa. Prima di proporre qualsiasi cosa, analizzo la situazione — strumenti, target, processi, concorrenza. Solo allora ha senso parlare di soluzioni.",
     steps: [
       ["01", "Capisco prima", "Analizzo target, struttura, processi e segnali di mercato prima di qualsiasi proposta."],
       ["02", "Ti dico cosa serve davvero", "Definisco priorità operative chiare: cosa fare, perché, e con quale impatto atteso."],
       ["03", "Lo costruiamo insieme", "Implemento io o ti affianco passo passo, mantenendo il progetto coerente con gli obiettivi."],
     ],
     casesTag: "Progetti",
-    casesTitle: "Progetti reali, prodotti e lavori in sviluppo.",
+    casesTitle: "Tre progetti. Tre problemi risolti.",
     casesReadMore: "Leggi il progetto →",
     casesAllBtn: "Tutti i progetti →",
-    casesShowMore: "Mostra altri 2 progetti",
-    casesShowLess: "Mostra meno",
     caseCards: [
       {
-        slug: "automazione-promemoria-appuntamenti",
-        tag: "In sviluppo · Automazione sanitaria",
-        title: "Promemoria appuntamenti su WhatsApp Business",
-        place: "Progetto riservato · In sviluppo",
-        imageSrc: "/case-studies/automazione-promemoria-appuntamenti.svg",
-        results: [
-          "Promemoria appuntamenti tramite WhatsApp Business",
-          "Esiti distinti: conferma, rinvio o cancellazione",
-          "Gestione della segreteria preservata per le eccezioni",
-        ],
-      },
-      {
-        slug: "ordine-pagamento-qr",
-        tag: "Prodotto white-label · Ristorazione",
-        title: "Ordine e pagamento al tavolo tramite QR code",
-        place: "Prototipo validato · Prodotto completato",
-        imageSrc: "/case-studies/ordine-pagamento-qr.svg",
-        results: [
-          "Prototipo UX distinto dal prodotto completato",
-          "Menu, ordine e pagamento in un flusso mobile-first",
-          "Personalizzabile per identità e operatività del locale",
-        ],
-      },
-      {
         slug: "azienda-hvac",
-        tag: "Progetto Cliente · Impiantistica HVAC",
-        title: "Sito HVAC: fedele a un design approvato",
-        place: "Nord Italia · via agenzia",
-        imageSrc: "/case-studies/azienda-hvac.jpg",
+        tag: "Cliente · Online",
+        title: "DIAMA Service",
+        place: "Sviluppo web · CMS · tracking",
+        imageSrc: "/projects/diama/cover.png",
+        status: "Online",
+        statusNote: "Live",
+        statusColor: "#28A978",
+        statusProgress: "100%",
         results: [
-          "Sviluppo fedele a un design approvato, con art director esterna",
-          "CMS headless con motore di generazione custom in Python",
-          "Stack di tracciamento GDPR ricostruito da zero",
-          "Migrazione dominio senza perdita di posizionamento SEO",
+          "Circa 30 pagine responsive",
+          "CMS per blog e landing",
+          "SEO tecnico e tracking",
         ],
       },
       {
-        slug: "infermiera-althea",
-        tag: "Libera Professione · Settore Sanitario",
-        title: "Infermiera Althea",
-        place: "📍 Pordenone e provincia",
-        imageSrc: "/case-studies/infermiera-althea.jpg",
+        slug: "forma",
+        tag: "Prodotto · In evoluzione",
+        title: "FORMA",
+        place: "Product design · web app",
+        imageSrc: "/projects/forma/quest-guide-1280.png",
+        status: "In costruzione",
+        statusNote: "WIP",
+        statusColor: "#EFB652",
+        statusProgress: "64%",
         results: [
-          "SEO locale senza budget pubblicitario",
-          "Posizionamento organico solido per le ricerche che contano",
-          "Piattaforma scelta per sostenibilità nel tempo",
-          "Redesign in corso proteggendo la SEO esistente",
+          "60 esercizi illustrati",
+          "Sessioni e timer di recupero",
+          "Collaudo browser 15/15",
         ],
       },
       {
         slug: "geofire",
-        tag: "Progetto Personale · Metodo",
-        title: "Geo·FIRE, mappamondo finanziario",
-        place: "Web app 3D nel browser",
-        imageSrc: "/case-studies/geofire.jpg",
+        tag: "Prodotto · Online",
+        title: "Geo·FIRE",
+        place: "Dati · finanza · visualizzazione",
+        imageSrc: "/projects/geofire/app.jpg",
         appLink: "https://geofire.davidcappelletto.it",
         appLinkLabel: "Prova l'app →",
+        status: "Online",
+        statusNote: "Live",
+        statusColor: "#28A978",
+        statusProgress: "100%",
         results: [
-          "Calcoli finanziari verificati su oltre 34.000 combinazioni",
-          "175 paesi, tre modelli di libertà finanziaria",
-          "Bandiere disegnate da zero per compatibilità universale",
-          "Il processo è il prodotto: un progetto di metodo",
-        ],
-      },
-      {
-        slug: "maybes-shop",
-        tag: "Progetto Sperimentale · Infrastruttura",
-        title: "Maybe's Shop, e-commerce automatizzato",
-        place: "Shopify + print-on-demand",
-        imageSrc: "/case-studies/maybes-shop.jpg",
-        results: [
-          "Flusso ordine → stampa → spedizione senza interventi manuali",
-          "Integrazione via webhook, zero magazzino",
-          "Brand e infrastruttura curati entrambi da zero",
-          "Verificato end-to-end, dall'acquisto alla consegna",
+          "175 paesi esplorabili",
+          "FIRE, Coast e Barista",
+          "34.560 combinazioni verificate",
         ],
       },
     ],
@@ -145,12 +112,9 @@ const copy = {
     aboutTitle: "David Cappelletto",
     aboutSubtitle: "Consulente Digitale Freelance · Friuli-Venezia Giulia",
     aboutText:
-      "Mi chiamo David, sono un consulente digitale freelance con base in Friuli-Venezia Giulia. Ho un background in design industriale che mi ha insegnato una cosa: la forma segue la funzione, non il contrario.\n\nLavoro con professionisti e PMI che hanno già un sito ma non vedono risultati. Prima di toccare qualsiasi strumento, analizzo target, struttura e processi. Solo dopo propongo cosa fare.\n\nNon gestisco decine di clienti in parallelo. Lavoro con pochi progetti alla volta e parli sempre direttamente con me, senza intermediari.",
+      "Mi chiamo David, sono un consulente digitale freelance con base in Friuli-Venezia Giulia. Ho un background in design industriale che mi ha insegnato una cosa: la forma segue la funzione, non il contrario.\n\nLavoro con professionisti e PMI che hanno già un sito ma non vedono risultati. Prima di toccare qualsiasi strumento, analizzo la situazione reale — target, struttura, processi. Solo dopo propongo cosa fare.\n\nNon gestisco decine di clienti in parallelo. Lavoro con pochi progetti alla volta — e parli sempre direttamente con me, senza intermediari.",
     servicesTag: "Cosa Puoi Chiedermi",
     servicesTitle: "Le competenze che porto. Applicate dove servono.",
-    customEstimateTitle: "Ogni attività ha esigenze diverse. Anche la soluzione dovrebbe esserlo.",
-    customEstimateText: "Analizziamo insieme il tuo obiettivo e costruiamo una proposta su misura, senza pacchetti predefiniti.",
-    customEstimateCta: "Richiedi un preventivo personalizzato →",
     serviceAccordions: [
       {
         iconSrc: "/icon-audit.svg",
@@ -162,7 +126,7 @@ const copy = {
         iconSrc: "/icon-siti.svg",
         title: "Progettazione Siti",
         description:
-          "Struttura, UX, contenuti e conversioni. In questo ordine, non al contrario. L'architettura viene prima del design, il design prima del codice.",
+          "Struttura, UX, contenuti, conversioni — in questo ordine, non al contrario. L'architettura viene prima del design, il design prima del codice.",
       },
       {
         iconSrc: "/icon-seo.svg",
@@ -174,25 +138,58 @@ const copy = {
         iconSrc: "/icon-ai.svg",
         title: "Automazioni AI",
         description:
-          "Elimino i processi manuali ripetitivi, come preventivi, follow-up e reportistica, con n8n e AI applicati al tuo caso reale, non a un caso da tutorial.",
+          "Elimino i processi manuali ripetitivi — preventivi, follow-up, reportistica — con n8n e AI applicati al tuo caso reale, non a un caso da tutorial.",
       },
       {
         iconSrc: "/icon-strategia.svg",
         title: "Strategia Digitale",
         description:
-          "Non ti vendo un piano a 90 giorni fatto di slide. Ti dico, con numeri veri, se conviene investire ora o aspettare e su cosa, esattamente.",
+          "Non ti vendo un piano a 90 giorni fatto di slide. Ti dico, con numeri veri, se conviene investire ora o aspettare — e su cosa, esattamente.",
       },
       {
         iconSrc: "/icon-affiancamento.svg",
         title: "Affiancamento",
         description:
-          "Ti insegno a usare da solo quello che ti ho costruito: CMS, tracking e automazioni. Così non mi richiami per cambiare un titolo o aggiungere una pagina.",
+          "Ti insegno a usare da solo quello che ti ho costruito — CMS, tracking, automazioni — così non mi richiami per cambiare un titolo o aggiungere una pagina.",
       },
     ],
+    pricing: ["Audit Diagnostico", "Intervento Mirato", "Presenza su Misura"],
+    pricingValue: ["€250-500", "€800-1.600", "da €2.700"],
+    pricingContext: [
+      "Per chi vuole capire prima di spendere di più.",
+      "Per chi ha un problema specifico da risolvere",
+      "Per chi parte da zero o vuole ripensare tutto.",
+    ],
+    pricingIdeal: [
+      "→ Ideale se non sai ancora dove intervenire.",
+      "→ Ideale se hai già un sito ma non ti porta clienti.",
+      "→ Ideale se il sito attuale non rispecchia più il tuo lavoro.",
+    ],
+    pricingItems: [
+      [
+        "Analisi completa sito e presenza digitale",
+        "Report con priorità e raccomandazioni",
+        "Mappa dei punti critici e opportunità",
+        "Call di presentazione risultati",
+      ],
+      [
+        "SEO locale e ottimizzazione on-page",
+        "Ristrutturazione pagine chiave",
+        "Automazione di un processo specifico",
+        "Revisione UX e conversioni",
+      ],
+      [
+        "Analisi, strategia e architettura",
+        "Prototipo navigabile e UX completa",
+        "Sviluppo e messa online",
+        "Follow-up post lancio incluso",
+      ],
+    ],
+    featured: "⭐ Più Richiesto",
     firstStep: "Primo Passo",
     miniTitle: "Inizia dal Mini Audit Gratuito",
     miniText:
-      "20 minuti, nessun impegno. Raccontami la tua situazione. Capisco il contesto e ti dico onestamente se e come posso aiutarti.",
+      "20 minuti. Nessun impegno. Raccontami la tua situazione — capisco il contesto, ti dico onestamente se e come posso aiutarti.",
     miniBtn2: "Oppure compila il form →",
     contacts: "Contatti",
     talk: "Parliamoci.",
@@ -201,6 +198,7 @@ const copy = {
       name: "Nome e Cognome",
       email: "Email",
       activity: "Tipo di attività",
+      budget: "Seleziona budget",
       msg: "Scrivi qui il tuo messaggio",
       submit: "Invia richiesta",
       success: "Messaggio inviato! Ti rispondo entro 24 ore.",
@@ -217,19 +215,17 @@ const copy = {
     navLinks: ["Projects", "How I work", "Services"],
     ctaMini: "Free Mini Audit",
     heroBadge: "Tailored Digital Consulting",
-    heroTitleA: "I help professionals and SMEs understand what is not working",
-    heroTitleB: "in their digital presence and act on clear priorities",
+    heroTitleA: "I turn confusing websites into",
+    heroTitleB: "systems that generate qualified leads",
     heroSubtitle:
-      "I analyze websites, content, and processes before proposing a solution. Then I design and build what is actually needed, without standard packages.",
+      "For Italian professionals and SMEs who already have a website but not the results they expected. Method, not templates.",
     heroBtn1: "Message me on WhatsApp",
     heroBtn2: "How I work →",
     approach: "My approach",
     quote:
-      "Digital works when it solves a real problem, not when it follows a trend. First I understand what is needed. Then I choose the tools, priorities, and investment.",
-    stat1Value: "Problem first",
-    stat1: "I analyze goals, people, and processes before proposing a solution.",
-    stat2Value: "Only what you need",
-    stat2: "Every engagement starts from your context, without standard packages.",
+      "Digital works when it solves a real problem, not when it follows a trend. I'll tell you honestly what you need — even if the answer is \"nothing, for now\".",
+    stat1: "The site loads in under 2 seconds on any device",
+    stat2: "You always talk to me, never an account manager.",
     problemTag: "The Problem",
     problemTitle: "Have you answered these questions before investing in your digital presence?",
     problemText:
@@ -249,101 +245,62 @@ const copy = {
       },
       {
         q: "Do you really know what's working in your digital presence, or are you guessing?",
-        a: "Without clear data on what actually generates real contacts, every decision is a bet. I set up essential tracking, without useless dashboards, so you know what to keep doing and what to cut.",
+        a: "Without clear data on what actually generates real contacts, every decision is a bet. I set up essential tracking — not useless dashboards — so you know what to keep doing and what to cut.",
       },
     ],
     workTag: "How I Work",
     workTitle: "I do not offer standard packages. I use a method.",
     workIntro:
-      "Every business is different. Before proposing anything, I analyze your tools, target, processes, and competition. Only then does it make sense to discuss solutions.",
+      "Every business is different. Before proposing anything, I analyze your current situation — tools, target, processes, and competition. Only then does it make sense to discuss solutions.",
     steps: [
       ["01", "I understand first", "I analyze target, structure, processes and market signals before any proposal."],
       ["02", "I tell you what you really need", "I define clear operational priorities: what to do, why, and expected impact."],
       ["03", "We build it together", "I implement directly or support you step by step, keeping the project aligned with your goals."],
     ],
     casesTag: "Projects",
-    casesTitle: "Real projects, finished products, and work in development.",
+    casesTitle: "Three projects. Three problems solved.",
     casesReadMore: "Read the case study →",
     casesAllBtn: "All case studies →",
-    casesShowMore: "Show 2 more projects",
-    casesShowLess: "Show fewer",
     caseCards: [
       {
-        slug: "automazione-promemoria-appuntamenti",
-        tag: "In development · Healthcare automation",
-        title: "Appointment reminders via WhatsApp Business",
-        place: "Confidential project · In development",
-        imageSrc: "/case-studies/automazione-promemoria-appuntamenti.svg",
-        results: [
-          "Appointment reminders through WhatsApp Business",
-          "Separate outcomes: confirmation, rescheduling, or cancellation",
-          "Front-desk control retained for exceptions",
-        ],
-      },
-      {
-        slug: "ordine-pagamento-qr",
-        tag: "White-label product · Hospitality",
-        title: "Table ordering and payment through a QR code",
-        place: "Validated prototype · Completed product",
-        imageSrc: "/case-studies/ordine-pagamento-qr.svg",
-        results: [
-          "UX prototype clearly separated from the completed product",
-          "Menu, ordering, and payment in one mobile-first flow",
-          "Customizable for each venue's identity and operations",
-        ],
-      },
-      {
         slug: "azienda-hvac",
-        tag: "Client Project · HVAC Installations",
-        title: "HVAC site: faithful to an approved design",
-        place: "Northern Italy · via agency",
-        imageSrc: "/case-studies/azienda-hvac.jpg",
+        tag: "Client · Online",
+        title: "DIAMA Service",
+        place: "Web development · CMS · tracking",
+        imageSrc: "/projects/diama/cover.png",
+        status: "Online", statusNote: "Live", statusColor: "#28A978", statusProgress: "100%",
         results: [
-          "Built faithfully to an approved design, with an external art director",
-          "Headless CMS with a custom Python generation engine",
-          "Tracking stack rebuilt from scratch, GDPR compliant",
-          "Domain migration with no loss of SEO ranking",
+          "About 30 responsive pages",
+          "CMS for blog and landing pages",
+          "Technical SEO and tracking",
         ],
       },
       {
-        slug: "infermiera-althea",
-        tag: "Independent Professional · Healthcare",
-        title: "Nurse Althea",
-        place: "📍 Pordenone area",
-        imageSrc: "/case-studies/infermiera-althea.jpg",
+        slug: "forma",
+        tag: "Product · Evolving",
+        title: "FORMA",
+        place: "Product design · web app",
+        imageSrc: "/projects/forma/quest-guide-1280.png",
+        status: "In progress", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "64%",
         results: [
-          "Local SEO with zero ad budget",
-          "Solid organic ranking for the searches that matter",
-          "Platform chosen for long-term sustainability",
-          "Redesign in progress while protecting existing SEO",
+          "60 illustrated exercises",
+          "Sessions and persistent rest timer",
+          "Browser QA 15/15",
         ],
       },
       {
         slug: "geofire",
-        tag: "Personal Project · Method",
-        title: "Geo·FIRE, a financial freedom globe",
-        place: "3D web app in the browser",
-        imageSrc: "/case-studies/geofire.jpg",
+        tag: "Product · Online",
+        title: "Geo·FIRE",
+        place: "Data · finance · visualisation",
+        imageSrc: "/projects/geofire/app.jpg",
         appLink: "https://geofire.davidcappelletto.it",
         appLinkLabel: "Try the app →",
+        status: "Online", statusNote: "Live", statusColor: "#28A978", statusProgress: "100%",
         results: [
-          "Financial calculations verified across 34,000+ combinations",
-          "175 countries, three models of financial freedom",
-          "Flags drawn from scratch for universal compatibility",
-          "The process is the product: a case study of method",
-        ],
-      },
-      {
-        slug: "maybes-shop",
-        tag: "Experimental Project · Infrastructure",
-        title: "Maybe's Shop, automated e-commerce",
-        place: "Shopify + print-on-demand",
-        imageSrc: "/case-studies/maybes-shop.jpg",
-        results: [
-          "Order → print → ship flow with no manual steps",
-          "Webhook integration, zero warehouse",
-          "Brand and infrastructure both built from scratch",
-          "Verified end-to-end, from purchase to delivery",
+          "175 explorable countries",
+          "FIRE, Coast and Barista",
+          "34,560 verified combinations",
         ],
       },
     ],
@@ -351,12 +308,9 @@ const copy = {
     aboutTitle: "David Cappelletto",
     aboutSubtitle: "Freelance Digital Consultant · Friuli-Venezia Giulia",
     aboutText:
-      "I'm David, a freelance digital consultant based in Friuli-Venezia Giulia. I come from an industrial design background that taught me one key principle: form follows function, never the other way around.\n\nI work with professionals and SMEs that already have a website but are not getting results. Before touching any tool, I analyze the target, structure, and processes. Only then do I define what to do.\n\nI do not handle dozens of clients in parallel. I work with a limited number of projects at a time, and you always speak directly with me, with no middle layers.",
+      "I'm David, a freelance digital consultant based in Friuli-Venezia Giulia. I come from an industrial design background that taught me one key principle: form follows function, never the other way around.\n\nI work with professionals and SMEs that already have a website but are not getting results. Before touching any tool, I analyze the real situation — target, structure, and processes. Only then do I define what to do.\n\nI do not handle dozens of clients in parallel. I work with a limited number of projects at a time — and you always speak directly with me, with no middle layers.",
     servicesTag: "What You Can Ask For",
     servicesTitle: "The skills I bring. Applied where they matter.",
-    customEstimateTitle: "Every business has different needs. Its solution should too.",
-    customEstimateText: "Let's review your goals and build a tailored proposal, without predefined packages.",
-    customEstimateCta: "Request a tailored quote →",
     serviceAccordions: [
       {
         iconSrc: "/icon-audit.svg",
@@ -368,7 +322,7 @@ const copy = {
         iconSrc: "/icon-siti.svg",
         title: "Website Design",
         description:
-          "Structure, UX, content, and conversions. In this order, not the other way around. Architecture comes before design, design before code.",
+          "Structure, UX, content, conversions — in this order, not the other way around. Architecture comes before design, design before code.",
       },
       {
         iconSrc: "/icon-seo.svg",
@@ -380,25 +334,58 @@ const copy = {
         iconSrc: "/icon-ai.svg",
         title: "AI Automations",
         description:
-          "I remove repetitive manual processes such as quotes, follow-ups, and reporting with n8n and AI applied to your actual case, not a generic tutorial case.",
+          "I remove repetitive manual processes — quotes, follow-ups, reporting — with n8n and AI applied to your actual case, not a generic tutorial case.",
       },
       {
         iconSrc: "/icon-strategia.svg",
         title: "Digital Strategy",
         description:
-          "I won't sell you a 90-day plan made of slides. I'll tell you, with real numbers, whether it's worth investing now or waiting and exactly where to focus.",
+          "I won't sell you a 90-day plan made of slides. I'll tell you, with real numbers, whether it's worth investing now or waiting — and on exactly what.",
       },
       {
         iconSrc: "/icon-affiancamento.svg",
         title: "Consulting Support",
         description:
-          "I teach you to run what I built for you on your own: CMS, tracking, and automations. That way, you don't call me back to change a heading or add a page.",
+          "I teach you to run what I built for you on your own — CMS, tracking, automations — so you don't call me back to change a heading or add a page.",
       },
     ],
+    pricing: ["Diagnostic Audit", "Targeted Intervention", "Tailored Presence"],
+    pricingValue: ["€250-500", "€800-1,600", "from €2,700"],
+    pricingContext: [
+      "For those who want to understand before spending more.",
+      "For those with one specific problem to solve",
+      "For those starting from scratch or rethinking everything.",
+    ],
+    pricingIdeal: [
+      "→ Ideal if you're not sure yet where to start.",
+      "→ Ideal if you already have a site that isn't bringing in clients.",
+      "→ Ideal if your current site no longer reflects your work.",
+    ],
+    pricingItems: [
+      [
+        "Complete website and digital presence analysis",
+        "Priority report with recommendations",
+        "Map of critical points and opportunities",
+        "Results presentation call",
+      ],
+      [
+        "Local SEO and on-page optimization",
+        "Key page restructuring",
+        "Automation of one specific process",
+        "UX and conversion review",
+      ],
+      [
+        "Analysis, strategy and architecture",
+        "Clickable prototype and full UX",
+        "Development and go-live",
+        "Post-launch follow-up included",
+      ],
+    ],
+    featured: "⭐ Most Requested",
     firstStep: "First Step",
     miniTitle: "Start with the Free Mini Audit",
     miniText:
-      "20 minutes, no commitment. Tell me your situation. I'll understand the context and honestly tell you if and how I can help.",
+      "20 minutes. No commitment. Tell me your situation — I understand the context and honestly tell you if and how I can help.",
     miniBtn2: "Or fill in the form →",
     contacts: "Contacts",
     talk: "Let's talk.",
@@ -407,6 +394,7 @@ const copy = {
       name: "Full Name",
       email: "Email",
       activity: "Type of business",
+      budget: "Select budget",
       msg: "Write your message here",
       submit: "Send request",
       success: "Message sent! I'll get back to you within 24 hours.",
@@ -441,7 +429,6 @@ export default function Home() {
   const [openServiceAccordion, setOpenServiceAccordion] = useState(0);
   const [hoveredStep, setHoveredStep] = useState(null);
   const [hoveredContact, setHoveredContact] = useState(null);
-  const [showAllHomeProjects, setShowAllHomeProjects] = useState(false);
 
   const t = copy[lang];
   const [formState, setFormState] = useState({ succeeded: false, submitting: false, error: false });
@@ -811,11 +798,11 @@ export default function Home() {
             </p>
             <div className="hero-stats-grid" style={{ marginTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
               <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>
-                <p style={{ margin: 0, fontSize: 17, lineHeight: 1.2, fontWeight: 800, color: colors.tealLight }}>{t.stat1Value}</p>
+                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>2s</p>
                 <p style={{ margin: "4px 0 0", fontSize: 12.5, lineHeight: 1.35 }}>{t.stat1}</p>
               </div>
               <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>
-                <p style={{ margin: 0, fontSize: 17, lineHeight: 1.2, fontWeight: 800, color: colors.tealLight }}>{t.stat2Value}</p>
+                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>1:1</p>
                 <p style={{ margin: "4px 0 0", fontSize: 12.5, lineHeight: 1.35 }}>{t.stat2}</p>
               </div>
             </div>
@@ -871,8 +858,8 @@ export default function Home() {
         <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
           <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>{t.casesTag}</span>
           <h2 className="section-title" style={{ margin: "20px 0 0", fontSize: 34, lineHeight: 1.15 }}>{t.casesTitle}</h2>
-          <div id="home-projects-grid" className="cases-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
-            {t.caseCards.slice(0, showAllHomeProjects ? t.caseCards.length : 4).map((card, cardIdx) => (
+          <div className="cases-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
+            {t.caseCards.map((card, cardIdx) => (
               <article
                 key={card.slug}
                 className="case-card"
@@ -935,18 +922,22 @@ export default function Home() {
                 </div>
 
                 <div className="case-card-body" style={{ padding: 24, display: "flex", flexDirection: "column", flex: 1 }}>
-                  <p style={{ margin: 0, color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
+                  <div className="home-project-status" style={{ "--home-status": card.statusColor, "--home-progress": card.statusProgress }}>
+                    <div><span>{card.status}</span><span>{card.statusNote}</span></div>
+                    <i />
+                  </div>
+                  <p className="case-card-tag" style={{ margin: 0, color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
                     {card.tag}
                   </p>
-                  <h3 style={{ margin: "10px 0 0", fontSize: 24, lineHeight: 1.25 }}>{card.title}</h3>
-                  <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{card.place}</p>
-                  <ul style={{ margin: "16px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 8 }}>
+                  <h3 className="case-card-title" style={{ margin: "10px 0 0", fontSize: 24, lineHeight: 1.25 }}>{card.title}</h3>
+                  <p className="case-card-place" style={{ margin: "6px 0 0", color: colors.inkMuted }}>{card.place}</p>
+                  <ul className="case-card-facts" style={{ margin: "16px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 8 }}>
                     {card.results.slice(0, 3).map((result) => (
                       <li key={result} style={{ fontSize: 14 }}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{result}</li>
                     ))}
                   </ul>
 
-                  <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
+                  <div className="case-card-actions" style={{ marginTop: 18, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
                     <span style={{ color: colors.tealText, fontWeight: 700 }}>{t.casesReadMore}</span>
                     {card.appLink && (
                       <a
@@ -973,27 +964,8 @@ export default function Home() {
               </article>
             ))}
           </div>
-          <div style={{ marginTop: 32, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
-            <button
-              type="button"
-              aria-expanded={showAllHomeProjects}
-              aria-controls="home-projects-grid"
-              onClick={() => setShowAllHomeProjects((current) => !current)}
-              className="cta-hover-lift"
-              style={{
-                border: `1px solid ${colors.navy}`,
-                background: "transparent",
-                color: colors.navy,
-                padding: "12px 24px",
-                borderRadius: 10,
-                font: "inherit",
-                fontWeight: 700,
-                cursor: "pointer",
-              }}
-            >
-              {showAllHomeProjects ? t.casesShowLess : t.casesShowMore}
-            </button>
-            <Link
+          <div style={{ marginTop: 32, textAlign: "center" }}>
+            <a
               href="/progetti"
               className="cta-hover-lift"
               style={{
@@ -1007,7 +979,7 @@ export default function Home() {
               }}
             >
               {t.casesAllBtn}
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -1194,11 +1166,62 @@ export default function Home() {
             })}
           </div>
 
-          <div style={{ marginTop: 40, borderRadius: 16, background: colors.navy, color: "#fff", padding: "32px clamp(24px, 5vw, 56px)", textAlign: "center" }}>
-            <h3 style={{ margin: 0, fontSize: 28, lineHeight: 1.2 }}>{t.customEstimateTitle}</h3>
-            <p style={{ margin: "14px auto 0", maxWidth: 650, color: "rgba(255,255,255,.78)", lineHeight: 1.65 }}>{t.customEstimateText}</p>
-            <a href="#contatti" className="cta-hover-lift" style={{ marginTop: 24, background: colors.teal, color: "#fff", borderRadius: 999, padding: "13px 24px", textDecoration: "none", fontWeight: 700 }}>
-              {t.customEstimateCta}
+          <div className="prices-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
+            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
+            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
+              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[0]}</p>
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
+                {t.pricingContext[0]}
+              </p>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.tealText, fontWeight: 500 }}>
+                {t.pricingIdeal[0]}
+              </p>
+              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
+                {t.pricingItems[0].map((item) => (
+                  <li key={item}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{item}</li>
+                ))}
+              </ul>
+            </article>
+            </a>
+
+            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
+            <article style={{ position: "relative", borderRadius: 12, border: `1px solid ${colors.navy}`, background: colors.navy, color: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
+              <span style={{ position: "absolute", left: 18, top: -12, borderRadius: 999, background: colors.teal, color: "#fff", fontSize: 12, fontWeight: 700, padding: "6px 10px" }}>
+                {t.featured}
+              </span>
+              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: "rgba(255,255,255,.9)" }}>{t.pricing[1]}</p>
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: "rgba(255,255,255,.9)" }}>
+                {t.pricingContext[1]}
+              </p>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: "#3DBFB2", fontWeight: 500 }}>
+                {t.pricingIdeal[1]}
+              </p>
+              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[1]}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10, color: "rgba(255,255,255,.95)" }}>
+                {t.pricingItems[1].map((item) => (
+                  <li key={item}><span style={{ color: colors.tealLight, marginRight: 8 }}>✓</span>{item}</li>
+                ))}
+              </ul>
+            </article>
+            </a>
+
+            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
+            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
+              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[2]}</p>
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
+                {t.pricingContext[2]}
+              </p>
+              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.tealText, fontWeight: 500 }}>
+                {t.pricingIdeal[2]}
+              </p>
+              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[2]}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
+                {t.pricingItems[2].map((item) => (
+                  <li key={item}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{item}</li>
+                ))}
+              </ul>
+            </article>
             </a>
           </div>
         </div>
@@ -1283,6 +1306,22 @@ export default function Home() {
                       style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box", gridColumn: "auto" }}
                       placeholder={t.form.activity}
                     />
+                    <select
+                      className="contact-span-full"
+                      name="budget"
+                      aria-label={t.form.budget}
+                      required
+                      style={{ border: `1px solid ${colors.line}`, borderRadius: 8, padding: "12px 14px", fontSize: 15, width: "100%", boxSizing: "border-box", gridColumn: "auto" }}
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        {t.form.budget}
+                      </option>
+                      <option value="€250-500">€250-500</option>
+                      <option value="€800-1.600">€800-1.600</option>
+                      <option value="€2.700-5.000">€2.700-5.000</option>
+                      <option value="Oltre €5.000">Oltre €5.000</option>
+                    </select>
                     <textarea
                       className="contact-span-full"
                       name="messaggio"
@@ -1405,7 +1444,7 @@ export default function Home() {
         <svg viewBox="0 0 24 24" width="26" height="26" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.886a.5.5 0 0 0 .619.608l6.188-1.615A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.52-5.17-1.428l-.36-.214-3.733.974.999-3.648-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
       </a>
 
-      <style jsx global>{`
+      <style>{`
         .cta-hover-lift {
           display: inline-block;
           transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -1429,6 +1468,108 @@ export default function Home() {
         .case-card a[aria-label]:focus-visible {
           outline: 2px solid ${colors.teal};
           outline-offset: 2px;
+        }
+        .home-project-status {
+          margin-bottom: 16px;
+          color: var(--home-status);
+        }
+        .home-project-status > div {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 6px;
+          font-size: 9px;
+          font-weight: 800;
+          letter-spacing: .09em;
+          text-transform: uppercase;
+        }
+        .home-project-status i {
+          display: block;
+          height: 4px;
+          overflow: hidden;
+          border-radius: 999px;
+          background: #e5e9ea;
+        }
+        .home-project-status i::after {
+          content: "";
+          display: block;
+          width: var(--home-progress);
+          height: 100%;
+          border-radius: inherit;
+          background: var(--home-status);
+        }
+
+        @media (max-width: 767px) {
+          #casi-reali {
+            padding: 34px 0 !important;
+          }
+          #casi-reali .section-title {
+            margin-top: 10px !important;
+            font-size: 25px !important;
+          }
+          .cases-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 9px !important;
+            margin-top: 16px !important;
+          }
+          .case-card {
+            border-radius: 9px !important;
+          }
+          .case-card-image {
+            aspect-ratio: 2 / 1 !important;
+          }
+          .case-card-body {
+            padding: 9px 10px 10px !important;
+          }
+          .home-project-status {
+            margin-bottom: 7px;
+          }
+          .home-project-status > div {
+            margin-bottom: 3px;
+            font-size: 6.5px;
+          }
+          .home-project-status i {
+            height: 3px;
+          }
+          .case-card-tag,
+          .case-card-place {
+            display: none;
+          }
+          .case-card-title {
+            margin-top: 3px !important;
+            font-size: 17px !important;
+          }
+          .case-card-facts {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            gap: 3px !important;
+            margin-top: 7px !important;
+          }
+          .case-card-facts li {
+            min-height: 43px;
+            padding: 4px 2px 3px;
+            border: 1px solid ${colors.line};
+            border-radius: 7px;
+            font-size: 6.5px !important;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+          }
+          .case-card-facts li span {
+            display: grid;
+            place-items: center;
+            width: 14px;
+            height: 14px;
+            margin: 0 0 3px !important;
+            border-radius: 50%;
+            background: rgba(43,168,154,.12);
+            font-size: 8px;
+          }
+          .case-card-actions {
+            margin-top: 6px !important;
+            gap: 5px !important;
+            font-size: 8px;
+          }
+          .case-card-actions a {
+            display: none;
+          }
         }
 
         html {
@@ -1470,12 +1611,13 @@ export default function Home() {
           .problem-grid {
             grid-template-columns: 1fr 1fr !important;
           }
-          .steps-grid {
+          .steps-grid,
+          .prices-grid {
             grid-template-columns: 1fr 1fr 1fr !important;
           }
           .cases-grid {
-            grid-template-columns: 1fr 1fr !important;
-            max-width: 760px !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            max-width: 1100px !important;
             margin-left: auto !important;
             margin-right: auto !important;
           }

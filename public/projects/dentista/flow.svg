@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" rx="40" fill="#f4f7fa"/>
+  <text x="70" y="88" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#2ba89a" letter-spacing="3">FLUSSO OPERATIVO ANONIMO</text>
+  <g font-family="Arial,sans-serif">
+    <path d="M240 280H470M730 280H960M600 400v130" stroke="#b8c8d4" stroke-width="8" stroke-linecap="round"/>
+    <g transform="translate(70 190)"><rect width="280" height="180" rx="24" fill="white" stroke="#d0dde8"/><text x="28" y="56" font-size="20" font-weight="800" fill="#14253c">1 · Legge</text><text x="28" y="96" font-size="18" fill="#607084">Solo i dati necessari</text><text x="28" y="128" font-size="18" fill="#607084">all'appuntamento.</text></g>
+    <g transform="translate(460 190)"><rect width="280" height="180" rx="24" fill="white" stroke="#efb652" stroke-width="3"/><text x="28" y="56" font-size="20" font-weight="800" fill="#14253c">2 · Decide</text><text x="28" y="96" font-size="18" fill="#607084">Applica tempi, regole</text><text x="28" y="128" font-size="18" fill="#607084">e controlli.</text></g>
+    <g transform="translate(850 190)"><rect width="280" height="180" rx="24" fill="white" stroke="#d0dde8"/><text x="28" y="56" font-size="20" font-weight="800" fill="#14253c">3 · Contatta</text><text x="28" y="96" font-size="18" fill="#607084">Invia il promemoria</text><text x="28" y="128" font-size="18" fill="#607084">nel momento corretto.</text></g>
+    <g transform="translate(460 520)"><rect width="280" height="150" rx="24" fill="#14253c"/><text x="28" y="56" font-size="20" font-weight="800" fill="white">4 · Registra</text><text x="28" y="96" font-size="18" fill="#b8eee4">Conferma o anomalia</text><text x="28" y="124" font-size="18" fill="#b8eee4">ritorna nel flusso.</text></g>
+  </g>
+</svg>

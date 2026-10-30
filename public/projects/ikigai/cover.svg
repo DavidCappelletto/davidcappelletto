@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+  <defs><radialGradient id="b"><stop stop-color="#443176"/><stop offset="1" stop-color="#0b1428"/></radialGradient><filter id="g"><feGaussianBlur stdDeviation="18"/></filter></defs>
+  <rect width="1200" height="760" rx="40" fill="url(#b)"/>
+  <g opacity=".5" filter="url(#g)"><circle cx="260" cy="370" r="120" fill="#ff6f91"/><circle cx="500" cy="370" r="120" fill="#54d9d1"/><circle cx="740" cy="370" r="120" fill="#ffc861"/><circle cx="980" cy="370" r="120" fill="#8976ff"/></g>
+  <g fill="none" stroke-width="6">
+    <path d="m260 220 112 150-112 150-112-150z" stroke="#ff9ab0"/><path d="m500 220 112 150-112 150-112-150z" stroke="#8ce9e3"/><path d="m740 220 112 150-112 150-112-150z" stroke="#ffdc91"/><path d="m980 220 112 150-112 150-112-150z" stroke="#b6a9ff"/>
+  </g>
+  <text x="74" y="100" fill="#d3caff" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="4">PROTOTIPO · CONVERSAZIONE 3D</text>
+  <text x="74" y="168" fill="white" font-family="Arial,sans-serif" font-size="54" font-weight="800">Mappa Ikigai</text>
+  <text x="74" y="664" fill="#d7d9e8" font-family="Arial,sans-serif" font-size="25">Quattro cristalli. Un equilibrio da rendere visibile.</text>
+</svg>

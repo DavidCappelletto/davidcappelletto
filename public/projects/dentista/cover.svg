@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Automazione promemoria per studio dentistico</title>
+  <desc id="d">Visualizzazione anonima del flusso appuntamento, verifica, messaggio e conferma.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#10243b"/><stop offset="1" stop-color="#1d5a69"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-opacity=".2"/></filter>
+  </defs>
+  <rect width="1200" height="760" rx="44" fill="url(#bg)"/>
+  <circle cx="1020" cy="90" r="170" fill="#2ba89a" opacity=".14"/>
+  <text x="76" y="102" fill="#9ee6dc" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="4">WORK IN PROGRESS</text>
+  <text x="76" y="170" fill="white" font-family="Arial,sans-serif" font-size="52" font-weight="800">Promemoria che seguono il flusso.</text>
+  <g filter="url(#s)" font-family="Arial,sans-serif">
+    <g transform="translate(76 270)"><rect width="232" height="250" rx="24" fill="white"/><circle cx="46" cy="48" r="20" fill="#e9f7f4"/><path d="M38 48h16M46 40v16" stroke="#2ba89a" stroke-width="4" stroke-linecap="round"/><text x="28" y="104" fill="#14253c" font-size="25" font-weight="800">Appuntamento</text><text x="28" y="145" fill="#607084" font-size="19">Dati essenziali</text><text x="28" y="176" fill="#607084" font-size="19">letti dal sistema</text><rect x="28" y="210" width="112" height="8" rx="4" fill="#2ba89a"/></g>
+    <g transform="translate(342 270)"><rect width="232" height="250" rx="24" fill="white"/><circle cx="46" cy="48" r="20" fill="#fff5df"/><path d="m38 49 6 6 12-15" fill="none" stroke="#efb652" stroke-width="4" stroke-linecap="round"/><text x="28" y="104" fill="#14253c" font-size="25" font-weight="800">Verifica</text><text x="28" y="145" fill="#607084" font-size="19">Regole, orari</text><text x="28" y="176" fill="#607084" font-size="19">e consenso</text><rect x="28" y="210" width="152" height="8" rx="4" fill="#efb652"/></g>
+    <g transform="translate(608 270)"><rect width="232" height="250" rx="24" fill="white"/><circle cx="46" cy="48" r="20" fill="#e9f7f4"/><path d="M35 41h22v15H44l-7 6v-6h-2z" fill="none" stroke="#2ba89a" stroke-width="3"/><text x="28" y="104" fill="#14253c" font-size="25" font-weight="800">Messaggio</text><text x="28" y="145" fill="#607084" font-size="19">Invio automatico</text><text x="28" y="176" fill="#607084" font-size="19">su WhatsApp</text><rect x="28" y="210" width="178" height="8" rx="4" fill="#2ba89a"/></g>
+    <g transform="translate(874 270)"><rect width="232" height="250" rx="24" fill="white"/><circle cx="46" cy="48" r="20" fill="#e8f0fb"/><path d="m37 49 7 7 13-17" fill="none" stroke="#397bd8" stroke-width="4" stroke-linecap="round"/><text x="28" y="104" fill="#14253c" font-size="25" font-weight="800">Conferma</text><text x="28" y="145" fill="#607084" font-size="19">Esito registrato</text><text x="28" y="176" fill="#607084" font-size="19">senza inseguimenti</text><rect x="28" y="210" width="74" height="8" rx="4" fill="#397bd8"/></g>
+  </g>
+  <path d="M309 395h32M575 395h32M841 395h32" stroke="#9ee6dc" stroke-width="6" stroke-linecap="round" stroke-dasharray="4 14"/>
+  <text x="76" y="640" fill="white" font-family="Arial,sans-serif" font-size="28" font-weight="700">Dati mostrati solo in forma anonima</text>
+  <text x="76" y="684" fill="#b8c8d4" font-family="Arial,sans-serif" font-size="22">Il caso sarà aggiornato man mano che il flusso viene validato.</text>
+</svg>

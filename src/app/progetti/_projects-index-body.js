@@ -1,203 +1,103 @@
 "use client";
 
 import Link from "next/link";
-import { caseStudies, colors, localizeCaseStudy } from "./_data";
-import {
-  SiteHeader,
-  SiteFooter,
-  SiteFirstStepSection,
-  SiteContactSection,
-  ImageWithFallback,
-  LangProvider,
-  useLang,
-} from "./_site-parts";
+import { caseStudies, categoryLabels, colors, getStatus, localizeCaseStudy } from "./_data";
+import { SiteHeader, SiteFooter, SiteContactSection, ImageWithFallback, LangProvider, useLang } from "./_site-parts";
 
 const ui = {
   it: {
-    tag: "Progetti",
-    title: "Non esempi ipotetici. Cose già fatte.",
-    intro:
-      "Ogni progetto qui è raccontato per come è stato fatto davvero: il problema, le scelte, l'esecuzione e il risultato. Uso l'AI come attrezzo da banco in ogni fase e lo dichiaro, perché il valore non sta nello strumento ma in chi decide cosa fargli fare. Questa pagina cresce: ogni progetto significativo che completo diventa una nuova voce qui.",
-    readMore: "Leggi il progetto →",
+    tag: "Portfolio",
+    title: "Progetti diversi, stati leggibili.",
+    intro: "Clienti, prodotti, soluzioni replicabili e prototipi sono presentati per ciò che sono davvero.",
+    readMore: "Apri →",
+    media: "Immagini + processo",
+    counts: (n) => `${n} ${n === 1 ? "progetto" : "progetti"}`,
   },
   en: {
-    tag: "Projects",
-    title: "No hypothetical examples. Real work already delivered.",
-    intro:
-      "Every project here is told the way it actually happened: the problem, the choices, the execution, and the result. I use AI as a hand tool at every stage, and I say so openly because the value isn't in the tool but in who decides what to do with it. This page grows: every significant project I finish becomes a new entry here.",
-    readMore: "Read the project →",
+    tag: "Portfolio",
+    title: "Different projects, readable states.",
+    intro: "Client work, products, reusable solutions and prototypes are presented for what they really are.",
+    readMore: "Open →",
+    media: "Images + process",
+    counts: (n) => `${n} ${n === 1 ? "project" : "projects"}`,
   },
 };
+
+function StatusBar({ project, lang }) {
+  const status = getStatus(project, lang);
+  return (
+    <div className="project-status" style={{ "--status-color": status.color, "--status-width": `${status.progress}%` }}>
+      <div><span>{status.label}</span><span>{project.status === "online" ? "Live" : project.status === "done" ? (lang === "it" ? "Caso pronto" : "Case ready") : project.status === "progress" ? "WIP" : (lang === "it" ? "Prototipo" : "Prototype")}</span></div>
+      <i />
+    </div>
+  );
+}
+
+function ProjectCard({ project, lang, readMore, media }) {
+  const item = localizeCaseStudy(project, lang);
+  return (
+    <article className="portfolio-card">
+      <Link href={`/progetti/${item.slug}`} aria-label={item.title} className="portfolio-card-link" />
+      <div className="portfolio-card-media">
+        <ImageWithFallback src={item.imageSrc} alt={item.shortTitle || item.title} />
+        <span>{media}</span>
+      </div>
+      <div className="portfolio-card-body">
+        <StatusBar project={project} lang={lang} />
+        <p className="portfolio-tag">{item.tag}</p>
+        <h3>{item.shortTitle || item.title}</h3>
+        <p className="portfolio-description">{item.cardText || item.intro}</p>
+        <strong className="portfolio-open">{readMore}</strong>
+      </div>
+    </article>
+  );
+}
 
 function ProjectsIndexInner() {
   const { lang } = useLang();
   const t = ui[lang];
+  const groups = ["featured", "solutions", "lab"];
 
   return (
-    <main style={{ background: colors.bg, minHeight: "100vh", fontFamily: "'DM Sans', system-ui, sans-serif", color: colors.ink }}>
+    <main className="portfolio-page" style={{ background: colors.bg, color: colors.ink }}>
       <SiteHeader />
-
-      <section style={{ background: colors.bg, padding: "56px 0 96px" }}>
-        <div style={{ width: "min(1200px, 89vw)", margin: "0 auto" }}>
-          <span style={{ display: "inline-block", background: "#fff", color: colors.inkMuted, padding: "6px 12px", borderRadius: 999, fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
-            {t.tag}
-          </span>
-          <h1 style={{ margin: "20px 0 0", fontSize: 40, lineHeight: 1.15 }}>
-            {t.title}
-          </h1>
-          <p style={{ marginTop: 16, maxWidth: 720, color: colors.inkMuted, lineHeight: 1.6, fontSize: 17 }}>
-            {t.intro}
-          </p>
-
-          <div className="cases-grid" style={{ marginTop: 48, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
-            {caseStudies.map((cs, cardIdx) => {
-              const localized = localizeCaseStudy(cs, lang);
-              return (
-                <article
-                  key={localized.slug}
-                  className="case-card"
-                  style={{
-                    position: "relative",
-                    borderRadius: 12,
-                    border: `1px solid ${colors.line}`,
-                    background: "#fff",
-                    overflow: "hidden",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Link
-                    href={`/progetti/${localized.slug}`}
-                    aria-label={localized.title}
-                    style={{ position: "absolute", inset: 0, zIndex: 1 }}
-                  />
-
-                  <div
-                    className="case-card-image"
-                    style={{
-                      position: "relative",
-                      minHeight: 180,
-                      background: `linear-gradient(135deg, ${colors.navy}, ${colors.teal})`,
-                      flexShrink: 0,
-                    }}
-                  >
-                    <ImageWithFallback
-                      src={localized.imageSrc}
-                      alt={localized.title}
-                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                    <div
-                      style={{
-                        display: "none",
-                        position: "absolute",
-                        inset: 0,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexDirection: "column",
-                        gap: 6,
-                        color: "rgba(255,255,255,.85)",
-                        textAlign: "center",
-                        padding: 16,
-                      }}
-                    >
-                      <span style={{ fontSize: 32, fontWeight: 800, opacity: 0.5 }}>{String(cardIdx + 1).padStart(2, "0")}</span>
-                      <span style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: ".06em" }}>{localized.place || localized.client}</span>
-                    </div>
-                  </div>
-
-                  <div className="case-card-body" style={{ padding: 24, display: "flex", flexDirection: "column", flex: 1 }}>
-                    <p style={{ margin: 0, color: colors.inkMuted, fontSize: 12, letterSpacing: ".04em", textTransform: "uppercase", fontWeight: 700 }}>
-                      {localized.tag}
-                    </p>
-                    <h2 style={{ margin: "10px 0 0", fontSize: 24, lineHeight: 1.25 }}>{localized.title}</h2>
-                    <p style={{ margin: "6px 0 0", color: colors.inkMuted }}>{localized.place || localized.client}</p>
-                    <ul style={{ margin: "16px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 8 }}>
-                      {localized.results.slice(0, 3).map((result) => (
-                        <li key={result} style={{ fontSize: 14 }}>
-                          <span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>
-                          {result}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div style={{ marginTop: 18, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
-                      <span style={{ color: colors.tealText, fontWeight: 700 }}>{t.readMore}</span>
-                      {localized.appLink && (
-                        <a
-                          href={localized.appLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            position: "relative",
-                            zIndex: 2,
-                            background: colors.navy,
-                            color: "#fff",
-                            borderRadius: 999,
-                            textDecoration: "none",
-                            padding: "8px 16px",
-                            fontSize: 13,
-                            fontWeight: 700,
-                          }}
-                        >
-                          {localized.appLinkLabel || (lang === "en" ? "Try the app →" : "Prova l'app →")}
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+      <section className="portfolio-hero">
+        <div className="portfolio-shell">
+          <span className="portfolio-eyebrow">{t.tag}</span>
+          <h1>{t.title}</h1>
+          <p>{t.intro}</p>
         </div>
       </section>
 
-      <SiteFirstStepSection />
+      <div className="portfolio-shell portfolio-groups">
+        {groups.map((group) => {
+          const projects = caseStudies.filter((project) => project.category === group);
+          if (!projects.length) return null;
+          return (
+            <section className="portfolio-group" key={group}>
+              <header>
+                <h2>{categoryLabels[group][lang] || categoryLabels[group].it}</h2>
+                <span>{t.counts(projects.length)}</span>
+              </header>
+              <div className="portfolio-grid">
+                {projects.map((project) => <ProjectCard key={project.slug} project={project} lang={lang} readMore={t.readMore} media={t.media} />)}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
       <SiteContactSection />
       <SiteFooter />
 
       <style>{`
-        .cta-hover-lift {
-          display: inline-block;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .cta-hover-lift:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(17, 30, 48, 0.18);
-        }
-        .case-card-image {
-          aspect-ratio: 4 / 3;
-          min-height: 0 !important;
-        }
-        .case-card {
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .case-card:hover,
-        .case-card:focus-within {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 28px rgba(17, 30, 48, 0.12);
-        }
-        .case-card a[aria-label]:focus-visible {
-          outline: 2px solid ${colors.teal};
-          outline-offset: 2px;
-        }
-        @media (min-width: 768px) {
-          .cases-grid {
-            grid-template-columns: 1fr 1fr !important;
-            max-width: 760px !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-          }
-        }
+        .portfolio-page{min-height:100vh;font-family:'DM Sans',system-ui,sans-serif}.portfolio-shell{width:min(1180px,90vw);margin:0 auto}.portfolio-hero{padding:72px 0 36px}.portfolio-eyebrow{display:flex;align-items:center;gap:10px;color:${colors.tealText};font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.portfolio-eyebrow:before{content:"";width:28px;height:2px;background:currentColor}.portfolio-hero h1{font-size:clamp(42px,6vw,74px);line-height:1;letter-spacing:-.055em;margin:18px 0}.portfolio-hero p{max-width:680px;color:${colors.inkMuted};font-size:18px;line-height:1.65}.portfolio-groups{padding-bottom:76px}.portfolio-group{padding:28px 0 48px}.portfolio-group>header{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid ${colors.line};padding-bottom:16px;margin-bottom:20px}.portfolio-group>header h2{font-size:30px;letter-spacing:-.03em;margin:0}.portfolio-group>header span{color:${colors.inkMuted};font-size:13px}.portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.portfolio-card{position:relative;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid ${colors.line};border-radius:14px;min-width:0;transition:transform .2s,box-shadow .2s}.portfolio-card:hover,.portfolio-card:focus-within{transform:translateY(-4px);box-shadow:0 14px 30px rgba(17,30,48,.1)}.portfolio-card-link{position:absolute;inset:0;z-index:3}.portfolio-card-link:focus-visible{outline:3px solid ${colors.teal};outline-offset:-3px}.portfolio-card-media{position:relative;aspect-ratio:1.5;background:${colors.navy};overflow:hidden}.portfolio-card-media img{width:100%;height:100%;object-fit:cover;display:block}.portfolio-card-media>span{position:absolute;right:12px;bottom:12px;padding:6px 9px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(8,18,31,.72);color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.portfolio-card-body{display:flex;flex-direction:column;flex:1;padding:20px}.project-status{margin-bottom:16px;color:var(--status-color)}.project-status>div{display:flex;justify-content:space-between;margin-bottom:6px;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.project-status i{display:block;height:4px;border-radius:999px;background:#e5e9ea;overflow:hidden}.project-status i:after{content:"";display:block;width:var(--status-width);height:100%;border-radius:inherit;background:var(--status-color)}.portfolio-tag{margin:0;color:${colors.tealText};font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.portfolio-card h3{font-size:22px;line-height:1.16;letter-spacing:-.025em;margin:8px 0}.portfolio-description{color:${colors.inkMuted};font-size:14px;line-height:1.5;margin:0}.portfolio-open{margin-top:auto;padding-top:16px;color:${colors.tealText};font-size:13px}
+        @media(max-width:767px){.portfolio-shell{width:94vw}.portfolio-hero{padding:30px 0 16px}.portfolio-hero h1{font-size:38px;margin:12px 0}.portfolio-hero p{font-size:14px;line-height:1.45;margin-bottom:0}.portfolio-group{padding:16px 0 28px}.portfolio-group>header{padding-bottom:9px;margin-bottom:10px}.portfolio-group>header h2{font-size:21px}.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.portfolio-card{border-radius:9px}.portfolio-card-media{aspect-ratio:2.05}.portfolio-card-media>span{right:6px;bottom:6px;padding:4px 6px;font-size:6px}.portfolio-card-body{padding:9px 10px 10px}.project-status{margin-bottom:7px}.project-status>div{font-size:7px;margin-bottom:4px;letter-spacing:.05em}.project-status i{height:3px}.portfolio-tag{font-size:7px;letter-spacing:.05em}.portfolio-card h3{font-size:14px;margin:5px 0}.portfolio-description{display:none}.portfolio-open{padding-top:5px;font-size:9px}.portfolio-groups{padding-bottom:34px}}
       `}</style>
     </main>
   );
 }
 
 export default function ProjectsIndexBody() {
-  return (
-    <LangProvider>
-      <ProjectsIndexInner />
-    </LangProvider>
-  );
+  return <LangProvider><ProjectsIndexInner /></LangProvider>;
 }

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" rx="40" fill="#f8f1e6"/>
+  <text x="70" y="92" fill="#15253b" font-family="Arial,sans-serif" font-size="48" font-weight="800">Un ordine, quattro sistemi.</text>
+  <text x="70" y="136" fill="#7a6d5e" font-family="Arial,sans-serif" font-size="22">Il valore era il flusso automatico, non il negozio.</text>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <g transform="translate(70 250)"><rect width="230" height="210" rx="24" fill="white" stroke="#dbcdbb"/><circle cx="115" cy="70" r="34" fill="#efe2d1"/><text x="115" y="78" font-size="26">01</text><text x="115" y="136" font-size="22" font-weight="800" fill="#15253b">Ordine</text><text x="115" y="170" font-size="17" fill="#7a6d5e">Shopify</text></g>
+    <g transform="translate(350 250)"><rect width="230" height="210" rx="24" fill="white" stroke="#dbcdbb"/><circle cx="115" cy="70" r="34" fill="#efe2d1"/><text x="115" y="78" font-size="26">02</text><text x="115" y="136" font-size="22" font-weight="800" fill="#15253b">Produzione</text><text x="115" y="170" font-size="17" fill="#7a6d5e">Printful / Gelato</text></g>
+    <g transform="translate(630 250)"><rect width="230" height="210" rx="24" fill="white" stroke="#dbcdbb"/><circle cx="115" cy="70" r="34" fill="#efe2d1"/><text x="115" y="78" font-size="26">03</text><text x="115" y="136" font-size="22" font-weight="800" fill="#15253b">Spedizione</text><text x="115" y="170" font-size="17" fill="#7a6d5e">Senza magazzino</text></g>
+    <g transform="translate(910 250)"><rect width="230" height="210" rx="24" fill="white" stroke="#dbcdbb"/><circle cx="115" cy="70" r="34" fill="#efe2d1"/><text x="115" y="78" font-size="26">04</text><text x="115" y="136" font-size="22" font-weight="800" fill="#15253b">Tracking</text><text x="115" y="170" font-size="17" fill="#7a6d5e">Ritorno al cliente</text></g>
+  </g>
+  <path d="M300 355h50M580 355h50M860 355h50" stroke="#c9aa83" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"/>
+  <rect x="70" y="555" width="1070" height="86" rx="20" fill="#15253b"/><text x="605" y="609" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="24" font-weight="700">Verificato end-to-end · Poi chiuso per evitare costi Shopify</text>
+</svg>

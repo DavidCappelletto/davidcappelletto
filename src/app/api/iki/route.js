@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 const API_URL = process.env.IKIGAI_API_URL || "https://api.anthropic.com/v1/messages";
 const MODELS = [process.env.IKIGAI_MODEL, "claude-haiku-5-5", "claude-haiku-4-5"].filter(Boolean);
 let workingModel = null;
+let lastProblem = null;
 
 const LIMITS = {
   ipPerDay: Number(process.env.IKIGAI_LIMIT_IP_DAY || 150), // chiamate a Claude per persona al giorno
@@ -120,6 +121,7 @@ async function claude({ messages, system = PERSONA, maxTokens = 400, temperature
       });
     } catch (e) {
       clearTimeout(timer);
+      lastProblem = { modello: model, rete: String(e?.name || e) + ": " + String(e?.cause?.code || e?.message || "").slice(0, 80) };
       console.error(`[iki] Claude non raggiungibile con ${model} dopo ${Date.now() - tStart}ms: ${e?.name || e}`);
       throw Object.assign(new Error("rete"), { code: "busy" });
     }
@@ -135,7 +137,8 @@ async function claude({ messages, system = PERSONA, maxTokens = 400, temperature
     try {
       detail = JSON.stringify(await res.json()).slice(0, 300);
     } catch {}
-    console.error(`[iki] Claude ${res.status} con ${model}: ${detail.replace(/"message":"[^"]*"/, '"message":"…"')}`);
+    lastProblem = { modello: model, stato: res.status, dettaglio: detail.slice(0, 200) };
+    console.error(`[iki] Claude ${res.status} con ${model}: ${detail}`);
     if (res.status === 404 || (res.status === 400 && /model/i.test(detail))) {
       lastErr = Object.assign(new Error("modello"), { code: "busy" });
       continue; // modello non disponibile: si prova il successivo
@@ -285,6 +288,6 @@ export async function GET(req) {
     console.log(`[iki] prova ok: ${JSON.stringify(tempi)} ${workingModel}`);
     return Response.json({ ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, contatori: !blobsOff }, { headers: h });
   } catch (e) {
-    return Response.json({ ok: false, errore: e?.code || "busy" }, { status: 502, headers: h });
+    return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY, contatori: !blobsOff }, { headers: h });
   }
 }

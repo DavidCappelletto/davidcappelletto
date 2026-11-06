@@ -62,26 +62,38 @@ function parseJson(text) {
   }
 }
 
-/* ---------- limiti d'uso (Netlify Blobs; in locale si passa oltre) ---------- */
+/* ---------- limiti d'uso (Netlify Blobs; se non risponde in fretta si passa oltre) ---------- */
 let storePromise = null;
+let blobsOff = false;
+function withTimeout(promise, ms) {
+  return Promise.race([promise, new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), ms))]);
+}
 async function store() {
+  if (blobsOff) return null;
   if (!storePromise) {
     storePromise = import("@netlify/blobs")
-      .then((m) => m.getStore({ name: "ikigai-limiti", consistency: "strong" }))
-      .catch(() => null);
+      .then((m) => m.getStore({ name: "ikigai-limiti" }))
+      .catch((e) => {
+        console.error(`[iki] contatori non disponibili: ${e?.message || e}`);
+        return null;
+      });
   }
   return storePromise;
 }
 async function bump(key, max) {
+  const t0 = Date.now();
   try {
     const s = await store();
     if (!s) return true;
-    const n = Number((await s.get(key)) || 0);
+    const n = Number((await withTimeout(s.get(key), 2500)) || 0);
     if (n >= max) return false;
-    await s.set(key, String(n + 1));
+    await withTimeout(s.set(key, String(n + 1)), 2500);
     return true;
-  } catch {
-    return true; // un guasto del contatore non deve bloccare l'app
+  } catch (e) {
+    // un guasto del contatore non deve bloccare l'app: lo si spegne per questa istanza
+    blobsOff = true;
+    console.error(`[iki] contatore spento dopo ${Date.now() - t0}ms: ${e?.message || e}`);
+    return true;
   }
 }
 function today() {
@@ -96,8 +108,9 @@ async function claude({ messages, system = PERSONA, maxTokens = 400, temperature
   let lastErr = null;
   for (const model of order) {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 22000);
+    const timer = setTimeout(() => ctrl.abort(), 20000);
     let res;
+    const tStart = Date.now();
     try {
       res = await fetch(API_URL, {
         method: "POST",
@@ -107,9 +120,11 @@ async function claude({ messages, system = PERSONA, maxTokens = 400, temperature
       });
     } catch (e) {
       clearTimeout(timer);
+      console.error(`[iki] Claude non raggiungibile con ${model} dopo ${Date.now() - tStart}ms: ${e?.name || e}`);
       throw Object.assign(new Error("rete"), { code: "busy" });
     }
     clearTimeout(timer);
+    console.log(`[iki] ${model} ${res.status} in ${Date.now() - tStart}ms`);
     if (res.ok) {
       const j = await res.json();
       workingModel = model;
@@ -261,10 +276,14 @@ export async function GET(req) {
   const codes = validCodes();
   if (!codes.length) return bad("not_configured", 503);
   if (!codes.includes(code)) return bad("invite_invalid", 403);
+  const t0 = Date.now();
   if (!(await bump(`${today()}:ip:${clientId(req)}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
+  const t1 = Date.now();
   try {
     const t = await claude({ messages: [{ role: "user", content: "Rispondi solo con la parola: ok" }], maxTokens: 5, temperature: 0 });
-    return Response.json({ ok: true, modello: workingModel, risposta: t.slice(0, 20) }, { headers: h });
+    const tempi = { contatori_ms: t1 - t0, claude_ms: Date.now() - t1 };
+    console.log(`[iki] prova ok: ${JSON.stringify(tempi)} ${workingModel}`);
+    return Response.json({ ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, contatori: !blobsOff }, { headers: h });
   } catch (e) {
     return Response.json({ ok: false, errore: e?.code || "busy" }, { status: 502, headers: h });
   }

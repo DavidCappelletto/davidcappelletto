@@ -63,39 +63,21 @@ function parseJson(text) {
   }
 }
 
-/* ---------- limiti d'uso (Netlify Blobs; se non risponde in fretta si passa oltre) ---------- */
-let storePromise = null;
-let blobsOff = false;
-function withTimeout(promise, ms) {
-  return Promise.race([promise, new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), ms))]);
-}
-async function store() {
-  if (blobsOff) return null;
-  if (!storePromise) {
-    storePromise = import("@netlify/blobs")
-      .then((m) => m.getStore({ name: "ikigai-limiti" }))
-      .catch((e) => {
-        console.error(`[iki] contatori non disponibili: ${e?.message || e}`);
-        return null;
-      });
+/* ---------- limiti d'uso ----------
+   Contatori in memoria per istanza della funzione: frenano gli abusi senza dipendenze esterne.
+   Il tetto vero ai costi resta il limite di spesa impostato nella console Anthropic. */
+const counters = new Map();
+let countersDay = "";
+function bump(key, max) {
+  const day = today();
+  if (day !== countersDay) {
+    counters.clear();
+    countersDay = day;
   }
-  return storePromise;
-}
-async function bump(key, max) {
-  const t0 = Date.now();
-  try {
-    const s = await store();
-    if (!s) return true;
-    const n = Number((await withTimeout(s.get(key), 2500)) || 0);
-    if (n >= max) return false;
-    await withTimeout(s.set(key, String(n + 1)), 2500);
-    return true;
-  } catch (e) {
-    // un guasto del contatore non deve bloccare l'app: lo si spegne per questa istanza
-    blobsOff = true;
-    console.error(`[iki] contatore spento dopo ${Date.now() - t0}ms: ${e?.message || e}`);
-    return true;
-  }
+  const n = counters.get(key) || 0;
+  if (n >= max) return false;
+  counters.set(key, n + 1);
+  return true;
 }
 function today() {
   return new Date().toISOString().slice(0, 10);
@@ -246,7 +228,7 @@ export async function POST(req) {
   const day = today();
 
   if (task === "check") {
-    if (!(await bump(`${day}:check:${who}`, LIMITS.checksPerDay))) return bad("rate_limited", 429);
+    if (!(bump(`${day}:check:${who}`, LIMITS.checksPerDay))) return bad("rate_limited", 429);
     const codes = validCodes();
     if (!codes.length) return bad("not_configured", 503);
     return codes.includes(code) ? Response.json({ result: { ok: true } }) : bad("invite_invalid", 403);
@@ -256,8 +238,8 @@ export async function POST(req) {
   const codes = validCodes();
   if (!codes.length) return bad("not_configured", 503);
   if (!codes.includes(code)) return bad("invite_invalid", 403);
-  if (!(await bump(`${day}:ip:${who}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
-  if (!(await bump(`${day}:tutti`, LIMITS.allPerDay))) return bad("rate_limited", 429);
+  if (!(bump(`${day}:ip:${who}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
+  if (!(bump(`${day}:tutti`, LIMITS.allPerDay))) return bad("rate_limited", 429);
 
   try {
     const result = await TASKS[task](body.data || {});
@@ -280,14 +262,14 @@ export async function GET(req) {
   if (!codes.length) return bad("not_configured", 503);
   if (!codes.includes(code)) return bad("invite_invalid", 403);
   const t0 = Date.now();
-  if (!(await bump(`${today()}:ip:${clientId(req)}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
+  if (!(bump(`${today()}:ip:${clientId(req)}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
   const t1 = Date.now();
   try {
     const t = await claude({ messages: [{ role: "user", content: "Rispondi solo con la parola: ok" }], maxTokens: 5, temperature: 0 });
     const tempi = { contatori_ms: t1 - t0, claude_ms: Date.now() - t1 };
     console.log(`[iki] prova ok: ${JSON.stringify(tempi)} ${workingModel}`);
-    return Response.json({ ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, contatori: !blobsOff }, { headers: h });
+    return Response.json({ ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi }, { headers: h });
   } catch (e) {
-    return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY, contatori: !blobsOff }, { headers: h });
+    return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY }, { headers: h });
   }
 }

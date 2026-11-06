@@ -126,6 +126,7 @@ async function claude({ messages, system = PERSONA, maxTokens = 400, temperature
       continue; // modello non disponibile: si prova il successivo
     }
     if (res.status === 401 || res.status === 403) throw Object.assign(new Error("chiave"), { code: "not_configured" });
+    if (/credit balance/i.test(detail)) throw Object.assign(new Error("credito"), { code: "no_credit" });
     if (res.status === 429) throw Object.assign(new Error("limite"), { code: "rate_limited" });
     throw Object.assign(new Error("errore"), { code: "busy" });
   }
@@ -247,7 +248,7 @@ export async function POST(req) {
   } catch (e) {
     const c = e?.code || "busy";
     console.error(`[iki] ${task}: ${c}`);
-    const status = c === "rate_limited" ? 429 : c === "not_configured" ? 503 : c === "bad_request" ? 400 : 502;
+    const status = c === "rate_limited" ? 429 : c === "not_configured" || c === "no_credit" ? 503 : c === "bad_request" ? 400 : 502;
     return bad(c, status);
   }
 }

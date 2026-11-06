@@ -817,7 +817,7 @@ downloadsApi={save:function(o){return new Promise(function(res){
   var u=URL.createObjectURL(o.data),a=document.createElement("a");a.href=u;a.download=o.filename||"immagine.png";
   document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();res();},400);
 });}};
-var HARD_STOP=["invite_invalid","not_configured"];
+var HARD_STOP=["invite_invalid","not_configured","no_credit"];
 
 /* ===================== utilità ===================== */
 function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}

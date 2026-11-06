@@ -3,6 +3,9 @@ const nextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  async rewrites() {
+    return [{ source: "/ikigai/app", destination: "/ikigai/app/index.html" }];
+  },
   async redirects() {
     return [
       {

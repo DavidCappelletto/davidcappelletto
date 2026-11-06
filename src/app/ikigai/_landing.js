@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 const PRIVACY = "https://www.iubenda.com/privacy-policy/65493035";
@@ -39,15 +39,15 @@ function encode(data) {
 
 function PreForm({ id }) {
   const [state, setState] = useState("idle");
-  const [fonte, setFonte] = useState("diretto");
 
-  useEffect(() => {
+  function fonteVisita() {
     try {
       const u = new URL(window.location.href);
-      const src = u.searchParams.get("utm_source") || u.searchParams.get("da");
-      if (src) setFonte(src.slice(0, 40));
-    } catch {}
-  }, []);
+      return (u.searchParams.get("utm_source") || u.searchParams.get("da") || "diretto").slice(0, 40);
+    } catch {
+      return "diretto";
+    }
+  }
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -58,7 +58,7 @@ function PreForm({ id }) {
       nome: f.nome.value.trim(),
       email: f.email.value.trim(),
       consenso: f.consenso.checked ? "sì" : "",
-      fonte,
+      fonte: fonteVisita(),
     };
     if (!data.email || !data.consenso) return;
     setState("sending");
@@ -193,6 +193,7 @@ export default function IkigaiLanding() {
         <p>
           Mappa Ikigai è ideata e sviluppata da <Link href="/">David Cappelletto</Link> ·{" "}
           <Link href="/progetti/mappa-ikigai">Il progetto</Link> ·{" "}
+          <a href="/ikigai/app">Hai un codice d&apos;invito? Entra</a> ·{" "}
           <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
         </p>
       </footer>

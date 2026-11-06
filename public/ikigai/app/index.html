@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Mappa Ikigai · anteprima</title>
 <meta name="description" content="Mappa Ikigai: otto domande, quattro cristalli e Iki che ti accompagna.">
 <meta name="robots" content="noindex">
@@ -29,7 +29,7 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{background:var(--bg);color:var(--star);font-family:var(--comic);font-size:16px;line-height:1.45;overflow:hidden;padding-block:0;padding-left:0;padding-right:0}
-.app{position:relative;height:100%;overflow:hidden}
+.app{position:relative;height:var(--vvh,100%);overflow:hidden;transform:translateY(var(--vvt,0px))}
 #stage{position:absolute;inset:0;touch-action:none}
 #stage canvas{display:block;width:100%;height:100%}
 .vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 32%,rgba(0,0,0,0) 48%,rgba(0,0,0,.62) 100%)}
@@ -866,15 +866,31 @@ function speak(text){
 }
 
 /* ===================== fumetti ===================== */
+/* Tastiera del telefono: l'app segue l'area davvero visibile, così il campo di testo resta sopra la tastiera */
+(function(){
+  var vv=window.visualViewport;if(!vv)return;
+  var root=document.documentElement;
+  function fit(){root.style.setProperty("--vvh",Math.round(vv.height)+"px");root.style.setProperty("--vvt",Math.round(vv.offsetTop)+"px");}
+  vv.addEventListener("resize",fit);vv.addEventListener("scroll",fit);fit();
+})();
 var speech=document.getElementById("speech"),answers=document.getElementById("answers"),composer=document.getElementById("composer"),input=document.getElementById("input"),send=document.getElementById("send");
 var skipFlag=false;
-function skip(){skipFlag=true;}
+var lastUserAct=0;
+function skip(){skipFlag=true;lastUserAct=Date.now();}
+["click","keydown"].forEach(function(t){document.addEventListener(t,function(e){if(e.target&&e.target.closest&&e.target.closest("#answers,#composer,.balloon,#mascot"))lastUserAct=Date.now();},true);});
+function readPause(){
+  if(!current||!current._readyAt||lastUserAct>current._shownAt)return Promise.resolve();
+  var ms=current._readyAt-Date.now();
+  if(ms<=0)return Promise.resolve();
+  if(!current.querySelector(".more"))current.appendChild(el("span","more","tocca per andare avanti"));
+  return wait(ms);
+}
 mascot.addEventListener("click",skip);
 function wait(ms){
   skipFlag=false;
   return new Promise(function(res){var s=Date.now(),iv=setInterval(function(){if(skipFlag||Date.now()-s>=ms){clearInterval(iv);skipFlag=false;res();}},50);});
 }
-function readTime(text){return prefs.auto?Math.min(9000,(1600+text.length*45)*SPEED[prefs.speed].read):Infinity;}
+function readTime(text){return prefs.auto?Math.min(15000,(2200+text.length*62)*SPEED[prefs.speed].read):Infinity;}
 function chunks(text){
   var parts=(text.replace(/\s+/g," ").match(/[^.!?…]+[.!?…]*\s*/g)||[text]).map(function(p){return p.trim();}),out=[],cur="";
   parts.forEach(function(p){if(!p)return;if(cur&&(cur+" "+p).length>190){out.push(cur);cur=p;}else{cur=cur?cur+" "+p:p;}});
@@ -890,7 +906,7 @@ function dismiss(b){
 var current=null;
 async function say(text,opts){
   opts=opts||{};
-  if(current){var c=current;current=null;await dismiss(c);}
+  if(current){await readPause();var c=current;current=null;await dismiss(c);}
   logPush("bot",text);
   var list=opts.noSplit?[text]:chunks(text),last=null,step=SPEED[prefs.speed].type;
   for(var i=0;i<list.length;i++){
@@ -915,7 +931,7 @@ async function say(text,opts){
     }
     if(sp)await sp;
     if(opts.mood==="happy")cheer();else iki(opts.mood||null,opts.hold?opts.gesture:null);
-    if(isLast&&opts.keep){last=b;break;}
+    if(isLast&&opts.keep){last=b;b._shownAt=Date.now();b._readyAt=Date.now()+readTime(part);break;}
     b.appendChild(el("span","more",isLast?"tocca per andare avanti":"tocca per continuare"));
     await wait(opts.pause?opts.pause*SPEED[prefs.speed].read:readTime(part));
     await dismiss(b);
@@ -941,6 +957,7 @@ function chip(label,cls){var b=el("button","chip"+(cls?" "+cls:""),label);b.type
 var pendingText=null,composerHandler=null;
 function showComposer(ph,handler){composer.hidden=false;input.disabled=false;send.disabled=false;input.placeholder=ph;input.value="";composerHandler=handler||null;}
 function hideComposer(){composer.hidden=true;pendingText=null;composerHandler=null;}
+input.addEventListener("focus",function(){setTimeout(function(){try{window.scrollTo(0,0);input.scrollIntoView({block:"nearest"});}catch(_){}},320);});
 composer.addEventListener("submit",function(ev){
   ev.preventDefault();var v=input.value.trim();if(!v)return;
   if(pendingText){input.value="";var f=pendingText;f(v);return;}
@@ -1058,6 +1075,14 @@ function answerLine(c,qi){
   if(free[c.id+qi])a.push("(con parole sue) "+free[c.id+qi]);
   return q.t+" → "+(a.join("; ")||"nessuna scelta");
 }
+function ownWords(){
+  var L=[];
+  CIRCLES.forEach(function(c){
+    c.qs.forEach(function(q,qi){if(free[c.id+qi])L.push(c.nome+" — "+q.t+": "+free[c.id+qi]);});
+    if(follow[c.id]&&follow[c.id].a)L.push(c.nome+" — "+follow[c.id].q+": "+follow[c.id].a);
+  });
+  return L;
+}
 function context(rs){
   var L=[];
   CIRCLES.forEach(function(c){
@@ -1091,6 +1116,7 @@ async function followQuestion(c){
 function trimTurns(){while(turns.length>22)turns.splice(1,2);}
 async function askClaude(){
   busy=true;
+  await readPause();
   var t=thinking();
   try{
     var r=await sampleFn.task("chat",{messages:turns});
@@ -1136,11 +1162,12 @@ function cleanMission(m,fallbackZone,i){
 }
 function stateLine(){return ZONES.map(function(z,k){return z.nome+": "+LAB[shardState(shardValue(k))];}).join(", ");}
 async function makeMissions(more){
+  await readPause();
   var t=thinking(),list=null;
   if(sampleFn){
     try{
       var doneList=missions.filter(function(m){return m.done;}).map(function(m){return m.titolo;});
-      var d=await sampleFn.task("missions",{profilo:context(baseRs),stato:stateLine(),fatte:doneList});
+      var d=await sampleFn.task("missions",{profilo:context(baseRs),parole:ownWords(),stato:stateLine(),fatte:doneList});
       var arr=(d&&Array.isArray(d.missioni))?d.missioni:[],weak=ZONES[weakOrder()[0]].id;
       list=arr.map(function(m,i){return cleanMission(m,weak,i);}).filter(Boolean).slice(0,3);
     }catch(e){if(e&&HARD_STOP.indexOf(e.code)>=0)sampleFn=null;}
@@ -1160,7 +1187,7 @@ async function missionFor(zoneKs,label){
   if(sampleFn){
     try{
       var open=missions.filter(function(x){return !x.done;}).map(function(x){return x.titolo;});
-      var d=await sampleFn.task("mission",{profilo:context(baseRs),stato:stateLine(),aperte:open,label:label,zone:zoneKs.map(function(k){return ZONES[k].id;})});
+      var d=await sampleFn.task("mission",{profilo:context(baseRs),parole:ownWords(),stato:stateLine(),aperte:open,label:label,zone:zoneKs.map(function(k){return ZONES[k].id;})});
       m=cleanMission(d,fallback,0);
     }catch(e){if(e&&HARD_STOP.indexOf(e.code)>=0)sampleFn=null;}
   }

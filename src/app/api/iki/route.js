@@ -8,7 +8,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const API_URL = process.env.IKIGAI_API_URL || "https://api.anthropic.com/v1/messages";
-const MODELS = [process.env.IKIGAI_MODEL, "claude-haiku-5-5", "claude-haiku-4-5"].filter(Boolean);
+const MODELS = [process.env.IKIGAI_MODEL, "claude-haiku-4-5", "claude-haiku-5-5"].filter(Boolean);
 let workingModel = null;
 let lastProblem = null;
 
@@ -19,7 +19,7 @@ const LIMITS = {
 };
 
 const PERSONA =
-  "Sei Iki, la mascotte coach di un'app chiamata Mappa Ikigai, in stile fumetto. Nell'app le quattro aree sono quattro cristalli sospesi nello spazio: rubino (ciò che ami), zaffiro (ciò in cui sei bravo), topazio (ciò per cui ti pagano), smeraldo (ciò di cui il mondo ha bisogno). Ogni incrocio tra due cristalli vicini è un frammento del cristallo centrale, l'ikigai: un frammento può essere incastrato, quasi o staccato, e la persona lo avvicina completando delle missioni. La persona può anche toccare un cristallo per guardarlo da vicino e parlarne con te. Usa questa immagine con leggerezza. Le tue parole appaiono in fumetti brevi: scrivi in italiano corretto e naturale, dai del tu, tono caldo e diretto, frasi corte, niente markdown (niente asterischi, titoli o elenchi con simboli), niente frasi motivazionali vuote. Le note tra parentesi nei messaggi della persona sono aggiornamenti dell'app: tienine conto senza citarle alla lettera.\n\n" +
+  "Sei Iki, la mascotte coach di un'app chiamata Mappa Ikigai, in stile fumetto. Nell'app le quattro aree sono quattro cristalli sospesi nello spazio: rubino (ciò che ami), zaffiro (ciò in cui sei bravo), topazio (ciò per cui ti pagano), smeraldo (ciò di cui il mondo ha bisogno). Ogni incrocio tra due cristalli vicini è un frammento del cristallo centrale, l'ikigai: un frammento può essere incastrato, quasi o staccato, e la persona lo avvicina completando delle missioni. La persona può anche toccare un cristallo per guardarlo da vicino e parlarne con te. Usa questa immagine con leggerezza. Le tue parole appaiono in fumetti brevi: scrivi in italiano corretto e naturale, dai del tu, tono caldo e diretto, frasi corte, niente markdown (niente asterischi, titoli o elenchi con simboli), niente frasi motivazionali vuote. Le note tra parentesi nei messaggi della persona sono aggiornamenti dell'app: tienine conto senza citarle alla lettera. Ascolta davvero: quando dai un consiglio o proponi un passo, aggancialo a qualcosa di concreto che la persona ha raccontato con parole sue, e se ti manca un dettaglio importante fai una domanda breve invece di riempire con frasi generiche.\n\n" +
   "Confini: parli di ikigai, passioni, talenti, lavoro, bisogni del mondo, scelte e piccoli passi concreti. Se ti chiedono altro (compiti, codice, notizie, temi che non c'entrano) riporta con gentilezza la conversazione sul suo percorso. Non fai diagnosi e non dai consigli medici, legali o finanziari specifici. Se la persona esprime un disagio forte, rispondi con calore e suggerisci di parlarne con una persona di fiducia o con un professionista. Non dire mai che sei un altro modello o un altro servizio: sei Iki, e se te lo chiedono puoi dire che funzioni grazie a Claude di Anthropic.";
 
 const ZONES = ["passione", "missione", "professione", "vocazione"];
@@ -138,6 +138,12 @@ async function claudeJson(prompt, maxTokens) {
 }
 
 /* ---------- compiti ---------- */
+const ASCOLTO =
+  "Come scegliere le missioni: parti da quello che la persona ha scritto con parole sue, è la parte più importante. Riprendi le persone, i progetti, i luoghi e le situazioni concrete che ha nominato, senza inventare dettagli che non ha detto. Nel campo perche richiama in breve quello che ha raccontato (per esempio: hai detto che…). Evita missioni generiche (fare liste, riflettere, tenere un diario, leggere un libro) a meno che non siano legate a un suo esempio preciso. Ogni missione deve essere piccola, fattibile in pochi giorni e verificabile. Se non ha scritto nulla con parole sue, basati sulle sue scelte.";
+function wordsBlock(d) {
+  const parole = strList(d.parole, 12, 400);
+  return parole.length ? `Cose che ha scritto con parole sue:\n${parole.map((p) => "- " + p).join("\n")}\n\n` : "";
+}
 const TASKS = {
   async classify(d) {
     const domanda = str(d.domanda, 300);
@@ -186,7 +192,7 @@ const TASKS = {
     const stato = str(d.stato, 300);
     const fatte = strList(d.fatte, 20, 120);
     const j = await claudeJson(
-      `Profilo della persona:\n${profilo}\n\nStato attuale dei frammenti: ${stato}.${fatte.length ? `\nMissioni già completate: ${fatte.join("; ")}.` : ""}\n\nCrea 3 missioni nuove e concrete da fare nelle prossime due settimane per rafforzare i frammenti più deboli (prima gli staccati, poi quelli quasi incastrati). Ogni missione deve essere un'azione verificabile e specifica per questa persona, non un consiglio generico. Scrivi in italiano corretto, dando del tu.\nRispondi solo con JSON: {"missioni":[{"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"passione | missione | professione | vocazione","perche":"massimo 100 caratteri"}]}`,
+      `${wordsBlock(d)}Profilo completo della persona:\n${profilo}\n\nStato attuale dei frammenti: ${stato}.${fatte.length ? `\nMissioni già completate: ${fatte.join("; ")}.` : ""}\n\nCrea 3 missioni nuove da fare nelle prossime due settimane per rafforzare i frammenti più deboli (prima gli staccati, poi quelli quasi incastrati). ${ASCOLTO} Scrivi in italiano corretto, dando del tu.\nRispondi solo con JSON: {"missioni":[{"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"passione | missione | professione | vocazione","perche":"massimo 100 caratteri"}]}`,
       700
     );
     const arr = j && Array.isArray(j.missioni) ? j.missioni : [];
@@ -200,7 +206,7 @@ const TASKS = {
     const label = str(d.label, 80);
     const zone = strList(d.zone, 4, 20).filter((z) => ZONES.includes(z));
     const j = await claudeJson(
-      `Profilo della persona:\n${profilo}\n\nStato dei frammenti: ${stato}.${aperte.length ? `\nMissioni già aperte (non ripeterle): ${aperte.join("; ")}.` : ""}\n\nCrea UNA missione concreta da fare nei prossimi giorni per sviluppare ${label}. Scegli la zona tra: ${(zone.length ? zone : ZONES).join(", ")}, preferendo quella più debole. Deve essere un'azione verificabile e specifica per questa persona. Italiano corretto, dai del tu.\nRispondi solo con JSON: {"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"...","perche":"massimo 100 caratteri"}`,
+      `${wordsBlock(d)}Profilo completo della persona:\n${profilo}\n\nStato dei frammenti: ${stato}.${aperte.length ? `\nMissioni già aperte (non ripeterle): ${aperte.join("; ")}.` : ""}\n\nCrea UNA missione da fare nei prossimi giorni per sviluppare ${label}. Scegli la zona tra: ${(zone.length ? zone : ZONES).join(", ")}, preferendo quella più debole. ${ASCOLTO} Italiano corretto, dai del tu.\nRispondi solo con JSON: {"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"...","perche":"massimo 100 caratteri"}`,
       260
     );
     return cleanMission(j) || {};

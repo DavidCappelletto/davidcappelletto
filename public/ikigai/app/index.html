@@ -337,7 +337,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
         <h3>I quattro cristalli</h3>
         <p>Ogni cristallo è una parte dell'ikigai: il rubino è ciò che ami, lo zaffiro ciò in cui sei bravo, il topazio ciò per cui ti pagano e lo smeraldo ciò di cui il mondo ha bisogno. Si accendono mentre rispondi alle domande.</p>
         <h3>I frammenti</h3>
-        <p>Tra due cristalli vicini nasce un frammento: passione, missione, professione e vocazione. Quando le tue risposte si somigliano, il frammento si incastra nel cristallo centrale. Se resta staccato, lì c'è qualcosa da sviluppare.</p>
+        <p>Tra due cristalli vicini nasce un frammento: passione, missione, professione e vocazione. Quando le tue risposte si somigliano, il frammento si incastra nel pianeta di cristallo. Se resta staccato, lì c'è qualcosa da sviluppare.</p>
         <h3>Esplorare</h3>
         <p>Dopo il test tocca un cristallo o un frammento nello spazio: Iki ci vola sopra e te lo racconta. Da lì puoi parlarne con lui, chiedere una missione o rispondere di nuovo alle domande di quel cristallo.</p>
         <h3>Le missioni</h3>
@@ -641,26 +641,67 @@ var Scene3D=(function(){
     return {g:g,m:m,back:back,inner:inner,e:e,glow:glow,spk:spk,hit:hit,v:0,base:POS[i]};
   });
 
-  /* --- cristallo centrale in quattro frammenti --- */
-  var T=[0,.95,0],B=[0,-.95,0],E0=[.56,0,0],E1=[0,0,.56],E2=[-.56,0,0],E3=[0,0,-.56];
+  /* --- pianeta di cristallo: un pianeta di cristallo fatto di quattro placche che si fondono --- */
+  var PR=.82;
+  function lune(a0,a1,r){
+    var nu=5,nv=9,gap=.035,out=[];
+    function P(u,v){return [r*Math.sin(v)*Math.cos(u),r*Math.sin(v)*Math.sin(u),r*Math.cos(v)];}
+    for(var i=0;i<nu;i++)for(var j=0;j<nv;j++){
+      var u0=a0+gap+(a1-a0-2*gap)*i/nu,u1=a0+gap+(a1-a0-2*gap)*(i+1)/nu,v0=Math.PI*j/nv,v1=Math.PI*(j+1)/nv;
+      var A=P(u0,v0),B=P(u1,v0),C=P(u1,v1),D=P(u0,v1);
+      out.push.apply(out,A.concat(D,B,B,D,C));
+    }
+    return out;
+  }
   var SHD=[
-    {tris:[T,E0,E1,T,E3,E0],dir:[1,1,0],cols:[0,1]},
-    {tris:[B,E1,E0,B,E0,E3],dir:[1,-1,0],cols:[1,2]},
-    {tris:[B,E2,E1,B,E3,E2],dir:[-1,-1,0],cols:[2,3]},
-    {tris:[T,E1,E2,T,E2,E3],dir:[-1,1,0],cols:[3,0]}
+    {a0:0,dir:[1,1,0],cols:[0,1]},
+    {a0:-Math.PI/2,dir:[1,-1,0],cols:[1,2]},
+    {a0:Math.PI,dir:[-1,-1,0],cols:[2,3]},
+    {a0:Math.PI/2,dir:[-1,1,0],cols:[3,0]}
   ];
-  var centre=new THREE.Group();root.add(centre);
-  var centerHit=new THREE.Mesh(new THREE.SphereGeometry(.9,12,8),new THREE.MeshBasicMaterial({visible:false}));root.add(centerHit);
+  /* nucleo: magma luminoso che prende il colore dei frammenti forti */
+  var CORE_VS="varying vec3 vN;varying vec3 vW;varying vec3 vWN;void main(){vN=normalize(position);vWN=normalize(mat3(modelMatrix)*normal);vec4 w=modelMatrix*vec4(position,1.0);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}";
+  var CORE_FS=["uniform float uTime;uniform float uCore;uniform vec4 uV;uniform vec3 uC0;uniform vec3 uC1;uniform vec3 uC2;uniform vec3 uC3;varying vec3 vN;varying vec3 vW;varying vec3 vWN;",
+    "float h3(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}",
+    "float n3(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(mix(h3(i),h3(i+vec3(1,0,0)),f.x),mix(h3(i+vec3(0,1,0)),h3(i+vec3(1,1,0)),f.x),f.y),mix(mix(h3(i+vec3(0,0,1)),h3(i+vec3(1,0,1)),f.x),mix(h3(i+vec3(0,1,1)),h3(i+vec3(1,1,1)),f.x),f.y),f.z);}",
+    "float fbm(vec3 p){float a=0.5,s=0.0;for(int i=0;i<4;i++){s+=a*n3(p);p*=2.03;a*=0.5;}return s;}",
+    "void main(){vec3 n=normalize(vN);float ang=atan(n.y,n.x);",
+    " vec4 w=pow(max(vec4(0.0),cos(vec4(ang-0.785,ang+0.785,ang+2.356,ang-2.356))),vec4(2.0));w/=max(1e-3,w.x+w.y+w.z+w.w);",
+    " vec3 c=uC0*w.x+uC1*w.y+uC2*w.z+uC3*w.w;float lit=dot(w,uV);",
+    " vec3 q=n*2.2+vec3(0.0,uTime*0.12,uTime*0.05);float f=fbm(q+1.7*fbm(n*1.6-uTime*0.04));",
+    " float veins=smoothstep(0.52,0.62,f);",
+    " float fres=pow(1.0-abs(dot(normalize(vWN),normalize(cameraPosition-vW))),2.0);",
+    " vec3 col=c*(0.08+0.9*lit*uCore)*(0.35+1.3*f)+c*veins*lit*(0.4+1.6*uCore)+c*fres*(0.2+0.8*uCore);",
+    " gl_FragColor=vec4(col,1.0);",
+    " #include <tonemapping_fragment>",
+    " #include <encodings_fragment>",
+    "}"].join("\n");
+  function shardCol(s){return new THREE.Color(COLS[s.cols[0]]).lerpHSL(new THREE.Color(COLS[s.cols[1]]),.5);}
+  var coreMat=new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uCore:{value:0},uV:{value:new THREE.Vector4()},uC0:{value:shardCol(SHD[0])},uC1:{value:shardCol(SHD[1])},uC2:{value:shardCol(SHD[2])},uC3:{value:shardCol(SHD[3])}},vertexShader:CORE_VS,fragmentShader:CORE_FS});
+  var planetCore=new THREE.Mesh(new THREE.IcosahedronGeometry(PR*.8,4),coreMat);
+  /* atmosfera: alone sottile sul bordo del pianeta */
+  var ATM_FS="uniform float uA;varying vec3 vN;varying vec3 vW;void main(){float r=1.0-abs(dot(normalize(vN),normalize(cameraPosition-vW)));gl_FragColor=vec4(vec3(0.75,0.82,1.0)*pow(r,3.0)*uA,1.0);}";
+  var atmo=new THREE.Mesh(new THREE.SphereGeometry(PR*1.18,48,32),new THREE.ShaderMaterial({uniforms:{uA:{value:0}},vertexShader:"varying vec3 vN;varying vec3 vW;void main(){vN=normalize(mat3(modelMatrix)*normal);vec4 w=modelMatrix*vec4(position,1.0);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}",fragmentShader:ATM_FS,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.FrontSide}));
+  /* anello planetario: compare quando il cristallo si allinea */
+  var RING_FS=["uniform float uA;uniform float uTime;varying vec2 vP;",
+    "void main(){float r=length(vP);float a=atan(vP.y,vP.x);float t=(r-1.42)/0.56;",
+    " float bands=0.65+0.35*sin(t*6.0+0.6)*sin(t*14.0);float edge=smoothstep(0.0,0.12,t)*smoothstep(1.0,0.7,t);",
+    " float grain=0.75+0.25*sin(a*60.0+uTime*0.6+t*20.0);",
+    " vec3 c=mix(vec3(1.0,0.78,0.55),vec3(0.6,0.75,1.0),t);",
+    " gl_FragColor=vec4(c*bands*edge*grain*uA,1.0);}"].join("\n");
+  var ring=new THREE.Mesh(new THREE.RingGeometry(1.42,1.98,160,1),new THREE.ShaderMaterial({uniforms:{uA:{value:0},uTime:{value:0}},vertexShader:"varying vec2 vP;void main(){vP=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}",fragmentShader:RING_FS,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide}));
+  ring.rotation.set(Math.PI/2-.42,0,.32);root.add(ring);
+  var centre=new THREE.Group();root.add(centre);centre.add(planetCore);centre.add(atmo);
+  var centerHit=new THREE.Mesh(new THREE.SphereGeometry(1.15,12,8),new THREE.MeshBasicMaterial({visible:false}));root.add(centerHit);
   var coreGlow=sprite(0xffffff,0);coreGlow.scale.set(4,4,1);root.add(coreGlow);
   var PART=6,pg=new THREE.BufferGeometry(),pp=new Float32Array(4*2*PART*3),pc=new Float32Array(4*2*PART*3);
   pg.setAttribute("position",new THREE.BufferAttribute(pp,3));pg.setAttribute("color",new THREE.BufferAttribute(pc,3));
   root.add(new THREE.Points(pg,new THREE.PointsMaterial({map:glowTex,size:.22,vertexColors:true,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false})));
   var shards=SHD.map(function(s){
-    var arr=[];s.tris.forEach(function(p){arr.push(p[0],p[1],p[2]);});
-    var geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.BufferAttribute(new Float32Array(arr),3));geo.computeVertexNormals();
-    var c=new THREE.Color(COLS[s.cols[0]]).lerpHSL(new THREE.Color(COLS[s.cols[1]]),.5);
-    var m=new THREE.Mesh(geo,gemMat(new THREE.Color(0xffffff).lerp(c,.85),false,s.cols[0]*2.3));m.material.side=THREE.DoubleSide;
-    var e=new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));
+    var geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.BufferAttribute(new Float32Array(lune(s.a0,s.a0+Math.PI/2,PR)),3));geo.computeVertexNormals();
+    var c=shardCol(s);
+    var m=new THREE.Mesh(geo,gemMat(new THREE.Color(0xffffff).lerp(c,.85),false,s.cols[0]*2.3));
+    var e=new THREE.LineSegments(new THREE.EdgesGeometry(geo,25),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));
     var g=new THREE.Group();g.add(m);g.add(e);centre.add(g);
     var beams=s.cols.map(function(ci){
       var bg=new THREE.BufferGeometry();bg.setAttribute("position",new THREE.BufferAttribute(new Float32Array(6),3));
@@ -669,8 +710,8 @@ var Scene3D=(function(){
     });
     return {g:g,m:m,e:e,d:new THREE.Vector3(s.dir[0],s.dir[1],s.dir[2]).normalize(),v:0,beams:beams};
   });
-  var halo=new THREE.Mesh(new THREE.TorusGeometry(1.25,.012,8,128),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));root.add(halo);
-  var halo2=new THREE.Mesh(new THREE.TorusGeometry(1.45,.008,8,128),new THREE.MeshBasicMaterial({color:0xb9c2ff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));root.add(halo2);
+  var halo=new THREE.Mesh(new THREE.TorusGeometry(2.35,.008,8,160),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));root.add(halo);
+  var halo2=new THREE.Mesh(new THREE.TorusGeometry(2.6,.006,8,160),new THREE.MeshBasicMaterial({color:0xb9c2ff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));root.add(halo2);
 
   /* --- interazione: trascina per ruotare, parallasse col mouse --- */
   var drag=null,rotX=-.12,rotY=0,autoY=0,px=0,py=0;
@@ -679,8 +720,10 @@ var Scene3D=(function(){
     var r=renderer.domElement.getBoundingClientRect();
     ndc.set(((cx-r.left)/r.width)*2-1,-((cy-r.top)/r.height)*2+1);
     raycaster.setFromCamera(ndc,camera);
+    /* dalla vista generale il pianeta si prende tutto insieme; una volta vicino, tocchi le singole placche */
+    var near=focus&&(focus.type==="center"||focus.type==="shard");
     var h=raycaster.intersectObjects(shards.filter(function(s){return s.v>.05;}).map(function(s){return s.m;}),false)[0];
-    if(h){for(var k=0;k<4;k++)if(shards[k].m===h.object)return {type:"shard",i:k};}
+    if(h){if(!near)return {type:"center"};for(var k=0;k<4;k++)if(shards[k].m===h.object)return {type:"shard",i:k};}
     h=raycaster.intersectObjects(gems.map(function(g){return g.hit;}),false)[0];
     if(h){for(var i=0;i<4;i++)if(gems[i].hit===h.object)return {type:"gem",i:i};}
     if(raycaster.intersectObject(centerHit,false)[0])return {type:"center"};
@@ -733,9 +776,9 @@ var Scene3D=(function(){
     var portrait=camera.aspect<1.1;
     if(focus){
       if(focus.type==="gem")gems[focus.i].g.getWorldPosition(lookGoal);
-      else if(focus.type==="shard"){centre.getWorldPosition(lookGoal);lookGoal.x+=shards[focus.i].d.x*.4;lookGoal.y+=shards[focus.i].d.y*.4;}
+      else if(focus.type==="shard"){centre.getWorldPosition(lookGoal);lookGoal.x+=shards[focus.i].d.x*.35;lookGoal.y+=shards[focus.i].d.y*.35;}
       else root.getWorldPosition(lookGoal);
-      var dist=focus.type==="gem"?(portrait?8.6:6.6):(portrait?11.5:8.6),drop=portrait?1.9:.6;
+      var dist=focus.type==="gem"?(portrait?8.6:6.6):focus.type==="center"?(portrait?10.5:7.8):(portrait?10:7.4),drop=portrait?1.9:.6;
       lookGoal.y-=drop;camGoal.set(lookGoal.x,lookGoal.y,lookGoal.z+dist);
     }else{lookGoal.set(0,0,0);camGoal.set(px*1.2,-py*.8,baseZ);}
     camera.position.lerp(camGoal,reduce?.25:.06);camLook.lerp(lookGoal,reduce?.25:.06);camera.lookAt(camLook);
@@ -765,7 +808,7 @@ var Scene3D=(function(){
     var pi=0;
     shards.forEach(function(S,k){
       S.v+=(api.shard[k]-S.v)*.045;al+=S.v;
-      var off=(1-Math.min(1,S.v/.85))*1.0;
+      var off=(1-Math.min(1,S.v/.85))*.75+(reduce?0:Math.sin(t*.9+k)*.02*(1-S.v));if(focus&&focus.type==="shard"&&focus.i===k)off+=.22*focusAmt;/* la placca guardata si solleva un po' */
       S.g.position.set(S.d.x*off,S.d.y*off,S.d.z*off);
       var sdim=focus&&focus.type!=="center"&&!(focus.type==="shard"&&focus.i===k)?.4:1;
       var su=S.m.material.uniforms;su.uOpacity.value=S.v<.05?0:(.35+.65*S.v)*(sdim<1?.6:1);su.uGlow.value=(.15+.85*S.v)*sdim;su.uTime.value=t;
@@ -773,7 +816,7 @@ var Scene3D=(function(){
       S.e.material.color.setHex(S.v>0&&S.v<.3?0xff5a5a:0xffffff);
       S.beams.forEach(function(b){
         var pa=b.l.geometry.attributes.position.array;
-        tmp.copy(gems[b.ci].g.position);tmp2.copy(S.d).multiplyScalar(.34).add(S.g.position).applyAxisAngle(YAXIS,centre.rotation.y);
+        tmp.copy(gems[b.ci].g.position);tmp2.copy(S.d).multiplyScalar(PR*.75).add(S.g.position).applyAxisAngle(YAXIS,centre.rotation.y);
         pa[0]=tmp.x;pa[1]=tmp.y;pa[2]=tmp.z;pa[3]=tmp2.x;pa[4]=tmp2.y;pa[5]=tmp2.z;b.l.geometry.attributes.position.needsUpdate=true;
         b.l.material.opacity=S.v<.3?S.v*.5:.15+.4*S.v;
         var bright=S.v<.3?0:S.v;
@@ -786,9 +829,13 @@ var Scene3D=(function(){
     });
     pg.attributes.position.needsUpdate=true;pg.attributes.color.needsUpdate=true;
     al/=4;
-    centre.rotation.y=t*.35;
     var full=Math.max(0,(al-.7)/.3),pulse=reduce?1:.8+.2*Math.sin(t*2.5);
-    core.intensity=full*2.6*pulse;
+    centre.rotation.y=reduce?0:Math.sin(t*.25)*.55;
+    coreMat.uniforms.uTime.value=t;coreMat.uniforms.uCore.value=Math.min(1,al*.6+full*.6);
+    coreMat.uniforms.uV.value.set(shards[0].v,shards[1].v,shards[2].v,shards[3].v);
+    atmo.material.uniforms.uA.value=(.2+al*.45+full*.35)*(1-.45*focusAmt);
+    ring.material.uniforms.uA.value=Math.max(0,(al-.45)/.55)*.5;ring.material.uniforms.uTime.value=t;ring.rotation.z=.32+(reduce?0:Math.sin(t*.2)*.04);
+    core.intensity=full*1.8*pulse*(1-.5*focusAmt);
     coreGlow.material.opacity=(al*.25+full*.6)*pulse;var cg=2+full*3;coreGlow.scale.set(cg,cg,1);
     halo.material.opacity=full*.7;halo2.material.opacity=full*.4;
     halo.rotation.set(Math.PI/2+.3,t*.4,0);halo2.rotation.set(Math.PI/2-.25,-t*.3,.2);
@@ -942,7 +989,7 @@ function updateStageLabel(){
     else if(lit)txt=lit===1?"1 cristallo acceso su 4":lit+" cristalli accesi su 4";
   }
   stageAl.textContent=txt;stageAl.hidden=!txt;
-  stageEl.setAttribute("aria-label",al>=.75?"Il cristallo centrale si è formato":"Quattro cristalli sospesi nello spazio, "+lit+" accesi");
+  stageEl.setAttribute("aria-label",al>=.75?"Il pianeta di cristallo si è formato":"Quattro cristalli sospesi nello spazio, "+lit+" accesi");
 }
 
 /* ===================== Iki ===================== */
@@ -1403,7 +1450,7 @@ function renderPath(){
     st.appendChild(el("small",null,open.length?(open.length===1?"Una aperta":open.length+" aperte")+(next&&next.entro?" · la prossima è "+dueLabel(next):""):"Nessuna aperta: chiedine di nuove a Iki."));
     sum.appendChild(st);b.appendChild(sum);
   }
-  b.appendChild(el("p","lead","Ogni missione fatta avvicina il suo frammento al cristallo centrale. Quando ne spunti una, racconta a Iki com'è andata: le prossime partiranno da lì."));
+  b.appendChild(el("p","lead","Ogni missione fatta avvicina il suo frammento al pianeta di cristallo. Quando ne spunti una, racconta a Iki com'è andata: le prossime partiranno da lì."));
   if(!missions.length)b.appendChild(el("p","lead",finished?"Non hai ancora missioni. Chiedine una a Iki.":"Le missioni arrivano alla fine del test."));
   var ordered=open.slice().sort(function(x,y){return (x.entro||"9")<(y.entro||"9")?-1:1;}).concat(missions.filter(function(m){return m.done;}).reverse());
   ordered.forEach(function(m){
@@ -1449,7 +1496,7 @@ function renderPath(){
       var before=avg(Scene3D.shard);
       if(m.done){m.fatta=Date.now();newlyDone++;Sound.fit();}else{m.fatta=null;newlyDone=Math.max(0,newlyDone-1);Sound.tap();}
       applyShards();persist();
-      pathMsg=m.done?(avg(Scene3D.shard)>=.75&&before<.75?"Il cristallo centrale si è formato! ":"Il frammento "+z.nome+" si è avvicinato al centro. ")+"Com'è andata?":"Missione riaperta.";
+      pathMsg=m.done?(avg(Scene3D.shard)>=.75&&before<.75?"Il pianeta di cristallo si è formato! ":"Il frammento "+z.nome+" si è avvicinato al centro. ")+"Com'è andata?":"Missione riaperta.";
       renderPath();
     };
     b.appendChild(card);
@@ -1480,7 +1527,7 @@ async function onPathClosed(){
   if(!n){return;}
   busy=true;clearAnswers();hideComposer();
   var formed=avg(Scene3D.shard)>=.75;
-  await say((n===1?"Bel colpo, una missione in meno!":"Bel colpo, "+n+" missioni in meno!")+(formed?" E il tuo cristallo centrale adesso è intero.":" Guarda lassù: il cristallo è più compatto."),{mood:"happy",keep:true,gesture:"point"});
+  await say((n===1?"Bel colpo, una missione in meno!":"Bel colpo, "+n+" missioni in meno!")+(formed?" E il tuo pianeta di cristallo adesso è intero.":" Guarda lassù: il cristallo è più compatto."),{mood:"happy",keep:true,gesture:"point"});
   busy=false;chatMode();
 }
 
@@ -1604,7 +1651,7 @@ async function explore(p){
     await say(t2,{gesture:"point",keep:true});
   }else{
     var al=avg(Scene3D.shard),miss=ZONES.filter(function(z,k){return shardValue(k)<.75;}).map(function(z){return z.nome;});
-    await say("Questo è il cristallo centrale, il tuo ikigai: è allineato al "+pct(al)+"%. "+(miss.length?"Per completarlo mancano "+(miss.length===1?"il frammento ":"i frammenti ")+(miss.length===1?miss[0]:miss.slice(0,-1).join(", ")+" e "+miss[miss.length-1])+".":"È intero: tutti e quattro i frammenti si incastrano."),{gesture:"point",keep:true});
+    await say("Questo è il tuo pianeta di cristallo, il tuo ikigai: le quattro placche si fondono quando i frammenti sono forti. Ora è allineato al "+pct(al)+"%. "+(miss.length?"Per completarlo mancano "+(miss.length===1?"il frammento ":"i frammenti ")+(miss.length===1?miss[0]:miss.slice(0,-1).join(", ")+" e "+miss[miss.length-1])+".":"È intero: tutti e quattro i frammenti si incastrano.")+" Tocca una placca per guardarla da vicino.",{gesture:"point",keep:true});
   }
   busy=false;focusChips(p);
 }
@@ -1622,8 +1669,8 @@ function focusChips(p){
     if(sampleFn)add("Come lo rafforzo?",function(){focusTalk("Come rafforzo il frammento "+z.nome+"?",prefix,p);});
     add("Una missione per questo frammento",function(){missionFor([p.i],"il frammento "+z.nome).then(function(){focusChips(p);});});
   }else{
-    subject="il cristallo centrale";prefix="(Stiamo guardando il cristallo centrale.)";
-    if(sampleFn)add("Cosa mi manca per completarlo?",function(){focusTalk("Cosa mi manca per completare il cristallo centrale?",prefix,p);});
+    subject="il pianeta di cristallo";prefix="(Stiamo guardando il pianeta di cristallo.)";
+    if(sampleFn)add("Cosa mi manca per completarlo?",function(){focusTalk("Cosa mi manca per completare il pianeta di cristallo?",prefix,p);});
   }
   add("Un altro cristallo",exploreMenu);
   add("Torna alla vista completa",leaveFocus,"ghost");
@@ -1644,7 +1691,7 @@ async function exploreMenu(){
   busy=false;mode="explore";
   var add=function(label,fn,cls){var b=chip(label,cls);b.onclick=function(){if(!busy)fn();};answers.appendChild(b);};
   CIRCLES.forEach(function(c){add(c.cap,function(){explore({type:"gem",i:GEM_INDEX[c.id]});});});
-  add("Cristallo centrale",function(){explore({type:"center"});});
+  add("Pianeta di cristallo",function(){explore({type:"center"});});
   ZONES.forEach(function(z,k){add(z.nome,function(){explore({type:"shard",i:k});});});
   add("Indietro",function(){chatMode();},"ghost");
 }
@@ -1752,7 +1799,7 @@ async function finishTest(){
   setTimeout(function(){prog.hidden=true;},1500);
   var al=avg(Scene3D.shard);
   if(al>=.75)Sound.fit();
-  await say(al>=.75?"Fatto! Il tuo cristallo centrale si è formato. Guardalo lassù.":"Fatto! Ecco il tuo cristallo. Guarda lassù quali frammenti restano fuori.",{mood:"happy",gesture:"point"});
+  await say(al>=.75?"Fatto! Il tuo pianeta di cristallo si è formato. Guardalo lassù.":"Fatto! Ecco il tuo cristallo. Guarda lassù quali frammenti restano fuori.",{mood:"happy",gesture:"point"});
   await showResultCard();
   pathBtn.hidden=false;persist();
   if(sampleFn){

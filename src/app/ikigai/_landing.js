@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 const PRIVACY = "https://www.iubenda.com/privacy-policy/65493035";
@@ -39,15 +39,15 @@ function encode(data) {
 
 function PreForm({ id }) {
   const [state, setState] = useState("idle");
-  const [fonte, setFonte] = useState("diretto");
 
-  useEffect(() => {
+  function fonteVisita() {
     try {
       const u = new URL(window.location.href);
-      const src = u.searchParams.get("utm_source") || u.searchParams.get("da");
-      if (src) setFonte(src.slice(0, 40));
-    } catch {}
-  }, []);
+      return (u.searchParams.get("utm_source") || u.searchParams.get("da") || "diretto").slice(0, 40);
+    } catch {
+      return "diretto";
+    }
+  }
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -58,7 +58,7 @@ function PreForm({ id }) {
       nome: f.nome.value.trim(),
       email: f.email.value.trim(),
       consenso: f.consenso.checked ? "sì" : "",
-      fonte,
+      fonte: fonteVisita(),
     };
     if (!data.email || !data.consenso) return;
     setState("sending");
@@ -119,10 +119,10 @@ function PreForm({ id }) {
 
 export default function IkigaiLanding() {
   return (
-    <main className="mk">
+    <main className="mk" id="top">
       <div className="mk-stars" aria-hidden="true" />
       <header className="mk-top">
-        <Link href="/" className="mk-home">David Cappelletto</Link>
+        <a href="#top" className="mk-home" aria-label="Mappa Ikigai"><img src="/ikigai/iki.png" alt="" width="40" height="44" /><span>Mappa <b>Ikigai</b></span></a>
         <a href="#pre" className="mk-top-cta">Pre-registrati</a>
       </header>
 
@@ -193,6 +193,7 @@ export default function IkigaiLanding() {
         <p>
           Mappa Ikigai è ideata e sviluppata da <Link href="/">David Cappelletto</Link> ·{" "}
           <Link href="/progetti/mappa-ikigai">Il progetto</Link> ·{" "}
+          <a href="/ikigai/app">Hai un codice d&apos;invito? Entra</a> ·{" "}
           <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
         </p>
       </footer>
@@ -204,7 +205,7 @@ export default function IkigaiLanding() {
         .mk-stars{position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 35%,#fff,transparent),radial-gradient(1px 1px at 80% 15%,#fff,transparent),radial-gradient(1px 1px at 90% 60%,#fff,transparent),radial-gradient(1.5px 1.5px at 20% 90%,#fff,transparent),radial-gradient(1px 1px at 65% 85%,#fff,transparent);background-size:600px 600px}
         .mk>*{position:relative}
         .mk-top{display:flex;justify-content:space-between;align-items:center;width:min(1160px,92vw);margin:0 auto;padding:22px 0}
-        .mk-home{color:var(--fg);text-decoration:none;font-weight:800;font-size:15px;letter-spacing:-.01em}
+        .mk-home{display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none;font-weight:700;font-size:19px;letter-spacing:-.02em}.mk-home img{width:40px;height:auto;filter:drop-shadow(0 0 12px rgba(185,194,255,.45))}.mk-home b{font-weight:800;color:var(--lilac)}
         .mk-top-cta{color:#14131C;background:var(--cta);text-decoration:none;font-weight:800;font-size:13px;padding:9px 14px;border-radius:999px}
         .mk-hero{width:min(1160px,92vw);margin:0 auto;padding:24px 0 72px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
         .mk-eyebrow{margin:0 0 14px;color:var(--lilac);font-size:12px;font-weight:800;letter-spacing:.16em}

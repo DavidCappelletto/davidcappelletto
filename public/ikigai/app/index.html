@@ -1,0 +1,1913 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<title>Mappa Ikigai · anteprima</title>
+<meta name="description" content="Mappa Ikigai: otto domande, quattro cristalli e Iki che ti accompagna.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05060C">
+<link rel="icon" href="/ikigai/iki.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Bangers&family=Shippori+Mincho:wght@600;800&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout: scena cosmica 3D a tutto schermo con i cristalli in alto; in basso Iki parla a fumetti che spuntano e volano via;
+   pannelli "a cassetto" dal basso per percorso e storia. Tema unico scuro, scelto di proposito */
+:root{
+  --bg:#05060C; --ink:#15141F; --paper:#FFFDF7; --star:#ECEEF8; --muted:#A3A8C3;
+  --glass:rgba(14,15,30,.62); --glass-strong:rgba(13,14,28,.95); --glass-line:rgba(255,255,255,.14);
+  --caption:#FFE14D; --me:#B9C2FF;
+  --ami:#FF4F8B; --mondo:#22E0A4; --pagato:#FFB02E; --bravo:#4F9DFF;
+  --ok:#22E0A4; --mid:#FFB02E; --no:#FF6B6B;
+  --display:"Shippori Mincho","Hiragino Mincho ProN","Times New Roman",serif;
+  --comic:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --shout:"Bangers","Impact","Arial Black",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--star);font-family:var(--comic);font-size:16px;line-height:1.45;overflow:hidden;padding-block:0;padding-left:0;padding-right:0}
+.app{position:relative;height:var(--vvh,100%);overflow:hidden;transform:translateY(var(--vvt,0px))}
+#stage{position:absolute;inset:0;touch-action:none}
+#stage canvas{display:block;width:100%;height:100%}
+.vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 32%,rgba(0,0,0,0) 48%,rgba(0,0,0,.62) 100%)}
+.shade{position:absolute;left:0;right:0;bottom:0;height:55%;pointer-events:none;background:linear-gradient(to top,rgba(5,6,12,.92),rgba(5,6,12,0))}
+.ui{position:relative;z-index:1;height:100%;max-width:640px;margin:0 auto;display:flex;flex-direction:column;pointer-events:none;
+  padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));padding-block:10px calc(10px + env(safe-area-inset-bottom,0px))}
+.ui button,.ui input,.ui form,.balloon,.iki,.result{pointer-events:auto}
+
+/* barra in alto */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:8px 10px 8px 14px;border-radius:18px;background:var(--glass);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.brand{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.02em;margin:0;flex:1;min-width:0;white-space:nowrap}
+.brand span{color:var(--muted);font-weight:600;font-size:13px;margin-left:6px}
+.tb{display:flex;gap:6px}
+.tbtn{font-family:var(--comic);font-weight:700;font-size:13px;padding:5px 12px 4px;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.06);color:var(--star);cursor:pointer;white-space:nowrap}
+.tbtn:hover{background:rgba(255,255,255,.12)}
+.tbtn[aria-pressed="true"]{background:var(--star);color:var(--ink)}
+.prog{order:3;width:100%;display:flex;justify-content:center;gap:7px;padding:2px 0 1px}
+.prog i{width:10px;height:10px;transform:rotate(45deg);border:1.5px solid rgba(255,255,255,.35);border-radius:2px;transition:background .4s,border-color .4s}
+.prog i.on{background:var(--c);border-color:var(--c)}
+.prog i.now{border-color:var(--star)}
+.note-3d{margin:8px 4px 0;font-size:13px;color:var(--muted)}
+
+/* titolo */
+.spacer{flex:1;min-height:30px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px}
+.logo{text-align:center;max-width:460px;transition:opacity .7s ease,transform .7s ease}
+.logo.gone{opacity:0;transform:translateY(-14px) scale(.98)}
+.logo .eyebrow{display:block;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
+.logo h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,11vw,58px);line-height:1.05;margin:6px 0 8px;letter-spacing:.01em;text-wrap:balance;
+  text-shadow:0 0 24px rgba(185,194,255,.35),0 2px 0 rgba(0,0,0,.4)}
+.logo p{margin:0 auto;font-size:16px;font-weight:500;color:#CDD1E6;max-width:34ch;text-wrap:balance}
+
+/* fumetti */
+.stagearea{position:relative;display:flex;flex-direction:column;gap:10px}
+.scene-tag{align-self:flex-start;font-weight:700;font-size:13px;color:var(--star);background:var(--glass);border:1px solid var(--glass-line);padding:2px 11px 1px;border-radius:999px}
+.speech{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+.balloon{position:relative;align-self:flex-start;max-width:min(94%,470px);background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:28px;padding:13px 18px 12px;
+  box-shadow:5px 6px 0 var(--ink),0 14px 30px rgba(0,0,0,.35);font-family:var(--comic);font-weight:600;font-size:19px;line-height:1.32;margin-left:44px;margin-bottom:20px;cursor:pointer;white-space:pre-wrap;word-wrap:break-word;transform-origin:18% 100%}
+.balloon::before,.balloon::after{content:"";position:absolute;clip-path:polygon(0 0,100% 0,8% 100%)}
+.balloon::before{left:22px;bottom:-27px;width:34px;height:28px;background:var(--ink)}
+.balloon::after{left:26px;bottom:-18px;width:25px;height:21px;background:var(--paper)}
+.balloon .cap{position:absolute;top:-17px;left:16px;font-family:var(--shout);font-weight:400;font-size:16px;letter-spacing:.07em;background:var(--caption);color:var(--ink);border:3px solid var(--ink);padding:1px 10px 0;transform:rotate(-2.5deg);white-space:nowrap;box-shadow:2px 2px 0 var(--ink)}
+.balloon .more{display:block;font-size:12px;font-weight:600;color:#7a7889;margin-top:4px;text-align:right}
+.balloon.thought{border-radius:46px;font-size:24px;letter-spacing:.18em;padding:6px 22px 10px;font-weight:800}
+.balloon.thought::before,.balloon.thought::after{clip-path:none;border:3px solid var(--ink);background:var(--paper);border-radius:50%}
+.balloon.thought::before{width:18px;height:18px;left:22px;bottom:-25px}
+.balloon.thought::after{width:11px;height:11px;left:12px;bottom:-40px}
+.balloon.me{align-self:flex-end;background:var(--me);margin-left:0;margin-right:10px;font-size:17px;transform-origin:88% 100%}
+.balloon.me::before{left:auto;right:22px;clip-path:polygon(0 0,100% 0,92% 100%)}
+.balloon.me::after{left:auto;right:26px;background:var(--me);clip-path:polygon(0 0,100% 0,92% 100%)}
+.result{align-self:stretch;display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:20px;box-shadow:5px 6px 0 var(--ink);padding:12px 14px;font-weight:700;font-size:15px;margin-bottom:6px}
+.result div{display:flex;justify-content:space-between;gap:6px;align-items:center}
+.st{font-size:12px;font-weight:800;padding:0 8px;border-radius:999px;border:2px solid var(--ink);color:var(--ink);white-space:nowrap}
+.st.ok{background:var(--ok)}.st.mid{background:var(--mid)}.st.no{background:var(--no)}
+
+/* Iki e risposte */
+.row{display:flex;align-items:flex-end;gap:8px}
+.iki{width:118px;height:134px;flex:none;margin-bottom:-6px;cursor:pointer;overflow:visible}
+.answers{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;align-content:flex-end;padding-bottom:6px}
+.chip{font-family:var(--comic);font-weight:700;font-size:15px;line-height:1.2;padding:8px 13px 6px;border-radius:14px;border:3px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;text-align:left;box-shadow:3px 3px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.chip:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.chip[aria-pressed="true"]{background:var(--c,var(--caption));transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.chip.go{background:var(--caption)}
+.chip.ghost{background:rgba(255,255,255,.06);color:var(--star);border:2px solid rgba(255,255,255,.4);box-shadow:none}
+.chip:disabled{opacity:.45;cursor:default}
+.answers.duo{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;align-content:end}
+.answers.duo .chip{text-align:center;font-size:14px;padding:9px 8px 7px;display:flex;align-items:center;justify-content:center}
+.composer{display:flex;gap:8px}
+#input{flex:1;min-width:0;font-family:var(--comic);font-weight:600;font-size:16px;padding:10px 14px 8px;border-radius:16px;border:3px solid var(--ink);background:var(--paper);color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+#input::placeholder{color:#7f7d8f;font-weight:500}
+#send{font-family:var(--shout);font-size:19px;letter-spacing:.06em;padding:2px 16px 0;border-radius:16px;border:3px solid var(--ink);background:var(--caption);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+#send:disabled,#input:disabled{opacity:.5;cursor:default}
+.hint{width:100%;text-align:right;font-size:12px;font-weight:600;color:var(--muted);margin:0}
+.chip:focus-visible,#input:focus-visible,#send:focus-visible,.tbtn:focus-visible,.ibtn:focus-visible,.balloon:focus-visible,.mis:focus-visible,.sheet button:focus-visible{outline:3px solid var(--caption);outline-offset:3px}
+
+.ibtn{height:38px;min-width:38px;padding:0 9px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--glass-line);background:rgba(255,255,255,.06);color:var(--star);cursor:pointer;font-family:var(--comic);font-weight:700;font-size:13px}
+.ibtn:hover{background:rgba(255,255,255,.12)}
+.ibtn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ibtn .lbl{display:none}
+@media (min-width:560px){.ibtn .lbl{display:inline}}
+#muteBtn .ico-off{display:none}
+#muteBtn[aria-pressed="true"] .ico-on{display:none}#muteBtn[aria-pressed="true"] .ico-off{display:inline}
+#muteBtn[aria-pressed="true"]{color:var(--no);border-color:rgba(255,107,107,.5)}
+.ibtn:focus-visible{outline:3px solid var(--caption);outline-offset:2px}
+
+/* opzioni */
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--glass-line)}
+.opt-t{min-width:0}
+.opt-t b{display:block;font-size:16px}
+.opt-t small{display:block;color:var(--muted);font-size:13px;line-height:1.35}
+.sw{flex:none;width:52px;height:30px;border-radius:999px;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);position:relative;cursor:pointer;padding:0}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--star);transition:transform .2s}
+.sw[aria-checked="true"]{background:var(--ok);border-color:var(--ok)}
+.sw[aria-checked="true"]::after{transform:translateX(22px);background:var(--ink)}
+.seg{flex:none;display:flex;border:2px solid rgba(255,255,255,.3);border-radius:12px;overflow:hidden}
+.seg button{font-family:var(--comic);font-weight:700;font-size:13px;padding:6px 10px 4px;border:0;background:transparent;color:var(--star);cursor:pointer}
+.seg button+button{border-left:1px solid rgba(255,255,255,.2)}
+.seg button[aria-pressed="true"]{background:var(--star);color:var(--ink)}
+.opt.col{flex-direction:column;align-items:stretch}
+.opt.col .seg{align-self:flex-start}
+.sw:focus-visible,.seg button:focus-visible{outline:3px solid var(--caption);outline-offset:2px}
+.help p{margin:0;color:#D6D9EB;font-size:15.5px;line-height:1.5}
+.help h3{margin-top:4px}
+.ver{margin:6px 0 0;font-size:12px;color:var(--muted);text-align:center}
+
+/* preferenze di lettura e movimento */
+html.big .balloon{font-size:22px}html.big .chip{font-size:17px}html.big #input{font-size:18px}html.big .result{font-size:17px}
+html.calm *,html.calm *::before,html.calm *::after{animation:none!important;transition:none!important}
+
+/* cassetti */
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;max-height:76%;display:flex;flex-direction:column;background:var(--glass-strong);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  border-top:1px solid var(--glass-line);border-radius:26px 26px 0 0;padding-block:14px calc(16px + env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-shadow:0 -20px 60px rgba(0,0,0,.5)}
+#pathSheet{max-height:82%}
+.sheet-in{max-width:620px;width:100%;margin:0 auto;display:flex;flex-direction:column;min-height:0;flex:1;gap:10px}
+.sheet-head{display:flex;align-items:center;gap:10px}
+.sheet-head h2{flex:1;margin:0;font-family:var(--display);font-weight:800;font-size:24px}
+.sheet-body{overflow-y:auto;min-height:0;flex:1;display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
+.sheet-body h3{margin:6px 0 0;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.lead{margin:0;color:#CDD1E6;font-size:15px}
+.zrow{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--glass-line)}
+.zgem{width:16px;height:16px;flex:none;transform:rotate(45deg);border-radius:3px;background:linear-gradient(90deg,var(--a) 50%,var(--b) 50%);box-shadow:0 0 12px var(--a)}
+.zinfo{flex:1;min-width:0}
+.zinfo b{font-size:16px}.zinfo small{color:var(--muted);margin-left:6px;font-size:13px}
+.bar{height:6px;border-radius:3px;background:rgba(255,255,255,.1);margin-top:5px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--a),var(--b));transition:width .8s ease}
+.zst{font-size:12px;font-weight:800;padding:1px 9px;border-radius:999px;white-space:nowrap;color:var(--ink)}
+.zst.ok{background:var(--ok)}.zst.mid{background:var(--mid)}.zst.no{background:var(--no)}
+.mis{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--glass-line);color:var(--star);font-family:var(--comic);cursor:pointer}
+.mis .tick{flex:none;width:24px;height:24px;border-radius:8px;border:2px solid rgba(255,255,255,.5);display:grid;place-items:center;font-weight:800;color:var(--ink);margin-top:1px}
+.mis[aria-pressed="true"] .tick{background:var(--ok);border-color:var(--ok)}
+.mis[aria-pressed="true"] b{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.4);color:var(--muted)}
+.mis b{display:block;font-size:16px;line-height:1.3}
+.msum{display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:14px;background:rgba(255,225,77,.08);border:1px solid rgba(255,225,77,.25);font-weight:700}
+.msum .big{font-family:var(--display);font-size:30px;line-height:1;color:var(--caption)}
+.msum small{display:block;color:var(--muted);font-weight:600;font-size:13px}
+.mcard{border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--glass-line);padding:12px;display:flex;flex-direction:column;gap:8px}
+.mcard.done{opacity:.85}
+.mcard.late{border-color:rgba(255,107,107,.55)}
+.mtop{display:flex;gap:12px;align-items:flex-start}
+.mtop .tick{flex:none;width:30px;height:30px;border-radius:9px;border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;font-weight:800;color:var(--ink);background:none;cursor:pointer;font-size:16px}
+.mtop .tick[aria-pressed="true"]{background:var(--ok);border-color:var(--ok)}
+.mtop b{display:block;font-size:16px;line-height:1.3}
+.mcard.done .mtop b{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.4);color:var(--muted)}
+.mwhy{display:block;color:#CDD1E6;font-size:14px;margin-top:3px;line-height:1.4}
+.mmeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+.mchip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px 2px;background:rgba(255,255,255,.07);font-weight:700}
+.mchip i{width:10px;height:10px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(90deg,var(--a) 50%,var(--b) 50%)}
+.mchip.late{background:rgba(255,107,107,.18);color:#FFB3B3}
+.msteps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:3px;font-size:14px;color:var(--star)}
+.mact{display:flex;flex-wrap:wrap;gap:6px}
+.mact .btn{font-size:13px;padding:7px 12px 5px;border-radius:12px}
+.mcheck{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:12px;background:rgba(34,224,164,.08);border:1px solid rgba(34,224,164,.3)}
+.mcheck p{margin:0;font-weight:700;font-size:14px}
+.mcheck .row{display:flex;gap:6px;flex-wrap:wrap}
+.mcheck .row button{font-family:var(--comic);font-weight:700;font-size:13px;border-radius:999px;padding:6px 12px 4px;border:2px solid var(--glass-line);background:none;color:var(--star);cursor:pointer}
+.mcheck .row button[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--ink)}
+.mcheck textarea{font-family:var(--comic);font-size:15px;color:var(--star);background:rgba(5,6,12,.6);border:1px solid var(--glass-line);border-radius:10px;padding:8px 10px;resize:vertical;min-height:54px}
+.mnote{font-size:13.5px;color:#CDD1E6;border-left:3px solid var(--ok);padding-left:8px}
+.mis small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.btn{font-family:var(--comic);font-weight:700;font-size:15px;padding:9px 16px 7px;border-radius:14px;cursor:pointer;border:2px solid var(--glass-line);background:rgba(255,255,255,.08);color:var(--star)}
+.btn.primary{background:var(--caption);color:var(--ink);border-color:var(--caption)}
+.btn.danger{border-color:rgba(255,107,107,.6);color:#FFB3B3}
+.btn:disabled{opacity:.5;cursor:default}
+.toast{min-height:20px;margin:0;font-size:14px;font-weight:700;color:var(--ok)}
+.fine{margin:4px 0 0;font-size:12.5px;color:var(--muted)}
+.h{max-width:88%;padding:8px 13px 6px;border-radius:16px;font-size:15px;font-weight:600;white-space:pre-wrap;word-wrap:break-word;color:var(--ink)}
+.h.bot{align-self:flex-start;background:var(--paper)}
+.h.me{align-self:flex-end;background:var(--me)}
+
+/* Iki: animazioni e stati */
+.iki *{transform-box:view-box}
+.iki .armL{transform-origin:29px 80px;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.iki .armR{transform-origin:91px 80px;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.iki .brow{transition:transform .3s}
+.iki .m,.iki .eyes-h{display:none}
+.iki .m-idle{display:inline}
+.iki.talk .m-idle,.iki.think .m-idle,.iki.happy .m-idle{display:none}
+.iki.talk .m-o{display:inline}.iki.think .m-t{display:inline}.iki.happy .m-h{display:inline}
+.iki.happy .eyes{display:none}.iki.happy .eyes-h{display:inline}
+.iki.think .pupils{transform:translate(1.5px,-2px)}
+.iki.think .browL{transform:translateY(-3px) rotate(-8deg);transform-origin:47px 60px}
+.iki.think .browR{transform:translateY(1px) rotate(6deg);transform-origin:73px 60px}
+.iki.happy .brow{transform:translateY(-2.5px)}
+.iki.g-point .armR{transform:rotate(-118deg)}
+.iki.g-chin .armL{transform:rotate(68deg)}
+.iki.g-cheer .armL{transform:rotate(118deg)}.iki.g-cheer .armR{transform:rotate(-118deg)}
+@media (prefers-reduced-motion:no-preference){
+  .iki .float{animation:float 3.4s ease-in-out infinite}@keyframes float{50%{transform:translateY(-4px)}}
+  .iki .wisp{transform-origin:60px 100px;animation:wisp 1.6s ease-in-out infinite alternate}@keyframes wisp{to{transform:skewX(9deg)}}
+  .iki .aura{transform-origin:60px 80px;animation:aura 3.4s ease-in-out infinite}@keyframes aura{50%{transform:scale(1.06);opacity:.8}}
+  .iki .eyes{transform-origin:60px 72px;animation:blink 4.6s infinite}@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+  .iki .spark{transform-origin:70px 12px;animation:spk 2.6s ease-in-out infinite}@keyframes spk{0%,100%{transform:scale(.4);opacity:.3}50%{transform:scale(1.1);opacity:1}}
+  .iki.talk .armR{animation:gest .8s ease-in-out infinite alternate}@keyframes gest{from{transform:rotate(4deg)}to{transform:rotate(-28deg)}}
+  .iki.talk .m-o{transform-origin:60px 87px;animation:talk .16s ease-in-out infinite alternate}@keyframes talk{from{transform:scale(1,.35)}to{transform:scale(1.15,1.25)}}
+  .iki.g-point .armR,.iki.g-cheer .armR{animation:none}
+  .iki.g-wave .armR{animation:wave .42s ease-in-out infinite alternate}@keyframes wave{from{transform:rotate(-92deg)}to{transform:rotate(-142deg)}}
+  .iki.think .crown polygon{animation:tw 1s ease-in-out infinite}@keyframes tw{50%{opacity:.45}}
+  .iki.happy .float{animation:hop .5s ease-in-out 2}@keyframes hop{50%{transform:translateY(-9px)}}
+  .pop{animation:pop .42s cubic-bezier(.2,1.6,.4,1)}@keyframes pop{0%{transform:scale(.2) rotate(-6deg);opacity:0}100%{transform:none;opacity:1}}
+  .away{animation:away .5s ease-in forwards}@keyframes away{to{transform:translate(18px,-70px) rotate(-5deg) scale(.85);opacity:0}}
+  .thought span{display:inline-block;animation:dot 1s infinite}.thought span:nth-child(2){animation-delay:.15s}.thought span:nth-child(3){animation-delay:.3s}
+  @keyframes dot{0%,60%,100%{transform:none}30%{transform:translateY(-5px)}}
+  .answers .chip{animation:chipin .32s cubic-bezier(.2,1.5,.4,1) both}@keyframes chipin{from{transform:translateY(12px) scale(.8);opacity:0}}
+  .sheet{animation:up .35s cubic-bezier(.2,1,.3,1)}@keyframes up{from{transform:translateY(40%);opacity:.4}}
+}
+@media (max-width:420px){.balloon{font-size:17.5px;margin-left:38px}.iki{width:100px;height:114px}.brand span{display:none}}
+@media (max-height:640px){.logo p{display:none}.iki{width:92px;height:104px}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div id="stage" role="img" aria-label="Quattro cristalli sospesi nello spazio"></div>
+  <div class="vig"></div>
+  <div class="shade"></div>
+  <div class="ui">
+    <header class="top">
+      <p class="brand">Mappa Ikigai<span>生き甲斐</span></p>
+      <div class="tb">
+        <button class="ibtn" id="pathBtn" type="button" aria-label="Il tuo percorso" title="Percorso" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span class="lbl">Percorso</span></button>
+        <button class="ibtn" id="histBtn" type="button" aria-label="Rileggi la storia" title="Storia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span class="lbl">Storia</span></button>
+        <button class="ibtn" id="muteBtn" type="button" aria-label="Disattiva l'audio" title="Audio"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico-on"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" class="ico-off"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9.5l5 5M22 9.5l-5 5"/></svg></button>
+        <button class="ibtn" id="menuBtn" type="button" aria-label="Apri il menu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+      <div class="prog" id="prog" role="img" aria-label="Avanzamento del test" hidden></div>
+    </header>
+    <p class="note-3d" id="sceneNote" hidden></p>
+    <div class="spacer">
+      <div class="logo" id="logo">
+        <span class="eyebrow">生き甲斐 · ikigai</span>
+        <h1>Mappa Ikigai</h1>
+        <p>Quattro cristalli, otto domande e un'idea più chiara di dove mettere le tue energie.</p>
+      </div>
+    </div>
+    <div class="stagearea">
+      <span class="scene-tag" id="stageAl" hidden></span>
+      <div class="speech" id="speech" aria-live="polite"></div>
+      <div class="row">
+        <svg class="iki" id="mascot" viewBox="0 0 120 136" role="img" aria-label="Iki, la mascotte">
+          <defs>
+            <radialGradient id="ikiAura" cx="50%" cy="55%" r="50%"><stop offset="0" stop-color="#C9C2FF" stop-opacity=".42"/><stop offset="1" stop-color="#C9C2FF" stop-opacity="0"/></radialGradient>
+            <linearGradient id="ikiWisp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F3FF"/><stop offset="1" stop-color="#F4F3FF" stop-opacity="0"/></linearGradient>
+            <clipPath id="ikiClip"><path d="M24 80 C24 54 40 42 60 42 C80 42 96 54 96 80 C96 98 80 106 60 106 C40 106 24 98 24 80 Z"/></clipPath>
+          </defs>
+          <ellipse class="aura" cx="60" cy="80" rx="58" ry="52" fill="url(#ikiAura)"/>
+          <g class="float">
+            <path class="wisp" d="M47 100 C44 114 54 120 60 133 C64 120 74 114 73 100 Z" fill="url(#ikiWisp)"/>
+            <g class="armL"><path d="M31 75 C20 71 12 79 15 87 C18 92 26 90 31 85" fill="#F4F3FF" stroke="#15141F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
+            <g class="armR"><path d="M89 75 C100 71 108 79 105 87 C102 92 94 90 89 85" fill="#F4F3FF" stroke="#15141F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
+            <path d="M24 80 C24 54 40 42 60 42 C80 42 96 54 96 80 C96 98 80 106 60 106 C40 106 24 98 24 80 Z" fill="#F4F3FF"/>
+            <g clip-path="url(#ikiClip)">
+              <ellipse cx="74" cy="102" rx="46" ry="23" fill="#D5D5EF"/>
+              <ellipse cx="41" cy="55" rx="10" ry="5" fill="#FFFFFF" transform="rotate(-28 41 55)"/>
+            </g>
+            <path d="M24 80 C24 54 40 42 60 42 C80 42 96 54 96 80 C96 98 80 106 60 106 C40 106 24 98 24 80 Z" fill="none" stroke="#15141F" stroke-width="3.5"/>
+            <g class="crown" stroke-linejoin="round">
+              <polygon points="60,11 53,22 60,33" fill="#FF8DB3"/><polygon points="60,11 67,22 60,33" fill="#D93370"/><polygon points="60,11 67,22 60,33 53,22" fill="none" stroke="#15141F" stroke-width="2.2"/>
+              <polygon points="45,23 39,32 45,41" fill="#9CC8FF"/><polygon points="45,23 51,32 45,41" fill="#2F76D6"/><polygon points="45,23 51,32 45,41 39,32" fill="none" stroke="#15141F" stroke-width="2.2"/>
+              <polygon points="75,23 69,32 75,41" fill="#86F2CF"/><polygon points="75,23 81,32 75,41" fill="#12A877"/><polygon points="75,23 81,32 75,41 69,32" fill="none" stroke="#15141F" stroke-width="2.2"/>
+              <polygon points="60,32 54,40 60,48" fill="#FFD683"/><polygon points="60,32 66,40 60,48" fill="#E08A0A"/><polygon points="60,32 66,40 60,48 54,40" fill="none" stroke="#15141F" stroke-width="2.2"/>
+            </g>
+            <path class="spark" d="M70 6 L71.5 10.5 L76 12 L71.5 13.5 L70 18 L68.5 13.5 L64 12 L68.5 10.5 Z" fill="#FFFFFF"/>
+            <ellipse cx="37" cy="85" rx="6.5" ry="3.8" fill="#FF7FA8" opacity=".5"/>
+            <ellipse cx="83" cy="85" rx="6.5" ry="3.8" fill="#FF7FA8" opacity=".5"/>
+            <path class="brow browL" d="M42 61 Q47 58 52 60" fill="none" stroke="#15141F" stroke-width="2.6" stroke-linecap="round"/>
+            <path class="brow browR" d="M68 60 Q73 58 78 61" fill="none" stroke="#15141F" stroke-width="2.6" stroke-linecap="round"/>
+            <g class="eyes">
+              <ellipse cx="48" cy="72" rx="5.2" ry="7" fill="#15141F"/><ellipse cx="72" cy="72" rx="5.2" ry="7" fill="#15141F"/>
+              <g class="pupils"><circle cx="49.8" cy="69.2" r="2" fill="#FFFFFF"/><circle cx="46.9" cy="75" r="1" fill="#FFFFFF"/><circle cx="73.8" cy="69.2" r="2" fill="#FFFFFF"/><circle cx="70.9" cy="75" r="1" fill="#FFFFFF"/></g>
+            </g>
+            <g class="eyes-h" fill="none" stroke="#15141F" stroke-width="3" stroke-linecap="round"><path d="M43 74 Q48 66 53 74"/><path d="M67 74 Q72 66 77 74"/></g>
+            <path class="m m-idle" d="M55 86 Q60 90 65 86" fill="none" stroke="#15141F" stroke-width="2.8" stroke-linecap="round"/>
+            <g class="m m-o"><ellipse cx="60" cy="87" rx="5" ry="4.4" fill="#15141F"/><ellipse cx="60" cy="89.6" rx="3" ry="1.6" fill="#FF7FA8"/></g>
+            <path class="m m-t" d="M56 88 Q61 86 66 88.5" fill="none" stroke="#15141F" stroke-width="2.6" stroke-linecap="round"/>
+            <g class="m m-h"><path d="M51 84 Q60 97 69 84 Z" fill="#15141F" stroke="#15141F" stroke-width="2" stroke-linejoin="round"/><ellipse cx="60" cy="91" rx="4" ry="2" fill="#FF7FA8"/></g>
+          </g>
+        </svg>
+        <div class="answers" id="answers"></div>
+      </div>
+      <form class="composer" id="composer" hidden>
+        <label for="input" style="position:absolute;left:-9999px">Scrivi la tua risposta</label>
+        <input id="input" type="text" autocomplete="off" placeholder="Oppure rispondi con parole tue…" maxlength="600">
+        <button id="send" type="submit">Vai!</button>
+      </form>
+    </div>
+  </div>
+
+  <section class="sheet" id="pathSheet" role="dialog" aria-modal="true" aria-labelledby="pathTitle" hidden>
+    <div class="sheet-in">
+      <div class="sheet-head"><h2 id="pathTitle">Il tuo percorso</h2><button class="tbtn" type="button" data-close="pathSheet">Chiudi</button></div>
+      <div class="sheet-body" id="pathBody"></div>
+    </div>
+  </section>
+  <section class="sheet" id="menuSheet" role="dialog" aria-modal="true" aria-labelledby="menuTitle" hidden>
+    <div class="sheet-in">
+      <div class="sheet-head"><h2 id="menuTitle">Opzioni</h2><button class="tbtn" type="button" data-close="menuSheet">Chiudi</button></div>
+      <div class="sheet-body" id="menuBody"></div>
+    </div>
+  </section>
+  <section class="sheet" id="helpSheet" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+    <div class="sheet-in">
+      <div class="sheet-head"><h2 id="helpTitle">Come funziona</h2><button class="tbtn" type="button" data-close="helpSheet">Chiudi</button></div>
+      <div class="sheet-body help">
+        <h3>I quattro cristalli</h3>
+        <p>Ogni cristallo è una parte dell'ikigai: il rubino è ciò che ami, lo zaffiro ciò in cui sei bravo, il topazio ciò per cui ti pagano e lo smeraldo ciò di cui il mondo ha bisogno. Si accendono mentre rispondi alle domande.</p>
+        <h3>I frammenti</h3>
+        <p>Tra due cristalli vicini nasce un frammento: passione, missione, professione e vocazione. Quando le tue risposte si somigliano, il frammento si incastra nel pianeta di cristallo. Se resta staccato, lì c'è qualcosa da sviluppare.</p>
+        <h3>Esplorare</h3>
+        <p>Dopo il test tocca un cristallo o un frammento nello spazio: Iki ci vola sopra e te lo racconta. Da lì puoi parlarne con lui, chiedere una missione o rispondere di nuovo alle domande di quel cristallo.</p>
+        <h3>Le missioni</h3>
+        <p>Sono azioni concrete. Quando ne completi una e la spunti in Percorso, il suo frammento si avvicina al centro e i cristalli collegati diventano più luminosi.</p>
+        <h3>Parlare con Iki</h3>
+        <p>Iki usa Claude, un modello di intelligenza artificiale di Anthropic, per leggere le risposte scritte con parole tue, preparare le missioni e chiacchierare con te. Se il collegamento non è disponibile, il test funziona lo stesso con consigli già pronti. Se vuoi parlargli a voce, usa il microfono della tastiera del telefono.</p>
+        <h3>I tuoi dati</h3>
+        <p>Risposte, missioni e opzioni restano salvate solo in questo browser. Per l'analisi e la chat il testo che serve passa dal server di Mappa Ikigai a Claude (Anthropic) e non viene conservato. Non scrivere dati sensibili. Puoi cancellare tutto dal menu Opzioni. <a href="https://www.iubenda.com/privacy-policy/65493035" target="_blank" rel="noopener" style="color:#B9C2FF">Privacy Policy</a></p>
+      </div>
+    </div>
+  </section>
+  <section class="sheet" id="histSheet" role="dialog" aria-modal="true" aria-labelledby="histTitle" hidden>
+    <div class="sheet-in">
+      <div class="sheet-head"><h2 id="histTitle">La storia finora</h2><button class="tbtn" type="button" data-close="histSheet">Chiudi</button></div>
+      <div class="sheet-body" id="hist"></div>
+    </div>
+  </section>
+</div>
+
+<script src="/ikigai/app/three.min.js"></script>
+<script src="/ikigai/app/three-post.js"></script>
+<script>
+/* ===================== dati del test ===================== */
+var THEMES={c:"creare",u:"capire",p:"persone",o:"organizzare"};
+var CIRCLES=[
+ {id:"ami",nome:"Ciò che ami",cap:"Rubino",Art:"Il rubino",art:"il rubino",del_:"del rubino",hex:"#FF4F8B",qs:[
+  {t:"Cosa ti fa perdere la cognizione del tempo?",o:[["Creare o costruire qualcosa","c"],["Capire come funziona una cosa","u"],["Stare con le persone","p"],["Organizzare e mettere ordine","o"]]},
+  {t:"Di cosa parli anche quando nessuno te lo chiede?",o:[["Strumenti e cose fatte bene","c"],["Idee, società, come va il mondo","u"],["Persone e relazioni","p"],["Piani e sistemi","o"]]}]},
+ {id:"bravo",nome:"Ciò in cui sei bravo",cap:"Zaffiro",Art:"Lo zaffiro",art:"lo zaffiro",del_:"dello zaffiro",hex:"#4F9DFF",qs:[
+  {t:"Per cosa ti chiedono aiuto più spesso?",o:[["Aggiustare o realizzare qualcosa","c"],["Capire un problema complicato","u"],["Un consiglio o un ascolto","p"],["Organizzare qualcosa","o"]]},
+  {t:"Cosa ti riesce meglio che agli altri?",o:[["Fare: con le mani, il codice o il design","c"],["Vedere cosa non torna","u"],["Spiegare e convincere","p"],["Cavarmela con poche risorse","o"]]}]},
+ {id:"pagato",nome:"Ciò per cui ti pagano",cap:"Topazio",Art:"Il topazio",art:"il topazio",del_:"del topazio",hex:"#FFB02E",qs:[
+  {t:"Per cosa qualcuno ti paga, o potrebbe pagarti?",o:[["Realizzare progetti","c"],["Consulenze e analisi","u"],["Insegnare o prendermi cura di qualcuno","p"],["Gestire processi","o"]]},
+  {t:"Che ruolo ti senti addosso?",o:[["Artigiano o creatore","c"],["Esperto o consulente","u"],["Formatore o coach","p"],["Coordinatore","o"]]}]},
+ {id:"mondo",nome:"Ciò di cui il mondo ha bisogno",cap:"Smeraldo",Art:"Lo smeraldo",art:"lo smeraldo",del_:"dello smeraldo",hex:"#22E0A4",qs:[
+  {t:"Quale problema ti fa arrabbiare?",o:[["Le cose fatte male","c"],["La disinformazione","u"],["Le persone lasciate indietro","p"],["Lo spreco e il caos","o"]]},
+  {t:"Chi vorresti aiutare?",o:[["Chi ha un'idea ma non sa realizzarla","c"],["Chi deve prendere decisioni","u"],["Chi è in difficoltà","p"],["Le piccole attività","o"]]}]}
+];
+/* l'ordine dei frammenti segue la scena: 0 Missione, 1 Vocazione, 2 Professione, 3 Passione */
+var ZONES=[
+ {id:"missione",nome:"Missione",d:"ami + mondo",a:"ami",b:"mondo",ca:"#FF4F8B",cb:"#22E0A4",
+  tip:"Quello che ami non tocca ancora un bisogno concreto. Scegli un problema vicino a te e chiediti come lo affronteresti facendo ciò che ami."},
+ {id:"vocazione",nome:"Vocazione",d:"mondo + pagato",a:"mondo",b:"pagato",ca:"#22E0A4",cb:"#FFB02E",
+  tip:"Il bisogno che senti non ha ancora qualcuno che paga. Cerca chi ha lo stesso problema e un budget: aziende, scuole, enti."},
+ {id:"professione",nome:"Professione",d:"bravo + pagato",a:"bravo",b:"pagato",ca:"#4F9DFF",cb:"#FFB02E",
+  tip:"Sei bravo in cose che non vendi. Trasforma una tua abilità in un servizio con un nome, una durata e un prezzo."},
+ {id:"passione",nome:"Passione",d:"ami + bravo",a:"ami",b:"bravo",ca:"#FF4F8B",cb:"#4F9DFF",
+  tip:"Ami cose in cui non ti senti ancora bravo. Prendi la parte in cui vali già qualcosa e allenala per un mese."}
+];
+var GEM_INDEX={ami:0,mondo:1,pagato:2,bravo:3};
+var LAB={ok:"incastrato",mid:"quasi",no:"staccato"};
+var ZVAL={ok:1,mid:.5,no:.12};
+var STATIC_FOLLOW={
+  ami:"Fammi un esempio concreto: l'ultima volta che ti è successo, cosa stavi facendo?",
+  bravo:"C'è una cosa precisa per cui ti cercano più spesso? Raccontamela in una riga.",
+  pagato:"Hai già guadagnato qualcosa in questo modo, anche poco? Cosa vendevi, e a chi?",
+  mondo:"Pensa a una persona o a un posto reale con quel problema. Chi ti viene in mente?"
+};
+var STATIC_MISSIONS={
+  passione:{titolo:"Allena per 20 minuti al giorno una cosa che ami e in cui vali già",perche:"Così ciò che ami diventa anche ciò in cui sei bravo.",passi:["Scegli l'attività e l'orario","Fallo per tre giorni di fila","Annota cosa è migliorato"],tempo:"20 minuti al giorno",giorni:5},
+  missione:{titolo:"Scrivi un problema reale, vicino a te, che vorresti risolvere",perche:"Colleghi ciò che ami a un bisogno concreto.",passi:["Pensa a chi ti sta intorno","Scrivi il problema in una frase","Chiedi a una persona se lo sente anche lei"],tempo:"30 minuti",giorni:4},
+  professione:{titolo:"Dai un nome e un prezzo a un servizio che sai già fare",perche:"Un'abilità diventa qualcosa che si può comprare.",passi:["Descrivilo in due righe","Guarda quanto costano servizi simili","Scegli un prezzo di prova"],tempo:"45 minuti",giorni:5},
+  vocazione:{titolo:"Chiedi a tre persone con quel problema come lo risolvono oggi",perche:"Scopri chi ha il bisogno e chi ha un budget.",passi:["Scegli tre persone","Fai una sola domanda aperta","Scrivi cosa ti ha sorpreso"],tempo:"1 ora",giorni:7}
+};
+
+/* ===================== scena 3D ===================== */
+var Scene3D=(function(){
+  var stage=document.getElementById("stage");
+  var api={gem:[0,0,0,0],shard:[0,0,0,0],polish:[0,0,0,0],ok:false,snapshot:null,onPick:null,focus:function(){},setCalm:function(){}};
+  function fail(msg){var n=document.getElementById("sceneNote");if(n){n.textContent=msg;n.hidden=false;}return api;}
+  if(!window.THREE)return fail("La scena 3D non si è caricata. Il test funziona lo stesso.");
+  var renderer;
+  try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});}
+  catch(e){return fail("Questo dispositivo non mostra la scena 3D. Il test funziona lo stesso.");}
+  api.ok=true;
+  renderer.setPixelRatio(Math.min(1.75,window.devicePixelRatio||1));
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+  renderer.setClearColor(0x05060c,1);
+  stage.appendChild(renderer.domElement);
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(40,1,.1,500);camera.position.set(0,0,12);
+
+  /* --- cielo: nebulosa procedurale con una fascia tipo Via Lattea --- */
+  var NOISE=[
+  "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}",
+  "vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}",
+  "vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}",
+  "vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}",
+  "float snoise(vec3 v){",
+  " const vec2 C=vec2(1.0/6.0,1.0/3.0);",
+  " const vec4 D=vec4(0.0,0.5,1.0,2.0);",
+  " vec3 i=floor(v+dot(v,C.yyy));",
+  " vec3 x0=v-i+dot(i,C.xxx);",
+  " vec3 g=step(x0.yzx,x0.xyz);",
+  " vec3 l=1.0-g;",
+  " vec3 i1=min(g.xyz,l.zxy);",
+  " vec3 i2=max(g.xyz,l.zxy);",
+  " vec3 x1=x0-i1+C.xxx;",
+  " vec3 x2=x0-i2+C.yyy;",
+  " vec3 x3=x0-D.yyy;",
+  " i=mod289(i);",
+  " vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));",
+  " float n_=0.142857142857;",
+  " vec3 ns=n_*D.wyz-D.xzx;",
+  " vec4 j=p-49.0*floor(p*ns.z*ns.z);",
+  " vec4 x_=floor(j*ns.z);",
+  " vec4 y_=floor(j-7.0*x_);",
+  " vec4 x=x_*ns.x+ns.yyyy;",
+  " vec4 y=y_*ns.x+ns.yyyy;",
+  " vec4 h=1.0-abs(x)-abs(y);",
+  " vec4 b0=vec4(x.xy,y.xy);",
+  " vec4 b1=vec4(x.zw,y.zw);",
+  " vec4 s0=floor(b0)*2.0+1.0;",
+  " vec4 s1=floor(b1)*2.0+1.0;",
+  " vec4 sh=-step(h,vec4(0.0));",
+  " vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;",
+  " vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;",
+  " vec3 p0=vec3(a0.xy,h.x);",
+  " vec3 p1=vec3(a0.zw,h.y);",
+  " vec3 p2=vec3(a1.xy,h.z);",
+  " vec3 p3=vec3(a1.zw,h.w);",
+  " vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));",
+  " p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;",
+  " vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);",
+  " m=m*m;",
+  " return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));",
+  "}"].join("\n");
+  var SKY=[
+  "float fbm(vec3 p){float f=0.0;float a=0.5;for(int i=0;i<5;i++){f+=a*snoise(p);p=p*2.03+vec3(1.7,9.2,3.1);a*=0.5;}return f;}",
+  "vec3 skyColor(vec3 d){",
+  " float bd=dot(d,normalize(vec3(0.35,1.0,0.2)));",
+  " float band=exp(-bd*bd*7.0);",
+  " vec3 q=d*1.8;",
+  " float n=fbm(q);",
+  " float n2=fbm(q*2.4+vec3(5.2,1.3,2.8));",
+  " float n3=fbm(q*0.7+vec3(3.1,7.4,1.9));",
+  " float dens=smoothstep(-0.2,0.7,n)*(0.22+0.78*band);",
+  " float dust=smoothstep(0.0,0.5,n2)*band;",
+  " vec3 purple=vec3(0.32,0.15,0.58);",
+  " vec3 teal=vec3(0.03,0.32,0.44);",
+  " vec3 rose=vec3(0.58,0.13,0.34);",
+  " vec3 warm=vec3(0.95,0.62,0.42);",
+  " vec3 col=mix(purple,teal,smoothstep(-0.35,0.45,n2));",
+  " col=mix(col,rose,smoothstep(0.15,0.75,n3));",
+  " vec3 c=vec3(0.010,0.012,0.028)+col*dens*0.5;",
+  " c+=warm*pow(band,8.0)*0.12*smoothstep(-0.1,0.6,n);",
+  " c*=1.0-dust*0.6;",
+  " return c;",
+  "}",
+  "varying vec2 vUv;",
+  "void main(){",
+  " float phi=vUv.x*6.28318530718;float th=(1.0-vUv.y)*3.14159265359;",
+  " vec3 d=vec3(-cos(phi)*sin(th),cos(th),sin(phi)*sin(th));",
+  " gl_FragColor=vec4(skyColor(d),1.0);",
+  "}"].join("\n");
+  /* la nebulosa si calcola una volta sola in una texture: così la scena resta fluida anche sui telefoni meno potenti */
+  var skyTex=null,skyMat;
+  try{
+    var rt=new THREE.WebGLRenderTarget(2048,1024,{depthBuffer:false});
+    rt.texture.encoding=THREE.sRGBEncoding;
+    var bakeScene=new THREE.Scene(),bakeCam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+    bakeScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({
+      vertexShader:"varying vec2 vUv;\nvoid main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}",
+      fragmentShader:NOISE+"\n"+SKY,depthTest:false,depthWrite:false})));
+    renderer.setRenderTarget(rt);renderer.render(bakeScene,bakeCam);renderer.setRenderTarget(null);
+    skyTex=rt.texture;
+  }catch(e){}
+  skyMat=skyTex?new THREE.MeshBasicMaterial({map:skyTex,side:THREE.BackSide,depthWrite:false,toneMapped:false})
+               :new THREE.MeshBasicMaterial({color:0x05060c,side:THREE.BackSide,depthWrite:false});
+  var sky=new THREE.Mesh(new THREE.SphereGeometry(200,64,32),skyMat);scene.add(sky);
+
+  /* --- riflessi: un ambiente con la nebulosa e qualche pannello di luce, per le sfaccettature --- */
+  try{
+    var envScene=new THREE.Scene();
+    envScene.add(new THREE.Mesh(new THREE.SphereGeometry(80,32,16),skyMat));
+    [[0xffffff,8,6,-4,7],[0xffd9ec,-9,4,3,5],[0xcfe6ff,2,-8,6,6],[0xfff1d0,-4,9,-7,4],[0xffffff,10,-2,8,3],[0xd8d0ff,-10,-5,-6,5]].forEach(function(c){
+      var m=new THREE.Mesh(new THREE.PlaneGeometry(c[4],c[4]),new THREE.MeshBasicMaterial({color:c[0],side:THREE.DoubleSide}));
+      m.position.set(c[1],c[2],c[3]);m.lookAt(0,0,0);envScene.add(m);
+    });
+    var pmrem=new THREE.PMREMGenerator(renderer);
+    scene.environment=pmrem.fromScene(envScene,0.02).texture;
+    pmrem.dispose();
+    var cubeRT=new THREE.WebGLCubeRenderTarget(256,{generateMipmaps:true,minFilter:THREE.LinearMipmapLinearFilter});
+    new THREE.CubeCamera(.1,500,cubeRT).update(renderer,envScene);
+    var gemEnv=cubeRT.texture;
+  }catch(e){}
+
+  /* --- materiale "gemma": riflessi, rifrazione con dispersione (l'arcobaleno sulle facce), bordo luminoso, scintille --- */
+  var GEM_VS=["varying vec3 vW;","void main(){vec4 w=modelMatrix*vec4(position,1.0);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}"].join("\n");
+  var GEM_FS=["uniform samplerCube uEnv;","uniform vec3 uColor;","uniform float uGlow;","uniform float uOpacity;","uniform float uTime;","uniform float uBack;","uniform float uSeed;","varying vec3 vW;",
+    "void main(){",
+    " vec3 toCam=normalize(cameraPosition-vW);",
+    " vec3 N=normalize(cross(dFdx(vW),dFdy(vW)));if(dot(N,toCam)<0.0)N=-N;",
+    " vec3 I=-toCam;float ndv=clamp(dot(N,toCam),0.0,1.0);",
+    " float fres=pow(1.0-ndv,2.2);",
+    " vec3 refl=textureCube(uEnv,reflect(I,N)).rgb;",
+    " vec3 rr=vec3(textureCube(uEnv,refract(I,N,0.42)).r,textureCube(uEnv,refract(I,N,0.40)).g,textureCube(uEnv,refract(I,N,0.38)).b);",
+    " float h=fract(sin(dot(floor(N*6.0+uSeed),vec3(12.9898,78.233,37.719)))*43758.5453);",
+    " float spark=pow(max(0.0,sin(uTime*1.3+h*60.0)),48.0);",
+    " vec3 body=mix(vec3(0.75),uColor,0.75+0.25*uGlow);",
+    " vec3 col;",
+    " if(uBack>0.5){col=body*(0.18+0.55*uGlow)+rr*body*0.6;}",
+    " else{col=(uColor*(0.08+0.3*uGlow)+rr*body*(0.45+0.45*uGlow))*0.62+refl*(0.08+0.7*fres)+uColor*(0.1+0.55*fres)*uGlow+vec3(1.0,0.97,0.92)*spark*(0.4+1.4*uGlow);}",
+    " float a=uOpacity*(uBack>0.5?0.7:mix(0.62,1.0,fres));",
+    " gl_FragColor=vec4(col,a);",
+    " #include <tonemapping_fragment>",
+    " #include <encodings_fragment>",
+    "}"].join("\n");
+  function gemMat(color,back,seed){
+    return new THREE.ShaderMaterial({uniforms:{uEnv:{value:gemEnv||null},uColor:{value:new THREE.Color(color)},uGlow:{value:0},uOpacity:{value:1},uTime:{value:0},uBack:{value:back?1:0},uSeed:{value:seed||0}},
+      vertexShader:GEM_VS,fragmentShader:GEM_FS,transparent:true,depthWrite:!back,side:back?THREE.BackSide:THREE.FrontSide,extensions:{derivatives:true}});
+  }
+  /* scintille sulle facce: piccole stelle a croce che si accendono a caso */
+  var SPK_VS=["attribute float aPhase;","uniform float uTime;","uniform float uPR;","uniform float uSize;","varying float vA;",
+    "void main(){vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;",
+    "vA=pow(max(0.0,sin(uTime*(1.1+fract(aPhase*7.3)*1.4)+aPhase*6.2831)),14.0);",
+    "gl_PointSize=uSize*uPR*(0.6+0.8*vA)*(10.0/-mv.z);}"].join("\n");
+  var SPK_FS=["uniform vec3 uColor;","uniform float uAlpha;","varying float vA;",
+    "void main(){vec2 uv=gl_PointCoord-0.5;float d=length(uv);",
+    "float core=pow(max(0.0,1.0-d*2.0),4.0);",
+    "float sx=max(0.0,1.0-abs(uv.y)*22.0)*max(0.0,1.0-abs(uv.x)*2.0);float sy=max(0.0,1.0-abs(uv.x)*22.0)*max(0.0,1.0-abs(uv.y)*2.0);",
+    "gl_FragColor=vec4(mix(vec3(1.0),uColor,0.25),(core+(sx+sy)*0.8)*vA*uAlpha);}"].join("\n");
+  var spkMats=[];
+  function sparkles(geo,n,color,scale){
+    var src=geo.attributes.position.array,cnt=src.length/3,p=new Float32Array(n*3),ph=new Float32Array(n);
+    for(var i=0;i<n;i++){var k=Math.floor(Math.random()*cnt);p[i*3]=src[k*3]*scale;p[i*3+1]=src[k*3+1]*scale;p[i*3+2]=src[k*3+2]*scale;ph[i]=Math.random();}
+    var g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.BufferAttribute(p,3));g.setAttribute("aPhase",new THREE.BufferAttribute(ph,1));
+    var m=new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uPR:{value:renderer.getPixelRatio()},uSize:{value:9},uColor:{value:new THREE.Color(color)},uAlpha:{value:0}},
+      vertexShader:SPK_VS,fragmentShader:SPK_FS,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
+    spkMats.push(m);return new THREE.Points(g,m);
+  }
+
+  /* --- stelle: colori diversi, scintillio, le più luminose con le punte --- */
+  var STAR_VS=["attribute vec3 aColor;","attribute float aSize;","attribute float aPhase;","uniform float uTime;","uniform float uPR;","varying vec3 vC;","varying float vTw;",
+    "void main(){","vec4 mv=modelViewMatrix*vec4(position,1.0);","gl_Position=projectionMatrix*mv;",
+    "vTw=0.68+0.32*sin(uTime*(0.8+aPhase*0.25)+aPhase*6.0);","vC=aColor;","gl_PointSize=aSize*uPR;","}"].join("\n");
+  var STAR_FS=["uniform float uSpike;","varying vec3 vC;","varying float vTw;",
+    "void main(){","vec2 uv=gl_PointCoord-0.5;","float d=length(uv);","float core=pow(max(0.0,1.0-d*2.0),3.0);",
+    "float sx=max(0.0,1.0-abs(uv.y)*16.0)*max(0.0,1.0-abs(uv.x)*2.0);","float sy=max(0.0,1.0-abs(uv.x)*16.0)*max(0.0,1.0-abs(uv.y)*2.0);",
+    "float a=core+uSpike*(sx+sy)*0.55;","gl_FragColor=vec4(vC*vTw,a*vTw);","}"].join("\n");
+  var TEMPS=[[.72,.82,1],[1,1,1],[1,1,1],[1,.94,.82],[1,.8,.62],[.86,.9,1]];
+  var starMats=[];
+  function starField(n,rMin,rMax,sMin,sMax,spike){
+    var g=new THREE.BufferGeometry(),p=new Float32Array(n*3),c=new Float32Array(n*3),s=new Float32Array(n),ph=new Float32Array(n);
+    for(var i=0;i<n;i++){
+      var r=rMin+Math.random()*(rMax-rMin),th=Math.random()*Math.PI*2,phi=Math.acos(2*Math.random()-1);
+      p[i*3]=r*Math.sin(phi)*Math.cos(th);p[i*3+1]=r*Math.sin(phi)*Math.sin(th);p[i*3+2]=r*Math.cos(phi);
+      var t=TEMPS[Math.floor(Math.random()*TEMPS.length)];c[i*3]=t[0];c[i*3+1]=t[1];c[i*3+2]=t[2];
+      s[i]=sMin+Math.pow(Math.random(),3)*(sMax-sMin);ph[i]=Math.random()*6.283;
+    }
+    g.setAttribute("position",new THREE.BufferAttribute(p,3));g.setAttribute("aColor",new THREE.BufferAttribute(c,3));
+    g.setAttribute("aSize",new THREE.BufferAttribute(s,1));g.setAttribute("aPhase",new THREE.BufferAttribute(ph,1));
+    var m=new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uPR:{value:renderer.getPixelRatio()},uSpike:{value:spike}},vertexShader:STAR_VS,fragmentShader:STAR_FS,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
+    starMats.push(m);var pts=new THREE.Points(g,m);scene.add(pts);return pts;
+  }
+  var stars=starField(2400,120,180,1.2,3.4,0),bright=starField(70,110,170,7,17,1);
+
+  function softTex(stops){
+    var c=document.createElement("canvas");c.width=c.height=128;var x=c.getContext("2d");
+    var g=x.createRadialGradient(64,64,0,64,64,64);stops.forEach(function(s){g.addColorStop(s[0],s[1]);});
+    x.fillStyle=g;x.fillRect(0,0,128,128);return new THREE.CanvasTexture(c);
+  }
+  var glowTex=softTex([[0,"rgba(255,255,255,1)"],[.18,"rgba(255,255,255,.55)"],[.5,"rgba(255,255,255,.12)"],[1,"rgba(255,255,255,0)"]]);
+  function sprite(color,op){return new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:color,transparent:true,opacity:op,blending:THREE.AdditiveBlending,depthWrite:false}));}
+
+  var dg=new THREE.BufferGeometry(),dp=new Float32Array(180*3);
+  for(var i=0;i<180;i++){dp[i*3]=(Math.random()-.5)*18;dp[i*3+1]=(Math.random()-.5)*12;dp[i*3+2]=(Math.random()-.5)*10-2;}
+  dg.setAttribute("position",new THREE.BufferAttribute(dp,3));
+  var dust=new THREE.Points(dg,new THREE.PointsMaterial({map:glowTex,color:0xb7bfff,size:.1,transparent:true,opacity:.4,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(dust);
+
+  /* stella cadente */
+  var shGeo=new THREE.BufferGeometry();shGeo.setAttribute("position",new THREE.BufferAttribute(new Float32Array(6),3));
+  shGeo.setAttribute("color",new THREE.BufferAttribute(new Float32Array([1,1,1,0,0,0]),3));
+  var shoot=new THREE.Line(shGeo,new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(shoot);
+  var SH={t:-1,next:5,a:new THREE.Vector3(),dir:new THREE.Vector3(),h:new THREE.Vector3()};
+
+  /* luci */
+  scene.add(new THREE.AmbientLight(0x6c74b0,.35));
+  var key=new THREE.DirectionalLight(0xffffff,1.0);key.position.set(3,4,6);scene.add(key);
+  var rim=new THREE.DirectionalLight(0x8fa0ff,.7);rim.position.set(-5,-2,-4);scene.add(rim);
+  var core=new THREE.PointLight(0xffffff,0,9);scene.add(core);
+  var spark1=new THREE.PointLight(0xffd6f0,1.1,14),spark2=new THREE.PointLight(0xc6e6ff,1.1,14);scene.add(spark1);scene.add(spark2);
+
+  /* --- cristalli --- */
+  var root=new THREE.Group();scene.add(root);
+  var COLS=[0xff4f8b,0x22e0a4,0xffb02e,0x4f9dff];
+  var POS=[[0,2.3,0],[2.55,0,0],[0,-2.3,0],[-2.55,0,0]];
+  var prof=[[0.001,1.08],[.16,.86],[.33,.55],[.42,.22],[.42,-.18],[.34,-.5],[.17,-.82],[0.001,-1.02]].map(function(p){return new THREE.Vector2(p[0],p[1]);});
+  var gemGeo=new THREE.LatheGeometry(prof,8),edgeGeo=new THREE.EdgesGeometry(gemGeo,20);
+  var gems=COLS.map(function(c,i){
+    var g=new THREE.Group();
+    var back=new THREE.Mesh(gemGeo,gemMat(c,true,i*1.7));
+    var m=new THREE.Mesh(gemGeo,gemMat(c,false,i*1.7));
+    var inner=new THREE.Mesh(gemGeo,new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));inner.scale.set(.32,.5,.32);
+    var e=new THREE.LineSegments(edgeGeo,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.2,blending:THREE.AdditiveBlending}));
+    var glow=sprite(c,0);glow.scale.set(3,3,1);
+    var spk=sparkles(gemGeo,14,c,1.02);
+    var hit=new THREE.Mesh(new THREE.SphereGeometry(1.15,12,8),new THREE.MeshBasicMaterial({visible:false}));
+    g.add(glow);g.add(back);g.add(inner);g.add(m);g.add(e);g.add(spk);g.add(hit);g.position.set(POS[i][0],POS[i][1],POS[i][2]);root.add(g);
+    return {g:g,m:m,back:back,inner:inner,e:e,glow:glow,spk:spk,hit:hit,v:0,base:POS[i]};
+  });
+
+  /* --- pianeta di cristallo: un pianeta di cristallo fatto di quattro placche che si fondono --- */
+  var PR=.82;
+  function lune(a0,a1,r){
+    var nu=5,nv=9,gap=.035,out=[];
+    function P(u,v){return [r*Math.sin(v)*Math.cos(u),r*Math.sin(v)*Math.sin(u),r*Math.cos(v)];}
+    for(var i=0;i<nu;i++)for(var j=0;j<nv;j++){
+      var u0=a0+gap+(a1-a0-2*gap)*i/nu,u1=a0+gap+(a1-a0-2*gap)*(i+1)/nu,v0=Math.PI*j/nv,v1=Math.PI*(j+1)/nv;
+      var A=P(u0,v0),B=P(u1,v0),C=P(u1,v1),D=P(u0,v1);
+      out.push.apply(out,A.concat(D,B,B,D,C));
+    }
+    return out;
+  }
+  var SHD=[
+    {a0:0,dir:[1,1,0],cols:[0,1]},
+    {a0:-Math.PI/2,dir:[1,-1,0],cols:[1,2]},
+    {a0:Math.PI,dir:[-1,-1,0],cols:[2,3]},
+    {a0:Math.PI/2,dir:[-1,1,0],cols:[3,0]}
+  ];
+  /* nucleo: magma luminoso che prende il colore dei frammenti forti */
+  var CORE_VS="varying vec3 vN;varying vec3 vW;varying vec3 vWN;void main(){vN=normalize(position);vWN=normalize(mat3(modelMatrix)*normal);vec4 w=modelMatrix*vec4(position,1.0);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}";
+  var CORE_FS=["uniform float uTime;uniform float uCore;uniform vec4 uV;uniform vec3 uC0;uniform vec3 uC1;uniform vec3 uC2;uniform vec3 uC3;varying vec3 vN;varying vec3 vW;varying vec3 vWN;",
+    "float h3(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}",
+    "float n3(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(mix(h3(i),h3(i+vec3(1,0,0)),f.x),mix(h3(i+vec3(0,1,0)),h3(i+vec3(1,1,0)),f.x),f.y),mix(mix(h3(i+vec3(0,0,1)),h3(i+vec3(1,0,1)),f.x),mix(h3(i+vec3(0,1,1)),h3(i+vec3(1,1,1)),f.x),f.y),f.z);}",
+    "float fbm(vec3 p){float a=0.5,s=0.0;for(int i=0;i<4;i++){s+=a*n3(p);p*=2.03;a*=0.5;}return s;}",
+    "void main(){vec3 n=normalize(vN);float ang=atan(n.y,n.x);",
+    " vec4 w=pow(max(vec4(0.0),cos(vec4(ang-0.785,ang+0.785,ang+2.356,ang-2.356))),vec4(2.0));w/=max(1e-3,w.x+w.y+w.z+w.w);",
+    " vec3 c=uC0*w.x+uC1*w.y+uC2*w.z+uC3*w.w;float lit=dot(w,uV);",
+    " vec3 q=n*2.2+vec3(0.0,uTime*0.12,uTime*0.05);float f=fbm(q+1.7*fbm(n*1.6-uTime*0.04));",
+    " float veins=smoothstep(0.52,0.62,f);",
+    " float fres=pow(1.0-abs(dot(normalize(vWN),normalize(cameraPosition-vW))),2.0);",
+    " vec3 col=c*(0.08+0.9*lit*uCore)*(0.35+1.3*f)+c*veins*lit*(0.4+1.6*uCore)+c*fres*(0.2+0.8*uCore);",
+    " gl_FragColor=vec4(col,1.0);",
+    " #include <tonemapping_fragment>",
+    " #include <encodings_fragment>",
+    "}"].join("\n");
+  function shardCol(s){return new THREE.Color(COLS[s.cols[0]]).lerpHSL(new THREE.Color(COLS[s.cols[1]]),.5);}
+  var coreMat=new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uCore:{value:0},uV:{value:new THREE.Vector4()},uC0:{value:shardCol(SHD[0])},uC1:{value:shardCol(SHD[1])},uC2:{value:shardCol(SHD[2])},uC3:{value:shardCol(SHD[3])}},vertexShader:CORE_VS,fragmentShader:CORE_FS});
+  var planetCore=new THREE.Mesh(new THREE.IcosahedronGeometry(PR*.8,4),coreMat);
+  /* atmosfera: alone sottile sul bordo del pianeta */
+  var ATM_FS="uniform float uA;varying vec3 vN;varying vec3 vW;void main(){float r=1.0-abs(dot(normalize(vN),normalize(cameraPosition-vW)));gl_FragColor=vec4(vec3(0.75,0.82,1.0)*pow(r,3.0)*uA,1.0);}";
+  var atmo=new THREE.Mesh(new THREE.SphereGeometry(PR*1.18,48,32),new THREE.ShaderMaterial({uniforms:{uA:{value:0}},vertexShader:"varying vec3 vN;varying vec3 vW;void main(){vN=normalize(mat3(modelMatrix)*normal);vec4 w=modelMatrix*vec4(position,1.0);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}",fragmentShader:ATM_FS,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.FrontSide}));
+  /* anello planetario: compare quando il cristallo si allinea */
+  var RING_FS=["uniform float uA;uniform float uTime;varying vec2 vP;",
+    "void main(){float r=length(vP);float a=atan(vP.y,vP.x);float t=(r-1.42)/0.56;",
+    " float bands=0.65+0.35*sin(t*6.0+0.6)*sin(t*14.0);float edge=smoothstep(0.0,0.12,t)*smoothstep(1.0,0.7,t);",
+    " float grain=0.75+0.25*sin(a*60.0+uTime*0.6+t*20.0);",
+    " vec3 c=mix(vec3(1.0,0.78,0.55),vec3(0.6,0.75,1.0),t);",
+    " gl_FragColor=vec4(c*bands*edge*grain*uA,1.0);}"].join("\n");
+  var ring=new THREE.Mesh(new THREE.RingGeometry(1.42,1.98,160,1),new THREE.ShaderMaterial({uniforms:{uA:{value:0},uTime:{value:0}},vertexShader:"varying vec2 vP;void main(){vP=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}",fragmentShader:RING_FS,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide}));
+  ring.rotation.set(Math.PI/2-.42,0,.32);root.add(ring);
+  var centre=new THREE.Group();root.add(centre);centre.add(planetCore);centre.add(atmo);
+  var centerHit=new THREE.Mesh(new THREE.SphereGeometry(1.15,12,8),new THREE.MeshBasicMaterial({visible:false}));root.add(centerHit);
+  var coreGlow=sprite(0xffffff,0);coreGlow.scale.set(4,4,1);root.add(coreGlow);
+  var PART=6,pg=new THREE.BufferGeometry(),pp=new Float32Array(4*2*PART*3),pc=new Float32Array(4*2*PART*3);
+  pg.setAttribute("position",new THREE.BufferAttribute(pp,3));pg.setAttribute("color",new THREE.BufferAttribute(pc,3));
+  root.add(new THREE.Points(pg,new THREE.PointsMaterial({map:glowTex,size:.22,vertexColors:true,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false})));
+  var shards=SHD.map(function(s){
+    var geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.BufferAttribute(new Float32Array(lune(s.a0,s.a0+Math.PI/2,PR)),3));geo.computeVertexNormals();
+    var c=shardCol(s);
+    var m=new THREE.Mesh(geo,gemMat(new THREE.Color(0xffffff).lerp(c,.85),false,s.cols[0]*2.3));
+    var e=new THREE.LineSegments(new THREE.EdgesGeometry(geo,25),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));
+    var g=new THREE.Group();g.add(m);g.add(e);centre.add(g);
+    var beams=s.cols.map(function(ci){
+      var bg=new THREE.BufferGeometry();bg.setAttribute("position",new THREE.BufferAttribute(new Float32Array(6),3));
+      var l=new THREE.Line(bg,new THREE.LineBasicMaterial({color:COLS[ci],transparent:true,opacity:0,blending:THREE.AdditiveBlending}));root.add(l);
+      return {l:l,ci:ci,col:new THREE.Color(COLS[ci])};
+    });
+    return {g:g,m:m,e:e,d:new THREE.Vector3(s.dir[0],s.dir[1],s.dir[2]).normalize(),v:0,beams:beams};
+  });
+  var halo=new THREE.Mesh(new THREE.TorusGeometry(2.35,.008,8,160),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));root.add(halo);
+  var halo2=new THREE.Mesh(new THREE.TorusGeometry(2.6,.006,8,160),new THREE.MeshBasicMaterial({color:0xb9c2ff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));root.add(halo2);
+
+  /* --- interazione: trascina per ruotare, parallasse col mouse --- */
+  var drag=null,rotX=-.12,rotY=0,autoY=0,px=0,py=0;
+  var raycaster=new THREE.Raycaster(),ndc=new THREE.Vector2();
+  function pick(cx,cy){
+    var r=renderer.domElement.getBoundingClientRect();
+    ndc.set(((cx-r.left)/r.width)*2-1,-((cy-r.top)/r.height)*2+1);
+    raycaster.setFromCamera(ndc,camera);
+    /* dalla vista generale il pianeta si prende tutto insieme; una volta vicino, tocchi le singole placche */
+    var near=focus&&(focus.type==="center"||focus.type==="shard");
+    var h=raycaster.intersectObjects(shards.filter(function(s){return s.v>.05;}).map(function(s){return s.m;}),false)[0];
+    if(h){if(!near)return {type:"center"};for(var k=0;k<4;k++)if(shards[k].m===h.object)return {type:"shard",i:k};}
+    h=raycaster.intersectObjects(gems.map(function(g){return g.hit;}),false)[0];
+    if(h){for(var i=0;i<4;i++)if(gems[i].hit===h.object)return {type:"gem",i:i};}
+    if(raycaster.intersectObject(centerHit,false)[0])return {type:"center"};
+    return null;
+  }
+  stage.addEventListener("pointerdown",function(e){drag={x:e.clientX,y:e.clientY,rx:rotX,ry:rotY,t:Date.now()};try{stage.setPointerCapture(e.pointerId);}catch(_){}});
+  stage.addEventListener("pointermove",function(e){
+    if(!drag){if(e.pointerType==="mouse")stage.style.cursor=pick(e.clientX,e.clientY)?"pointer":"grab";return;}
+    if(focus)return;
+    rotY=drag.ry+(e.clientX-drag.x)*.01;rotX=Math.max(-.8,Math.min(.8,drag.rx+(e.clientY-drag.y)*.01));
+  });
+  stage.addEventListener("pointerup",function(e){
+    var d=drag;drag=null;
+    if(d&&Math.abs(e.clientX-d.x)<8&&Math.abs(e.clientY-d.y)<8&&Date.now()-d.t<500&&api.onPick)api.onPick(pick(e.clientX,e.clientY));
+  });
+  stage.addEventListener("pointercancel",function(){drag=null;});
+  var focus=null,focusAmt=0,baseZ=12,camLook=new THREE.Vector3(),camGoal=new THREE.Vector3(),lookGoal=new THREE.Vector3();
+  api.focus=function(f){focus=f||null;};
+  window.addEventListener("pointermove",function(e){if(e.pointerType==="mouse"){px=(e.clientX/window.innerWidth-.5);py=(e.clientY/window.innerHeight-.5);}});
+
+  var composer=null,bloom=null;
+  try{
+    if(THREE.EffectComposer&&THREE.UnrealBloomPass&&THREE.GammaCorrectionShader){
+      /* buffer a 16 bit dove si può: niente gradini nell'alone */
+      THREE.POST_HALF=!!(renderer.capabilities.isWebGL2&&renderer.extensions.get("EXT_color_buffer_float"));
+      composer=new THREE.EffectComposer(renderer);
+      composer.addPass(new THREE.RenderPass(scene,camera));
+      bloom=new THREE.UnrealBloomPass(new THREE.Vector2(256,256),.7,.5,.72);composer.addPass(bloom);
+      composer.addPass(new THREE.ShaderPass(THREE.GammaCorrectionShader));
+    }
+  }catch(e){composer=null;}
+  function resize(){
+    var w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;
+    renderer.setSize(w,h,false);if(composer){composer.setPixelRatio(renderer.getPixelRatio());composer.setSize(w,h);}camera.aspect=w/h;var a=w/h;
+    baseZ=a<.6?19:a<.75?17:a<1.1?13.5:12.5;if(!focus)camera.position.z=baseZ;root.position.y=a<.6?2.7:a<.75?2.3:a<1.1?1.4:.6;
+    camera.updateProjectionMatrix();
+  }
+  try{new ResizeObserver(resize).observe(stage);}catch(_){window.addEventListener("resize",resize);}
+  resize();
+
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,t=0,dt=.016;
+  api.setCalm=function(b){reduce=!!b;};
+  var tmp=new THREE.Vector3(),tmp2=new THREE.Vector3(),YAXIS=new THREE.Vector3(0,1,0);
+  function frame(){
+    if(!reduce)t+=dt;
+    starMats.forEach(function(m){m.uniforms.uTime.value=t;});
+    sky.rotation.y=t*.004;stars.rotation.y=t*.003;bright.rotation.y=t*.003;dust.rotation.y=-t*.02;
+    spark1.position.set(Math.cos(t*.7)*5,Math.sin(t*.5)*3,4);spark2.position.set(Math.cos(t*.6+3)*5,Math.sin(t*.8+1)*3,3);
+    focusAmt+=((focus?1:0)-focusAmt)*.06;
+    var portrait=camera.aspect<1.1;
+    if(focus){
+      if(focus.type==="gem")gems[focus.i].g.getWorldPosition(lookGoal);
+      else if(focus.type==="shard"){centre.getWorldPosition(lookGoal);lookGoal.x+=shards[focus.i].d.x*.35;lookGoal.y+=shards[focus.i].d.y*.35;}
+      else root.getWorldPosition(lookGoal);
+      var dist=focus.type==="gem"?(portrait?8.6:6.6):focus.type==="center"?(portrait?10.5:7.8):(portrait?10:7.4),drop=portrait?1.9:.6;
+      lookGoal.y-=drop;camGoal.set(lookGoal.x,lookGoal.y,lookGoal.z+dist);
+    }else{lookGoal.set(0,0,0);camGoal.set(px*1.2,-py*.8,baseZ);}
+    camera.position.lerp(camGoal,reduce?.25:.06);camLook.lerp(lookGoal,reduce?.25:.06);camera.lookAt(camLook);
+
+    if(!reduce){
+      if(SH.t<0){SH.next-=dt;if(SH.next<=0){SH.t=0;var side=Math.random()<.5?-1:1;SH.a.set(side*(10+Math.random()*25),14+Math.random()*12,-55-Math.random()*20);SH.dir.set(-side*(.7+Math.random()*.5),-.5,0).normalize();}}
+      else{SH.t+=dt;var p=SH.t/1.1;var arr=shGeo.attributes.position.array;
+        if(p>1){SH.t=-1;SH.next=9+Math.random()*14;shoot.material.opacity=0;}
+        else{SH.h.copy(SH.a).addScaledVector(SH.dir,p*40);arr[0]=SH.h.x;arr[1]=SH.h.y;arr[2]=SH.h.z;arr[3]=SH.h.x-SH.dir.x*8;arr[4]=SH.h.y-SH.dir.y*8;arr[5]=SH.h.z;shGeo.attributes.position.needsUpdate=true;shoot.material.opacity=Math.sin(p*Math.PI);}}
+    }
+
+    var al=0;
+    gems.forEach(function(G,i){
+      G.v+=(api.gem[i]-G.v)*.05;
+      var pol=api.polish[i]||0,dim=focus&&!(focus.type==="gem"&&focus.i===i)?.35:1;
+      var s=.45+.5*G.v+.1*pol;G.g.scale.set(s,s,s);
+      G.g.position.y=G.base[1]+(reduce?0:Math.sin(t*1.2+i*1.7)*.1);
+      G.m.rotation.y=G.back.rotation.y=G.e.rotation.y=G.inner.rotation.y=G.spk.rotation.y=t*.45*(i%2?1:-1)+i;
+      G.m.rotation.z=G.back.rotation.z=G.e.rotation.z=G.inner.rotation.z=G.spk.rotation.z=.15*Math.sin(t*.6+i);
+      var gl=Math.min(1,G.v*.85+pol*.3);
+      [G.m,G.back].forEach(function(M){var u=M.material.uniforms;u.uGlow.value=gl*dim;u.uOpacity.value=(.55+.45*G.v)*(dim<1?.6:1);u.uTime.value=t;});
+      G.inner.material.opacity=(.2*G.v+.12*pol)*dim*(reduce?1:.8+.2*Math.sin(t*2+i));
+      G.e.material.opacity=(.06+.22*G.v)*dim;
+      G.spk.material.uniforms.uAlpha.value=(.15+.85*G.v)*dim;G.spk.material.uniforms.uTime.value=t+i*3.1;
+      G.glow.material.opacity=(.05+.42*G.v+.2*pol)*dim;var gs=1.6+2.4*G.v+1.2*pol;G.glow.scale.set(gs,gs,1);
+    });
+    var pi=0;
+    shards.forEach(function(S,k){
+      S.v+=(api.shard[k]-S.v)*.045;al+=S.v;
+      var off=(1-Math.min(1,S.v/.85))*.75+(reduce?0:Math.sin(t*.9+k)*.02*(1-S.v));if(focus&&focus.type==="shard"&&focus.i===k)off+=.22*focusAmt;/* la placca guardata si solleva un po' */
+      S.g.position.set(S.d.x*off,S.d.y*off,S.d.z*off);
+      var sdim=focus&&focus.type!=="center"&&!(focus.type==="shard"&&focus.i===k)?.4:1;
+      var su=S.m.material.uniforms;su.uOpacity.value=S.v<.05?0:(.35+.65*S.v)*(sdim<1?.6:1);su.uGlow.value=(.15+.85*S.v)*sdim;su.uTime.value=t;
+      S.e.material.opacity=S.v<.05?0:(.3+.5*S.v)*sdim;
+      S.e.material.color.setHex(S.v>0&&S.v<.3?0xff5a5a:0xffffff);
+      S.beams.forEach(function(b){
+        var pa=b.l.geometry.attributes.position.array;
+        tmp.copy(gems[b.ci].g.position);tmp2.copy(S.d).multiplyScalar(PR*.75).add(S.g.position).applyAxisAngle(YAXIS,centre.rotation.y);
+        pa[0]=tmp.x;pa[1]=tmp.y;pa[2]=tmp.z;pa[3]=tmp2.x;pa[4]=tmp2.y;pa[5]=tmp2.z;b.l.geometry.attributes.position.needsUpdate=true;
+        b.l.material.opacity=S.v<.3?S.v*.5:.15+.4*S.v;
+        var bright=S.v<.3?0:S.v;
+        for(var j=0;j<PART;j++){
+          var f=reduce?j/PART:((t*.35+j/PART+k*.13)%1);
+          pp[pi*3]=tmp.x+(tmp2.x-tmp.x)*f;pp[pi*3+1]=tmp.y+(tmp2.y-tmp.y)*f;pp[pi*3+2]=tmp.z+(tmp2.z-tmp.z)*f;
+          var fade=Math.sin(f*Math.PI)*bright;pc[pi*3]=b.col.r*fade;pc[pi*3+1]=b.col.g*fade;pc[pi*3+2]=b.col.b*fade;pi++;
+        }
+      });
+    });
+    pg.attributes.position.needsUpdate=true;pg.attributes.color.needsUpdate=true;
+    al/=4;
+    var full=Math.max(0,(al-.7)/.3),pulse=reduce?1:.8+.2*Math.sin(t*2.5);
+    centre.rotation.y=reduce?0:Math.sin(t*.25)*.55;
+    coreMat.uniforms.uTime.value=t;coreMat.uniforms.uCore.value=Math.min(1,al*.6+full*.6);
+    coreMat.uniforms.uV.value.set(shards[0].v,shards[1].v,shards[2].v,shards[3].v);
+    atmo.material.uniforms.uA.value=(.2+al*.45+full*.35)*(1-.45*focusAmt);
+    ring.material.uniforms.uA.value=Math.max(0,(al-.45)/.55)*.5;ring.material.uniforms.uTime.value=t;ring.rotation.z=.32+(reduce?0:Math.sin(t*.2)*.04);
+    core.intensity=full*1.8*pulse*(1-.5*focusAmt);
+    coreGlow.material.opacity=(al*.25+full*.6)*pulse;var cg=2+full*3;coreGlow.scale.set(cg,cg,1);
+    halo.material.opacity=full*.7;halo2.material.opacity=full*.4;
+    halo.rotation.set(Math.PI/2+.3,t*.4,0);halo2.rotation.set(Math.PI/2-.25,-t*.3,.2);
+    if(!drag&&!focus)autoY+=reduce?0:.0025;
+    var fr=1-focusAmt;root.rotation.set(rotX*fr,(rotY+Math.sin(autoY)*.35)*fr,0);
+    spkMats.forEach(function(m){m.uniforms.uPR.value=renderer.getPixelRatio();});
+    if(composer)composer.render();else renderer.render(scene,camera);
+  }
+  var perf={n:0,sum:0,last:0};
+  function loop(){
+    var now=performance.now();
+    if(perf.last&&composer&&perf.n<150&&!document.hidden){var d=now-perf.last;if(d<200){perf.sum+=d;perf.n++;}
+      if(perf.n===150&&perf.sum/perf.n>32){composer=null;renderer.setPixelRatio(1);resize();}}
+    perf.last=now;frame();requestAnimationFrame(loop);
+  }
+  loop();
+  api.snapshot=function(){
+    frame();
+    var c=document.createElement("canvas");c.width=renderer.domElement.width;c.height=renderer.domElement.height;
+    c.getContext("2d").drawImage(renderer.domElement,0,0);return c;
+  };
+  return api;
+})();
+
+/* ===================== preferenze ===================== */
+var PREF_KEY="mappa-ikigai-prefs";
+var OS_CALM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var prefs={voice:"blip",sfx:true,music:false,speed:"normale",auto:true,big:false,calm:OS_CALM,muted:false};
+try{var _p=JSON.parse(localStorage.getItem(PREF_KEY)||"null");if(_p&&typeof _p==="object")Object.keys(prefs).forEach(function(k){if(k in _p)prefs[k]=_p[k];});}catch(e){}
+function savePrefs(){try{localStorage.setItem(PREF_KEY,JSON.stringify(prefs));}catch(e){}}
+var SPEED={lenta:{type:46,read:1.45},normale:{type:30,read:1},veloce:{type:14,read:.65}};
+var reduce=prefs.calm;
+function applyPrefs(){
+  reduce=!!prefs.calm;
+  document.documentElement.classList.toggle("calm",reduce);
+  document.documentElement.classList.toggle("big",!!prefs.big);
+  if(Scene3D&&Scene3D.setCalm)Scene3D.setCalm(reduce);
+  var mb=document.getElementById("muteBtn");
+  mb.setAttribute("aria-pressed",prefs.muted?"true":"false");
+  mb.setAttribute("aria-label",prefs.muted?"Riattiva l'audio":"Disattiva l'audio");
+  Sound.setMuted(prefs.muted);
+  Sound.music(prefs.music&&!prefs.muted);
+  if((prefs.muted||prefs.voice!=="tts")&&"speechSynthesis" in window){try{speechSynthesis.cancel();}catch(e){}}
+}
+
+/* ===================== audio generato nel browser ===================== */
+var Sound=(function(){
+  var ctx=null,master=null,music=null,unlocked=false;
+  function ensure(){
+    if(!unlocked)return null;
+    if(!ctx){
+      var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
+      try{ctx=new AC();master=ctx.createGain();master.gain.value=prefs.muted?0:1;master.connect(ctx.destination);}catch(e){ctx=null;return null;}
+    }
+    if(ctx.state==="suspended"){try{ctx.resume();}catch(e){}}
+    return ctx;
+  }
+  function tone(f,dur,type,vol,delay,slide){
+    var c=ensure();if(!c)return;
+    var t0=c.currentTime+(delay||0),o=c.createOscillator(),g=c.createGain();
+    o.type=type||"sine";o.frequency.setValueAtTime(f,t0);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t0+dur);
+    g.gain.setValueAtTime(.0001,t0);g.gain.exponentialRampToValueAtTime(vol,t0+.012);g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+    o.connect(g);g.connect(master);o.start(t0);o.stop(t0+dur+.03);
+  }
+  function startMusic(){
+    var c=ensure();if(!c||music)return;
+    var g=c.createGain();g.gain.value=0;g.connect(master);
+    var f=c.createBiquadFilter();f.type="lowpass";f.frequency.value=650;f.Q.value=.6;f.connect(g);
+    var oscs=[110,164.81,246.94,329.63,415.3].map(function(fr,i){var o=c.createOscillator();o.type=i%2?"triangle":"sine";o.frequency.value=fr;o.detune.value=(Math.random()-.5)*12;o.connect(f);o.start();return o;});
+    var lfo=c.createOscillator(),lg=c.createGain();lfo.frequency.value=.06;lg.gain.value=320;lfo.connect(lg);lg.connect(f.frequency);lfo.start();
+    g.gain.setTargetAtTime(.022,c.currentTime,2);
+    music={g:g,oscs:oscs,lfo:lfo};
+  }
+  function stopMusic(){
+    if(!music||!ctx)return;var m=music;music=null;
+    m.g.gain.setTargetAtTime(0,ctx.currentTime,.5);
+    setTimeout(function(){m.oscs.forEach(function(o){try{o.stop();}catch(e){}});try{m.lfo.stop();}catch(e){}},2500);
+  }
+  return {
+    unlock:function(){unlocked=true;ensure();},
+    setMuted:function(m){if(master&&ctx)master.gain.setTargetAtTime(m?0:1,ctx.currentTime,.05);},
+    music:function(on){if(on)startMusic();else stopMusic();},
+    blip:function(){if(prefs.muted||prefs.voice!=="blip")return;tone(480+Math.random()*360,.055,"triangle",.045);},
+    pop:function(){if(prefs.muted||!prefs.sfx)return;tone(330,.13,"sine",.07,0,700);},
+    tap:function(){if(prefs.muted||!prefs.sfx)return;tone(880,.05,"sine",.035);},
+    chime:function(i){if(prefs.muted||!prefs.sfx)return;var f=[659.25,987.77,783.99,880][i%4];tone(f,1.3,"sine",.07);tone(f*2,.9,"sine",.02,.01);},
+    fit:function(){if(prefs.muted||!prefs.sfx)return;[523.25,659.25,783.99,1046.5].forEach(function(f,i){tone(f,.7,"sine",.055,i*.08);});},
+    whoosh:function(){if(prefs.muted||!prefs.sfx)return;tone(220,.35,"sine",.04,0,520);}
+  };
+})();
+document.addEventListener("pointerdown",function first(){Sound.unlock();if(prefs.music&&!prefs.muted)Sound.music(true);document.removeEventListener("pointerdown",first);});
+document.addEventListener("keydown",function firstK(){Sound.unlock();document.removeEventListener("keydown",firstK);});
+
+/* ===================== stato e salvataggio ===================== */
+var KEY="mappa-ikigai-v1";
+var sel={},free={},follow={},turns=[],talkLog=[],missions=[],analysis="",finished=false,created=null;
+var mode="title",busy=false,baseRs=null,lastSig="",newlyDone=0,pendingUpdate="",focused=null;
+function persist(){
+  if(!finished)return;
+  try{localStorage.setItem(KEY,JSON.stringify({v:1,created:created,sel:sel,free:free,follow:follow,turns:turns,talkLog:talkLog.slice(-80),missions:missions,analysis:analysis,finished:true}));}catch(e){}
+}
+function readSaved(){try{var raw=localStorage.getItem(KEY);if(!raw)return null;var s=JSON.parse(raw);return (s&&s.v===1&&s.finished)?s:null;}catch(e){return null;}}
+function restore(){
+  var s=readSaved();if(!s)return false;
+  sel=s.sel||{};free=s.free||{};follow=s.follow||{};turns=Array.isArray(s.turns)?s.turns:[];talkLog=Array.isArray(s.talkLog)?s.talkLog:[];
+  missions=Array.isArray(s.missions)?s.missions:[];analysis=s.analysis||"";created=s.created||null;finished=true;return true;
+}
+function wipe(){try{localStorage.removeItem(KEY);}catch(e){}}
+
+/* ===================== capacità della pagina ===================== */
+var sampleFn=null,downloadsApi=null,samplePromise=Promise.resolve(null);
+var INV_KEY="mappa-ikigai-invito",API_URL="/api/iki";
+function aiErr(c){var e=new Error(c);e.code=c;return e;}
+async function apiCall(task,code,data){
+  var r,j=null;
+  try{r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({task:task,code:code,data:data||{}})});}
+  catch(e){throw aiErr("network");}
+  try{j=await r.json();}catch(e){}
+  if(!r.ok||!j||j.error)throw aiErr((j&&j.error)||("http_"+r.status));
+  return j.result;
+}
+/* Iki ragiona con Claude attraverso la funzione del sito: l'app manda dati, i prompt stanno sul server */
+function makeAI(code){return {code:code,task:function(task,data){return apiCall(task,code,data);}};}
+downloadsApi={save:function(o){return new Promise(function(res){
+  var u=URL.createObjectURL(o.data),a=document.createElement("a");a.href=u;a.download=o.filename||"immagine.png";
+  document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();res();},400);
+});}};
+var HARD_STOP=["invite_invalid","not_configured","no_credit"];
+
+/* ===================== utilità ===================== */
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+function avg(a){return (a[0]+a[1]+a[2]+a[3])/4;}
+function pct(v){return Math.round(v*100);}
+function zoneIdx(id){for(var k=0;k<4;k++)if(ZONES[k].id===id)return k;return -1;}
+function circleById(id){return CIRCLES.filter(function(c){return c.id===id;})[0];}
+function circleByGem(i){return CIRCLES.filter(function(c){return GEM_INDEX[c.id]===i;})[0];}
+function capFirst(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+
+/* ===================== scena: etichetta ===================== */
+var stageEl=document.getElementById("stage"),stageAl=document.getElementById("stageAl");
+function updateStageLabel(){
+  var al=avg(Scene3D.shard),lit=Scene3D.gem.filter(function(v){return v>=.99;}).length;
+  var txt="";
+  if(focused){
+    if(focused.type==="gem"){var c=circleByGem(focused.i);txt=c.cap+" · "+c.nome.toLowerCase();}
+    else if(focused.type==="shard"){var z=ZONES[focused.i];txt="Frammento "+z.nome+" · "+LAB[shardState(shardValue(focused.i))];}
+    else txt="Cristallo centrale · "+pct(al)+"%";
+  }else if(mode!=="title"){
+    if(al>0)txt=(al>=.75?"Cristallo formato · ":"Allineamento ")+pct(al)+"%";
+    else if(lit)txt=lit===1?"1 cristallo acceso su 4":lit+" cristalli accesi su 4";
+  }
+  stageAl.textContent=txt;stageAl.hidden=!txt;
+  stageEl.setAttribute("aria-label",al>=.75?"Il pianeta di cristallo si è formato":"Quattro cristalli sospesi nello spazio, "+lit+" accesi");
+}
+
+/* ===================== Iki ===================== */
+var mascot=document.getElementById("mascot");
+function iki(state,gesture){mascot.setAttribute("class","iki"+(state?" "+state:"")+(gesture?" g-"+gesture:""));}
+function cheer(){iki("happy","cheer");setTimeout(function(){if(mascot.getAttribute("class")==="iki happy g-cheer")iki("happy");},1500);}
+var itVoice=null;
+function pickVoice(){try{var v=speechSynthesis.getVoices();itVoice=v.filter(function(x){return /^it/i.test(x.lang);})[0]||null;}catch(e){}}
+var HAS_TTS="speechSynthesis" in window;
+if(HAS_TTS){pickVoice();try{speechSynthesis.onvoiceschanged=pickVoice;}catch(e){}}
+function speak(text){
+  if(prefs.muted||prefs.voice!=="tts"||!HAS_TTS)return null;
+  return new Promise(function(res){
+    try{
+      var u=new SpeechSynthesisUtterance(text);u.lang="it-IT";if(itVoice)u.voice=itVoice;u.rate=1.05;u.pitch=1.3;
+      var done=false;function fin(){if(!done){done=true;res();}}
+      u.onend=u.onerror=fin;speechSynthesis.speak(u);setTimeout(fin,Math.min(16000,text.length*90+1500));
+    }catch(e){res();}
+  });
+}
+
+/* ===================== fumetti ===================== */
+/* Tastiera del telefono: l'app segue l'area davvero visibile, così il campo di testo resta sopra la tastiera */
+(function(){
+  var vv=window.visualViewport;if(!vv)return;
+  var root=document.documentElement;
+  function fit(){root.style.setProperty("--vvh",Math.round(vv.height)+"px");root.style.setProperty("--vvt",Math.round(vv.offsetTop)+"px");}
+  vv.addEventListener("resize",fit);vv.addEventListener("scroll",fit);fit();
+})();
+var speech=document.getElementById("speech"),answers=document.getElementById("answers"),composer=document.getElementById("composer"),input=document.getElementById("input"),send=document.getElementById("send");
+var skipFlag=false;
+var lastUserAct=0;
+function skip(){skipFlag=true;lastUserAct=Date.now();}
+["pointerdown","keydown"].forEach(function(t){document.addEventListener(t,function(){lastUserAct=Date.now();},true);});
+function readPause(){
+  if(!current||!current._readyAt||lastUserAct>current._shownAt)return Promise.resolve();
+  var ms=current._readyAt-Date.now();
+  if(ms<=0)return Promise.resolve();
+  if(!current.querySelector(".more"))current.appendChild(el("span","more","tocca per andare avanti"));
+  return wait(ms);
+}
+mascot.addEventListener("click",skip);
+function wait(ms){
+  skipFlag=false;
+  return new Promise(function(res){var s=Date.now(),iv=setInterval(function(){if(skipFlag||Date.now()-s>=ms){clearInterval(iv);skipFlag=false;res();}},50);});
+}
+function readTime(text){return prefs.auto?Math.min(15000,(2200+text.length*62)*SPEED[prefs.speed].read):Infinity;}
+function chunks(text){
+  var parts=(text.replace(/\s+/g," ").match(/[^.!?…]+[.!?…]*\s*/g)||[text]).map(function(p){return p.trim();}),out=[],cur="";
+  parts.forEach(function(p){if(!p)return;if(cur&&(cur+" "+p).length>190){out.push(cur);cur=p;}else{cur=cur?cur+" "+p:p;}});
+  if(cur)out.push(cur);return out.length?out:[text];
+}
+function logPush(who,text){talkLog.push({who:who,text:text});if(talkLog.length>120)talkLog.shift();persist();}
+function dismiss(b){
+  if(!b||!b.parentNode)return Promise.resolve();
+  if(reduce){b.remove();return Promise.resolve();}
+  b.classList.remove("pop");b.classList.add("away");
+  return new Promise(function(r){setTimeout(function(){b.remove();r();},480);});
+}
+var current=null;
+async function say(text,opts){
+  opts=opts||{};
+  if(current){await readPause();var c=current;current=null;await dismiss(c);}
+  logPush("bot",text);
+  var list=opts.noSplit?[text]:chunks(text),last=null,step=SPEED[prefs.speed].type;
+  for(var i=0;i<list.length;i++){
+    var part=list[i],isLast=i===list.length-1;
+    var b=el("div","balloon pop");b.tabIndex=0;b.setAttribute("role","note");
+    if(opts.cap)b.appendChild(el("span","cap",opts.cap));
+    var tn=document.createTextNode("");b.appendChild(tn);
+    b.addEventListener("click",skip);
+    b.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();skip();}});
+    speech.appendChild(b);Sound.pop();
+    iki("talk",opts.gesture);
+    var sp=speak(part);
+    if(reduce){tn.data=part;}
+    else{
+      skipFlag=false;
+      for(var k=0;k<part.length;k+=2){
+        if(skipFlag)break;tn.data=part.slice(0,k+2);
+        if(!sp&&k%6===0&&/\S/.test(part.charAt(k)))Sound.blip();
+        await sleep(step);
+      }
+      tn.data=part;skipFlag=false;
+    }
+    if(sp)await sp;
+    if(opts.mood==="happy")cheer();else iki(opts.mood||null,opts.hold?opts.gesture:null);
+    if(isLast&&opts.keep){last=b;b._shownAt=Date.now();b._readyAt=Date.now()+readTime(part);break;}
+    b.appendChild(el("span","more",isLast?"tocca per andare avanti":"tocca per continuare"));
+    await wait(opts.pause?opts.pause*SPEED[prefs.speed].read:readTime(part));
+    await dismiss(b);
+  }
+  current=last;
+  return last;
+}
+function thinking(){
+  if(current){dismiss(current);current=null;}
+  var b=el("div","balloon thought pop");b.innerHTML="<span>.</span><span>.</span><span>.</span>";b.setAttribute("aria-label","Iki ci sta pensando");
+  speech.appendChild(b);iki("think","chin");return b;
+}
+async function meSay(text){
+  logPush("me",text);
+  if(current){var c=current;current=null;dismiss(c);}
+  var b=el("div","balloon me pop",text);speech.appendChild(b);
+  await sleep(reduce?600:1100);await dismiss(b);
+}
+
+/* ===================== risposte ===================== */
+function clearAnswers(){answers.innerHTML="";answers.classList.remove("duo");}
+function chip(label,cls){var b=el("button","chip"+(cls?" "+cls:""),label);b.type="button";b.addEventListener("click",function(){Sound.tap();});return b;}
+var pendingText=null,composerHandler=null;
+function showComposer(ph,handler){composer.hidden=false;input.disabled=false;send.disabled=false;input.placeholder=ph;input.value="";composerHandler=handler||null;}
+function hideComposer(){composer.hidden=true;pendingText=null;composerHandler=null;}
+input.addEventListener("focus",function(){setTimeout(function(){try{window.scrollTo(0,0);input.scrollIntoView({block:"nearest"});}catch(_){}},320);});
+composer.addEventListener("submit",function(ev){
+  ev.preventDefault();var v=input.value.trim();if(!v)return;
+  if(pendingText){input.value="";var f=pendingText;f(v);return;}
+  if(composerHandler&&!busy){input.value="";composerHandler(v);}
+});
+function choose(options){
+  return new Promise(function(res){
+    clearAnswers();hideComposer();
+    options.forEach(function(o,i){var b=chip(o,i===0?"go":"");b.style.animationDelay=(i*70)+"ms";b.onclick=function(){clearAnswers();meSay(o);res(o);};answers.appendChild(b);});
+  });
+}
+function ask(q,col){
+  return new Promise(function(res){
+    var picked=[];clearAnswers();answers.style.setProperty("--c",col);
+    var ok=chip("Conferma","go");ok.disabled=true;
+    q.o.forEach(function(o,i){
+      var b=chip(o[0]);b.setAttribute("aria-pressed","false");b.style.animationDelay=(i*60)+"ms";
+      b.onclick=function(){var j=picked.indexOf(i);if(j<0)picked.push(i);else picked.splice(j,1);b.setAttribute("aria-pressed",j<0?"true":"false");ok.disabled=!picked.length&&!input.value.trim();};
+      answers.appendChild(b);
+    });
+    ok.style.animationDelay="260ms";
+    function finish(text){
+      clearAnswers();hideComposer();picked.sort();
+      var said=picked.map(function(i){return q.o[i][0];});if(text)said.push(text);
+      meSay(said.join(", "));res({picks:picked,text:text||""});
+    }
+    ok.onclick=function(){finish(input.value.trim());};
+    answers.appendChild(ok);
+    answers.appendChild(el("p","hint","Puoi sceglierne più di una, o scrivere qui sotto"));
+    showComposer("Oppure rispondi con parole tue…");
+    input.oninput=function(){ok.disabled=!picked.length&&!input.value.trim();};
+    pendingText=function(v){finish(v);};
+  });
+}
+function askText(){
+  return new Promise(function(res){
+    clearAnswers();
+    var s=chip("Salta","ghost");s.onclick=function(){clearAnswers();hideComposer();meSay("Salto");res("");};
+    answers.appendChild(s);
+    showComposer("Scrivi la tua risposta…");input.oninput=null;
+    setTimeout(function(){try{input.focus({preventScroll:true});}catch(_){}},60);
+    pendingText=function(v){clearAnswers();hideComposer();meSay(v);res(v);};
+  });
+}
+async function askCircle(c,startN,total){
+  var lit=[];
+  for(var qi=0;qi<c.qs.length;qi++){
+    await say(c.qs[qi].t,{cap:c.cap+" · "+(startN+qi+1)+"/"+total,keep:true,noSplit:true});
+    var r=await ask(c.qs[qi],c.hex);
+    var picks=r.picks;
+    if(r.text){free[c.id+qi]=r.text;if(!picks.length){var t=thinking();picks=await classify(c.qs[qi],r.text);await dismiss(t);iki(null);}}
+    else delete free[c.id+qi];
+    sel[c.id+qi]=picks;
+    if(total===8)markProg(startN+qi+1);
+    lit=lit.concat(updateScene());
+  }
+  return lit;
+}
+
+/* ===================== avanzamento ===================== */
+var prog=document.getElementById("prog");
+function buildProg(){
+  prog.innerHTML="";
+  CIRCLES.forEach(function(c){c.qs.forEach(function(){var i=document.createElement("i");i.style.setProperty("--c",c.hex);prog.appendChild(i);});});
+  prog.hidden=false;
+}
+function markProg(n){
+  Array.prototype.forEach.call(prog.children,function(d,i){d.className=i<n?"on":(i===n?"now":"");});
+  prog.setAttribute("aria-label",n>=8?"Test completato":"Domanda "+(n+1)+" di 8");
+}
+
+/* ===================== calcoli ===================== */
+function counts(id){
+  var c=circleById(id),n={};
+  c.qs.forEach(function(q,qi){(sel[id+qi]||[]).forEach(function(i){var t=q.o[i]&&q.o[i][1];if(t)n[t]=(n[t]||0)+1;});});return n;
+}
+function done(id){return !!(sel[id+0]&&sel[id+1]);}
+function results(){
+  return ZONES.map(function(z){
+    var a=counts(z.a),b=counts(z.b),shared=[],score=0;
+    Object.keys(THEMES).forEach(function(t){if(a[t]&&b[t]){shared.push(t);score+=Math.min(a[t],b[t]);}});
+    return {z:z,shared:shared,st:score>=2?"ok":(score===1?"mid":"no")};
+  });
+}
+function shardValue(k){
+  if(!baseRs)return 0;
+  var n=missions.filter(function(m){return m.done&&m.zona===ZONES[k].id;}).length;
+  return Math.min(1,ZVAL[baseRs[k].st]+.22*n);
+}
+function shardState(v){return v>=.75?"ok":v>=.4?"mid":"no";}
+function polishOf(cid){
+  var n=missions.filter(function(m){if(!m.done)return false;var z=ZONES[zoneIdx(m.zona)];return z&&(z.a===cid||z.b===cid);}).length;
+  return Math.min(1,n*.25);
+}
+function applyShards(){
+  for(var k=0;k<4;k++)Scene3D.shard[k]=shardValue(k);
+  CIRCLES.forEach(function(c){Scene3D.polish[GEM_INDEX[c.id]]=polishOf(c.id);});
+  updateStageLabel();
+}
+var LIT_TXT={ok:"si è incastrato bene.",mid:"si è avvicinato, ma non si incastra del tutto.",no:"è rimasto staccato."};
+function updateScene(){
+  CIRCLES.forEach(function(c){
+    var n=(sel[c.id+0]?1:0)+(sel[c.id+1]?1:0),gi=GEM_INDEX[c.id];
+    if(n===2&&Scene3D.gem[gi]<1)Sound.chime(gi);
+    Scene3D.gem[gi]=n/2;
+  });
+  var rs=results(),lit=[];
+  rs.forEach(function(r,k){if(done(r.z.a)&&done(r.z.b)){if(!Scene3D.shard[k]){lit.push(r);if(r.st==="ok")setTimeout(Sound.fit,500);}Scene3D.shard[k]=ZVAL[r.st];}});
+  updateStageLabel();return lit;
+}
+
+/* ===================== Claude ===================== */
+function answerLine(c,qi){
+  var q=c.qs[qi],a=(sel[c.id+qi]||[]).map(function(i){return q.o[i]?q.o[i][0]:"";}).filter(Boolean);
+  if(free[c.id+qi])a.push("(con parole sue) "+free[c.id+qi]);
+  return q.t+" → "+(a.join("; ")||"nessuna scelta");
+}
+function ownWords(){
+  var L=[];
+  CIRCLES.forEach(function(c){
+    c.qs.forEach(function(q,qi){if(free[c.id+qi])L.push(c.nome+" — "+q.t+": "+free[c.id+qi]);});
+    if(follow[c.id]&&follow[c.id].a)L.push(c.nome+" — "+follow[c.id].q+": "+follow[c.id].a);
+  });
+  missions.forEach(function(m){if(m.done&&(m.nota||m.voto))L.push("Missione fatta «"+m.titolo+"» — "+(m.voto?"per lei è stata "+m.voto:"")+(m.nota?(m.voto?". ":"")+"Com'è andata: "+m.nota:""));});
+  return L;
+}
+function context(rs){
+  var L=[];
+  CIRCLES.forEach(function(c){
+    L.push(c.nome+":");
+    c.qs.forEach(function(q,qi){L.push("- "+answerLine(c,qi));});
+    if(follow[c.id]&&follow[c.id].a)L.push("- Approfondimento: "+follow[c.id].q+" → "+follow[c.id].a);
+  });
+  if(rs){L.push("Frammenti:");rs.forEach(function(r){L.push("- "+r.z.nome+" ("+r.z.d+"): "+LAB[r.st]+(r.shared.length?", temi in comune: "+r.shared.map(function(t){return THEMES[t];}).join(", "):""));});}
+  return L.join("\n");
+}
+var RULES="Ecco le risposte della persona:\n\n";
+async function classify(q,text){
+  if(!sampleFn)return [];
+  try{
+    var opts=q.o.map(function(o,i){return i+": "+o[0];}).join("\n");
+    var d=await sampleFn.task("classify",{domanda:q.t,opzioni:q.o.map(function(o){return o[0];}),testo:text});
+    var arr=(d&&Array.isArray(d.scelte))?d.scelte:[];
+    return arr.map(Number).filter(function(n,i,a){return n>=0&&n<q.o.length&&a.indexOf(n)===i;}).slice(0,2);
+  }catch(e){if(e&&HARD_STOP.indexOf(e.code)>=0)sampleFn=null;return [];}
+}
+async function followQuestion(c){
+  if(!sampleFn)return STATIC_FOLLOW[c.id];
+  var picks=c.qs.map(function(q,qi){return answerLine(c,qi);}).join("\n");
+  var t=thinking(),out=STATIC_FOLLOW[c.id];
+  try{
+    var d=await sampleFn.task("follow",{cristallo:c.nome,risposte:picks});
+    if(d&&typeof d.domanda==="string"&&d.domanda.trim())out=d.domanda.trim();
+  }catch(e){if(e&&HARD_STOP.indexOf(e.code)>=0)sampleFn=null;}
+  await dismiss(t);iki(null);return out;
+}
+function trimTurns(){while(turns.length>22)turns.splice(1,2);}
+async function askClaude(){
+  busy=true;
+  await readPause();
+  var t=thinking();
+  try{
+    var r=await sampleFn.task("chat",{messages:turns});
+    turns.push({role:"assistant",content:r.text});trimTurns();persist();
+    await dismiss(t);
+    await say(r.text,{keep:true,mood:"happy"});
+    busy=false;return true;
+  }catch(e){
+    await dismiss(t);iki(null);busy=false;
+    var c=e&&e.code;turns.pop();persist();
+    if(HARD_STOP.indexOf(c)>=0){sampleFn=null;return false;}
+    await say(c==="rate_limited"?"Per oggi abbiamo chiacchierato parecchio. Riprova più tardi.":c==="network"?"Sembra che manchi la connessione. Riprova tra poco.":"Non sono riuscito a rispondere. Riprova a scrivermi.",{keep:true});
+    return false;
+  }
+}
+function missionNote(){
+  var notes=[];
+  if(missions.length){
+    var sig=missions.map(function(m){return m.id+(m.done?"1":"0");}).join(",");
+    if(sig!==lastSig){lastSig=sig;notes.push("Stato delle missioni: "+missions.map(function(m){return (m.done?"fatta":"da fare")+" – "+m.titolo;}).join("; ")+".");}
+  }
+  if(pendingUpdate){notes.push(pendingUpdate);pendingUpdate="";}
+  return notes.length?"("+notes.join(" ")+")":"";
+}
+async function talk(v,prefix){
+  if(!turns.length)turns=[{role:"user",content:RULES+context(results())+"\n\nLa persona ha già visto il suo risultato. Rispondi al messaggio che segue."}];
+  var note=missionNote();
+  turns.push({role:"user",content:(prefix?prefix+" ":"")+v+(note?"\n\n"+note:"")});
+  return askClaude();
+}
+
+/* ===================== missioni ===================== */
+function weakOrder(ids){return (ids||[0,1,2,3]).slice().sort(function(a,b){return shardValue(a)-shardValue(b);});}
+function staticMissions(){
+  var order=weakOrder(),pick=order.filter(function(k){return shardValue(k)<.75;});
+  if(pick.length<2)pick=order.slice(0,2);
+  return pick.slice(0,3).map(function(k,i){var z=ZONES[k];return fromStatic(z.id,i);});
+}
+function dayStr(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function todayStr(){return dayStr(new Date());}
+function dueIn(days){var d=new Date();d.setDate(d.getDate()+(days||5));return dayStr(d);}
+function daysLeft(entro){if(!entro)return null;var a=new Date(todayStr()+"T12:00:00"),b=new Date(entro+"T12:00:00");return Math.round((b-a)/864e5);}
+function dueLabel(m){
+  var n=daysLeft(m.entro);if(n===null)return "";
+  if(n<0)return n===-1?"scaduta ieri":"scaduta da "+(-n)+" giorni";
+  if(n===0)return "da fare oggi";if(n===1)return "entro domani";
+  return "entro "+new Date(m.entro+"T12:00:00").toLocaleDateString("it-IT",{weekday:"short",day:"numeric",month:"short"});
+}
+function fromStatic(zid,i){var sm=STATIC_MISSIONS[zid];return {id:"m"+Date.now()+(i||0),titolo:sm.titolo,zona:zid,perche:sm.perche,passi:sm.passi.slice(),tempo:sm.tempo,entro:dueIn(sm.giorni),creata:Date.now(),done:false};}
+function cleanMission(m,fallbackZone,i){
+  if(!m||typeof m.titolo!=="string"||!m.titolo.trim())return null;
+  var z=String(m.zona||"").toLowerCase().trim();if(zoneIdx(z)<0)z=fallbackZone;
+  var passi=Array.isArray(m.passi)?m.passi.filter(function(p){return typeof p==="string"&&p.trim();}).slice(0,3).map(function(p){return p.trim().slice(0,90);}):[];
+  var g=Math.round(Number(m.giorni));if(!isFinite(g)||g<1)g=5;
+  return {id:"m"+Date.now()+(i||0),titolo:m.titolo.trim().slice(0,110),zona:z,perche:String(m.perche||"").trim().slice(0,160),passi:passi,tempo:String(m.tempo||"").trim().slice(0,30),entro:dueIn(Math.min(14,g)),creata:Date.now(),done:false};
+}
+function stateLine(){return ZONES.map(function(z,k){return z.nome+": "+LAB[shardState(shardValue(k))];}).join(", ");}
+async function makeMissions(more){
+  await readPause();
+  var t=thinking(),list=null;
+  if(sampleFn){
+    try{
+      var doneList=missions.filter(function(m){return m.done;}).map(function(m){return m.titolo;});
+      var d=await sampleFn.task("missions",{profilo:context(baseRs),parole:ownWords(),stato:stateLine(),fatte:doneList});
+      var arr=(d&&Array.isArray(d.missioni))?d.missioni:[],weak=ZONES[weakOrder()[0]].id;
+      list=arr.map(function(m,i){return cleanMission(m,weak,i);}).filter(Boolean).slice(0,3);
+    }catch(e){if(e&&HARD_STOP.indexOf(e.code)>=0)sampleFn=null;}
+  }
+  await dismiss(t);iki(null);
+  if(!list||!list.length)list=staticMissions();
+  missions=more?missions.filter(function(m){return m.done;}).concat(list):list;
+  persist();applyShards();
+  pathBtn.hidden=false;
+  var nw=["","una missione","due missioni","tre missioni"][Math.min(3,list.length)];
+  var weakAny=[0,1,2,3].some(function(k){return shardValue(k)<.75;});
+  await say(more?"Ecco "+(list.length===1?"una nuova missione":"nuove missioni")+": le trovi in Percorso.":"Ti ho preparato "+nw+(weakAny?" per far rientrare i frammenti":" per tenere il cristallo in forma")+". Le trovi in Percorso, qui in alto.",{gesture:"point",keep:true});
+}
+async function missionFor(zoneKs,label){
+  busy=true;clearAnswers();hideComposer();
+  var t=thinking(),m=null,weakK=weakOrder(zoneKs)[0],fallback=ZONES[weakK].id;
+  if(sampleFn){
+    try{
+      var open=missions.filter(function(x){return !x.done;}).map(function(x){return x.titolo;});
+      var d=await sampleFn.task("mission",{profilo:context(baseRs),parole:ownWords(),stato:stateLine(),aperte:open,scartate:discarded.slice(-10),label:label,zone:zoneKs.map(function(k){return ZONES[k].id;})});
+      m=cleanMission(d,fallback,0);
+    }catch(e){if(e&&HARD_STOP.indexOf(e.code)>=0)sampleFn=null;}
+  }
+  await dismiss(t);iki(null);
+  if(!m){
+    var sm=STATIC_MISSIONS[fallback];
+    if(!missions.some(function(x){return !x.done&&x.titolo===sm.titolo;}))m=fromStatic(fallback,0);
+  }
+  if(m){missions.push(m);persist();pathBtn.hidden=false;Sound.chime(GEM_INDEX[ZONES[zoneIdx(m.zona)].a]);var tt=m.titolo.replace(/[.!]+$/,"");await say("Nuova missione: "+tt.charAt(0).toLowerCase()+tt.slice(1)+". La trovi in Percorso.",{keep:true,mood:"happy"});}
+  else await say("Hai già una missione aperta per "+label+". Completala in Percorso e poi te ne preparo un'altra.",{keep:true});
+  busy=false;
+}
+
+/* ===================== cassetti ===================== */
+var pathBtn=document.getElementById("pathBtn"),histBtn=document.getElementById("histBtn");
+var SHEETS=["pathSheet","histSheet","menuSheet","helpSheet"];
+function openSheet(id){
+  SHEETS.forEach(function(s){if(s!==id)closeSheet(s);});
+  var s=document.getElementById(id);s.hidden=false;Sound.whoosh();var b=s.querySelector("[data-close]");if(b)b.focus();
+}
+function closeSheet(id){
+  var s=document.getElementById(id);if(s.hidden)return;s.hidden=true;
+  if(id==="pathSheet")onPathClosed();
+}
+function anySheetOpen(){return SHEETS.some(function(s){return !document.getElementById(s).hidden;});}
+document.querySelectorAll("[data-close]").forEach(function(b){b.onclick=function(){closeSheet(b.getAttribute("data-close"));};});
+document.addEventListener("keydown",function(e){
+  if(e.key!=="Escape")return;
+  if(anySheetOpen()){SHEETS.forEach(closeSheet);return;}
+  if(focused&&!busy&&mode==="explore")leaveFocus();
+});
+histBtn.onclick=function(){
+  var h=document.getElementById("hist");h.innerHTML="";
+  if(!talkLog.length)h.appendChild(el("p","lead","Ancora niente da rileggere."));
+  talkLog.forEach(function(x){h.appendChild(el("div","h "+x.who,x.text));});
+  openSheet("histSheet");h.scrollTop=h.scrollHeight;
+};
+pathBtn.onclick=function(){renderPath();openSheet("pathSheet");};
+document.getElementById("muteBtn").onclick=function(){Sound.unlock();prefs.muted=!prefs.muted;savePrefs();applyPrefs();if(!prefs.muted)Sound.tap();if(!document.getElementById("menuSheet").hidden)renderMenu();};
+document.getElementById("menuBtn").onclick=function(){renderMenu();openSheet("menuSheet");};
+
+function zoneRows(box){
+  box.innerHTML="";
+  ZONES.forEach(function(z,k){
+    var v=shardValue(k),st=shardState(v);
+    var row=el("div","zrow");row.style.setProperty("--a",z.ca);row.style.setProperty("--b",z.cb);
+    row.appendChild(el("span","zgem"));
+    var info=el("div","zinfo");info.appendChild(el("b",null,z.nome));info.appendChild(el("small",null,z.d));
+    var bar=el("div","bar");var fill=el("i");fill.style.width=Math.max(4,pct(v))+"%";bar.appendChild(fill);info.appendChild(bar);
+    row.appendChild(info);row.appendChild(el("span","zst "+st,LAB[st]));
+    box.appendChild(row);
+  });
+}
+function twoStep(btn,label,armedLabel,action){
+  var armed=null;
+  btn.onclick=function(){
+    if(armed){clearTimeout(armed);armed=null;action();return;}
+    btn.textContent=armedLabel;
+    armed=setTimeout(function(){armed=null;btn.textContent=label;},4000);
+  };
+}
+var checkins=[],pathMsg="",discarded=[];
+function icsText(s){return String(s||"").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\;");}
+function missionIcs(m){
+  var d=(m.entro||dueIn(3)).replace(/-/g,""),now=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
+  var url=location.origin+"/ikigai/app";
+  var desc=(m.perche?m.perche+"\n\n":"")+((m.passi||[]).map(function(p,i){return (i+1)+". "+p;}).join("\n"))+"\n\nQuando l'hai fatta, spuntala qui: "+url;
+  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Mappa Ikigai//IT","CALSCALE:GREGORIAN","BEGIN:VEVENT",
+    "UID:"+m.id+"@mappa-ikigai","DTSTAMP:"+now,"DTSTART:"+d+"T180000","DTEND:"+d+"T183000",
+    "SUMMARY:"+icsText("Missione Ikigai: "+m.titolo),"DESCRIPTION:"+icsText(desc),"URL:"+url,
+    "BEGIN:VALARM","TRIGGER:-PT0M","ACTION:DISPLAY","DESCRIPTION:"+icsText("Iki ti ricorda: "+m.titolo),"END:VALARM",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+}
+function checkinBox(m,card,toast){
+  var box=el("div","mcheck");box.appendChild(el("p",null,"Com'è andata?"));
+  var row=el("div","row"),pick=m.voto||"";
+  ["facile","giusta","tosta"].forEach(function(v){
+    var bt=el("button",null,v==="facile"?"Facile":v==="giusta"?"Giusta":"Tosta");bt.type="button";bt.setAttribute("aria-pressed",pick===v?"true":"false");
+    bt.onclick=function(){pick=v;row.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===bt?"true":"false");});Sound.tap();};
+    row.appendChild(bt);
+  });
+  box.appendChild(row);
+  var ta=document.createElement("textarea");ta.maxLength=300;ta.placeholder="Raccontalo in una riga: cosa hai fatto, cosa hai scoperto…";ta.value=m.nota||"";box.appendChild(ta);
+  var ok=el("button","btn primary","Salva");ok.type="button";
+  ok.onclick=function(){
+    m.voto=pick;m.nota=ta.value.trim().slice(0,300);persist();
+    if(m.voto||m.nota){checkins=checkins.filter(function(x){return x.id!==m.id;});checkins.push(m);}
+    pathMsg="Grazie! Iki ne terrà conto per le prossime missioni.";renderPath();
+  };
+  box.appendChild(ok);return box;
+}
+function renderPath(){
+  var b=document.getElementById("pathBody");b.innerHTML="";
+  var toast=el("p","toast");toast.setAttribute("aria-live","polite");toast.textContent=pathMsg;pathMsg="";
+  var done=missions.filter(function(m){return m.done;}).length,open=missions.filter(function(m){return !m.done;});
+  if(missions.length){
+    var sum=el("div","msum");sum.appendChild(el("span","big",String(done)));
+    var st=el("div");st.appendChild(document.createTextNode(done===1?"missione fatta":"missioni fatte"));
+    var next=open.slice().sort(function(x,y){return (x.entro||"9")<(y.entro||"9")?-1:1;})[0];
+    st.appendChild(el("small",null,open.length?(open.length===1?"Una aperta":open.length+" aperte")+(next&&next.entro?" · la prossima è "+dueLabel(next):""):"Nessuna aperta: chiedine di nuove a Iki."));
+    sum.appendChild(st);b.appendChild(sum);
+  }
+  b.appendChild(el("p","lead","Ogni missione fatta avvicina il suo frammento al pianeta di cristallo. Quando ne spunti una, racconta a Iki com'è andata: le prossime partiranno da lì."));
+  if(!missions.length)b.appendChild(el("p","lead",finished?"Non hai ancora missioni. Chiedine una a Iki.":"Le missioni arrivano alla fine del test."));
+  var ordered=open.slice().sort(function(x,y){return (x.entro||"9")<(y.entro||"9")?-1:1;}).concat(missions.filter(function(m){return m.done;}).reverse());
+  ordered.forEach(function(m){
+    var z=ZONES[zoneIdx(m.zona)]||ZONES[0],late=!m.done&&daysLeft(m.entro)!==null&&daysLeft(m.entro)<0;
+    var card=el("div","mcard"+(m.done?" done":"")+(late?" late":""));
+    var top=el("div","mtop");
+    var tick=el("button","tick",m.done?"✓":"");tick.type="button";tick.setAttribute("aria-pressed",m.done?"true":"false");tick.setAttribute("aria-label",m.done?"Segna come da fare":"Segna come fatta");
+    top.appendChild(tick);
+    var txt=el("div");txt.appendChild(el("b",null,m.titolo));if(m.perche)txt.appendChild(el("span","mwhy",m.perche));top.appendChild(txt);
+    card.appendChild(top);
+    var meta=el("div","mmeta");
+    var zc=el("span","mchip");zc.style.setProperty("--a",z.ca);zc.style.setProperty("--b",z.cb);zc.appendChild(el("i"));zc.appendChild(document.createTextNode(z.nome));meta.appendChild(zc);
+    if(m.tempo)meta.appendChild(el("span","mchip","⏱ "+m.tempo));
+    if(!m.done&&m.entro)meta.appendChild(el("span","mchip"+(late?" late":""),dueLabel(m)));
+    if(m.done&&m.fatta)meta.appendChild(el("span","mchip","fatta il "+new Date(m.fatta).toLocaleDateString("it-IT",{day:"numeric",month:"short"})));
+    card.appendChild(meta);
+    if(!m.done&&m.passi&&m.passi.length){var ol=el("ol","msteps");m.passi.forEach(function(p){ol.appendChild(el("li",null,p));});card.appendChild(ol);}
+    if(m.done){
+      if(m.nota||m.voto){var nt=el("div","mnote",(m.voto?"È stata "+m.voto+". ":"")+(m.nota||""));nt.onclick=function(){card.replaceChild(checkinBox(m,card,toast),nt);};card.appendChild(nt);}
+      else card.appendChild(checkinBox(m,card,toast));
+    }else{
+      var act=el("div","mact");
+      var cal=el("button","btn","📅 Promemoria");cal.type="button";
+      cal.onclick=function(){downloadsApi.save({filename:"missione-ikigai.ics",data:new Blob([missionIcs(m)],{type:"text/calendar"})}).then(function(){toast.textContent="Aprilo per aggiungerlo al calendario: ti ricorderà la missione "+dueLabel(m)+".";});};
+      act.appendChild(cal);
+      if(sampleFn){
+        var talkB=el("button","btn","Parliamone");talkB.type="button";
+        talkB.onclick=function(){closeSheet("pathSheet");if(mode==="chat"&&!busy)chatSend("Parliamo della missione «"+m.titolo+"»: da dove parto?");};
+        act.appendChild(talkB);
+      }
+      var swap=el("button","btn","Cambiala");swap.type="button";
+      swap.onclick=function(){
+        if(busy)return;closeSheet("pathSheet");
+        missions=missions.filter(function(x){return x!==m;});persist();
+        var k=zoneIdx(m.zona);if(k<0)k=weakOrder()[0];
+        discarded.push(m.titolo);
+        missionFor([k],"il frammento "+ZONES[k].nome).then(function(){if(mode==="chat")chatMode();});
+      };
+      act.appendChild(swap);card.appendChild(act);
+    }
+    tick.onclick=function(){
+      m.done=!m.done;
+      var before=avg(Scene3D.shard);
+      if(m.done){m.fatta=Date.now();newlyDone++;Sound.fit();}else{m.fatta=null;newlyDone=Math.max(0,newlyDone-1);Sound.tap();}
+      applyShards();persist();
+      pathMsg=m.done?(avg(Scene3D.shard)>=.75&&before<.75?"Il pianeta di cristallo si è formato! ":"Il frammento "+z.nome+" si è avvicinato al centro. ")+"Com'è andata?":"Missione riaperta.";
+      renderPath();
+    };
+    b.appendChild(card);
+  });
+  b.appendChild(toast);
+  b.appendChild(el("h3",null,"Frammenti"));
+  var zb=el("div");zb.style.display="flex";zb.style.flexDirection="column";zb.style.gap="8px";b.appendChild(zb);zoneRows(zb);
+  var acts=el("div","actions");
+  if(downloadsApi&&Scene3D.ok&&finished){
+    var save=el("button","btn primary","Salva l'immagine del cristallo");save.type="button";
+    save.onclick=function(){saveImage(save,function(t){toast.textContent=t;});};acts.appendChild(save);
+  }
+  b.appendChild(acts);
+}
+async function onPathClosed(){
+  if(!newlyDone&&!checkins.length)return;
+  /* se Iki sta ancora parlando, aspetta che finisca invece di perdere il racconto */
+  for(var w=0;w<120&&(busy||mode!=="chat");w++){await sleep(250);if(!document.getElementById("pathSheet").hidden)return;}
+  if(busy||mode!=="chat")return;
+  var n=newlyDone;newlyDone=0;
+  var told=checkins.filter(function(m){return m.done&&(m.nota||m.voto);});checkins=[];
+  if(told.length&&sampleFn){
+    clearAnswers();hideComposer();
+    var msg=told.map(function(m){return "Ho completato la missione «"+m.titolo+"»"+(m.voto?", è stata "+m.voto:"")+(m.nota?". Com'è andata: "+m.nota:"")+".";}).join(" ");
+    await talk(msg+" Rispondimi in breve e dimmi cosa ne ricavi per il prossimo passo.","");
+    chatMode();return;
+  }
+  if(!n){return;}
+  busy=true;clearAnswers();hideComposer();
+  var formed=avg(Scene3D.shard)>=.75;
+  await say((n===1?"Bel colpo, una missione in meno!":"Bel colpo, "+n+" missioni in meno!")+(formed?" E il tuo pianeta di cristallo adesso è intero.":" Guarda lassù: il cristallo è più compatto."),{mood:"happy",keep:true,gesture:"point"});
+  busy=false;chatMode();
+}
+
+/* ===================== menu opzioni ===================== */
+function optRow(title,desc,control,col){
+  var r=el("div","opt"+(col?" col":""));var t=el("div","opt-t");t.appendChild(el("b",null,title));if(desc)t.appendChild(el("small",null,desc));r.appendChild(t);r.appendChild(control);return r;
+}
+function switchCtl(key,label,after){
+  var b=el("button","sw");b.type="button";b.setAttribute("role","switch");b.setAttribute("aria-checked",prefs[key]?"true":"false");b.setAttribute("aria-label",label);
+  b.onclick=function(){Sound.unlock();prefs[key]=!prefs[key];b.setAttribute("aria-checked",prefs[key]?"true":"false");savePrefs();applyPrefs();if(after)after();Sound.tap();};
+  return b;
+}
+function segCtl(key,opts,label,after){
+  var g=el("div","seg");g.setAttribute("role","group");g.setAttribute("aria-label",label);
+  opts.forEach(function(o){
+    var b=el("button",null,o[1]);b.type="button";b.setAttribute("aria-pressed",prefs[key]===o[0]?"true":"false");
+    b.onclick=function(){Sound.unlock();prefs[key]=o[0];savePrefs();applyPrefs();Array.prototype.forEach.call(g.children,function(x){x.setAttribute("aria-pressed","false");});b.setAttribute("aria-pressed","true");if(after)after(o[0]);};
+    g.appendChild(b);
+  });
+  return g;
+}
+function renderMenu(){
+  var b=document.getElementById("menuBody");b.innerHTML="";
+  b.appendChild(el("h3",null,"Audio"));
+  var vopts=[["blip","Versetti"],["tts","Voce"],["off","Muta"]];if(!HAS_TTS)vopts=[["blip","Versetti"],["off","Muta"]];
+  b.appendChild(optRow("Voce di Iki","Versetti da cartone animato, voce parlata del dispositivo o nessun suono.",segCtl("voice",vopts,"Voce di Iki",function(v){if(v==="tts"&&!prefs.muted){var p=speak("Ciao, sono Iki.");if(p)iki("talk");if(p)p.then(function(){iki(null);});}else if(v==="blip"){Sound.blip();setTimeout(Sound.blip,90);setTimeout(Sound.blip,180);}}),true));
+  b.appendChild(optRow("Effetti sonori","Fumetti, cristalli che si accendono, frammenti che si incastrano.",switchCtl("sfx","Effetti sonori")));
+  b.appendChild(optRow("Musica d'ambiente","Un sottofondo spaziale leggero.",switchCtl("music","Musica d'ambiente")));
+  b.appendChild(optRow("Disattiva tutto l'audio","Lo stesso del tasto con l'altoparlante.",switchCtl("muted","Disattiva tutto l'audio")));
+  b.appendChild(el("h3",null,"Lettura"));
+  b.appendChild(optRow("Velocità del testo","Quanto in fretta Iki scrive e quanto tempo ti lascia per leggere.",segCtl("speed",[["lenta","Lenta"],["normale","Normale"],["veloce","Veloce"]],"Velocità del testo"),true));
+  b.appendChild(optRow("Avanti in automatico","Se lo spegni, i fumetti restano finché non li tocchi.",switchCtl("auto","Avanti in automatico")));
+  b.appendChild(optRow("Testo più grande","Fumetti e risposte più leggibili.",switchCtl("big","Testo più grande")));
+  b.appendChild(optRow("Animazioni ridotte","Meno movimento nella scena e nei fumetti.",switchCtl("calm","Animazioni ridotte")));
+  b.appendChild(el("h3",null,"Il tuo cristallo"));
+  var acts=el("div","actions");
+  var redo=el("button","btn","Rifai il test");redo.type="button";
+  twoStep(redo,"Rifai il test","Tocca di nuovo: il cristallo attuale andrà perso",function(){wipe();try{location.reload();}catch(e){}});
+  var del=el("button","btn danger","Cancella tutti i miei dati");del.type="button";
+  twoStep(del,"Cancella tutti i miei dati","Tocca di nuovo per cancellare tutto",function(){wipe();try{localStorage.removeItem(PREF_KEY);}catch(e){}try{location.reload();}catch(e){}});
+  if(finished)acts.appendChild(redo);acts.appendChild(del);b.appendChild(acts);
+  b.appendChild(el("h3",null,"Informazioni"));
+  var help=el("button","btn","Come funziona");help.type="button";help.onclick=function(){openSheet("helpSheet");};
+  var acts2=el("div","actions");acts2.appendChild(help);b.appendChild(acts2);
+  b.appendChild(el("p","fine","Risposte, missioni e opzioni restano salvate solo in questo browser. Per l'analisi e la chat il testo passa dal server di Mappa Ikigai a Claude (Anthropic) e non viene conservato."));
+  b.appendChild(el("p","ver","Mappa Ikigai · versione 1.0"));
+}
+
+/* ===================== immagine da salvare ===================== */
+async function saveImage(btn,toast){
+  if(!downloadsApi){toast("Il salvataggio non è disponibile qui.");return;}
+  btn.disabled=true;var old=btn.textContent;btn.textContent="Preparo l'immagine…";
+  try{
+    try{await Promise.all([document.fonts.load('800 76px "Shippori Mincho"'),document.fonts.load('700 32px "Baloo 2"')]);}catch(_){}
+    var W=1080,H=1350,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+    x.fillStyle="#05060C";x.fillRect(0,0,W,H);
+    var s=Scene3D.snapshot(),sw=s.width,sh=s.height,ar=W/920;
+    var cw=sw,ch=cw/ar;if(ch>sh*.8){ch=sh*.8;cw=ch*ar;}
+    var cy=sh*(sw/sh<1.1?.34:.42),sx=(sw-cw)/2,sy=Math.max(0,Math.min(sh-ch,cy-ch/2));
+    x.drawImage(s,sx,sy,cw,ch,0,0,W,920);
+    var g=x.createLinearGradient(0,680,0,960);g.addColorStop(0,"rgba(5,6,12,0)");g.addColorStop(1,"rgba(5,6,12,1)");x.fillStyle=g;x.fillRect(0,680,W,280);
+    var al=avg(Scene3D.shard);
+    var date=new Date().toLocaleDateString("it-IT",{day:"numeric",month:"long",year:"numeric"});
+    x.textAlign="left";
+    x.fillStyle="#A3A8C3";x.font='600 28px "Shippori Mincho", serif';x.fillText("生き甲斐 · il mio cristallo",80,990);
+    x.fillStyle="#ECEEF8";x.font='800 78px "Shippori Mincho", serif';x.fillText("Mappa Ikigai",80,1074);
+    x.fillStyle="#CDD1E6";x.font='600 32px "Baloo 2", sans-serif';x.fillText((al>=.75?"Cristallo formato · ":"Allineamento ")+pct(al)+"% · "+date,80,1126);
+    var STC={ok:"#22E0A4",mid:"#FFB02E",no:"#FF6B6B"};
+    ZONES.forEach(function(z,k){
+      var X=80+(k%2)*470,Y=1196+Math.floor(k/2)*62,st=shardState(shardValue(k));
+      x.save();x.translate(X+12,Y-11);x.rotate(Math.PI/4);
+      var gg=x.createLinearGradient(-11,0,11,0);gg.addColorStop(0,z.ca);gg.addColorStop(.5,z.ca);gg.addColorStop(.5,z.cb);gg.addColorStop(1,z.cb);
+      x.fillStyle=gg;x.fillRect(-11,-11,22,22);x.restore();
+      x.fillStyle="#ECEEF8";x.font='700 32px "Baloo 2", sans-serif';x.fillText(z.nome,X+42,Y);
+      x.fillStyle=STC[st];x.font='800 26px "Baloo 2", sans-serif';x.fillText(LAB[st],X+250,Y);
+    });
+    x.fillStyle="#7E84A3";x.font='600 24px "Baloo 2", sans-serif';x.fillText("Creato con Iki · Mappa Ikigai",80,1316);
+    var blob=await new Promise(function(res){c.toBlob(res,"image/png");});
+    if(!blob)throw {code:"bad_request"};
+    await downloadsApi.save({filename:"cristallo-ikigai.png",data:blob});
+    toast("Immagine salvata.");
+  }catch(e){
+    var code=e&&e.code;
+    toast(code==="declined"?"Salvataggio annullato.":code==="rate_limited"?"C'è già una richiesta aperta: riprova tra poco.":"Non riesco a salvare l'immagine da qui.");
+    if(["unavailable","not_granted","capability_disabled","capability_removed"].indexOf(code)>=0)downloadsApi=null;
+  }
+  btn.disabled=false;btn.textContent=old;
+}
+
+/* ===================== esplorazione dei cristalli ===================== */
+Scene3D.onPick=function(p){
+  if(!p||busy||anySheetOpen())return;
+  if(mode==="chat"||mode==="explore")explore(p);
+  else if(mode==="test")Sound.tap();
+};
+function setFocus(p){focused=p;Scene3D.focus(p);updateStageLabel();}
+function leaveFocus(){setFocus(null);Sound.whoosh();chatMode();}
+function gemZones(cid){var out=[];ZONES.forEach(function(z,k){if(z.a===cid||z.b===cid)out.push(k);});return out;}
+function picksText(c){
+  var items=[];
+  c.qs.forEach(function(q,qi){(sel[c.id+qi]||[]).forEach(function(i){if(q.o[i])items.push("«"+q.o[i][0]+"»");});if(free[c.id+qi])items.push("«"+free[c.id+qi]+"»");});
+  if(!items.length)return "";
+  return items.length===1?items[0]:items.slice(0,-1).join(", ")+" e "+items[items.length-1];
+}
+async function explore(p){
+  busy=true;mode="explore";clearAnswers();hideComposer();Sound.whoosh();
+  setFocus(p);
+  if(p.type==="gem"){
+    var c=circleByGem(p.i),zs=gemZones(c.id);
+    var txt=c.Art+" rappresenta "+c.nome.toLowerCase()+".";
+    var pk=picksText(c);if(pk)txt+=" Hai scelto "+pk+".";
+    if(follow[c.id]&&follow[c.id].a)txt+=" E mi hai raccontato: «"+follow[c.id].a+"».";
+    txt+=" Fa parte dei frammenti "+zs.map(function(k){return ZONES[k].nome+" ("+LAB[shardState(shardValue(k))]+")";}).join(" e ")+".";
+    var pol=polishOf(c.id);if(pol>0)txt+=pol>=1?" Brilla al massimo: hai lavorato tanto su di lui.":" Brilla di più grazie alle missioni che hai completato.";
+    await say(txt,{gesture:"point",keep:true});
+  }else if(p.type==="shard"){
+    var z=ZONES[p.i],st=shardState(shardValue(p.i)),ca=circleById(z.a),cb=circleById(z.b);
+    var open=missions.filter(function(m){return !m.done&&m.zona===z.id;}).length;
+    var t2="Il frammento "+z.nome+" nasce tra "+ca.art+" e "+cb.art+". Adesso è "+LAB[st]+". "+(st==="ok"?"Regge bene: è uno dei tuoi punti di forza.":z.tip);
+    if(open)t2+=open===1?" Hai una missione aperta su questo frammento.":" Hai "+open+" missioni aperte su questo frammento.";
+    await say(t2,{gesture:"point",keep:true});
+  }else{
+    var al=avg(Scene3D.shard),miss=ZONES.filter(function(z,k){return shardValue(k)<.75;}).map(function(z){return z.nome;});
+    await say("Questo è il tuo pianeta di cristallo, il tuo ikigai: le quattro placche si fondono quando i frammenti sono forti. Ora è allineato al "+pct(al)+"%. "+(miss.length?"Per completarlo mancano "+(miss.length===1?"il frammento ":"i frammenti ")+(miss.length===1?miss[0]:miss.slice(0,-1).join(", ")+" e "+miss[miss.length-1])+".":"È intero: tutti e quattro i frammenti si incastrano.")+" Tocca una placca per guardarla da vicino.",{gesture:"point",keep:true});
+  }
+  busy=false;focusChips(p);
+}
+function focusChips(p){
+  mode="explore";clearAnswers();
+  var add=function(label,fn,cls){var b=chip(label,cls);b.onclick=function(){if(!busy)fn();};answers.appendChild(b);};
+  var subject,prefix;
+  if(p.type==="gem"){
+    var c=circleByGem(p.i);subject=c.art;prefix="(Stiamo guardando da vicino "+c.art+", cioè "+c.nome.toLowerCase()+".)";
+    if(sampleFn)add("Parliamone",function(){focusTalk("Parliamo "+c.del_+": cosa ci vedi e come posso svilupparlo?",prefix,p);});
+    add("Una missione per "+c.art,function(){missionFor(gemZones(c.id),c.art).then(function(){focusChips(p);});});
+    add("Rispondi di nuovo",function(){reanswer(c,p);});
+  }else if(p.type==="shard"){
+    var z=ZONES[p.i];subject="il frammento "+z.nome;prefix="(Stiamo guardando da vicino il frammento "+z.nome+", "+z.d+".)";
+    if(sampleFn)add("Come lo rafforzo?",function(){focusTalk("Come rafforzo il frammento "+z.nome+"?",prefix,p);});
+    add("Una missione per questo frammento",function(){missionFor([p.i],"il frammento "+z.nome).then(function(){focusChips(p);});});
+  }else{
+    subject="il pianeta di cristallo";prefix="(Stiamo guardando il pianeta di cristallo.)";
+    if(sampleFn)add("Cosa mi manca per completarlo?",function(){focusTalk("Cosa mi manca per completare il pianeta di cristallo?",prefix,p);});
+  }
+  add("Un altro cristallo",exploreMenu);
+  add("Torna alla vista completa",leaveFocus,"ghost");
+  if(sampleFn)showComposer("Chiedi a Iki di "+subject+"…",function(v){focusTalk(v,prefix,p);});else hideComposer();
+  input.oninput=null;
+}
+async function focusTalk(v,prefix,p){
+  if(busy)return;
+  clearAnswers();hideComposer();
+  await meSay(v);
+  if(sampleFn)await talk(v,prefix);
+  focusChips(p);
+}
+async function exploreMenu(){
+  busy=true;clearAnswers();hideComposer();
+  if(focused){setFocus(null);}
+  await say("Tocca un cristallo lassù per guardarlo da vicino, oppure scegline uno qui.",{keep:true,gesture:"point",hold:true});
+  busy=false;mode="explore";
+  var add=function(label,fn,cls){var b=chip(label,cls);b.onclick=function(){if(!busy)fn();};answers.appendChild(b);};
+  CIRCLES.forEach(function(c){add(c.cap,function(){explore({type:"gem",i:GEM_INDEX[c.id]});});});
+  add("Pianeta di cristallo",function(){explore({type:"center"});});
+  ZONES.forEach(function(z,k){add(z.nome,function(){explore({type:"shard",i:k});});});
+  add("Indietro",function(){chatMode();},"ghost");
+}
+async function reanswer(c,p){
+  busy=true;clearAnswers();hideComposer();
+  var before=results().map(function(r){return r.st;});
+  await say("Va bene, rifacciamo le due domande "+c.del_+". Rispondi pensando a come sei adesso.");
+  await askCircle(c,0,2);
+  baseRs=results();applyShards();Scene3D.gem[GEM_INDEX[c.id]]=1;persist();
+  var changes=[];
+  baseRs.forEach(function(r,k){if(r.st!==before[k])changes.push("il frammento "+r.z.nome+" è passato da "+LAB[before[k]]+" a "+LAB[r.st]);});
+  pendingUpdate="Ha aggiornato le risposte su "+c.nome.toLowerCase()+": "+c.qs.map(function(q,qi){return answerLine(c,qi);}).join(" | ")+".";
+  if(changes.some(function(x){return /a incastrato$/.test(x);}))Sound.fit();
+  await say(changes.length?"Fatto! "+capFirst(changes.join(", "))+".":"Fatto! I frammenti restano come prima, ma ora le risposte sono aggiornate.",{mood:"happy",keep:true});
+  busy=false;focusChips(p);
+}
+
+/* ===================== chat ===================== */
+function chatMode(){
+  mode="chat";clearAnswers();pendingText=null;
+  if(focused)setFocus(null);
+  var add=function(label,fn,cls){var b=chip(label,cls);b.onclick=function(){if(!busy)fn();};answers.appendChild(b);};
+  /* solo due scorciatoie affiancate: il resto lo chiedi scrivendo (i cristalli si esplorano toccandoli) */
+  answers.classList.add("duo");
+  if(sampleFn){
+    var w=weakOrder()[0],weak=shardValue(w)<.75;
+    var q1=weak?"Come faccio rientrare il frammento "+ZONES[w].nome+"?":"Come tengo il cristallo allineato?";
+    add(weak?"Rinforza "+ZONES[w].nome:"Tienilo allineato",function(){chatSend(q1);},"go");
+    add("Nuove missioni",function(){chatSend("Dammi nuove missioni");});
+  }else{
+    add("Esplora i cristalli",exploreMenu,"go");
+    add("Apri il percorso",function(){pathBtn.click();});
+  }
+  if(sampleFn)showComposer("Scrivi a Iki…",chatSend);else hideComposer();
+  input.oninput=null;
+}
+async function chatSend(v){
+  if(busy)return;
+  clearAnswers();hideComposer();
+  await meSay(v);
+  if(v==="Dammi nuove missioni"){await makeMissions(true);chatMode();return;}
+  if(!sampleFn){chatMode();return;}
+  await talk(v,"");
+  chatMode();
+}
+async function fallbackAdvice(){
+  var bad=baseRs.filter(function(r){return r.st!=="ok";});
+  if(!bad.length)await say("Tutti e quattro i frammenti si sono incastrati. Il passo successivo è scegliere da dove partire.",{mood:"happy"});
+  for(var i=0;i<bad.length;i++)await say(bad[i].z.tip,{cap:"Frammento "+bad[i].z.nome});
+  await say("In questo momento non riesco a collegarmi per chiacchierare. Riprova più tardi: il tuo cristallo resta salvato qui.");
+}
+
+/* ===================== flussi principali ===================== */
+var logo=document.getElementById("logo");
+function hideLogo(){logo.classList.add("gone");logo.setAttribute("aria-hidden","true");}
+async function demo(){var order=[0,3,2,1];for(var i=0;i<4;i++){Scene3D.gem[order[i]]=.85;Sound.chime(order[i]);await sleep(450);}}
+async function explain(){
+  await say("È un'idea giapponese: iki significa vivere, gai significa valore. In pratica è il motivo per cui ti alzi la mattina.");
+  var p=say("Qui la rappresentiamo con quattro cristalli: ciò che ami, ciò in cui sei bravo, ciò per cui ti pagano e ciò di cui il mondo ha bisogno. Guarda lassù!",{gesture:"point"});
+  await sleep(2200);await demo();await p;
+  var p2=say("Quando due cristalli vicini sono forti, tra loro nasce un frammento: passione, missione, professione e vocazione.",{gesture:"point"});
+  await sleep(2400);Scene3D.shard=[1,1,1,1];updateStageLabel();Sound.fit();await p2;
+  await say("Se tutti e quattro i frammenti si incastrano, al centro si forma il tuo cristallo, cioè il tuo ikigai. Se ne manca uno, si vede subito dove.");
+  Scene3D.gem=[0,0,0,0];Scene3D.shard=[0,0,0,0];updateStageLabel();
+  await say("Ora spengo tutto: il tuo cristallo lo costruiamo insieme, da zero.");
+}
+async function newTest(){
+  mode="test";hideLogo();
+  sel={};free={};follow={};turns=[];missions=[];analysis="";finished=false;baseRs=null;lastSig="";pendingUpdate="";created=new Date().toISOString();
+  Scene3D.gem=[0,0,0,0];Scene3D.shard=[0,0,0,0];Scene3D.polish=[0,0,0,0];updateStageLabel();
+  await say("Se leggi in fretta, tocca il fumetto e vado avanti. Le opzioni per audio e lettura sono nel menu in alto.");
+  await say("Sai già cos'è l'ikigai?",{keep:true});
+  var a=await choose(["Sì, lo so","No, spiegamelo"]);
+  if(a==="No, spiegamelo")await explain();
+  else{Scene3D.gem=[0,0,0,0];updateStageLabel();}
+  await samplePromise;
+  await say("Ti farò otto domande, due per ogni cristallo. Puoi scegliere tra le risposte o scrivere con parole tue. Dopo ogni cristallo ti chiederò qualcosa di più personale.");
+  buildProg();markProg(0);
+  for(var ci=0;ci<CIRCLES.length;ci++){
+    var c=CIRCLES[ci];
+    var lit=await askCircle(c,ci*2,8);
+    var fq=await followQuestion(c);
+    await say(fq,{cap:"Approfondiamo",keep:true,noSplit:true});
+    var ans=await askText();
+    follow[c.id]={q:fq,a:ans};
+    if(ci<CIRCLES.length-1){
+      var txt=(ans?"Me lo segno. ":"")+c.Art+" si è acceso!";
+      if(lit.length)txt+=" "+lit.map(function(x){return "Il frammento "+x.z.nome+" "+LIT_TXT[x.st];}).join(" ");
+      await say(txt,{mood:"happy"});
+    }
+  }
+  await finishTest();
+}
+async function showResultCard(){
+  var card=el("div","result pop");card.setAttribute("role","note");
+  ZONES.forEach(function(z,k){var st=shardState(shardValue(k));var d=el("div");d.appendChild(el("span",null,z.nome));d.appendChild(el("span","st "+st,LAB[st]));card.appendChild(d);});
+  card.addEventListener("click",skip);
+  speech.appendChild(card);Sound.pop();
+  logPush("bot",ZONES.map(function(z,k){return z.nome+": "+LAB[shardState(shardValue(k))];}).join("\n"));
+  await wait(prefs.auto?5500*SPEED[prefs.speed].read:Infinity);await dismiss(card);
+}
+async function finishTest(){
+  mode="wait";baseRs=results();finished=true;
+  applyShards();
+  setTimeout(function(){prog.hidden=true;},1500);
+  var al=avg(Scene3D.shard);
+  if(al>=.75)Sound.fit();
+  await say(al>=.75?"Fatto! Il tuo pianeta di cristallo si è formato. Guardalo lassù.":"Fatto! Ecco il tuo cristallo. Guarda lassù quali frammenti restano fuori.",{mood:"happy",gesture:"point"});
+  await showResultCard();
+  pathBtn.hidden=false;persist();
+  if(sampleFn){
+    turns=[{role:"user",content:RULES+context(baseRs)+"\n\nAdesso commenta il suo cristallo in massimo 100 parole: cosa regge, quale frammento conta di più far rientrare e una mossa concreta per farlo, usando quello che ha raccontato con parole sue. Chiudi con una domanda per continuare la conversazione."}];
+    var ok=await askClaude();
+    if(ok)analysis=turns[turns.length-1].content;
+    if(!sampleFn)await fallbackAdvice();
+  }else{
+    await fallbackAdvice();
+  }
+  await makeMissions(false);
+  await say("Un'ultima cosa: puoi toccare un cristallo o un frammento lassù per guardarlo da vicino e svilupparlo insieme a me.",{gesture:"point",keep:true});
+  persist();
+  chatMode();
+}
+async function resume(){
+  mode="wait";hideLogo();restore();baseRs=results();pathBtn.hidden=false;
+  Scene3D.gem=[1,1,1,1];applyShards();
+  var open=missions.filter(function(m){return !m.done;}).length;
+  await say("Ecco il tuo cristallo, come l'avevi lasciato.",{gesture:"point"});
+  var due=missions.filter(function(m){return !m.done&&m.entro&&daysLeft(m.entro)<=0;}).sort(function(x,y){return x.entro<y.entro?-1:1;})[0];
+  if(due){
+    var n=daysLeft(due.entro);
+    await say("La missione «"+due.titolo.replace(/[.!]+$/,"")+"» "+(n===0?"era per oggi":n===-1?"era per ieri":"è scaduta da "+(-n)+" giorni")+". Com'è andata?",{keep:true});
+    var c=await choose(["Fatta!","Non ancora","Cambiala"]);
+    if(c==="Fatta!"){
+      due.done=true;due.fatta=Date.now();applyShards();persist();Sound.fit();
+      await say("Grande! Raccontamela in una riga: cosa hai fatto, cosa hai scoperto?",{keep:true,mood:"happy"});
+      var nota=await askText();
+      if(nota){due.nota=nota.slice(0,300);persist();if(sampleFn){await talk("Ho completato la missione «"+due.titolo+"». Com'è andata: "+due.nota+". Rispondimi in breve e dimmi cosa ne ricavi per il prossimo passo.","");}}
+      else await say("Ok! Il frammento "+(ZONES[zoneIdx(due.zona)]||ZONES[0]).nome+" si è avvicinato al centro.",{gesture:"point"});
+    }else if(c==="Non ancora"){
+      due.entro=dueIn(3);persist();
+      await say("Nessun problema: ti do altri tre giorni. Se ti aiuta, mettiti un promemoria dal Percorso.");
+    }else{
+      missions=missions.filter(function(x){return x!==due;});persist();
+      var k=zoneIdx(due.zona);if(k<0)k=weakOrder()[0];
+      discarded.push(due.titolo);
+      await missionFor([k],"il frammento "+ZONES[k].nome);
+    }
+  }
+  if(missions.length){
+    await say(open?(open===1?"Hai ancora una missione aperta.":"Hai ancora "+open+" missioni aperte.")+" Quando ne completi una, spuntala in Percorso e guarda il frammento che si avvicina.":"Hai completato tutte le missioni. Se vuoi, te ne preparo di nuove.");
+  }
+  await say("Puoi anche toccare un cristallo lassù per esplorarlo con me.",{keep:true,gesture:"point"});
+  await samplePromise;
+  chatMode();
+}
+function askCode(){
+  return new Promise(function(res){
+    clearAnswers();
+    var n=chip("Non ho un codice","ghost");n.onclick=function(){clearAnswers();hideComposer();meSay("Non ho un codice");res(null);};
+    answers.appendChild(n);
+    showComposer("Codice d'invito…");input.oninput=null;input.setAttribute("autocapitalize","characters");input.setAttribute("autocomplete","off");
+    setTimeout(function(){try{input.focus({preventScroll:true});}catch(_){}},60);
+    pendingText=function(v){clearAnswers();hideComposer();input.removeAttribute("autocapitalize");meSay(v.toUpperCase());res(v.trim());};
+  });
+}
+/* L'anteprima è per chi si è pre-registrato: il codice arriva con l'email d'invito */
+async function gate(){
+  var saved=null;try{saved=localStorage.getItem(INV_KEY);}catch(e){}
+  if(saved){
+    try{await apiCall("check",saved);sampleFn=makeAI(saved);return true;}
+    catch(e){if(e.code==="network"||e.code==="rate_limited"||/^http_5/.test(e.code)){sampleFn=makeAI(saved);return true;}try{localStorage.removeItem(INV_KEY);}catch(_){}}
+  }
+  await say("Ciao! Sono Iki. Mappa Ikigai è in anteprima: per entrare serve il codice d'invito che hai ricevuto via email.",{keep:true,gesture:"wave"});
+  while(true){
+    var v=await askCode();
+    if(v===null){
+      await say("Nessun problema: pre-registrati e ti mando il codice appena apriamo le porte.",{keep:true});
+      var c=await choose(["Vai alla pre-registrazione","Ho trovato il codice"]);
+      if(c==="Vai alla pre-registrazione"){location.href="/ikigai?da=app";return false;}
+      continue;
+    }
+    var t=thinking();
+    try{
+      await apiCall("check",v);await dismiss(t);
+      try{localStorage.setItem(INV_KEY,v);}catch(e){}
+      sampleFn=makeAI(v);
+      await say("Perfetto, sei dentro!",{mood:"happy"});
+      return true;
+    }catch(e){
+      await dismiss(t);iki(null);
+      await say(e.code==="invite_invalid"?"Mmm, questo codice non lo riconosco. Controllalo e riprova.":e.code==="rate_limited"?"Troppi tentativi per oggi. Riprova domani.":e.code==="network"?"Sembra che manchi la connessione. Riprova tra poco.":"Non riesco a controllare il codice adesso. Riprova tra poco.",{keep:true});
+    }
+  }
+}
+async function boot(){
+  mode="title";applyPrefs();
+  Scene3D.gem=[.5,.5,.5,.5];Scene3D.shard=[0,0,0,0];updateStageLabel();
+  iki(null,"wave");
+  await sleep(700);
+  var hadCode=false;try{hadCode=!!localStorage.getItem(INV_KEY);}catch(e){}
+  if(!(await gate()))return;
+  var saved=!!readSaved();
+  await say(saved?"Bentornato! Il tuo cristallo ti aspetta.":hadCode?"Ciao! Sono Iki. Ti accompagno a scoprire dove si incontrano le cose che contano per te.":"Ti accompagno a scoprire dove si incontrano le cose che contano per te.",{keep:true,gesture:"wave",hold:true});
+  while(true){
+    var c=await choose(saved?["Riprendi il mio cristallo","Ricomincia da capo","Come funziona"]:["Iniziamo","Come funziona"]);
+    if(c==="Come funziona"){openSheet("helpSheet");continue;}
+    if(c==="Iniziamo")return newTest();
+    if(c==="Riprendi il mio cristallo")return resume();
+    await say("Sicuro? Il cristallo che hai adesso andrà perso.",{keep:true});
+    var d=await choose(["Sì, ricomincia","No, lascia stare"]);
+    if(d==="Sì, ricomincia"){wipe();talkLog=[];return newTest();}
+    await say("Va bene. Cosa facciamo?",{keep:true});
+  }
+}
+boot();
+</script>
+</body>
+</html>

@@ -94,6 +94,8 @@ body{background:var(--bg);color:var(--star);font-family:var(--comic);font-size:1
 .chip.go{background:var(--caption)}
 .chip.ghost{background:rgba(255,255,255,.06);color:var(--star);border:2px solid rgba(255,255,255,.4);box-shadow:none}
 .chip:disabled{opacity:.45;cursor:default}
+.answers.duo{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;align-content:end}
+.answers.duo .chip{text-align:center;font-size:14px;padding:9px 8px 7px;display:flex;align-items:center;justify-content:center}
 .composer{display:flex;gap:8px}
 #input{flex:1;min-width:0;font-family:var(--comic);font-weight:600;font-size:16px;padding:10px 14px 8px;border-radius:16px;border:3px solid var(--ink);background:var(--paper);color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
 #input::placeholder{color:#7f7d8f;font-weight:500}
@@ -356,6 +358,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 </div>
 
 <script src="/ikigai/app/three.min.js"></script>
+<script src="/ikigai/app/three-post.js"></script>
 <script>
 /* ===================== dati del test ===================== */
 var THEMES={c:"creare",u:"capire",p:"persone",o:"organizzare"};
@@ -518,7 +521,55 @@ var Scene3D=(function(){
     var pmrem=new THREE.PMREMGenerator(renderer);
     scene.environment=pmrem.fromScene(envScene,0.02).texture;
     pmrem.dispose();
+    var cubeRT=new THREE.WebGLCubeRenderTarget(256,{generateMipmaps:true,minFilter:THREE.LinearMipmapLinearFilter});
+    new THREE.CubeCamera(.1,500,cubeRT).update(renderer,envScene);
+    var gemEnv=cubeRT.texture;
   }catch(e){}
+
+  /* --- materiale "gemma": riflessi, rifrazione con dispersione (l'arcobaleno sulle facce), bordo luminoso, scintille --- */
+  var GEM_VS=["varying vec3 vW;","void main(){vec4 w=modelMatrix*vec4(position,1.0);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}"].join("\n");
+  var GEM_FS=["uniform samplerCube uEnv;","uniform vec3 uColor;","uniform float uGlow;","uniform float uOpacity;","uniform float uTime;","uniform float uBack;","uniform float uSeed;","varying vec3 vW;",
+    "void main(){",
+    " vec3 toCam=normalize(cameraPosition-vW);",
+    " vec3 N=normalize(cross(dFdx(vW),dFdy(vW)));if(dot(N,toCam)<0.0)N=-N;",
+    " vec3 I=-toCam;float ndv=clamp(dot(N,toCam),0.0,1.0);",
+    " float fres=pow(1.0-ndv,2.2);",
+    " vec3 refl=textureCube(uEnv,reflect(I,N)).rgb;",
+    " vec3 rr=vec3(textureCube(uEnv,refract(I,N,0.42)).r,textureCube(uEnv,refract(I,N,0.40)).g,textureCube(uEnv,refract(I,N,0.38)).b);",
+    " float h=fract(sin(dot(floor(N*6.0+uSeed),vec3(12.9898,78.233,37.719)))*43758.5453);",
+    " float spark=pow(max(0.0,sin(uTime*1.3+h*60.0)),48.0);",
+    " vec3 body=mix(vec3(0.75),uColor,0.75+0.25*uGlow);",
+    " vec3 col;",
+    " if(uBack>0.5){col=body*(0.18+0.55*uGlow)+rr*body*0.6;}",
+    " else{col=(uColor*(0.08+0.3*uGlow)+rr*body*(0.45+0.45*uGlow))*0.62+refl*(0.08+0.7*fres)+uColor*(0.1+0.55*fres)*uGlow+vec3(1.0,0.97,0.92)*spark*(0.4+1.4*uGlow);}",
+    " float a=uOpacity*(uBack>0.5?0.7:mix(0.62,1.0,fres));",
+    " gl_FragColor=vec4(col,a);",
+    " #include <tonemapping_fragment>",
+    " #include <encodings_fragment>",
+    "}"].join("\n");
+  function gemMat(color,back,seed){
+    return new THREE.ShaderMaterial({uniforms:{uEnv:{value:gemEnv||null},uColor:{value:new THREE.Color(color)},uGlow:{value:0},uOpacity:{value:1},uTime:{value:0},uBack:{value:back?1:0},uSeed:{value:seed||0}},
+      vertexShader:GEM_VS,fragmentShader:GEM_FS,transparent:true,depthWrite:!back,side:back?THREE.BackSide:THREE.FrontSide,extensions:{derivatives:true}});
+  }
+  /* scintille sulle facce: piccole stelle a croce che si accendono a caso */
+  var SPK_VS=["attribute float aPhase;","uniform float uTime;","uniform float uPR;","uniform float uSize;","varying float vA;",
+    "void main(){vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;",
+    "vA=pow(max(0.0,sin(uTime*(1.1+fract(aPhase*7.3)*1.4)+aPhase*6.2831)),14.0);",
+    "gl_PointSize=uSize*uPR*(0.6+0.8*vA)*(10.0/-mv.z);}"].join("\n");
+  var SPK_FS=["uniform vec3 uColor;","uniform float uAlpha;","varying float vA;",
+    "void main(){vec2 uv=gl_PointCoord-0.5;float d=length(uv);",
+    "float core=pow(max(0.0,1.0-d*2.0),4.0);",
+    "float sx=max(0.0,1.0-abs(uv.y)*22.0)*max(0.0,1.0-abs(uv.x)*2.0);float sy=max(0.0,1.0-abs(uv.x)*22.0)*max(0.0,1.0-abs(uv.y)*2.0);",
+    "gl_FragColor=vec4(mix(vec3(1.0),uColor,0.25),(core+(sx+sy)*0.8)*vA*uAlpha);}"].join("\n");
+  var spkMats=[];
+  function sparkles(geo,n,color,scale){
+    var src=geo.attributes.position.array,cnt=src.length/3,p=new Float32Array(n*3),ph=new Float32Array(n);
+    for(var i=0;i<n;i++){var k=Math.floor(Math.random()*cnt);p[i*3]=src[k*3]*scale;p[i*3+1]=src[k*3+1]*scale;p[i*3+2]=src[k*3+2]*scale;ph[i]=Math.random();}
+    var g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.BufferAttribute(p,3));g.setAttribute("aPhase",new THREE.BufferAttribute(ph,1));
+    var m=new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uPR:{value:renderer.getPixelRatio()},uSize:{value:9},uColor:{value:new THREE.Color(color)},uAlpha:{value:0}},
+      vertexShader:SPK_VS,fragmentShader:SPK_FS,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
+    spkMats.push(m);return new THREE.Points(g,m);
+  }
 
   /* --- stelle: colori diversi, scintillio, le più luminose con le punte --- */
   var STAR_VS=["attribute vec3 aColor;","attribute float aSize;","attribute float aPhase;","uniform float uTime;","uniform float uPR;","varying vec3 vC;","varying float vTw;",
@@ -575,17 +626,19 @@ var Scene3D=(function(){
   var root=new THREE.Group();scene.add(root);
   var COLS=[0xff4f8b,0x22e0a4,0xffb02e,0x4f9dff];
   var POS=[[0,2.3,0],[2.55,0,0],[0,-2.3,0],[-2.55,0,0]];
-  var prof=[[0.001,1.0],[.28,.62],[.4,.34],[.4,-.34],[.28,-.62],[0.001,-1.0]].map(function(p){return new THREE.Vector2(p[0],p[1]);});
-  var gemGeo=new THREE.LatheGeometry(prof,6),edgeGeo=new THREE.EdgesGeometry(gemGeo);
+  var prof=[[0.001,1.08],[.16,.86],[.33,.55],[.42,.22],[.42,-.18],[.34,-.5],[.17,-.82],[0.001,-1.02]].map(function(p){return new THREE.Vector2(p[0],p[1]);});
+  var gemGeo=new THREE.LatheGeometry(prof,8),edgeGeo=new THREE.EdgesGeometry(gemGeo,20);
   var gems=COLS.map(function(c,i){
     var g=new THREE.Group();
-    var m=new THREE.Mesh(gemGeo,new THREE.MeshPhysicalMaterial({color:c,emissive:c,emissiveIntensity:.05,flatShading:true,metalness:0,roughness:.04,clearcoat:1,clearcoatRoughness:.03,envMapIntensity:2.4,transparent:true,opacity:.35}));
-    var inner=new THREE.Mesh(gemGeo,new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));inner.scale.set(.45,.55,.45);
+    var back=new THREE.Mesh(gemGeo,gemMat(c,true,i*1.7));
+    var m=new THREE.Mesh(gemGeo,gemMat(c,false,i*1.7));
+    var inner=new THREE.Mesh(gemGeo,new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));inner.scale.set(.32,.5,.32);
     var e=new THREE.LineSegments(edgeGeo,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.2,blending:THREE.AdditiveBlending}));
     var glow=sprite(c,0);glow.scale.set(3,3,1);
+    var spk=sparkles(gemGeo,14,c,1.02);
     var hit=new THREE.Mesh(new THREE.SphereGeometry(1.15,12,8),new THREE.MeshBasicMaterial({visible:false}));
-    g.add(glow);g.add(m);g.add(inner);g.add(e);g.add(hit);g.position.set(POS[i][0],POS[i][1],POS[i][2]);root.add(g);
-    return {g:g,m:m,inner:inner,e:e,glow:glow,hit:hit,v:0,base:POS[i]};
+    g.add(glow);g.add(back);g.add(inner);g.add(m);g.add(e);g.add(spk);g.add(hit);g.position.set(POS[i][0],POS[i][1],POS[i][2]);root.add(g);
+    return {g:g,m:m,back:back,inner:inner,e:e,glow:glow,spk:spk,hit:hit,v:0,base:POS[i]};
   });
 
   /* --- cristallo centrale in quattro frammenti --- */
@@ -606,7 +659,7 @@ var Scene3D=(function(){
     var arr=[];s.tris.forEach(function(p){arr.push(p[0],p[1],p[2]);});
     var geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.BufferAttribute(new Float32Array(arr),3));geo.computeVertexNormals();
     var c=new THREE.Color(COLS[s.cols[0]]).lerpHSL(new THREE.Color(COLS[s.cols[1]]),.5);
-    var m=new THREE.Mesh(geo,new THREE.MeshPhysicalMaterial({color:new THREE.Color(0xffffff).lerp(c,.45),emissive:c,emissiveIntensity:.05,flatShading:true,metalness:0,roughness:.04,clearcoat:1,envMapIntensity:2.4,transparent:true,opacity:0,side:THREE.DoubleSide}));
+    var m=new THREE.Mesh(geo,gemMat(new THREE.Color(0xffffff).lerp(c,.85),false,s.cols[0]*2.3));m.material.side=THREE.DoubleSide;
     var e=new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));
     var g=new THREE.Group();g.add(m);g.add(e);centre.add(g);
     var beams=s.cols.map(function(ci){
@@ -648,9 +701,20 @@ var Scene3D=(function(){
   api.focus=function(f){focus=f||null;};
   window.addEventListener("pointermove",function(e){if(e.pointerType==="mouse"){px=(e.clientX/window.innerWidth-.5);py=(e.clientY/window.innerHeight-.5);}});
 
+  var composer=null,bloom=null;
+  try{
+    if(THREE.EffectComposer&&THREE.UnrealBloomPass&&THREE.GammaCorrectionShader){
+      /* buffer a 16 bit dove si può: niente gradini nell'alone */
+      THREE.POST_HALF=!!(renderer.capabilities.isWebGL2&&renderer.extensions.get("EXT_color_buffer_float"));
+      composer=new THREE.EffectComposer(renderer);
+      composer.addPass(new THREE.RenderPass(scene,camera));
+      bloom=new THREE.UnrealBloomPass(new THREE.Vector2(256,256),.7,.5,.72);composer.addPass(bloom);
+      composer.addPass(new THREE.ShaderPass(THREE.GammaCorrectionShader));
+    }
+  }catch(e){composer=null;}
   function resize(){
     var w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;
-    renderer.setSize(w,h,false);camera.aspect=w/h;var a=w/h;
+    renderer.setSize(w,h,false);if(composer){composer.setPixelRatio(renderer.getPixelRatio());composer.setSize(w,h);}camera.aspect=w/h;var a=w/h;
     baseZ=a<.6?19:a<.75?17:a<1.1?13.5:12.5;if(!focus)camera.position.z=baseZ;root.position.y=a<.6?2.7:a<.75?2.3:a<1.1?1.4:.6;
     camera.updateProjectionMatrix();
   }
@@ -689,12 +753,14 @@ var Scene3D=(function(){
       var pol=api.polish[i]||0,dim=focus&&!(focus.type==="gem"&&focus.i===i)?.35:1;
       var s=.45+.5*G.v+.1*pol;G.g.scale.set(s,s,s);
       G.g.position.y=G.base[1]+(reduce?0:Math.sin(t*1.2+i*1.7)*.1);
-      G.m.rotation.y=G.e.rotation.y=G.inner.rotation.y=t*.45*(i%2?1:-1)+i;
-      G.m.rotation.z=G.e.rotation.z=G.inner.rotation.z=.15*Math.sin(t*.6+i);
-      G.m.material.opacity=(.3+.6*G.v)*(dim<1?.55:1);G.m.material.emissiveIntensity=(.03+.2*G.v+.15*pol)*dim;
-      G.inner.material.opacity=(.3*G.v+.2*pol)*dim*(reduce?1:.8+.2*Math.sin(t*2+i));
-      G.e.material.opacity=(.1+.45*G.v)*dim;
-      G.glow.material.opacity=(.05+.4*G.v+.2*pol)*dim;var gs=1.6+2.2*G.v+1.2*pol;G.glow.scale.set(gs,gs,1);
+      G.m.rotation.y=G.back.rotation.y=G.e.rotation.y=G.inner.rotation.y=G.spk.rotation.y=t*.45*(i%2?1:-1)+i;
+      G.m.rotation.z=G.back.rotation.z=G.e.rotation.z=G.inner.rotation.z=G.spk.rotation.z=.15*Math.sin(t*.6+i);
+      var gl=Math.min(1,G.v*.85+pol*.3);
+      [G.m,G.back].forEach(function(M){var u=M.material.uniforms;u.uGlow.value=gl*dim;u.uOpacity.value=(.55+.45*G.v)*(dim<1?.6:1);u.uTime.value=t;});
+      G.inner.material.opacity=(.2*G.v+.12*pol)*dim*(reduce?1:.8+.2*Math.sin(t*2+i));
+      G.e.material.opacity=(.06+.22*G.v)*dim;
+      G.spk.material.uniforms.uAlpha.value=(.15+.85*G.v)*dim;G.spk.material.uniforms.uTime.value=t+i*3.1;
+      G.glow.material.opacity=(.05+.42*G.v+.2*pol)*dim;var gs=1.6+2.4*G.v+1.2*pol;G.glow.scale.set(gs,gs,1);
     });
     var pi=0;
     shards.forEach(function(S,k){
@@ -702,7 +768,7 @@ var Scene3D=(function(){
       var off=(1-Math.min(1,S.v/.85))*1.0;
       S.g.position.set(S.d.x*off,S.d.y*off,S.d.z*off);
       var sdim=focus&&focus.type!=="center"&&!(focus.type==="shard"&&focus.i===k)?.4:1;
-      S.m.material.opacity=S.v<.05?0:(.25+.6*S.v)*(sdim<1?.6:1);S.m.material.emissiveIntensity=(.05+.45*S.v)*sdim;
+      var su=S.m.material.uniforms;su.uOpacity.value=S.v<.05?0:(.35+.65*S.v)*(sdim<1?.6:1);su.uGlow.value=(.15+.85*S.v)*sdim;su.uTime.value=t;
       S.e.material.opacity=S.v<.05?0:(.3+.5*S.v)*sdim;
       S.e.material.color.setHex(S.v>0&&S.v<.3?0xff5a5a:0xffffff);
       S.beams.forEach(function(b){
@@ -728,9 +794,16 @@ var Scene3D=(function(){
     halo.rotation.set(Math.PI/2+.3,t*.4,0);halo2.rotation.set(Math.PI/2-.25,-t*.3,.2);
     if(!drag&&!focus)autoY+=reduce?0:.0025;
     var fr=1-focusAmt;root.rotation.set(rotX*fr,(rotY+Math.sin(autoY)*.35)*fr,0);
-    renderer.render(scene,camera);
+    spkMats.forEach(function(m){m.uniforms.uPR.value=renderer.getPixelRatio();});
+    if(composer)composer.render();else renderer.render(scene,camera);
   }
-  function loop(){frame();requestAnimationFrame(loop);}
+  var perf={n:0,sum:0,last:0};
+  function loop(){
+    var now=performance.now();
+    if(perf.last&&composer&&perf.n<150&&!document.hidden){var d=now-perf.last;if(d<200){perf.sum+=d;perf.n++;}
+      if(perf.n===150&&perf.sum/perf.n>32){composer=null;renderer.setPixelRatio(1);resize();}}
+    perf.last=now;frame();requestAnimationFrame(loop);
+  }
   loop();
   api.snapshot=function(){
     frame();
@@ -978,7 +1051,7 @@ async function meSay(text){
 }
 
 /* ===================== risposte ===================== */
-function clearAnswers(){answers.innerHTML="";}
+function clearAnswers(){answers.innerHTML="";answers.classList.remove("duo");}
 function chip(label,cls){var b=el("button","chip"+(cls?" "+cls:""),label);b.type="button";b.addEventListener("click",function(){Sound.tap();});return b;}
 var pendingText=null,composerHandler=null;
 function showComposer(ph,handler){composer.hidden=false;input.disabled=false;send.disabled=false;input.placeholder=ph;input.value="";composerHandler=handler||null;}
@@ -1594,15 +1667,17 @@ function chatMode(){
   mode="chat";clearAnswers();pendingText=null;
   if(focused)setFocus(null);
   var add=function(label,fn,cls){var b=chip(label,cls);b.onclick=function(){if(!busy)fn();};answers.appendChild(b);};
-  add("Esplora i cristalli",exploreMenu,"go");
+  /* solo due scorciatoie affiancate: il resto lo chiedi scrivendo (i cristalli si esplorano toccandoli) */
+  answers.classList.add("duo");
   if(sampleFn){
-    var w=weakOrder()[0];
-    var q1=shardValue(w)<.75?"Come faccio rientrare il frammento "+ZONES[w].nome+"?":"Come tengo il cristallo allineato?";
-    add(q1,function(){chatSend(q1);});
-    add("Dammi un piano per questa settimana",function(){chatSend("Dammi un piano per questa settimana");});
+    var w=weakOrder()[0],weak=shardValue(w)<.75;
+    var q1=weak?"Come faccio rientrare il frammento "+ZONES[w].nome+"?":"Come tengo il cristallo allineato?";
+    add(weak?"Rinforza "+ZONES[w].nome:"Tienilo allineato",function(){chatSend(q1);},"go");
+    add("Nuove missioni",function(){chatSend("Dammi nuove missioni");});
+  }else{
+    add("Esplora i cristalli",exploreMenu,"go");
+    add("Apri il percorso",function(){pathBtn.click();});
   }
-  add("Dammi nuove missioni",function(){chatSend("Dammi nuove missioni");});
-  add("Apri il percorso",function(){pathBtn.click();},"ghost");
   if(sampleFn)showComposer("Scrivi a Iki…",chatSend);else hideComposer();
   input.oninput=null;
 }

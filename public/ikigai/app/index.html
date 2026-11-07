@@ -140,7 +140,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;max-height:76%;display:flex;flex-direction:column;background:var(--glass-strong);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
   border-top:1px solid var(--glass-line);border-radius:26px 26px 0 0;padding-block:14px calc(16px + env(safe-area-inset-bottom,0px));
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-shadow:0 -20px 60px rgba(0,0,0,.5)}
-#pathSheet{max-height:58%}
+#pathSheet{max-height:82%}
 .sheet-in{max-width:620px;width:100%;margin:0 auto;display:flex;flex-direction:column;min-height:0;flex:1;gap:10px}
 .sheet-head{display:flex;align-items:center;gap:10px}
 .sheet-head h2{flex:1;margin:0;font-family:var(--display);font-weight:800;font-size:24px}
@@ -160,6 +160,32 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 .mis[aria-pressed="true"] .tick{background:var(--ok);border-color:var(--ok)}
 .mis[aria-pressed="true"] b{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.4);color:var(--muted)}
 .mis b{display:block;font-size:16px;line-height:1.3}
+.msum{display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:14px;background:rgba(255,225,77,.08);border:1px solid rgba(255,225,77,.25);font-weight:700}
+.msum .big{font-family:var(--display);font-size:30px;line-height:1;color:var(--caption)}
+.msum small{display:block;color:var(--muted);font-weight:600;font-size:13px}
+.mcard{border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--glass-line);padding:12px;display:flex;flex-direction:column;gap:8px}
+.mcard.done{opacity:.85}
+.mcard.late{border-color:rgba(255,107,107,.55)}
+.mtop{display:flex;gap:12px;align-items:flex-start}
+.mtop .tick{flex:none;width:30px;height:30px;border-radius:9px;border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;font-weight:800;color:var(--ink);background:none;cursor:pointer;font-size:16px}
+.mtop .tick[aria-pressed="true"]{background:var(--ok);border-color:var(--ok)}
+.mtop b{display:block;font-size:16px;line-height:1.3}
+.mcard.done .mtop b{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.4);color:var(--muted)}
+.mwhy{display:block;color:#CDD1E6;font-size:14px;margin-top:3px;line-height:1.4}
+.mmeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+.mchip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px 2px;background:rgba(255,255,255,.07);font-weight:700}
+.mchip i{width:10px;height:10px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(90deg,var(--a) 50%,var(--b) 50%)}
+.mchip.late{background:rgba(255,107,107,.18);color:#FFB3B3}
+.msteps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:3px;font-size:14px;color:var(--star)}
+.mact{display:flex;flex-wrap:wrap;gap:6px}
+.mact .btn{font-size:13px;padding:7px 12px 5px;border-radius:12px}
+.mcheck{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:12px;background:rgba(34,224,164,.08);border:1px solid rgba(34,224,164,.3)}
+.mcheck p{margin:0;font-weight:700;font-size:14px}
+.mcheck .row{display:flex;gap:6px;flex-wrap:wrap}
+.mcheck .row button{font-family:var(--comic);font-weight:700;font-size:13px;border-radius:999px;padding:6px 12px 4px;border:2px solid var(--glass-line);background:none;color:var(--star);cursor:pointer}
+.mcheck .row button[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--ink)}
+.mcheck textarea{font-family:var(--comic);font-size:15px;color:var(--star);background:rgba(5,6,12,.6);border:1px solid var(--glass-line);border-radius:10px;padding:8px 10px;resize:vertical;min-height:54px}
+.mnote{font-size:13.5px;color:#CDD1E6;border-left:3px solid var(--ok);padding-left:8px}
 .mis small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
 .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .btn{font-family:var(--comic);font-weight:700;font-size:15px;padding:9px 16px 7px;border-radius:14px;cursor:pointer;border:2px solid var(--glass-line);background:rgba(255,255,255,.08);color:var(--star)}
@@ -368,10 +394,10 @@ var STATIC_FOLLOW={
   mondo:"Pensa a una persona o a un posto reale con quel problema. Chi ti viene in mente?"
 };
 var STATIC_MISSIONS={
-  passione:{titolo:"Allena per 20 minuti al giorno una cosa che ami e in cui vali già",perche:"Così ciò che ami diventa anche ciò in cui sei bravo."},
-  missione:{titolo:"Scrivi un problema reale, vicino a te, che vorresti risolvere",perche:"Colleghi ciò che ami a un bisogno concreto."},
-  professione:{titolo:"Dai un nome e un prezzo a un servizio che sai già fare",perche:"Un'abilità diventa qualcosa che si può comprare."},
-  vocazione:{titolo:"Chiedi a tre persone con quel problema come lo risolvono oggi",perche:"Scopri chi ha il bisogno e chi ha un budget."}
+  passione:{titolo:"Allena per 20 minuti al giorno una cosa che ami e in cui vali già",perche:"Così ciò che ami diventa anche ciò in cui sei bravo.",passi:["Scegli l'attività e l'orario","Fallo per tre giorni di fila","Annota cosa è migliorato"],tempo:"20 minuti al giorno",giorni:5},
+  missione:{titolo:"Scrivi un problema reale, vicino a te, che vorresti risolvere",perche:"Colleghi ciò che ami a un bisogno concreto.",passi:["Pensa a chi ti sta intorno","Scrivi il problema in una frase","Chiedi a una persona se lo sente anche lei"],tempo:"30 minuti",giorni:4},
+  professione:{titolo:"Dai un nome e un prezzo a un servizio che sai già fare",perche:"Un'abilità diventa qualcosa che si può comprare.",passi:["Descrivilo in due righe","Guarda quanto costano servizi simili","Scegli un prezzo di prova"],tempo:"45 minuti",giorni:5},
+  vocazione:{titolo:"Chiedi a tre persone con quel problema come lo risolvono oggi",perche:"Scopri chi ha il bisogno e chi ha un budget.",passi:["Scegli tre persone","Fai una sola domanda aperta","Scrivi cosa ti ha sorpreso"],tempo:"1 ora",giorni:7}
 };
 
 /* ===================== scena 3D ===================== */
@@ -877,7 +903,7 @@ var speech=document.getElementById("speech"),answers=document.getElementById("an
 var skipFlag=false;
 var lastUserAct=0;
 function skip(){skipFlag=true;lastUserAct=Date.now();}
-["click","keydown"].forEach(function(t){document.addEventListener(t,function(e){if(e.target&&e.target.closest&&e.target.closest("#answers,#composer,.balloon,#mascot"))lastUserAct=Date.now();},true);});
+["pointerdown","keydown"].forEach(function(t){document.addEventListener(t,function(){lastUserAct=Date.now();},true);});
 function readPause(){
   if(!current||!current._readyAt||lastUserAct>current._shownAt)return Promise.resolve();
   var ms=current._readyAt-Date.now();
@@ -1081,6 +1107,7 @@ function ownWords(){
     c.qs.forEach(function(q,qi){if(free[c.id+qi])L.push(c.nome+" — "+q.t+": "+free[c.id+qi]);});
     if(follow[c.id]&&follow[c.id].a)L.push(c.nome+" — "+follow[c.id].q+": "+follow[c.id].a);
   });
+  missions.forEach(function(m){if(m.done&&(m.nota||m.voto))L.push("Missione fatta «"+m.titolo+"» — "+(m.voto?"per lei è stata "+m.voto:"")+(m.nota?(m.voto?". ":"")+"Com'è andata: "+m.nota:""));});
   return L;
 }
 function context(rs){
@@ -1153,12 +1180,25 @@ function weakOrder(ids){return (ids||[0,1,2,3]).slice().sort(function(a,b){retur
 function staticMissions(){
   var order=weakOrder(),pick=order.filter(function(k){return shardValue(k)<.75;});
   if(pick.length<2)pick=order.slice(0,2);
-  return pick.slice(0,3).map(function(k,i){var z=ZONES[k],m=STATIC_MISSIONS[z.id];return {id:"m"+Date.now()+i,titolo:m.titolo,zona:z.id,perche:m.perche,done:false};});
+  return pick.slice(0,3).map(function(k,i){var z=ZONES[k];return fromStatic(z.id,i);});
 }
+function dayStr(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function todayStr(){return dayStr(new Date());}
+function dueIn(days){var d=new Date();d.setDate(d.getDate()+(days||5));return dayStr(d);}
+function daysLeft(entro){if(!entro)return null;var a=new Date(todayStr()+"T12:00:00"),b=new Date(entro+"T12:00:00");return Math.round((b-a)/864e5);}
+function dueLabel(m){
+  var n=daysLeft(m.entro);if(n===null)return "";
+  if(n<0)return n===-1?"scaduta ieri":"scaduta da "+(-n)+" giorni";
+  if(n===0)return "da fare oggi";if(n===1)return "entro domani";
+  return "entro "+new Date(m.entro+"T12:00:00").toLocaleDateString("it-IT",{weekday:"short",day:"numeric",month:"short"});
+}
+function fromStatic(zid,i){var sm=STATIC_MISSIONS[zid];return {id:"m"+Date.now()+(i||0),titolo:sm.titolo,zona:zid,perche:sm.perche,passi:sm.passi.slice(),tempo:sm.tempo,entro:dueIn(sm.giorni),creata:Date.now(),done:false};}
 function cleanMission(m,fallbackZone,i){
   if(!m||typeof m.titolo!=="string"||!m.titolo.trim())return null;
   var z=String(m.zona||"").toLowerCase().trim();if(zoneIdx(z)<0)z=fallbackZone;
-  return {id:"m"+Date.now()+(i||0),titolo:m.titolo.trim().slice(0,110),zona:z,perche:String(m.perche||"").trim().slice(0,140),done:false};
+  var passi=Array.isArray(m.passi)?m.passi.filter(function(p){return typeof p==="string"&&p.trim();}).slice(0,3).map(function(p){return p.trim().slice(0,90);}):[];
+  var g=Math.round(Number(m.giorni));if(!isFinite(g)||g<1)g=5;
+  return {id:"m"+Date.now()+(i||0),titolo:m.titolo.trim().slice(0,110),zona:z,perche:String(m.perche||"").trim().slice(0,160),passi:passi,tempo:String(m.tempo||"").trim().slice(0,30),entro:dueIn(Math.min(14,g)),creata:Date.now(),done:false};
 }
 function stateLine(){return ZONES.map(function(z,k){return z.nome+": "+LAB[shardState(shardValue(k))];}).join(", ");}
 async function makeMissions(more){
@@ -1187,14 +1227,14 @@ async function missionFor(zoneKs,label){
   if(sampleFn){
     try{
       var open=missions.filter(function(x){return !x.done;}).map(function(x){return x.titolo;});
-      var d=await sampleFn.task("mission",{profilo:context(baseRs),parole:ownWords(),stato:stateLine(),aperte:open,label:label,zone:zoneKs.map(function(k){return ZONES[k].id;})});
+      var d=await sampleFn.task("mission",{profilo:context(baseRs),parole:ownWords(),stato:stateLine(),aperte:open,scartate:discarded.slice(-10),label:label,zone:zoneKs.map(function(k){return ZONES[k].id;})});
       m=cleanMission(d,fallback,0);
     }catch(e){if(e&&HARD_STOP.indexOf(e.code)>=0)sampleFn=null;}
   }
   await dismiss(t);iki(null);
   if(!m){
     var sm=STATIC_MISSIONS[fallback];
-    if(!missions.some(function(x){return !x.done&&x.titolo===sm.titolo;}))m={id:"m"+Date.now(),titolo:sm.titolo,zona:fallback,perche:sm.perche,done:false};
+    if(!missions.some(function(x){return !x.done&&x.titolo===sm.titolo;}))m=fromStatic(fallback,0);
   }
   if(m){missions.push(m);persist();pathBtn.hidden=false;Sound.chime(GEM_INDEX[ZONES[zoneIdx(m.zona)].a]);var tt=m.titolo.replace(/[.!]+$/,"");await say("Nuova missione: "+tt.charAt(0).toLowerCase()+tt.slice(1)+". La trovi in Percorso.",{keep:true,mood:"happy"});}
   else await say("Hai già una missione aperta per "+label+". Completala in Percorso e poi te ne preparo un'altra.",{keep:true});
@@ -1249,26 +1289,97 @@ function twoStep(btn,label,armedLabel,action){
     armed=setTimeout(function(){armed=null;btn.textContent=label;},4000);
   };
 }
+var checkins=[],pathMsg="",discarded=[];
+function icsText(s){return String(s||"").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\;");}
+function missionIcs(m){
+  var d=(m.entro||dueIn(3)).replace(/-/g,""),now=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
+  var url=location.origin+"/ikigai/app";
+  var desc=(m.perche?m.perche+"\n\n":"")+((m.passi||[]).map(function(p,i){return (i+1)+". "+p;}).join("\n"))+"\n\nQuando l'hai fatta, spuntala qui: "+url;
+  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Mappa Ikigai//IT","CALSCALE:GREGORIAN","BEGIN:VEVENT",
+    "UID:"+m.id+"@mappa-ikigai","DTSTAMP:"+now,"DTSTART:"+d+"T180000","DTEND:"+d+"T183000",
+    "SUMMARY:"+icsText("Missione Ikigai: "+m.titolo),"DESCRIPTION:"+icsText(desc),"URL:"+url,
+    "BEGIN:VALARM","TRIGGER:-PT0M","ACTION:DISPLAY","DESCRIPTION:"+icsText("Iki ti ricorda: "+m.titolo),"END:VALARM",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+}
+function checkinBox(m,card,toast){
+  var box=el("div","mcheck");box.appendChild(el("p",null,"Com'è andata?"));
+  var row=el("div","row"),pick=m.voto||"";
+  ["facile","giusta","tosta"].forEach(function(v){
+    var bt=el("button",null,v==="facile"?"Facile":v==="giusta"?"Giusta":"Tosta");bt.type="button";bt.setAttribute("aria-pressed",pick===v?"true":"false");
+    bt.onclick=function(){pick=v;row.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===bt?"true":"false");});Sound.tap();};
+    row.appendChild(bt);
+  });
+  box.appendChild(row);
+  var ta=document.createElement("textarea");ta.maxLength=300;ta.placeholder="Raccontalo in una riga: cosa hai fatto, cosa hai scoperto…";ta.value=m.nota||"";box.appendChild(ta);
+  var ok=el("button","btn primary","Salva");ok.type="button";
+  ok.onclick=function(){
+    m.voto=pick;m.nota=ta.value.trim().slice(0,300);persist();
+    if(m.voto||m.nota){checkins=checkins.filter(function(x){return x.id!==m.id;});checkins.push(m);}
+    pathMsg="Grazie! Iki ne terrà conto per le prossime missioni.";renderPath();
+  };
+  box.appendChild(ok);return box;
+}
 function renderPath(){
   var b=document.getElementById("pathBody");b.innerHTML="";
-  b.appendChild(el("p","lead","Ogni missione completata avvicina il suo frammento al cristallo centrale e rende più luminosi i cristalli collegati. Guarda lassù mentre le spunti."));
-  b.appendChild(el("h3",null,"Missioni"));
-  var toast=el("p","toast");toast.setAttribute("aria-live","polite");
+  var toast=el("p","toast");toast.setAttribute("aria-live","polite");toast.textContent=pathMsg;pathMsg="";
+  var done=missions.filter(function(m){return m.done;}).length,open=missions.filter(function(m){return !m.done;});
+  if(missions.length){
+    var sum=el("div","msum");sum.appendChild(el("span","big",String(done)));
+    var st=el("div");st.appendChild(document.createTextNode(done===1?"missione fatta":"missioni fatte"));
+    var next=open.slice().sort(function(x,y){return (x.entro||"9")<(y.entro||"9")?-1:1;})[0];
+    st.appendChild(el("small",null,open.length?(open.length===1?"Una aperta":open.length+" aperte")+(next&&next.entro?" · la prossima è "+dueLabel(next):""):"Nessuna aperta: chiedine di nuove a Iki."));
+    sum.appendChild(st);b.appendChild(sum);
+  }
+  b.appendChild(el("p","lead","Ogni missione fatta avvicina il suo frammento al cristallo centrale. Quando ne spunti una, racconta a Iki com'è andata: le prossime partiranno da lì."));
   if(!missions.length)b.appendChild(el("p","lead",finished?"Non hai ancora missioni. Chiedine una a Iki.":"Le missioni arrivano alla fine del test."));
-  missions.forEach(function(m){
-    var z=ZONES[zoneIdx(m.zona)]||ZONES[0];
-    var btn=el("button","mis");btn.type="button";btn.setAttribute("aria-pressed",m.done?"true":"false");
-    var tick=el("span","tick",m.done?"✓":"");btn.appendChild(tick);
-    var txt=el("span");txt.appendChild(el("b",null,m.titolo));txt.appendChild(el("small",null,"Frammento "+z.nome+(m.perche?" · "+m.perche:"")));btn.appendChild(txt);
-    btn.onclick=function(){
-      m.done=!m.done;btn.setAttribute("aria-pressed",m.done?"true":"false");tick.textContent=m.done?"✓":"";
-      var before=avg(Scene3D.shard);applyShards();persist();zoneRows(zb);
-      if(m.done){
-        newlyDone++;Sound.fit();
-        toast.textContent=avg(Scene3D.shard)>=.75&&before<.75?"Il cristallo centrale si è formato!":"Il frammento "+z.nome+" si è avvicinato al centro.";
-      }else{newlyDone=Math.max(0,newlyDone-1);Sound.tap();toast.textContent="Missione riaperta.";}
+  var ordered=open.slice().sort(function(x,y){return (x.entro||"9")<(y.entro||"9")?-1:1;}).concat(missions.filter(function(m){return m.done;}).reverse());
+  ordered.forEach(function(m){
+    var z=ZONES[zoneIdx(m.zona)]||ZONES[0],late=!m.done&&daysLeft(m.entro)!==null&&daysLeft(m.entro)<0;
+    var card=el("div","mcard"+(m.done?" done":"")+(late?" late":""));
+    var top=el("div","mtop");
+    var tick=el("button","tick",m.done?"✓":"");tick.type="button";tick.setAttribute("aria-pressed",m.done?"true":"false");tick.setAttribute("aria-label",m.done?"Segna come da fare":"Segna come fatta");
+    top.appendChild(tick);
+    var txt=el("div");txt.appendChild(el("b",null,m.titolo));if(m.perche)txt.appendChild(el("span","mwhy",m.perche));top.appendChild(txt);
+    card.appendChild(top);
+    var meta=el("div","mmeta");
+    var zc=el("span","mchip");zc.style.setProperty("--a",z.ca);zc.style.setProperty("--b",z.cb);zc.appendChild(el("i"));zc.appendChild(document.createTextNode(z.nome));meta.appendChild(zc);
+    if(m.tempo)meta.appendChild(el("span","mchip","⏱ "+m.tempo));
+    if(!m.done&&m.entro)meta.appendChild(el("span","mchip"+(late?" late":""),dueLabel(m)));
+    if(m.done&&m.fatta)meta.appendChild(el("span","mchip","fatta il "+new Date(m.fatta).toLocaleDateString("it-IT",{day:"numeric",month:"short"})));
+    card.appendChild(meta);
+    if(!m.done&&m.passi&&m.passi.length){var ol=el("ol","msteps");m.passi.forEach(function(p){ol.appendChild(el("li",null,p));});card.appendChild(ol);}
+    if(m.done){
+      if(m.nota||m.voto){var nt=el("div","mnote",(m.voto?"È stata "+m.voto+". ":"")+(m.nota||""));nt.onclick=function(){card.replaceChild(checkinBox(m,card,toast),nt);};card.appendChild(nt);}
+      else card.appendChild(checkinBox(m,card,toast));
+    }else{
+      var act=el("div","mact");
+      var cal=el("button","btn","📅 Promemoria");cal.type="button";
+      cal.onclick=function(){downloadsApi.save({filename:"missione-ikigai.ics",data:new Blob([missionIcs(m)],{type:"text/calendar"})}).then(function(){toast.textContent="Aprilo per aggiungerlo al calendario: ti ricorderà la missione "+dueLabel(m)+".";});};
+      act.appendChild(cal);
+      if(sampleFn){
+        var talkB=el("button","btn","Parliamone");talkB.type="button";
+        talkB.onclick=function(){closeSheet("pathSheet");if(mode==="chat"&&!busy)chatSend("Parliamo della missione «"+m.titolo+"»: da dove parto?");};
+        act.appendChild(talkB);
+      }
+      var swap=el("button","btn","Cambiala");swap.type="button";
+      swap.onclick=function(){
+        if(busy)return;closeSheet("pathSheet");
+        missions=missions.filter(function(x){return x!==m;});persist();
+        var k=zoneIdx(m.zona);if(k<0)k=weakOrder()[0];
+        discarded.push(m.titolo);
+        missionFor([k],"il frammento "+ZONES[k].nome).then(function(){if(mode==="chat")chatMode();});
+      };
+      act.appendChild(swap);card.appendChild(act);
+    }
+    tick.onclick=function(){
+      m.done=!m.done;
+      var before=avg(Scene3D.shard);
+      if(m.done){m.fatta=Date.now();newlyDone++;Sound.fit();}else{m.fatta=null;newlyDone=Math.max(0,newlyDone-1);Sound.tap();}
+      applyShards();persist();
+      pathMsg=m.done?(avg(Scene3D.shard)>=.75&&before<.75?"Il cristallo centrale si è formato! ":"Il frammento "+z.nome+" si è avvicinato al centro. ")+"Com'è andata?":"Missione riaperta.";
+      renderPath();
     };
-    b.appendChild(btn);
+    b.appendChild(card);
   });
   b.appendChild(toast);
   b.appendChild(el("h3",null,"Frammenti"));
@@ -1281,8 +1392,19 @@ function renderPath(){
   b.appendChild(acts);
 }
 async function onPathClosed(){
-  if(!newlyDone||mode!=="chat"||busy)return;
+  if(!newlyDone&&!checkins.length)return;
+  /* se Iki sta ancora parlando, aspetta che finisca invece di perdere il racconto */
+  for(var w=0;w<120&&(busy||mode!=="chat");w++){await sleep(250);if(!document.getElementById("pathSheet").hidden)return;}
+  if(busy||mode!=="chat")return;
   var n=newlyDone;newlyDone=0;
+  var told=checkins.filter(function(m){return m.done&&(m.nota||m.voto);});checkins=[];
+  if(told.length&&sampleFn){
+    clearAnswers();hideComposer();
+    var msg=told.map(function(m){return "Ho completato la missione «"+m.titolo+"»"+(m.voto?", è stata "+m.voto:"")+(m.nota?". Com'è andata: "+m.nota:"")+".";}).join(" ");
+    await talk(msg+" Rispondimi in breve e dimmi cosa ne ricavi per il prossimo passo.","");
+    chatMode();return;
+  }
+  if(!n){return;}
   busy=true;clearAnswers();hideComposer();
   var formed=avg(Scene3D.shard)>=.75;
   await say((n===1?"Bel colpo, una missione in meno!":"Bel colpo, "+n+" missioni in meno!")+(formed?" E il tuo cristallo centrale adesso è intero.":" Guarda lassù: il cristallo è più compatto."),{mood:"happy",keep:true,gesture:"point"});
@@ -1576,6 +1698,27 @@ async function resume(){
   Scene3D.gem=[1,1,1,1];applyShards();
   var open=missions.filter(function(m){return !m.done;}).length;
   await say("Ecco il tuo cristallo, come l'avevi lasciato.",{gesture:"point"});
+  var due=missions.filter(function(m){return !m.done&&m.entro&&daysLeft(m.entro)<=0;}).sort(function(x,y){return x.entro<y.entro?-1:1;})[0];
+  if(due){
+    var n=daysLeft(due.entro);
+    await say("La missione «"+due.titolo.replace(/[.!]+$/,"")+"» "+(n===0?"era per oggi":n===-1?"era per ieri":"è scaduta da "+(-n)+" giorni")+". Com'è andata?",{keep:true});
+    var c=await choose(["Fatta!","Non ancora","Cambiala"]);
+    if(c==="Fatta!"){
+      due.done=true;due.fatta=Date.now();applyShards();persist();Sound.fit();
+      await say("Grande! Raccontamela in una riga: cosa hai fatto, cosa hai scoperto?",{keep:true,mood:"happy"});
+      var nota=await askText();
+      if(nota){due.nota=nota.slice(0,300);persist();if(sampleFn){await talk("Ho completato la missione «"+due.titolo+"». Com'è andata: "+due.nota+". Rispondimi in breve e dimmi cosa ne ricavi per il prossimo passo.","");}}
+      else await say("Ok! Il frammento "+(ZONES[zoneIdx(due.zona)]||ZONES[0]).nome+" si è avvicinato al centro.",{gesture:"point"});
+    }else if(c==="Non ancora"){
+      due.entro=dueIn(3);persist();
+      await say("Nessun problema: ti do altri tre giorni. Se ti aiuta, mettiti un promemoria dal Percorso.");
+    }else{
+      missions=missions.filter(function(x){return x!==due;});persist();
+      var k=zoneIdx(due.zona);if(k<0)k=weakOrder()[0];
+      discarded.push(due.titolo);
+      await missionFor([k],"il frammento "+ZONES[k].nome);
+    }
+  }
   if(missions.length){
     await say(open?(open===1?"Hai ancora una missione aperta.":"Hai ancora "+open+" missioni aperte.")+" Quando ne completi una, spuntala in Percorso e guarda il frammento che si avvicina.":"Hai completato tutte le missioni. Se vuoi, te ne preparo di nuove.");
   }

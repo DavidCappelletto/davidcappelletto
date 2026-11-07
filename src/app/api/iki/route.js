@@ -141,7 +141,7 @@ async function claudeJson(prompt, maxTokens) {
 const ASCOLTO =
   "Come scegliere le missioni: parti da quello che la persona ha scritto con parole sue, è la parte più importante. Riprendi le persone, i progetti, i luoghi e le situazioni concrete che ha nominato, senza inventare dettagli che non ha detto. Nel campo perche richiama in breve quello che ha raccontato (per esempio: hai detto che…). Evita missioni generiche (fare liste, riflettere, tenere un diario, leggere un libro) a meno che non siano legate a un suo esempio preciso. Ogni missione deve essere piccola, fattibile in pochi giorni e verificabile. Se non ha scritto nulla con parole sue, basati sulle sue scelte.";
 function wordsBlock(d) {
-  const parole = strList(d.parole, 12, 400);
+  const parole = strList(d.parole, 20, 400);
   return parole.length ? `Cose che ha scritto con parole sue:\n${parole.map((p) => "- " + p).join("\n")}\n\n` : "";
 }
 const TASKS = {
@@ -192,8 +192,8 @@ const TASKS = {
     const stato = str(d.stato, 300);
     const fatte = strList(d.fatte, 20, 120);
     const j = await claudeJson(
-      `${wordsBlock(d)}Profilo completo della persona:\n${profilo}\n\nStato attuale dei frammenti: ${stato}.${fatte.length ? `\nMissioni già completate: ${fatte.join("; ")}.` : ""}\n\nCrea 3 missioni nuove da fare nelle prossime due settimane per rafforzare i frammenti più deboli (prima gli staccati, poi quelli quasi incastrati). ${ASCOLTO} Scrivi in italiano corretto, dando del tu.\nRispondi solo con JSON: {"missioni":[{"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"passione | missione | professione | vocazione","perche":"massimo 100 caratteri"}]}`,
-      700
+      `${wordsBlock(d)}Profilo completo della persona:\n${profilo}\n\nStato attuale dei frammenti: ${stato}.${fatte.length ? `\nMissioni già completate: ${fatte.join("; ")}.` : ""}\n\nCrea 3 missioni nuove da fare nelle prossime due settimane per rafforzare i frammenti più deboli (prima gli staccati, poi quelli quasi incastrati). ${ASCOLTO} Scrivi in italiano corretto, dando del tu.\nRispondi solo con JSON: {"missioni":[{"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"passione | missione | professione | vocazione","perche":"massimo 110 caratteri, richiama quello che ha detto","passi":["2 o 3 passi brevi e pratici, massimo 60 caratteri ciascuno"],"tempo":"tempo stimato, es. 20 minuti","giorni":numero di giorni per farla, da 1 a 14}]}`,
+      1000
     );
     const arr = j && Array.isArray(j.missioni) ? j.missioni : [];
     return { missioni: arr.slice(0, 3).map(cleanMission).filter(Boolean) };
@@ -203,21 +203,26 @@ const TASKS = {
     const profilo = str(d.profilo, 4000);
     const stato = str(d.stato, 300);
     const aperte = strList(d.aperte, 20, 120);
+    const scartate = strList(d.scartate, 10, 120);
     const label = str(d.label, 80);
     const zone = strList(d.zone, 4, 20).filter((z) => ZONES.includes(z));
     const j = await claudeJson(
-      `${wordsBlock(d)}Profilo completo della persona:\n${profilo}\n\nStato dei frammenti: ${stato}.${aperte.length ? `\nMissioni già aperte (non ripeterle): ${aperte.join("; ")}.` : ""}\n\nCrea UNA missione da fare nei prossimi giorni per sviluppare ${label}. Scegli la zona tra: ${(zone.length ? zone : ZONES).join(", ")}, preferendo quella più debole. ${ASCOLTO} Italiano corretto, dai del tu.\nRispondi solo con JSON: {"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"...","perche":"massimo 100 caratteri"}`,
-      260
+      `${wordsBlock(d)}Profilo completo della persona:\n${profilo}\n\nStato dei frammenti: ${stato}.${aperte.length ? `\nMissioni già aperte (non ripeterle): ${aperte.join("; ")}.` : ""}${scartate.length ? `\nMissioni che ha scartato perché non le andavano (proponi qualcosa di diverso): ${scartate.join("; ")}.` : ""}\n\nCrea UNA missione da fare nei prossimi giorni per sviluppare ${label}. Scegli la zona tra: ${(zone.length ? zone : ZONES).join(", ")}, preferendo quella più debole. ${ASCOLTO} Italiano corretto, dai del tu.\nRispondi solo con JSON: {"titolo":"verbo all'imperativo, massimo 70 caratteri","zona":"passione | missione | professione | vocazione","perche":"massimo 110 caratteri, richiama quello che ha detto","passi":["2 o 3 passi brevi e pratici, massimo 60 caratteri ciascuno"],"tempo":"tempo stimato, es. 20 minuti","giorni":numero di giorni per farla, da 1 a 14}`,
+      380
     );
     return cleanMission(j) || {};
   },
 };
 function cleanMission(m) {
   if (!m || typeof m.titolo !== "string" || !m.titolo.trim()) return null;
+  const giorni = Math.round(Number(m.giorni));
   return {
     titolo: m.titolo.trim().slice(0, 110),
     zona: String(m.zona || "").toLowerCase().trim().slice(0, 20),
-    perche: String(m.perche || "").trim().slice(0, 140),
+    perche: String(m.perche || "").trim().slice(0, 160),
+    passi: strList(m.passi, 3, 90).map((p) => p.trim()).filter(Boolean),
+    tempo: str(m.tempo, 30).trim(),
+    giorni: Number.isFinite(giorni) ? Math.min(14, Math.max(1, giorni)) : 5,
   };
 }
 

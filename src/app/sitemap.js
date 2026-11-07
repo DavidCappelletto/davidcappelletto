@@ -22,6 +22,12 @@ export default function sitemap() {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: `${base}/forma`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     ...caseSlugs.map((slug) => ({
       url: `${base}/progetti/${slug}`,
       lastModified: new Date(),

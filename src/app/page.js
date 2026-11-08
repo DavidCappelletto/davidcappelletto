@@ -175,6 +175,7 @@ const copy = {
       email: "Email",
       activity: "Tipo di attività",
       budget: "Seleziona budget",
+      budgetOptions: ["Fino a €500", "€500-1.500", "Oltre €1.500", "Non lo so ancora"],
       msg: "Scrivi qui il tuo messaggio",
       submit: "Invia richiesta",
       success: "Messaggio inviato! Ti rispondo entro 24 ore.",
@@ -356,6 +357,7 @@ const copy = {
       email: "Email",
       activity: "Type of business",
       budget: "Select budget",
+      budgetOptions: ["Up to €500", "€500-1,500", "Over €1,500", "Not sure yet"],
       msg: "Write your message here",
       submit: "Send request",
       success: "Message sent! I'll get back to you within 24 hours.",
@@ -1237,10 +1239,9 @@ export default function Home() {
                       <option value="" disabled>
                         {t.form.budget}
                       </option>
-                      <option value="€250-500">€250-500</option>
-                      <option value="€800-1.600">€800-1.600</option>
-                      <option value="€2.700-5.000">€2.700-5.000</option>
-                      <option value="Oltre €5.000">Oltre €5.000</option>
+                      {t.form.budgetOptions.map((opt) => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
                     </select>
                     <textarea
                       className="contact-span-full"

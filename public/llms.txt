@@ -1,0 +1,29 @@
+# David Cappelletto | Consulenza Digitale
+
+> Consulente digitale freelance ad Aviano (Pordenone, Friuli-Venezia Giulia). Siti che portano clienti e automazioni che ridanno tempo, per professionisti e piccole imprese. Prima analizza dove si perdono contatti e ore di lavoro, poi interviene solo lì.
+
+- Servizi: audit e diagnosi, progettazione e sviluppo siti web, SEO locale, automazioni AI (n8n, WhatsApp), strategia digitale, affiancamento.
+- Prezzi: si parte da un Mini Audit gratuito di 20 minuti; interventi da €250, con preventivo su misura prima di iniziare.
+- Zona: provincia di Pordenone e Friuli-Venezia Giulia, anche da remoto. Lingue: italiano, inglese.
+- Contatti: contact@davidcappelletto.it · WhatsApp +39 348 115 1160 · https://www.linkedin.com/in/david-cappelletto-703832306/
+
+## Pagine principali
+
+- [Home](https://davidcappelletto.it/): offerta, metodo, servizi, contatti
+- [Progetti](https://davidcappelletto.it/progetti): tutti i progetti, divisi per stato
+- [Privacy](https://davidcappelletto.it/privacy)
+
+## Progetti in evidenza
+
+- [DIAMA Service](https://davidcappelletto.it/progetti/azienda-hvac): sito multipagina per un'azienda di impianti, con CMS, landing, SEO tecnico e tracking. Online.
+- [Infermiera Althea](https://davidcappelletto.it/progetti/infermiera-althea): sito professionale per un'infermiera a domicilio, in Astro, con form, WhatsApp e testi a norma. In anteprima.
+- [Studio dentistico](https://davidcappelletto.it/progetti/dentista-automazione): automazione dei promemoria appuntamenti via WhatsApp. In costruzione.
+- [FORMA Allenamento](https://davidcappelletto.it/progetti/forma-allenamento): web app di allenamento con circuiti guidati e 60 esercizi illustrati. Prototipo in uso.
+
+## Altri progetti
+
+- [Landing per palestre](https://davidcappelletto.it/progetti/palestra-white-label)
+- [Maybe's Shop](https://davidcappelletto.it/progetti/maybes-shop)
+- [Geo·FIRE](https://davidcappelletto.it/progetti/geofire): calcolatore di libertà finanziaria con globo 3D
+- [Mappa Ikigai](https://davidcappelletto.it/ikigai)
+- [FORMA Gyms](https://davidcappelletto.it/progetti/forma)

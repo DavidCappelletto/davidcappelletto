@@ -172,7 +172,7 @@ export function SiteFooter() {
         <div style={{ textAlign: "left" }}>
           <p style={{ margin: 0, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>{lang === "en" ? "Aviano (PN), Italy · Also working remotely" : "Aviano (PN) · Lavoro anche da remoto"}</p>
           <p style={{ margin: "4px 0 0", color: "rgba(255,255,255,0.3)", fontSize: 12 }}>{lang === "en" ? "UX · Local SEO · AI Automations" : "UX · SEO Locale · Automazioni AI"}</p>
-          <a href="https://www.iubenda.com/privacy-policy/65493035" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 6, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>Privacy Policy</a>
+          <a href="/privacy" style={{ display: "inline-block", marginTop: 6, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>Privacy Policy</a>
         </div>
       </div>
 

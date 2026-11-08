@@ -458,7 +458,7 @@ export default function Home() {
       style={{
         background: colors.bg,
         color: colors.ink,
-        fontFamily: "'DM Sans', system-ui, sans-serif",
+        fontFamily: "var(--font-dm), system-ui, sans-serif",
       }}
     >
       <nav
@@ -1324,9 +1324,7 @@ export default function Home() {
               UX · SEO Locale · Automazioni AI
             </p>
             <a
-              href="https://www.iubenda.com/privacy-policy/65493035"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/privacy"
               style={{ display: "inline-block", marginTop: 6, color: "rgba(255,255,255,0.3)", fontSize: 12 }}
             >
               Privacy Policy

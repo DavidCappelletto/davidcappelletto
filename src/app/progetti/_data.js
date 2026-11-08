@@ -180,17 +180,17 @@ export const caseStudies = [
   },
   {
     slug: "geofire", category: "lab", status: "online",
-    imageSrc: "/projects/geofire/app.jpg", appLink: "https://geofire.davidcappelletto.it",
+    imageSrc: "/projects/geofire/app.webp", appLink: "https://geofire.davidcappelletto.it",
     it: {
       tag: "Prodotto · Dati e visualizzazione", shortTitle: "Geo·FIRE", title: "Geo·FIRE: libertà finanziaria, dati e geografia",
       client: "Progetto personale", place: "Web app interattiva · online", stack: "React · D3 · motore geografico · simulazioni finanziarie",
       role: "Ideazione, design, sviluppo e verifica", intro: "Un mappamondo interattivo per esplorare come la libertà finanziaria cambia fra paesi e modelli FIRE.",
       cardText: "Un globo interattivo con 175 paesi e tre modelli di libertà finanziaria.", facts: ["175 paesi", "3 modelli FIRE", "34.560 test"], appLinkLabel: "Prova l’app →",
       sections: [
-        { h: "Una domanda resa esplorabile", body: "L’idea era capire in quali paesi un patrimonio rende già finanziariamente liberi e quanto manca negli altri.", image: "/projects/geofire/app.jpg", mediaLabel: "Globo · paesi" },
-        { h: "Prima i calcoli, poi l’interfaccia", body: "Le formule e i modelli FIRE, Coast e Barista sono stati verificati contro simulazioni mese per mese: l’interfaccia visualizza un motore già controllato.", image: "/projects/geofire/cover.png", mediaLabel: "Modelli · simulazioni" },
-        { h: "Costruire per il browser reale", body: "Confini, ricerca, confronto, temi e bandiere dovevano funzionare su dispositivi diversi. Le bandiere sono state disegnate nel progetto per evitare incompatibilità.", image: "/projects/geofire/app.jpg", mediaLabel: "Compatibilità · UI" },
-        { h: "Il metodo è parte del risultato", body: "Scomporre il problema, verificare i numeri, iterare via screenshot e rifinire manualmente l’ultimo tratto dell’esperienza.", image: "/projects/geofire/cover.png", mediaLabel: "Metodo · iterazione" },
+        { h: "Una domanda resa esplorabile", body: "L’idea era capire in quali paesi un patrimonio rende già finanziariamente liberi e quanto manca negli altri.", image: "/projects/geofire/app.webp", mediaLabel: "Globo · paesi" },
+        { h: "Prima i calcoli, poi l’interfaccia", body: "Le formule e i modelli FIRE, Coast e Barista sono stati verificati contro simulazioni mese per mese: l’interfaccia visualizza un motore già controllato.", image: "/projects/geofire/calcoli.webp", mediaLabel: "Modelli · simulazioni" },
+        { h: "Costruire per il browser reale", body: "Confini, ricerca, confronto, temi e bandiere dovevano funzionare su dispositivi diversi. Le bandiere sono state disegnate nel progetto per evitare incompatibilità.", image: "/projects/geofire/chiaro.webp", mediaLabel: "Compatibilità · UI" },
+        { h: "Il metodo è parte del risultato", body: "Scomporre il problema, verificare i numeri, iterare via screenshot e rifinire manualmente l’ultimo tratto dell’esperienza.", image: "/projects/geofire/globo.webp", mediaLabel: "Metodo · iterazione" },
       ], results: ["175 paesi con confini reali", "FIRE, Coast e Barista", "34.560 combinazioni verificate", "Ricerca e confronto paesi", "Desktop e mobile", "App online sul proprio dominio"],
     },
     en: {
@@ -199,10 +199,10 @@ export const caseStudies = [
       role: "Concept, design, development and verification", intro: "An interactive globe exploring how financial freedom changes across countries and FIRE models.",
       cardText: "An interactive globe with 175 countries and three financial-freedom models.", facts: ["175 countries", "3 FIRE models", "34,560 tests"], appLinkLabel: "Try the app →",
       sections: [
-        { h: "A question made explorable", body: "The idea was to understand where a portfolio already enables financial freedom and how long it takes elsewhere.", image: "/projects/geofire/app.jpg", mediaLabel: "Globe · countries" },
-        { h: "Calculations before interface", body: "Formulas and FIRE, Coast and Barista models were checked against month-by-month simulations.", image: "/projects/geofire/cover.png", mediaLabel: "Models · simulations" },
-        { h: "Built for real browsers", body: "Borders, search, comparison, themes and flags had to work across devices. Flags were drawn to avoid incompatibility.", image: "/projects/geofire/app.jpg", mediaLabel: "Compatibility · UI" },
-        { h: "Method is part of the result", body: "Decompose the problem, verify the numbers, iterate through screenshots and refine the final experience manually.", image: "/projects/geofire/cover.png", mediaLabel: "Method · iteration" },
+        { h: "A question made explorable", body: "The idea was to understand where a portfolio already enables financial freedom and how long it takes elsewhere.", image: "/projects/geofire/app.webp", mediaLabel: "Globe · countries" },
+        { h: "Calculations before interface", body: "Formulas and FIRE, Coast and Barista models were checked against month-by-month simulations.", image: "/projects/geofire/calcoli.webp", mediaLabel: "Models · simulations" },
+        { h: "Built for real browsers", body: "Borders, search, comparison, themes and flags had to work across devices. Flags were drawn to avoid incompatibility.", image: "/projects/geofire/chiaro.webp", mediaLabel: "Compatibility · UI" },
+        { h: "Method is part of the result", body: "Decompose the problem, verify the numbers, iterate through screenshots and refine the final experience manually.", image: "/projects/geofire/globo.webp", mediaLabel: "Method · iteration" },
       ], results: ["175 countries with real borders", "FIRE, Coast and Barista", "34,560 verified combinations", "Country search and comparison", "Desktop and mobile", "Live on its own domain"],
     },
   },

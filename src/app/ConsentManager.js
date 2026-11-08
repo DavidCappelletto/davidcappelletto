@@ -83,9 +83,7 @@ export default function ConsentManager() {
         cookie di analisi (Google Analytics, Microsoft Clarity) per capire come viene usato il
         sito.{" "}
         <a
-          href="https://www.iubenda.com/privacy-policy/65493035"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/privacy"
           style={{ color: "#1E7E73" }}
         >
           Privacy Policy

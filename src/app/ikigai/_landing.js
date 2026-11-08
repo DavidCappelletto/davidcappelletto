@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const PRIVACY = "https://www.iubenda.com/privacy-policy/65493035";
+const PRIVACY = "/privacy";
 
 const steps = [
   {
@@ -200,7 +200,7 @@ export default function IkigaiLanding() {
       <style>{`
         .mk{--bg:#05060C;--fg:#F1F2FA;--muted:#A3A8C3;--line:rgba(185,194,255,.18);--cta:#FFE14D;--lilac:#B9C2FF;
           position:relative;min-height:100vh;background:radial-gradient(1200px 700px at 70% -10%,rgba(92,74,180,.35),transparent 60%),radial-gradient(900px 600px at -10% 30%,rgba(34,224,164,.08),transparent 60%),var(--bg);
-          color:var(--fg);overflow:hidden;font-family:'DM Sans',system-ui,sans-serif}
+          color:var(--fg);overflow:hidden;font-family:var(--font-dm),system-ui,sans-serif}
         .mk-stars{position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 35%,#fff,transparent),radial-gradient(1px 1px at 80% 15%,#fff,transparent),radial-gradient(1px 1px at 90% 60%,#fff,transparent),radial-gradient(1.5px 1.5px at 20% 90%,#fff,transparent),radial-gradient(1px 1px at 65% 85%,#fff,transparent);background-size:600px 600px}
         .mk>*{position:relative}
         .mk-top{display:flex;justify-content:space-between;align-items:center;width:min(1160px,92vw);margin:0 auto;padding:22px 0}

@@ -1,3 +1,4 @@
+import "@fontsource-variable/dm-sans";
 import "./globals.css";
 import ConsentManager from "./ConsentManager";
 

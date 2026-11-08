@@ -18,8 +18,9 @@ const copy = {
     heroBtn2: "Come lavoro →",
     approach: "Il mio approccio",
     quote:
-      "Il digitale funziona quando risolve un problema vero, non quando segue una tendenza. Ti dico onestamente cosa serve — anche se la risposta è \"niente, per ora\".",
-    stat1: "Il sito carica in meno di 2 secondi su qualsiasi dispositivo",
+      "Non parto dagli strumenti, parto da come lavori. Se la risposta onesta è \"per ora non serve niente\", te lo dico.",
+    stat1Value: "20 min",
+    stat1: "Mini Audit gratuito, senza impegno.",
     stat2: "Parli sempre con me, mai con un account manager.",
     problemTag: "Il Problema",
     problemTitle: "Hai risposto a queste domande prima di investire nel tuo digitale?",
@@ -40,13 +41,13 @@ const copy = {
       },
       {
         q: "Sai davvero cosa funziona nel tuo digitale, o vai a intuito?",
-        a: "Senza dati chiari su cosa genera contatti reali, ogni decisione è una scommessa. Imposto un tracciamento essenziale — non dashboard inutili — per capire cosa portare avanti e cosa tagliare.",
+        a: "Senza dati chiari su cosa genera contatti reali, ogni decisione è una scommessa. Imposto un tracciamento essenziale, senza dashboard inutili, per capire cosa portare avanti e cosa tagliare.",
       },
     ],
     workTag: "Come Lavoro",
     workTitle: "Non ho soluzioni standard. Ho un metodo.",
     workIntro:
-      "Ogni realtà è diversa. Prima di proporre qualsiasi cosa, analizzo la situazione — strumenti, target, processi, concorrenza. Solo allora ha senso parlare di soluzioni.",
+      "Ogni realtà è diversa. Prima di proporre qualsiasi cosa, analizzo la situazione: strumenti, target, processi, concorrenza. Solo allora ha senso parlare di soluzioni.",
     steps: [
       ["01", "Capisco prima", "Analizzo target, struttura, processi e segnali di mercato prima di qualsiasi proposta."],
       ["02", "Ti dico cosa serve davvero", "Definisco priorità operative chiare: cosa fare, perché, e con quale impatto atteso."],
@@ -97,16 +98,16 @@ const copy = {
         ],
       },
       {
-        slug: "forma",
-        tag: "Prodotto · Pre-beta",
-        title: "FORMA Gyms",
-        place: "Product design · fitness-game",
-        imageSrc: "/projects/forma/card.webp",
-        status: "In costruzione", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "64%",
+        slug: "forma-allenamento",
+        tag: "Prodotto · In uso",
+        title: "FORMA Allenamento",
+        place: "Web app · allenamento in palestra",
+        imageSrc: "/projects/forma-app/card.webp",
+        status: "In costruzione", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "70%",
         results: [
-          "6 famiglie di arene",
-          "3 compagni, 4 stadi",
-          "Micro-demo pre-beta",
+          "60 esercizi illustrati",
+          "Circuiti guidati",
+          "Calendario sessioni",
         ],
       },
     ],
@@ -114,7 +115,7 @@ const copy = {
     aboutTitle: "David Cappelletto",
     aboutSubtitle: "Consulente Digitale Freelance · Friuli-Venezia Giulia",
     aboutText:
-      "Mi chiamo David, sono un consulente digitale freelance con base in Friuli-Venezia Giulia. Ho un background in design industriale che mi ha insegnato una cosa: la forma segue la funzione, non il contrario.\n\nLavoro con professionisti e PMI che hanno già un sito ma non vedono risultati. Prima di toccare qualsiasi strumento, analizzo la situazione reale — target, struttura, processi. Solo dopo propongo cosa fare.\n\nNon gestisco decine di clienti in parallelo. Lavoro con pochi progetti alla volta — e parli sempre direttamente con me, senza intermediari.",
+      "Mi chiamo David, sono un consulente digitale freelance con base in Friuli-Venezia Giulia. Ho un background in design industriale che mi ha insegnato una cosa: la forma segue la funzione, non il contrario.\n\nLavoro con professionisti e PMI che hanno già un sito ma non vedono risultati. Prima di toccare qualsiasi strumento, analizzo la situazione reale: target, struttura, processi. Solo dopo propongo cosa fare.\n\nNon gestisco decine di clienti in parallelo. Lavoro con pochi progetti alla volta e parli sempre direttamente con me, senza intermediari.",
     servicesTag: "Cosa Puoi Chiedermi",
     servicesTitle: "Le competenze che porto. Applicate dove servono.",
     serviceAccordions: [
@@ -128,7 +129,7 @@ const copy = {
         iconSrc: "/icon-siti.svg",
         title: "Progettazione Siti",
         description:
-          "Struttura, UX, contenuti, conversioni — in questo ordine, non al contrario. L'architettura viene prima del design, il design prima del codice.",
+          "Struttura, UX, contenuti, conversioni: in questo ordine, non al contrario. L'architettura viene prima del design, il design prima del codice.",
       },
       {
         iconSrc: "/icon-seo.svg",
@@ -140,19 +141,19 @@ const copy = {
         iconSrc: "/icon-ai.svg",
         title: "Automazioni AI",
         description:
-          "Elimino i processi manuali ripetitivi — preventivi, follow-up, reportistica — con n8n e AI applicati al tuo caso reale, non a un caso da tutorial.",
+          "Elimino i processi manuali ripetitivi (preventivi, follow-up, reportistica) con n8n e AI applicati al tuo caso reale, non a un caso da tutorial.",
       },
       {
         iconSrc: "/icon-strategia.svg",
         title: "Strategia Digitale",
         description:
-          "Non ti vendo un piano a 90 giorni fatto di slide. Ti dico, con numeri veri, se conviene investire ora o aspettare — e su cosa, esattamente.",
+          "Non ti vendo un piano a 90 giorni fatto di slide. Ti dico, con numeri veri, se conviene investire ora o aspettare, e su cosa esattamente.",
       },
       {
         iconSrc: "/icon-affiancamento.svg",
         title: "Affiancamento",
         description:
-          "Ti insegno a usare da solo quello che ti ho costruito — CMS, tracking, automazioni — così non mi richiami per cambiare un titolo o aggiungere una pagina.",
+          "Ti insegno a usare da solo quello che ti ho costruito (CMS, tracking, automazioni), così non mi richiami per cambiare un titolo o aggiungere una pagina.",
       },
     ],
     priceTag: "Investimento",
@@ -165,7 +166,7 @@ const copy = {
     firstStep: "Primo Passo",
     miniTitle: "Inizia dal Mini Audit Gratuito",
     miniText:
-      "20 minuti. Nessun impegno. Raccontami la tua situazione — capisco il contesto, ti dico onestamente se e come posso aiutarti.",
+      "20 minuti. Nessun impegno. Raccontami la tua situazione: capisco il contesto e ti dico onestamente se e come posso aiutarti.",
     miniBtn2: "Oppure compila il form →",
     contacts: "Contatti",
     talk: "Parliamoci.",
@@ -200,8 +201,9 @@ const copy = {
     heroBtn2: "How I work →",
     approach: "My approach",
     quote:
-      "Digital works when it solves a real problem, not when it follows a trend. I'll tell you honestly what you need — even if the answer is \"nothing, for now\".",
-    stat1: "The site loads in under 2 seconds on any device",
+      "I don't start from tools, I start from how you work. If the honest answer is \"nothing for now\", I'll tell you.",
+    stat1Value: "20 min",
+    stat1: "Free Mini Audit, no commitment.",
     stat2: "You always talk to me, never an account manager.",
     problemTag: "The Problem",
     problemTitle: "Have you answered these questions before investing in your digital presence?",
@@ -222,13 +224,13 @@ const copy = {
       },
       {
         q: "Do you really know what's working in your digital presence, or are you guessing?",
-        a: "Without clear data on what actually generates real contacts, every decision is a bet. I set up essential tracking — not useless dashboards — so you know what to keep doing and what to cut.",
+        a: "Without clear data on what actually generates real contacts, every decision is a bet. I set up essential tracking, no useless dashboards, so you know what to keep doing and what to cut.",
       },
     ],
     workTag: "How I Work",
     workTitle: "I do not offer standard packages. I use a method.",
     workIntro:
-      "Every business is different. Before proposing anything, I analyze your current situation — tools, target, processes, and competition. Only then does it make sense to discuss solutions.",
+      "Every business is different. Before proposing anything, I analyze your current situation: tools, target, processes and competition. Only then does it make sense to discuss solutions.",
     steps: [
       ["01", "I understand first", "I analyze target, structure, processes and market signals before any proposal."],
       ["02", "I tell you what you really need", "I define clear operational priorities: what to do, why, and expected impact."],
@@ -279,16 +281,16 @@ const copy = {
         ],
       },
       {
-        slug: "forma",
-        tag: "Product · Pre-beta",
-        title: "FORMA Gyms",
-        place: "Product design · fitness game",
-        imageSrc: "/projects/forma/card.webp",
-        status: "In progress", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "64%",
+        slug: "forma-allenamento",
+        tag: "Product · In use",
+        title: "FORMA Training",
+        place: "Web app · gym training",
+        imageSrc: "/projects/forma-app/card.webp",
+        status: "In progress", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "70%",
         results: [
-          "6 arena families",
-          "3 companions, 4 stages",
-          "Pre-beta micro-demo",
+          "60 illustrated exercises",
+          "Guided circuits",
+          "Session calendar",
         ],
       },
     ],
@@ -296,7 +298,7 @@ const copy = {
     aboutTitle: "David Cappelletto",
     aboutSubtitle: "Freelance Digital Consultant · Friuli-Venezia Giulia",
     aboutText:
-      "I'm David, a freelance digital consultant based in Friuli-Venezia Giulia. I come from an industrial design background that taught me one key principle: form follows function, never the other way around.\n\nI work with professionals and SMEs that already have a website but are not getting results. Before touching any tool, I analyze the real situation — target, structure, and processes. Only then do I define what to do.\n\nI do not handle dozens of clients in parallel. I work with a limited number of projects at a time — and you always speak directly with me, with no middle layers.",
+      "I'm David, a freelance digital consultant based in Friuli-Venezia Giulia. I come from an industrial design background that taught me one key principle: form follows function, never the other way around.\n\nI work with professionals and SMEs that already have a website but are not getting results. Before touching any tool, I analyze the real situation: target, structure and processes. Only then do I define what to do.\n\nI do not handle dozens of clients in parallel. I work with a limited number of projects at a time and you always speak directly with me, with no middle layers.",
     servicesTag: "What You Can Ask For",
     servicesTitle: "The skills I bring. Applied where they matter.",
     serviceAccordions: [
@@ -310,7 +312,7 @@ const copy = {
         iconSrc: "/icon-siti.svg",
         title: "Website Design",
         description:
-          "Structure, UX, content, conversions — in this order, not the other way around. Architecture comes before design, design before code.",
+          "Structure, UX, content, conversions: in this order, not the other way around. Architecture comes before design, design before code.",
       },
       {
         iconSrc: "/icon-seo.svg",
@@ -322,19 +324,19 @@ const copy = {
         iconSrc: "/icon-ai.svg",
         title: "AI Automations",
         description:
-          "I remove repetitive manual processes — quotes, follow-ups, reporting — with n8n and AI applied to your actual case, not a generic tutorial case.",
+          "I remove repetitive manual processes (quotes, follow-ups, reporting) with n8n and AI applied to your actual case, not a generic tutorial case.",
       },
       {
         iconSrc: "/icon-strategia.svg",
         title: "Digital Strategy",
         description:
-          "I won't sell you a 90-day plan made of slides. I'll tell you, with real numbers, whether it's worth investing now or waiting — and on exactly what.",
+          "I won't sell you a 90-day plan made of slides. I'll tell you, with real numbers, whether it's worth investing now or waiting, and on exactly what.",
       },
       {
         iconSrc: "/icon-affiancamento.svg",
         title: "Consulting Support",
         description:
-          "I teach you to run what I built for you on your own — CMS, tracking, automations — so you don't call me back to change a heading or add a page.",
+          "I teach you to run what I built for you on your own (CMS, tracking, automations), so you don't call me back to change a heading or add a page.",
       },
     ],
     priceTag: "Investment",
@@ -347,7 +349,7 @@ const copy = {
     firstStep: "First Step",
     miniTitle: "Start with the Free Mini Audit",
     miniText:
-      "20 minutes. No commitment. Tell me your situation — I understand the context and honestly tell you if and how I can help.",
+      "20 minutes. No commitment. Tell me your situation: I understand the context and honestly tell you if and how I can help.",
     miniBtn2: "Or fill in the form →",
     contacts: "Contacts",
     talk: "Let's talk.",
@@ -761,7 +763,7 @@ export default function Home() {
             </p>
             <div className="hero-stats-grid" style={{ marginTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
               <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>
-                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>2s</p>
+                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>{t.stat1Value}</p>
                 <p style={{ margin: "4px 0 0", fontSize: 12.5, lineHeight: 1.35 }}>{t.stat1}</p>
               </div>
               <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>

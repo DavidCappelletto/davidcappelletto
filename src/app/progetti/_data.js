@@ -23,7 +23,7 @@ export const caseStudies = [
     imageSrc: "/projects/diama/home.webp", link: "https://diamaservice.it",
     it: {
       tag: "Cliente · Sviluppo web", shortTitle: "DIAMA Service",
-      title: "DIAMA Service — dal sistema progettuale al sito in produzione",
+      title: "DIAMA Service: dal sistema progettuale al sito in produzione",
       client: "DIAMA Service", place: "Torino · con Stefania Bertone e Lara Bragagna",
       stack: "HTML · CSS · JavaScript · Decap CMS · Netlify · GA4/GTM",
       role: "Prototipo, sviluppo, CMS, tracking e messa online",
@@ -40,7 +40,7 @@ export const caseStudies = [
     },
     en: {
       tag: "Client · Web development", shortTitle: "DIAMA Service",
-      title: "DIAMA Service — from design system to production website", client: "DIAMA Service",
+      title: "DIAMA Service: from design system to production website", client: "DIAMA Service",
       place: "Turin · with Stefania Bertone and Lara Bragagna", stack: "HTML · CSS · JavaScript · Decap CMS · Netlify · GA4/GTM",
       role: "Prototype, development, CMS, tracking and launch", intro: "Turning a complete Figma system into a real website: responsive, editable and measurable.",
       cardText: "A multi-page web ecosystem with CMS, landing pages, technical SEO and tracking.", facts: ["About 30 pages", "CMS and landing pages", "SEO and tracking"],
@@ -57,7 +57,7 @@ export const caseStudies = [
     imageSrc: "/projects/althea/cover.webp",
     it: {
       tag: "Cliente · Sito professionale", shortTitle: "Infermiera Althea",
-      title: "Infermiera Althea — il sito di un’infermiera a domicilio, rifatto da zero",
+      title: "Infermiera Althea: il sito di un’infermiera a domicilio, rifatto da zero",
       client: "Dott.ssa Althea Vignando · infermiera libera professionista", place: "Provincia di Pordenone",
       stack: "Astro · TypeScript · Tailwind · Netlify Forms",
       role: "Struttura, testi, design, sviluppo e SEO locale",
@@ -73,7 +73,7 @@ export const caseStudies = [
     },
     en: {
       tag: "Client · Professional website", shortTitle: "Infermiera Althea",
-      title: "Infermiera Althea — a home-care nurse’s website, rebuilt from scratch",
+      title: "Infermiera Althea: a home-care nurse’s website, rebuilt from scratch",
       client: "Althea Vignando · freelance nurse", place: "Province of Pordenone",
       stack: "Astro · TypeScript · Tailwind · Netlify Forms",
       role: "Structure, copy, design, development and local SEO",
@@ -114,10 +114,46 @@ export const caseStudies = [
     },
   },
   {
-    slug: "forma", category: "featured", status: "progress", featured: true,
+    slug: "forma-allenamento", category: "featured", status: "progress", featured: true,
+    imageSrc: "/projects/forma-app/card.webp",
+    it: {
+      tag: "Prodotto · Prototipo in uso", shortTitle: "FORMA Allenamento",
+      title: "FORMA Allenamento: la scheda della palestra, sul telefono",
+      client: "Prodotto personale", place: "Web app mobile · usata in palestra",
+      stack: "HTML · CSS · JavaScript · PWA · Netlify",
+      role: "Ideazione, UX, design e sviluppo",
+      intro: "Nata per allenarsi senza la fotocopia della scheda in mano: circuiti, esercizi illustrati e calendario in un’app che si usa dal telefono, senza account.",
+      cardText: "Web app di allenamento: circuiti guidati, 60 esercizi illustrati, calendario e progressi.",
+      facts: ["60 esercizi", "Circuiti guidati", "Nessun account"],
+      sections: [
+        { h: "Dalla fotocopia al telefono", body: "La scheda cartacea diventa un percorso: cardio, mobilità e circuiti di forza nell’ordine giusto. Si sceglie il circuito del giorno e si parte.", image: "/projects/forma-app/oggi.webp", mediaLabel: "Allenamento di oggi" },
+        { h: "Un archivio di esercizi che si usa davvero", body: "60 esercizi illustrati, con filtri per colore della scheda, muscolo e attrezzo. Le varianti non ancora verificate sono segnalate come tali.", image: "/projects/forma-app/esercizi.webp", mediaLabel: "Archivio · filtri" },
+        { h: "Si adatta durante l’allenamento", body: "Circuiti consecutivi o alternativi, esercizi sostituibili al primo giro, sessioni salvate nel calendario. I dati restano sul telefono.", image: "/projects/forma-app/sessione.webp", mediaLabel: "Sessione · scelte" },
+      ],
+      results: ["60 esercizi illustrati", "Filtri per scheda, muscolo e attrezzo", "Circuiti consecutivi o alternativi", "Calendario e storico sessioni", "Si installa come app dal telefono", "Nessun account, dati in locale"],
+    },
+    en: {
+      tag: "Product · Prototype in use", shortTitle: "FORMA Training",
+      title: "FORMA Training: the gym workout sheet, on your phone",
+      client: "Personal product", place: "Mobile web app · used at the gym",
+      stack: "HTML · CSS · JavaScript · PWA · Netlify",
+      role: "Concept, UX, design and development",
+      intro: "Built to train without carrying a printed workout sheet: circuits, illustrated exercises and a calendar in an app you use from your phone, no account needed.",
+      cardText: "Training web app: guided circuits, 60 illustrated exercises, calendar and progress.",
+      facts: ["60 exercises", "Guided circuits", "No account"],
+      sections: [
+        { h: "From paper sheet to phone", body: "The paper sheet becomes a path: cardio, mobility and strength circuits in the right order. Pick today’s circuit and start.", image: "/projects/forma-app/oggi.webp", mediaLabel: "Today’s workout" },
+        { h: "An exercise library people actually use", body: "60 illustrated exercises, filtered by sheet colour, muscle and equipment. Variants not yet verified are flagged as such.", image: "/projects/forma-app/esercizi.webp", mediaLabel: "Library · filters" },
+        { h: "It adapts while you train", body: "Consecutive or alternating circuits, exercises you can swap on the first round, sessions saved to the calendar. Data stays on the phone.", image: "/projects/forma-app/sessione.webp", mediaLabel: "Session · choices" },
+      ],
+      results: ["60 illustrated exercises", "Filters by sheet, muscle and equipment", "Consecutive or alternating circuits", "Calendar and session history", "Installs as an app on the phone", "No account, local data"],
+    },
+  },
+  {
+    slug: "forma", category: "lab", status: "progress",
     imageSrc: "/projects/forma/card.webp",
     it: {
-      tag: "Prodotto · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms — dall’allenamento guidato a un mondo fitness-game",
+      tag: "Prodotto · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms: dall’allenamento guidato a un mondo fitness-game",
       client: "Prodotto personale", place: "Concept interattivo · preregistrazione pre-beta",
       stack: "Landing autonoma · micro-demo · Netlify Forms", role: "Ideazione, product design, direzione visiva e sviluppo",
       intro: "Nata da un’esigenza concreta in palestra, FORMA si è evoluta in un concept fitness-game dove palestre, progressi e compagni diventano un mondo da esplorare.",
@@ -130,7 +166,7 @@ export const caseStudies = [
       ], results: ["6 famiglie visive di arene", "3 compagni e 4 stadi evolutivi", "Micro-demo narrativa del distretto Hero", "Landing pre-beta autonoma", "Preregistrazione predisposta con Netlify Forms", "Prototipo tecnico mantenuto separato"],
     },
     en: {
-      tag: "Product · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms — from guided training to a fitness-game world",
+      tag: "Product · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms: from guided training to a fitness-game world",
       client: "Own product", place: "Interactive concept · pre-beta registration", stack: "Standalone landing · micro-demo · Netlify Forms",
       role: "Concept, product design, visual direction and development", intro: "Born from a real gym need, FORMA evolved into a fitness-game concept where gyms, progress and companions become a world to explore.",
       cardText: "A pre-beta fitness game with arenas, evolving companions and a narrative micro-demo.", facts: ["6 arena families", "3 companions · 4 stages", "Pre-beta micro-demo"],
@@ -146,7 +182,7 @@ export const caseStudies = [
     slug: "geofire", category: "lab", status: "online",
     imageSrc: "/projects/geofire/app.jpg", appLink: "https://geofire.davidcappelletto.it",
     it: {
-      tag: "Prodotto · Dati e visualizzazione", shortTitle: "Geo·FIRE", title: "Geo·FIRE — libertà finanziaria, dati e geografia",
+      tag: "Prodotto · Dati e visualizzazione", shortTitle: "Geo·FIRE", title: "Geo·FIRE: libertà finanziaria, dati e geografia",
       client: "Progetto personale", place: "Web app interattiva · online", stack: "React · D3 · motore geografico · simulazioni finanziarie",
       role: "Ideazione, design, sviluppo e verifica", intro: "Un mappamondo interattivo per esplorare come la libertà finanziaria cambia fra paesi e modelli FIRE.",
       cardText: "Un globo interattivo con 175 paesi e tre modelli di libertà finanziaria.", facts: ["175 paesi", "3 modelli FIRE", "34.560 test"], appLinkLabel: "Prova l’app →",
@@ -158,7 +194,7 @@ export const caseStudies = [
       ], results: ["175 paesi con confini reali", "FIRE, Coast e Barista", "34.560 combinazioni verificate", "Ricerca e confronto paesi", "Desktop e mobile", "App online sul proprio dominio"],
     },
     en: {
-      tag: "Product · Data visualisation", shortTitle: "Geo·FIRE", title: "Geo·FIRE — financial freedom through data and geography",
+      tag: "Product · Data visualisation", shortTitle: "Geo·FIRE", title: "Geo·FIRE: financial freedom through data and geography",
       client: "Own project", place: "Interactive web app · online", stack: "React · D3 · geographic engine · financial simulations",
       role: "Concept, design, development and verification", intro: "An interactive globe exploring how financial freedom changes across countries and FIRE models.",
       cardText: "An interactive globe with 175 countries and three financial-freedom models.", facts: ["175 countries", "3 FIRE models", "34,560 tests"], appLinkLabel: "Try the app →",
@@ -198,7 +234,7 @@ export const caseStudies = [
   {
     slug: "maybes-shop", category: "solutions", status: "done", imageSrc: "/projects/maybes/flow.svg",
     it: {
-      tag: "Automazione · Esperimento concluso", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop — il negozio era il test, il prodotto era il flusso",
+      tag: "Automazione · Esperimento concluso", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop: il negozio era il test, il prodotto era il flusso",
       client: "Progetto sperimentale", place: "Shopify · Printful · Gelato", stack: "Shopify · print-on-demand · tracking ordini",
       role: "Brand, store, integrazioni e test end-to-end", intro: "Un esperimento su ordine, produzione e spedizione senza magazzino o interventi manuali.",
       cardText: "Ordine, produzione, spedizione e tracking senza magazzino.", facts: ["2 fornitori", "Zero magazzino", "Test conclusi"],
@@ -209,7 +245,7 @@ export const caseStudies = [
       ], results: ["Printful e Gelato testati", "Ciclo completo verificato", "Nessun magazzino", "Tracking al cliente", "Esperimento concluso", "Chiuso per evitare costi"],
     },
     en: {
-      tag: "Automation · Completed experiment", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop — the store was the test, the workflow the product",
+      tag: "Automation · Completed experiment", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop: the store was the test, the workflow the product",
       client: "Experimental project", place: "Shopify · Printful · Gelato", stack: "Shopify · print-on-demand · order tracking",
       role: "Brand, store, integrations and end-to-end testing", intro: "An experiment on order, production and shipping without stock or manual steps.",
       cardText: "Order, production, shipping and tracking without a warehouse.", facts: ["2 suppliers", "No warehouse", "Tests complete"],
@@ -223,7 +259,7 @@ export const caseStudies = [
   {
     slug: "mappa-ikigai", category: "lab", status: "progress", imageSrc: "/projects/ikigai/cover.webp", link: "/ikigai",
     it: {
-      tag: "Prodotto · Pre-registrazione", shortTitle: "Mappa Ikigai", title: "Mappa Ikigai — una conversazione che diventa una mappa",
+      tag: "Prodotto · Pre-registrazione", shortTitle: "Mappa Ikigai", title: "Mappa Ikigai: una conversazione che diventa una mappa",
       client: "Prodotto personale", place: "Prototipo funzionante · pre-registrazione aperta",
       stack: "HTML · JavaScript · three.js · LLM · Netlify Forms", role: "Ideazione, UX, direzione visiva, mascotte e sviluppo",
       intro: "Un test ikigai in forma di chat: Iki fa otto domande, le risposte accendono quattro cristalli 3D e ciò che resta staccato diventa una missione concreta.",
@@ -236,7 +272,7 @@ export const caseStudies = [
       ], results: ["Prototipo interattivo funzionante", "Mascotte con quattro espressioni", "Cristalli 3D in three.js", "Risposte libere interpretate da LLM", "Landing con pre-registrazione", "Contenuti social con Sir Maybe e Iki"],
     },
     en: {
-      tag: "Product · Pre-registration", shortTitle: "Ikigai Map", title: "Ikigai Map — a conversation that becomes a map",
+      tag: "Product · Pre-registration", shortTitle: "Ikigai Map", title: "Ikigai Map: a conversation that becomes a map",
       client: "Own product", place: "Working prototype · pre-registration open",
       stack: "HTML · JavaScript · three.js · LLM · Netlify Forms", role: "Concept, UX, visual direction, mascot and development",
       intro: "An ikigai test shaped as a chat: Iki asks eight questions, the answers light up four 3D crystals and whatever stays detached becomes a concrete mission.",

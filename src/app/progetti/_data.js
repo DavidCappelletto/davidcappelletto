@@ -7,6 +7,7 @@ export const statusConfig = {
   online: { color: "#28A978", progress: 100, it: "Online", en: "Online" },
   done: { color: "#397BD8", progress: 100, it: "Concluso", en: "Completed" },
   progress: { color: "#EFB652", progress: 64, it: "In costruzione", en: "In progress" },
+  preview: { color: "#2BA89A", progress: 90, it: "In anteprima", en: "In preview" },
   idea: { color: "#DD5D67", progress: 22, it: "Idea / prototipo", en: "Idea / prototype" },
 };
 
@@ -52,8 +53,69 @@ export const caseStudies = [
     },
   },
   {
+    slug: "infermiera-althea", category: "featured", status: "preview", featured: true,
+    imageSrc: "/projects/althea/cover.webp",
+    it: {
+      tag: "Cliente · Sito professionale", shortTitle: "Infermiera Althea",
+      title: "Infermiera Althea — il sito di un’infermiera a domicilio, rifatto da zero",
+      client: "Dott.ssa Althea Vignando · infermiera libera professionista", place: "Provincia di Pordenone",
+      stack: "Astro · TypeScript · Tailwind · Netlify Forms",
+      role: "Struttura, testi, design, sviluppo e SEO locale",
+      intro: "Dal vecchio sito Wix a un sito veloce e chiaro: chi cerca assistenza a domicilio capisce subito cosa trova e come prenotare, anche da smartphone.",
+      cardText: "Sito professionale per un’infermiera a domicilio: servizi chiari, contatto rapido, testi a norma.",
+      facts: ["12 pagine", "Form e WhatsApp", "Testi a norma"],
+      sections: [
+        { h: "Chi cerca, spesso cerca per un familiare", body: "La home dice subito chi è Althea, cosa fa e dove lavora. Due pulsanti: prenotare o vedere i servizi. Nessun passaggio in più.", image: "/projects/althea/cover.webp", mediaLabel: "Home · primo impatto" },
+        { h: "Ogni prestazione ha la sua pagina", body: "Cosa comprende il servizio e come si organizza l’appuntamento, senza gergo. I testi rispettano le regole sulla pubblicità sanitaria.", image: "/projects/althea/servizi.webp", mediaLabel: "Servizi · contenuti" },
+        { h: "Pensato per il telefono", body: "WhatsApp sempre a portata di dito, form gestiti da Netlify, pagine statiche che si aprono subito. I comuni serviti sono in pagina per la ricerca locale.", image: "/projects/althea/mobile.webp", mediaLabel: "Mobile · contatto" },
+      ],
+      results: ["12 pagine statiche in Astro", "Form Netlify e WhatsApp", "Comuni serviti per la SEO locale", "Testi a norma per la pubblicità sanitaria", "Pensato per smartphone", "In anteprima, in attesa del dominio"],
+    },
+    en: {
+      tag: "Client · Professional website", shortTitle: "Infermiera Althea",
+      title: "Infermiera Althea — a home-care nurse’s website, rebuilt from scratch",
+      client: "Althea Vignando · freelance nurse", place: "Province of Pordenone",
+      stack: "Astro · TypeScript · Tailwind · Netlify Forms",
+      role: "Structure, copy, design, development and local SEO",
+      intro: "From an old Wix site to a fast, clear one: people looking for home care see right away what is offered and how to book, even on a phone.",
+      cardText: "Professional website for a home-care nurse: clear services, quick contact, compliant copy.",
+      facts: ["12 pages", "Forms and WhatsApp", "Compliant copy"],
+      sections: [
+        { h: "People often search on behalf of a relative", body: "The home page says who Althea is, what she does and where. Two buttons: book or see the services. Nothing in between.", image: "/projects/althea/cover.webp", mediaLabel: "Home · first impression" },
+        { h: "Every service has its own page", body: "What the service includes and how the visit is arranged, in plain words. Copy follows Italian rules on healthcare advertising.", image: "/projects/althea/servizi.webp", mediaLabel: "Services · content" },
+        { h: "Built for the phone", body: "WhatsApp always within reach, Netlify forms, static pages that open instantly. Served towns are listed on the page for local search.", image: "/projects/althea/mobile.webp", mediaLabel: "Mobile · contact" },
+      ],
+      results: ["12 static pages in Astro", "Netlify forms and WhatsApp", "Served towns for local SEO", "Copy compliant with healthcare advertising rules", "Built for smartphones", "In preview, waiting for the domain"],
+    },
+  },
+  {
+    slug: "dentista-automazione", category: "featured", status: "progress", featured: true, imageSrc: "/projects/dentista/cover.svg",
+    it: {
+      tag: "Automazione · Work in progress", shortTitle: "Studio dentistico", title: "Promemoria WhatsApp per uno studio dentistico",
+      client: "Studio dentistico · caso anonimizzato", place: "In costruzione e validazione", stack: "Workflow automation · WhatsApp · regole e controlli",
+      role: "Analisi, progettazione del flusso e sviluppo", intro: "Un’automazione per rendere tracciabile il percorso fra appuntamento, promemoria e conferma.",
+      cardText: "Un flusso operativo in costruzione e validazione sul campo.", facts: ["Flusso anonimo", "Controlli", "WIP dichiarato"],
+      sections: [
+        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/cover.svg", mediaLabel: "Appuntamento · input" },
+        { h: "Tradurre il lavoro in regole", body: "Tempi, eccezioni, consensi e casi incompleti diventano un flusso leggibile. L’automazione deve sapere anche quando fermarsi e chiedere controllo umano.", image: "/projects/dentista/flow.svg", mediaLabel: "Regole · verifica" },
+        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validazione" },
+      ], results: ["Processo mappato", "Dati pubblici anonimi", "Regole ed eccezioni esplicite", "Controllo umano previsto", "WIP dichiarato", "Risultati da misurare"],
+    },
+    en: {
+      tag: "Automation · Work in progress", shortTitle: "Dental practice", title: "WhatsApp reminders for a dental practice",
+      client: "Dental practice · anonymised case", place: "In development and validation", stack: "Workflow automation · WhatsApp · rules and checks",
+      role: "Analysis, workflow design and development", intro: "An automation making the path from appointment to reminder and confirmation traceable.",
+      cardText: "An operational flow under construction and field validation.", facts: ["Anonymous flow", "Checks", "WIP declared"],
+      sections: [
+        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/cover.svg", mediaLabel: "Appointment · input" },
+        { h: "Turn work into rules", body: "Timing, exceptions, consent and incomplete cases become a readable flow. Automation must know when to request human review.", image: "/projects/dentista/flow.svg", mediaLabel: "Rules · checks" },
+        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validation" },
+      ], results: ["Process mapped", "Public data anonymised", "Rules and exceptions explicit", "Human review included", "WIP declared", "Results to measure"],
+    },
+  },
+  {
     slug: "forma", category: "featured", status: "progress", featured: true,
-    imageSrc: "/projects/forma/v32-hero.png",
+    imageSrc: "/projects/forma/card.webp",
     it: {
       tag: "Prodotto · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms — dall’allenamento guidato a un mondo fitness-game",
       client: "Prodotto personale", place: "Concept interattivo · preregistrazione pre-beta",
@@ -81,7 +143,7 @@ export const caseStudies = [
     },
   },
   {
-    slug: "geofire", category: "featured", status: "online", featured: true,
+    slug: "geofire", category: "lab", status: "online",
     imageSrc: "/projects/geofire/app.jpg", appLink: "https://geofire.davidcappelletto.it",
     it: {
       tag: "Prodotto · Dati e visualizzazione", shortTitle: "Geo·FIRE", title: "Geo·FIRE — libertà finanziaria, dati e geografia",
@@ -131,31 +193,6 @@ export const caseStudies = [
         { h: "Separate the need from one business", body: "The structure was anonymised and made white-label. It shows a concrete base for gyms that genuinely need acquisition.", image: "/projects/palestra/courses.webp", mediaLabel: "Courses · offer" },
         { h: "A page built for contact", body: "Hierarchy, trial, courses, local trust and calls to action move visitors towards a simple enquiry, especially on mobile.", image: "/projects/palestra/cover.webp", mediaLabel: "Mobile · conversion" },
       ], results: ["Anonymised case", "White-label structure", "Mobile-first design", "Trial-oriented content", "Local CTA", "Ready to adapt"],
-    },
-  },
-  {
-    slug: "dentista-automazione", category: "solutions", status: "progress", imageSrc: "/projects/dentista/cover.svg",
-    it: {
-      tag: "Automazione · Work in progress", shortTitle: "Studio dentistico", title: "Promemoria WhatsApp per uno studio dentistico",
-      client: "Studio dentistico · caso anonimizzato", place: "In costruzione e validazione", stack: "Workflow automation · WhatsApp · regole e controlli",
-      role: "Analisi, progettazione del flusso e sviluppo", intro: "Un’automazione per rendere tracciabile il percorso fra appuntamento, promemoria e conferma.",
-      cardText: "Un flusso operativo in costruzione e validazione sul campo.", facts: ["Flusso anonimo", "Controlli", "WIP dichiarato"],
-      sections: [
-        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/cover.svg", mediaLabel: "Appuntamento · input" },
-        { h: "Tradurre il lavoro in regole", body: "Tempi, eccezioni, consensi e casi incompleti diventano un flusso leggibile. L’automazione deve sapere anche quando fermarsi e chiedere controllo umano.", image: "/projects/dentista/flow.svg", mediaLabel: "Regole · verifica" },
-        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validazione" },
-      ], results: ["Processo mappato", "Dati pubblici anonimi", "Regole ed eccezioni esplicite", "Controllo umano previsto", "WIP dichiarato", "Risultati da misurare"],
-    },
-    en: {
-      tag: "Automation · Work in progress", shortTitle: "Dental practice", title: "WhatsApp reminders for a dental practice",
-      client: "Dental practice · anonymised case", place: "In development and validation", stack: "Workflow automation · WhatsApp · rules and checks",
-      role: "Analysis, workflow design and development", intro: "An automation making the path from appointment to reminder and confirmation traceable.",
-      cardText: "An operational flow under construction and field validation.", facts: ["Anonymous flow", "Checks", "WIP declared"],
-      sections: [
-        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/cover.svg", mediaLabel: "Appointment · input" },
-        { h: "Turn work into rules", body: "Timing, exceptions, consent and incomplete cases become a readable flow. Automation must know when to request human review.", image: "/projects/dentista/flow.svg", mediaLabel: "Rules · checks" },
-        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validation" },
-      ], results: ["Process mapped", "Public data anonymised", "Rules and exceptions explicit", "Human review included", "WIP declared", "Results to measure"],
     },
   },
   {

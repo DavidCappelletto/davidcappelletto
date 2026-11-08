@@ -9,11 +9,11 @@ const copy = {
   it: {
     navLinks: ["Progetti", "Come lavoro", "Servizi"],
     ctaMini: "Mini Audit Gratuito",
-    heroBadge: "Consulenza Digitale su Misura",
-    heroTitleA: "Trasformo siti confusi in",
-    heroTitleB: "sistemi che generano richieste",
+    heroBadge: "Siti · SEO locale · Automazioni AI",
+    heroTitleA: "Siti che portano clienti.",
+    heroTitleB: "Automazioni che ti ridanno tempo",
     heroSubtitle:
-      "Per professionisti e PMI italiane che hanno già un sito ma non i risultati che si aspettavano. Metodo, non template.",
+      "Per professionisti e piccole imprese. Prima trovo dove perdi contatti e ore di lavoro, poi intervengo solo lì.",
     heroBtn1: "Scrivimi su WhatsApp",
     heroBtn2: "Come lavoro →",
     approach: "Il mio approccio",
@@ -53,7 +53,7 @@ const copy = {
       ["03", "Lo costruiamo insieme", "Implemento io o ti affianco passo passo, mantenendo il progetto coerente con gli obiettivi."],
     ],
     casesTag: "Progetti",
-    casesTitle: "Tre progetti. Tre problemi risolti.",
+    casesTitle: "Quattro progetti. Problemi diversi, stesso metodo.",
     casesReadMore: "Leggi il progetto →",
     casesAllBtn: "Tutti i progetti →",
     caseCards: [
@@ -62,11 +62,8 @@ const copy = {
         tag: "Cliente · Online",
         title: "DIAMA Service",
         place: "Sviluppo web · CMS · tracking",
-        imageSrc: "/projects/diama/cover.png",
-        status: "Online",
-        statusNote: "Live",
-        statusColor: "#28A978",
-        statusProgress: "100%",
+        imageSrc: "/projects/diama/card.webp",
+        status: "Online", statusNote: "Live", statusColor: "#28A978", statusProgress: "100%",
         results: [
           "Circa 30 pagine responsive",
           "CMS per blog e landing",
@@ -74,37 +71,42 @@ const copy = {
         ],
       },
       {
+        slug: "infermiera-althea",
+        tag: "Cliente · Anteprima",
+        title: "Infermiera Althea",
+        place: "Sito professionale · SEO locale",
+        imageSrc: "/projects/althea/cover.webp",
+        status: "In anteprima", statusNote: "Pronto", statusColor: "#2BA89A", statusProgress: "90%",
+        results: [
+          "12 pagine in Astro",
+          "Form e WhatsApp",
+          "Testi a norma sanitaria",
+        ],
+      },
+      {
+        slug: "dentista-automazione",
+        tag: "Cliente · In costruzione",
+        title: "Studio dentistico",
+        place: "Automazione · promemoria WhatsApp",
+        imageSrc: "/projects/dentista/cover.svg",
+        status: "In costruzione", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "30%",
+        results: [
+          "Promemoria automatici",
+          "Conferma, annulla, rinvia",
+          "Parte dal gestionale esistente",
+        ],
+      },
+      {
         slug: "forma",
         tag: "Prodotto · Pre-beta",
         title: "FORMA Gyms",
         place: "Product design · fitness-game",
-        imageSrc: "/projects/forma/v32-hero.png",
-        status: "In costruzione",
-        statusNote: "WIP",
-        statusColor: "#EFB652",
-        statusProgress: "64%",
+        imageSrc: "/projects/forma/card.webp",
+        status: "In costruzione", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "64%",
         results: [
           "6 famiglie di arene",
           "3 compagni, 4 stadi",
           "Micro-demo pre-beta",
-        ],
-      },
-      {
-        slug: "geofire",
-        tag: "Prodotto · Online",
-        title: "Geo·FIRE",
-        place: "Dati · finanza · visualizzazione",
-        imageSrc: "/projects/geofire/app.jpg",
-        appLink: "https://geofire.davidcappelletto.it",
-        appLinkLabel: "Prova l'app →",
-        status: "Online",
-        statusNote: "Live",
-        statusColor: "#28A978",
-        statusProgress: "100%",
-        results: [
-          "175 paesi esplorabili",
-          "FIRE, Coast e Barista",
-          "34.560 combinazioni verificate",
         ],
       },
     ],
@@ -153,39 +155,13 @@ const copy = {
           "Ti insegno a usare da solo quello che ti ho costruito — CMS, tracking, automazioni — così non mi richiami per cambiare un titolo o aggiungere una pagina.",
       },
     ],
-    pricing: ["Audit Diagnostico", "Intervento Mirato", "Presenza su Misura"],
-    pricingValue: ["€250-500", "€800-1.600", "da €2.700"],
-    pricingContext: [
-      "Per chi vuole capire prima di spendere di più.",
-      "Per chi ha un problema specifico da risolvere",
-      "Per chi parte da zero o vuole ripensare tutto.",
-    ],
-    pricingIdeal: [
-      "→ Ideale se non sai ancora dove intervenire.",
-      "→ Ideale se hai già un sito ma non ti porta clienti.",
-      "→ Ideale se il sito attuale non rispecchia più il tuo lavoro.",
-    ],
-    pricingItems: [
-      [
-        "Analisi completa sito e presenza digitale",
-        "Report con priorità e raccomandazioni",
-        "Mappa dei punti critici e opportunità",
-        "Call di presentazione risultati",
-      ],
-      [
-        "SEO locale e ottimizzazione on-page",
-        "Ristrutturazione pagine chiave",
-        "Automazione di un processo specifico",
-        "Revisione UX e conversioni",
-      ],
-      [
-        "Analisi, strategia e architettura",
-        "Prototipo navigabile e UX completa",
-        "Sviluppo e messa online",
-        "Follow-up post lancio incluso",
-      ],
-    ],
-    featured: "⭐ Più Richiesto",
+    priceTag: "Investimento",
+    priceTitle: "Ogni lavoro parte da un'analisi.",
+    priceText: "Prima il Mini Audit gratuito: capisco il problema e ti dico se e come posso aiutarti. Poi un preventivo su misura, basato su quello che serve davvero.",
+    priceFrom: "Interventi da",
+    priceValue: "€250",
+    priceItems: ["Mini Audit gratuito di 20 minuti", "Preventivo chiaro prima di iniziare", "Parli sempre con me"],
+    priceBtn: "Prenota il Mini Audit →",
     firstStep: "Primo Passo",
     miniTitle: "Inizia dal Mini Audit Gratuito",
     miniText:
@@ -214,11 +190,11 @@ const copy = {
   en: {
     navLinks: ["Projects", "How I work", "Services"],
     ctaMini: "Free Mini Audit",
-    heroBadge: "Tailored Digital Consulting",
-    heroTitleA: "I turn confusing websites into",
-    heroTitleB: "systems that generate qualified leads",
+    heroBadge: "Websites · Local SEO · AI automation",
+    heroTitleA: "Websites that bring clients.",
+    heroTitleB: "Automations that give you time back",
     heroSubtitle:
-      "For Italian professionals and SMEs who already have a website but not the results they expected. Method, not templates.",
+      "For professionals and small businesses. First I find where you lose leads and hours, then I fix only that.",
     heroBtn1: "Message me on WhatsApp",
     heroBtn2: "How I work →",
     approach: "My approach",
@@ -258,7 +234,7 @@ const copy = {
       ["03", "We build it together", "I implement directly or support you step by step, keeping the project aligned with your goals."],
     ],
     casesTag: "Projects",
-    casesTitle: "Three projects. Three problems solved.",
+    casesTitle: "Four projects. Different problems, same method.",
     casesReadMore: "Read the case study →",
     casesAllBtn: "All case studies →",
     caseCards: [
@@ -267,7 +243,7 @@ const copy = {
         tag: "Client · Online",
         title: "DIAMA Service",
         place: "Web development · CMS · tracking",
-        imageSrc: "/projects/diama/cover.png",
+        imageSrc: "/projects/diama/card.webp",
         status: "Online", statusNote: "Live", statusColor: "#28A978", statusProgress: "100%",
         results: [
           "About 30 responsive pages",
@@ -276,31 +252,42 @@ const copy = {
         ],
       },
       {
+        slug: "infermiera-althea",
+        tag: "Client · Preview",
+        title: "Infermiera Althea",
+        place: "Professional website · local SEO",
+        imageSrc: "/projects/althea/cover.webp",
+        status: "In preview", statusNote: "Ready", statusColor: "#2BA89A", statusProgress: "90%",
+        results: [
+          "12 pages in Astro",
+          "Forms and WhatsApp",
+          "Healthcare-compliant copy",
+        ],
+      },
+      {
+        slug: "dentista-automazione",
+        tag: "Client · In progress",
+        title: "Dental practice",
+        place: "Automation · WhatsApp reminders",
+        imageSrc: "/projects/dentista/cover.svg",
+        status: "In progress", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "30%",
+        results: [
+          "Automatic reminders",
+          "Confirm, cancel, reschedule",
+          "Built on the existing software",
+        ],
+      },
+      {
         slug: "forma",
         tag: "Product · Pre-beta",
         title: "FORMA Gyms",
         place: "Product design · fitness game",
-        imageSrc: "/projects/forma/v32-hero.png",
+        imageSrc: "/projects/forma/card.webp",
         status: "In progress", statusNote: "WIP", statusColor: "#EFB652", statusProgress: "64%",
         results: [
           "6 arena families",
           "3 companions, 4 stages",
           "Pre-beta micro-demo",
-        ],
-      },
-      {
-        slug: "geofire",
-        tag: "Product · Online",
-        title: "Geo·FIRE",
-        place: "Data · finance · visualisation",
-        imageSrc: "/projects/geofire/app.jpg",
-        appLink: "https://geofire.davidcappelletto.it",
-        appLinkLabel: "Try the app →",
-        status: "Online", statusNote: "Live", statusColor: "#28A978", statusProgress: "100%",
-        results: [
-          "175 explorable countries",
-          "FIRE, Coast and Barista",
-          "34,560 verified combinations",
         ],
       },
     ],
@@ -349,39 +336,13 @@ const copy = {
           "I teach you to run what I built for you on your own — CMS, tracking, automations — so you don't call me back to change a heading or add a page.",
       },
     ],
-    pricing: ["Diagnostic Audit", "Targeted Intervention", "Tailored Presence"],
-    pricingValue: ["€250-500", "€800-1,600", "from €2,700"],
-    pricingContext: [
-      "For those who want to understand before spending more.",
-      "For those with one specific problem to solve",
-      "For those starting from scratch or rethinking everything.",
-    ],
-    pricingIdeal: [
-      "→ Ideal if you're not sure yet where to start.",
-      "→ Ideal if you already have a site that isn't bringing in clients.",
-      "→ Ideal if your current site no longer reflects your work.",
-    ],
-    pricingItems: [
-      [
-        "Complete website and digital presence analysis",
-        "Priority report with recommendations",
-        "Map of critical points and opportunities",
-        "Results presentation call",
-      ],
-      [
-        "Local SEO and on-page optimization",
-        "Key page restructuring",
-        "Automation of one specific process",
-        "UX and conversion review",
-      ],
-      [
-        "Analysis, strategy and architecture",
-        "Clickable prototype and full UX",
-        "Development and go-live",
-        "Post-launch follow-up included",
-      ],
-    ],
-    featured: "⭐ Most Requested",
+    priceTag: "Investment",
+    priceTitle: "Every project starts with an analysis.",
+    priceText: "First the free Mini Audit: I understand the problem and tell you whether and how I can help. Then a tailored quote, based on what you actually need.",
+    priceFrom: "Projects from",
+    priceValue: "€250",
+    priceItems: ["Free 20-minute Mini Audit", "Clear quote before we start", "You always talk to me"],
+    priceBtn: "Book the Mini Audit →",
     firstStep: "First Step",
     miniTitle: "Start with the Free Mini Audit",
     miniText:
@@ -737,7 +698,7 @@ export default function Home() {
               </span>
             </div>
             <h1 className="hero-title" style={{ fontSize: 38, lineHeight: 1.1, margin: 0, fontWeight: 800 }}>
-              {t.heroTitleA} <span style={{ color: colors.teal }}>{t.heroTitleB}</span>.
+              {t.heroTitleA}{" "}<span className="hero-title-b" style={{ color: colors.teal }}>{t.heroTitleB}.</span>
             </h1>
             <p style={{ marginTop: 24, maxWidth: 640, fontSize: 20, lineHeight: 1.55, color: "rgba(255,255,255,.9)" }}>
               {t.heroSubtitle}
@@ -1166,64 +1127,23 @@ export default function Home() {
             })}
           </div>
 
-          <div className="prices-grid" style={{ marginTop: 40, display: "grid", gap: 20, gridTemplateColumns: "1fr" }}>
-            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
-            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
-              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[0]}</p>
-              <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
-                {t.pricingContext[0]}
-              </p>
-              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.tealText, fontWeight: 500 }}>
-                {t.pricingIdeal[0]}
-              </p>
-              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[0]}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                {t.pricingItems[0].map((item) => (
-                  <li key={item}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{item}</li>
+          <a href="#contatti" className="cta-hover-lift price-card" style={{ marginTop: 40, display: "grid", gap: 24, gridTemplateColumns: "1fr", alignItems: "center", textDecoration: "none", color: "#fff", background: colors.navy, borderRadius: 16, padding: 32 }}>
+            <div>
+              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.tealLight, fontWeight: 700 }}>{t.priceTag}</p>
+              <h3 style={{ margin: "10px 0 0", fontSize: 28, lineHeight: 1.2 }}>{t.priceTitle}</h3>
+              <p style={{ margin: "12px 0 0", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.85)", maxWidth: 560 }}>{t.priceText}</p>
+              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 8 }}>
+                {t.priceItems.map((item) => (
+                  <li key={item} style={{ fontSize: 15 }}><span style={{ color: colors.tealLight, marginRight: 8 }}>✓</span>{item}</li>
                 ))}
               </ul>
-            </article>
-            </a>
-
-            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
-            <article style={{ position: "relative", borderRadius: 12, border: `1px solid ${colors.navy}`, background: colors.navy, color: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
-              <span style={{ position: "absolute", left: 18, top: -12, borderRadius: 999, background: colors.teal, color: "#fff", fontSize: 12, fontWeight: 700, padding: "6px 10px" }}>
-                {t.featured}
-              </span>
-              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: "rgba(255,255,255,.9)" }}>{t.pricing[1]}</p>
-              <p style={{ margin: "8px 0 0", fontSize: 14, color: "rgba(255,255,255,.9)" }}>
-                {t.pricingContext[1]}
-              </p>
-              <p style={{ margin: "6px 0 12px", fontSize: 13, color: "#3DBFB2", fontWeight: 500 }}>
-                {t.pricingIdeal[1]}
-              </p>
-              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[1]}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10, color: "rgba(255,255,255,.95)" }}>
-                {t.pricingItems[1].map((item) => (
-                  <li key={item}><span style={{ color: colors.tealLight, marginRight: 8 }}>✓</span>{item}</li>
-                ))}
-              </ul>
-            </article>
-            </a>
-
-            <a href="#contatti" className="cta-hover-lift" style={{ textDecoration: "none", color: "inherit", display: "block", borderRadius: 12 }}>
-            <article style={{ borderRadius: 12, border: `1px solid ${colors.line}`, background: "#fff", height: "100%", boxSizing: "border-box", padding: 24 }}>
-              <p style={{ margin: 0, textTransform: "uppercase", letterSpacing: ".08em", fontSize: 12, color: colors.inkMuted }}>{t.pricing[2]}</p>
-              <p style={{ margin: "8px 0 0", fontSize: 14, color: colors.inkMuted }}>
-                {t.pricingContext[2]}
-              </p>
-              <p style={{ margin: "6px 0 12px", fontSize: 13, color: colors.tealText, fontWeight: 500 }}>
-                {t.pricingIdeal[2]}
-              </p>
-              <p style={{ margin: "16px 0 0", fontSize: 42, fontWeight: 800 }}>{t.pricingValue[2]}</p>
-              <ul style={{ margin: "18px 0 0", paddingLeft: 0, listStyle: "none", display: "grid", gap: 10 }}>
-                {t.pricingItems[2].map((item) => (
-                  <li key={item}><span style={{ color: colors.tealText, marginRight: 8 }}>✓</span>{item}</li>
-                ))}
-              </ul>
-            </article>
-            </a>
-          </div>
+            </div>
+            <div className="price-card-side">
+              <p style={{ margin: 0, fontSize: 14, color: "rgba(255,255,255,.75)" }}>{t.priceFrom}</p>
+              <p style={{ margin: "2px 0 0", fontSize: 56, fontWeight: 800, lineHeight: 1 }}>{t.priceValue}</p>
+              <span style={{ display: "inline-block", marginTop: 18, background: colors.teal, color: "#fff", borderRadius: 999, padding: "12px 22px", fontWeight: 700, fontSize: 15 }}>{t.priceBtn}</span>
+            </div>
+          </a>
         </div>
       </section>
 
@@ -1454,7 +1374,7 @@ export default function Home() {
           box-shadow: 0 10px 20px rgba(17, 30, 48, 0.18);
         }
         .case-card-image {
-          aspect-ratio: 4 / 3;
+          aspect-ratio: 16 / 10;
           min-height: 0 !important;
         }
         .case-card {
@@ -1611,13 +1531,23 @@ export default function Home() {
           .problem-grid {
             grid-template-columns: 1fr 1fr !important;
           }
-          .steps-grid,
-          .prices-grid {
+          .steps-grid {
             grid-template-columns: 1fr 1fr 1fr !important;
           }
+          .price-card {
+            grid-template-columns: 1fr auto !important;
+            gap: 48px !important;
+            padding: 40px 48px !important;
+          }
+          .price-card-side {
+            text-align: right;
+          }
+          .hero-title-b {
+            display: block;
+          }
           .cases-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            max-width: 1100px !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            max-width: 1000px !important;
             margin-left: auto !important;
             margin-right: auto !important;
           }

@@ -24,11 +24,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/progetti/infermiera-althea",
-        destination: "/progetti",
-        permanent: false,
-      },
-      {
         source: "/progetti/ordine-pagamento-qr",
         destination: "/progetti",
         permanent: false,

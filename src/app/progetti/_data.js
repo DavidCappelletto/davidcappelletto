@@ -7,6 +7,7 @@ export const statusConfig = {
   online: { color: "#28A978", progress: 100, it: "Online", en: "Online" },
   done: { color: "#397BD8", progress: 100, it: "Concluso", en: "Completed" },
   progress: { color: "#EFB652", progress: 64, it: "In costruzione", en: "In progress" },
+  preview: { color: "#2BA89A", progress: 90, it: "In anteprima", en: "In preview" },
   idea: { color: "#DD5D67", progress: 22, it: "Idea / prototipo", en: "Idea / prototype" },
 };
 
@@ -22,7 +23,7 @@ export const caseStudies = [
     imageSrc: "/projects/diama/home.webp", link: "https://diamaservice.it",
     it: {
       tag: "Cliente · Sviluppo web", shortTitle: "DIAMA Service",
-      title: "DIAMA Service — dal sistema progettuale al sito in produzione",
+      title: "DIAMA Service: dal sistema progettuale al sito in produzione",
       client: "DIAMA Service", place: "Torino · con Stefania Bertone e Lara Bragagna",
       stack: "HTML · CSS · JavaScript · Decap CMS · Netlify · GA4/GTM",
       role: "Prototipo, sviluppo, CMS, tracking e messa online",
@@ -39,7 +40,7 @@ export const caseStudies = [
     },
     en: {
       tag: "Client · Web development", shortTitle: "DIAMA Service",
-      title: "DIAMA Service — from design system to production website", client: "DIAMA Service",
+      title: "DIAMA Service: from design system to production website", client: "DIAMA Service",
       place: "Turin · with Stefania Bertone and Lara Bragagna", stack: "HTML · CSS · JavaScript · Decap CMS · Netlify · GA4/GTM",
       role: "Prototype, development, CMS, tracking and launch", intro: "Turning a complete Figma system into a real website: responsive, editable and measurable.",
       cardText: "A multi-page web ecosystem with CMS, landing pages, technical SEO and tracking.", facts: ["About 30 pages", "CMS and landing pages", "SEO and tracking"],
@@ -52,10 +53,107 @@ export const caseStudies = [
     },
   },
   {
-    slug: "forma", category: "featured", status: "progress", featured: true,
-    imageSrc: "/projects/forma/v32-hero.png",
+    slug: "infermiera-althea", category: "featured", status: "preview", featured: true,
+    imageSrc: "/projects/althea/cover.webp",
     it: {
-      tag: "Prodotto · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms — dall’allenamento guidato a un mondo fitness-game",
+      tag: "Cliente · Sito professionale", shortTitle: "Infermiera Althea",
+      title: "Infermiera Althea: il sito di un’infermiera a domicilio, rifatto da zero",
+      client: "Dott.ssa Althea Vignando · infermiera libera professionista", place: "Provincia di Pordenone",
+      stack: "Astro · TypeScript · Tailwind · Netlify Forms",
+      role: "Struttura, testi, design, sviluppo e SEO locale",
+      intro: "Dal vecchio sito Wix a un sito veloce e chiaro: chi cerca assistenza a domicilio capisce subito cosa trova e come prenotare, anche da smartphone.",
+      cardText: "Sito professionale per un’infermiera a domicilio: servizi chiari, contatto rapido, testi a norma.",
+      facts: ["12 pagine", "Form e WhatsApp", "Testi a norma"],
+      sections: [
+        { h: "Chi cerca, spesso cerca per un familiare", body: "La home dice subito chi è Althea, cosa fa e dove lavora. Due pulsanti: prenotare o vedere i servizi. Nessun passaggio in più.", image: "/projects/althea/cover.webp", mediaLabel: "Home · primo impatto" },
+        { h: "Ogni prestazione ha la sua pagina", body: "Cosa comprende il servizio e come si organizza l’appuntamento, senza gergo. I testi rispettano le regole sulla pubblicità sanitaria.", image: "/projects/althea/servizi.webp", mediaLabel: "Servizi · contenuti" },
+        { h: "Pensato per il telefono", body: "WhatsApp sempre a portata di dito, form gestiti da Netlify, pagine statiche che si aprono subito. I comuni serviti sono in pagina per la ricerca locale.", image: "/projects/althea/mobile.webp", mediaLabel: "Mobile · contatto" },
+      ],
+      results: ["12 pagine statiche in Astro", "Form Netlify e WhatsApp", "Comuni serviti per la SEO locale", "Testi a norma per la pubblicità sanitaria", "Pensato per smartphone", "In anteprima, in attesa del dominio"],
+    },
+    en: {
+      tag: "Client · Professional website", shortTitle: "Infermiera Althea",
+      title: "Infermiera Althea: a home-care nurse’s website, rebuilt from scratch",
+      client: "Althea Vignando · freelance nurse", place: "Province of Pordenone",
+      stack: "Astro · TypeScript · Tailwind · Netlify Forms",
+      role: "Structure, copy, design, development and local SEO",
+      intro: "From an old Wix site to a fast, clear one: people looking for home care see right away what is offered and how to book, even on a phone.",
+      cardText: "Professional website for a home-care nurse: clear services, quick contact, compliant copy.",
+      facts: ["12 pages", "Forms and WhatsApp", "Compliant copy"],
+      sections: [
+        { h: "People often search on behalf of a relative", body: "The home page says who Althea is, what she does and where. Two buttons: book or see the services. Nothing in between.", image: "/projects/althea/cover.webp", mediaLabel: "Home · first impression" },
+        { h: "Every service has its own page", body: "What the service includes and how the visit is arranged, in plain words. Copy follows Italian rules on healthcare advertising.", image: "/projects/althea/servizi.webp", mediaLabel: "Services · content" },
+        { h: "Built for the phone", body: "WhatsApp always within reach, Netlify forms, static pages that open instantly. Served towns are listed on the page for local search.", image: "/projects/althea/mobile.webp", mediaLabel: "Mobile · contact" },
+      ],
+      results: ["12 static pages in Astro", "Netlify forms and WhatsApp", "Served towns for local SEO", "Copy compliant with healthcare advertising rules", "Built for smartphones", "In preview, waiting for the domain"],
+    },
+  },
+  {
+    slug: "dentista-automazione", category: "featured", status: "progress", featured: true, imageSrc: "/projects/dentista/cover.svg",
+    it: {
+      tag: "Automazione · Work in progress", shortTitle: "Studio dentistico", title: "Promemoria WhatsApp per uno studio dentistico",
+      client: "Studio dentistico · caso anonimizzato", place: "In costruzione e validazione", stack: "Workflow automation · WhatsApp · regole e controlli",
+      role: "Analisi, progettazione del flusso e sviluppo", intro: "Un’automazione per rendere tracciabile il percorso fra appuntamento, promemoria e conferma.",
+      cardText: "Un flusso operativo in costruzione e validazione sul campo.", facts: ["Flusso anonimo", "Controlli", "WIP dichiarato"],
+      sections: [
+        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/cover.svg", mediaLabel: "Appuntamento · input" },
+        { h: "Tradurre il lavoro in regole", body: "Tempi, eccezioni, consensi e casi incompleti diventano un flusso leggibile. L’automazione deve sapere anche quando fermarsi e chiedere controllo umano.", image: "/projects/dentista/flow.svg", mediaLabel: "Regole · verifica" },
+        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validazione" },
+      ], results: ["Processo mappato", "Dati pubblici anonimi", "Regole ed eccezioni esplicite", "Controllo umano previsto", "WIP dichiarato", "Risultati da misurare"],
+    },
+    en: {
+      tag: "Automation · Work in progress", shortTitle: "Dental practice", title: "WhatsApp reminders for a dental practice",
+      client: "Dental practice · anonymised case", place: "In development and validation", stack: "Workflow automation · WhatsApp · rules and checks",
+      role: "Analysis, workflow design and development", intro: "An automation making the path from appointment to reminder and confirmation traceable.",
+      cardText: "An operational flow under construction and field validation.", facts: ["Anonymous flow", "Checks", "WIP declared"],
+      sections: [
+        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/cover.svg", mediaLabel: "Appointment · input" },
+        { h: "Turn work into rules", body: "Timing, exceptions, consent and incomplete cases become a readable flow. Automation must know when to request human review.", image: "/projects/dentista/flow.svg", mediaLabel: "Rules · checks" },
+        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validation" },
+      ], results: ["Process mapped", "Public data anonymised", "Rules and exceptions explicit", "Human review included", "WIP declared", "Results to measure"],
+    },
+  },
+  {
+    slug: "forma-allenamento", category: "featured", status: "progress", featured: true,
+    imageSrc: "/projects/forma-app/card.webp",
+    it: {
+      tag: "Prodotto · Prototipo in uso", shortTitle: "FORMA Allenamento",
+      title: "FORMA Allenamento: la scheda della palestra, sul telefono",
+      client: "Prodotto personale", place: "Web app mobile · usata in palestra",
+      stack: "HTML · CSS · JavaScript · PWA · Netlify",
+      role: "Ideazione, UX, design e sviluppo",
+      intro: "Nata per allenarsi senza la fotocopia della scheda in mano: circuiti, esercizi illustrati e calendario in un’app che si usa dal telefono, senza account.",
+      cardText: "Web app di allenamento: circuiti guidati, 60 esercizi illustrati, calendario e progressi.",
+      facts: ["60 esercizi", "Circuiti guidati", "Nessun account"],
+      sections: [
+        { h: "Dalla fotocopia al telefono", body: "La scheda cartacea diventa un percorso: cardio, mobilità e circuiti di forza nell’ordine giusto. Si sceglie il circuito del giorno e si parte.", image: "/projects/forma-app/oggi.webp", mediaLabel: "Allenamento di oggi" },
+        { h: "Un archivio di esercizi che si usa davvero", body: "60 esercizi illustrati, con filtri per colore della scheda, muscolo e attrezzo. Le varianti non ancora verificate sono segnalate come tali.", image: "/projects/forma-app/esercizi.webp", mediaLabel: "Archivio · filtri" },
+        { h: "Si adatta durante l’allenamento", body: "Circuiti consecutivi o alternativi, esercizi sostituibili al primo giro, sessioni salvate nel calendario. I dati restano sul telefono.", image: "/projects/forma-app/sessione.webp", mediaLabel: "Sessione · scelte" },
+      ],
+      results: ["60 esercizi illustrati", "Filtri per scheda, muscolo e attrezzo", "Circuiti consecutivi o alternativi", "Calendario e storico sessioni", "Si installa come app dal telefono", "Nessun account, dati in locale"],
+    },
+    en: {
+      tag: "Product · Prototype in use", shortTitle: "FORMA Training",
+      title: "FORMA Training: the gym workout sheet, on your phone",
+      client: "Personal product", place: "Mobile web app · used at the gym",
+      stack: "HTML · CSS · JavaScript · PWA · Netlify",
+      role: "Concept, UX, design and development",
+      intro: "Built to train without carrying a printed workout sheet: circuits, illustrated exercises and a calendar in an app you use from your phone, no account needed.",
+      cardText: "Training web app: guided circuits, 60 illustrated exercises, calendar and progress.",
+      facts: ["60 exercises", "Guided circuits", "No account"],
+      sections: [
+        { h: "From paper sheet to phone", body: "The paper sheet becomes a path: cardio, mobility and strength circuits in the right order. Pick today’s circuit and start.", image: "/projects/forma-app/oggi.webp", mediaLabel: "Today’s workout" },
+        { h: "An exercise library people actually use", body: "60 illustrated exercises, filtered by sheet colour, muscle and equipment. Variants not yet verified are flagged as such.", image: "/projects/forma-app/esercizi.webp", mediaLabel: "Library · filters" },
+        { h: "It adapts while you train", body: "Consecutive or alternating circuits, exercises you can swap on the first round, sessions saved to the calendar. Data stays on the phone.", image: "/projects/forma-app/sessione.webp", mediaLabel: "Session · choices" },
+      ],
+      results: ["60 illustrated exercises", "Filters by sheet, muscle and equipment", "Consecutive or alternating circuits", "Calendar and session history", "Installs as an app on the phone", "No account, local data"],
+    },
+  },
+  {
+    slug: "forma", category: "lab", status: "progress",
+    imageSrc: "/projects/forma/card.webp",
+    it: {
+      tag: "Prodotto · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms: dall’allenamento guidato a un mondo fitness-game",
       client: "Prodotto personale", place: "Concept interattivo · preregistrazione pre-beta",
       stack: "Landing autonoma · micro-demo · Netlify Forms", role: "Ideazione, product design, direzione visiva e sviluppo",
       intro: "Nata da un’esigenza concreta in palestra, FORMA si è evoluta in un concept fitness-game dove palestre, progressi e compagni diventano un mondo da esplorare.",
@@ -68,7 +166,7 @@ export const caseStudies = [
       ], results: ["6 famiglie visive di arene", "3 compagni e 4 stadi evolutivi", "Micro-demo narrativa del distretto Hero", "Landing pre-beta autonoma", "Preregistrazione predisposta con Netlify Forms", "Prototipo tecnico mantenuto separato"],
     },
     en: {
-      tag: "Product · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms — from guided training to a fitness-game world",
+      tag: "Product · Pre-beta", shortTitle: "FORMA Gyms", title: "FORMA Gyms: from guided training to a fitness-game world",
       client: "Own product", place: "Interactive concept · pre-beta registration", stack: "Standalone landing · micro-demo · Netlify Forms",
       role: "Concept, product design, visual direction and development", intro: "Born from a real gym need, FORMA evolved into a fitness-game concept where gyms, progress and companions become a world to explore.",
       cardText: "A pre-beta fitness game with arenas, evolving companions and a narrative micro-demo.", facts: ["6 arena families", "3 companions · 4 stages", "Pre-beta micro-demo"],
@@ -81,10 +179,10 @@ export const caseStudies = [
     },
   },
   {
-    slug: "geofire", category: "featured", status: "online", featured: true,
+    slug: "geofire", category: "lab", status: "online",
     imageSrc: "/projects/geofire/app.jpg", appLink: "https://geofire.davidcappelletto.it",
     it: {
-      tag: "Prodotto · Dati e visualizzazione", shortTitle: "Geo·FIRE", title: "Geo·FIRE — libertà finanziaria, dati e geografia",
+      tag: "Prodotto · Dati e visualizzazione", shortTitle: "Geo·FIRE", title: "Geo·FIRE: libertà finanziaria, dati e geografia",
       client: "Progetto personale", place: "Web app interattiva · online", stack: "React · D3 · motore geografico · simulazioni finanziarie",
       role: "Ideazione, design, sviluppo e verifica", intro: "Un mappamondo interattivo per esplorare come la libertà finanziaria cambia fra paesi e modelli FIRE.",
       cardText: "Un globo interattivo con 175 paesi e tre modelli di libertà finanziaria.", facts: ["175 paesi", "3 modelli FIRE", "34.560 test"], appLinkLabel: "Prova l’app →",
@@ -96,7 +194,7 @@ export const caseStudies = [
       ], results: ["175 paesi con confini reali", "FIRE, Coast e Barista", "34.560 combinazioni verificate", "Ricerca e confronto paesi", "Desktop e mobile", "App online sul proprio dominio"],
     },
     en: {
-      tag: "Product · Data visualisation", shortTitle: "Geo·FIRE", title: "Geo·FIRE — financial freedom through data and geography",
+      tag: "Product · Data visualisation", shortTitle: "Geo·FIRE", title: "Geo·FIRE: financial freedom through data and geography",
       client: "Own project", place: "Interactive web app · online", stack: "React · D3 · geographic engine · financial simulations",
       role: "Concept, design, development and verification", intro: "An interactive globe exploring how financial freedom changes across countries and FIRE models.",
       cardText: "An interactive globe with 175 countries and three financial-freedom models.", facts: ["175 countries", "3 FIRE models", "34,560 tests"], appLinkLabel: "Try the app →",
@@ -134,34 +232,9 @@ export const caseStudies = [
     },
   },
   {
-    slug: "dentista-automazione", category: "solutions", status: "progress", imageSrc: "/projects/dentista/cover.svg",
-    it: {
-      tag: "Automazione · Work in progress", shortTitle: "Studio dentistico", title: "Promemoria WhatsApp per uno studio dentistico",
-      client: "Studio dentistico · caso anonimizzato", place: "In costruzione e validazione", stack: "Workflow automation · WhatsApp · regole e controlli",
-      role: "Analisi, progettazione del flusso e sviluppo", intro: "Un’automazione per rendere tracciabile il percorso fra appuntamento, promemoria e conferma.",
-      cardText: "Un flusso operativo in costruzione e validazione sul campo.", facts: ["Flusso anonimo", "Controlli", "WIP dichiarato"],
-      sections: [
-        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/cover.svg", mediaLabel: "Appuntamento · input" },
-        { h: "Tradurre il lavoro in regole", body: "Tempi, eccezioni, consensi e casi incompleti diventano un flusso leggibile. L’automazione deve sapere anche quando fermarsi e chiedere controllo umano.", image: "/projects/dentista/flow.svg", mediaLabel: "Regole · verifica" },
-        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validazione" },
-      ], results: ["Processo mappato", "Dati pubblici anonimi", "Regole ed eccezioni esplicite", "Controllo umano previsto", "WIP dichiarato", "Risultati da misurare"],
-    },
-    en: {
-      tag: "Automation · Work in progress", shortTitle: "Dental practice", title: "WhatsApp reminders for a dental practice",
-      client: "Dental practice · anonymised case", place: "In development and validation", stack: "Workflow automation · WhatsApp · rules and checks",
-      role: "Analysis, workflow design and development", intro: "An automation making the path from appointment to reminder and confirmation traceable.",
-      cardText: "An operational flow under construction and field validation.", facts: ["Anonymous flow", "Checks", "WIP declared"],
-      sections: [
-        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/cover.svg", mediaLabel: "Appointment · input" },
-        { h: "Turn work into rules", body: "Timing, exceptions, consent and incomplete cases become a readable flow. Automation must know when to request human review.", image: "/projects/dentista/flow.svg", mediaLabel: "Rules · checks" },
-        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validation" },
-      ], results: ["Process mapped", "Public data anonymised", "Rules and exceptions explicit", "Human review included", "WIP declared", "Results to measure"],
-    },
-  },
-  {
     slug: "maybes-shop", category: "solutions", status: "done", imageSrc: "/projects/maybes/flow.svg",
     it: {
-      tag: "Automazione · Esperimento concluso", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop — il negozio era il test, il prodotto era il flusso",
+      tag: "Automazione · Esperimento concluso", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop: il negozio era il test, il prodotto era il flusso",
       client: "Progetto sperimentale", place: "Shopify · Printful · Gelato", stack: "Shopify · print-on-demand · tracking ordini",
       role: "Brand, store, integrazioni e test end-to-end", intro: "Un esperimento su ordine, produzione e spedizione senza magazzino o interventi manuali.",
       cardText: "Ordine, produzione, spedizione e tracking senza magazzino.", facts: ["2 fornitori", "Zero magazzino", "Test conclusi"],
@@ -172,7 +245,7 @@ export const caseStudies = [
       ], results: ["Printful e Gelato testati", "Ciclo completo verificato", "Nessun magazzino", "Tracking al cliente", "Esperimento concluso", "Chiuso per evitare costi"],
     },
     en: {
-      tag: "Automation · Completed experiment", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop — the store was the test, the workflow the product",
+      tag: "Automation · Completed experiment", shortTitle: "Maybe’s Shop", title: "Maybe’s Shop: the store was the test, the workflow the product",
       client: "Experimental project", place: "Shopify · Printful · Gelato", stack: "Shopify · print-on-demand · order tracking",
       role: "Brand, store, integrations and end-to-end testing", intro: "An experiment on order, production and shipping without stock or manual steps.",
       cardText: "Order, production, shipping and tracking without a warehouse.", facts: ["2 suppliers", "No warehouse", "Tests complete"],
@@ -186,7 +259,7 @@ export const caseStudies = [
   {
     slug: "mappa-ikigai", category: "lab", status: "progress", imageSrc: "/projects/ikigai/cover.webp", link: "/ikigai",
     it: {
-      tag: "Prodotto · Pre-registrazione", shortTitle: "Mappa Ikigai", title: "Mappa Ikigai — una conversazione che diventa una mappa",
+      tag: "Prodotto · Pre-registrazione", shortTitle: "Mappa Ikigai", title: "Mappa Ikigai: una conversazione che diventa una mappa",
       client: "Prodotto personale", place: "Prototipo funzionante · pre-registrazione aperta",
       stack: "HTML · JavaScript · three.js · LLM · Netlify Forms", role: "Ideazione, UX, direzione visiva, mascotte e sviluppo",
       intro: "Un test ikigai in forma di chat: Iki fa otto domande, le risposte accendono quattro cristalli 3D e ciò che resta staccato diventa una missione concreta.",
@@ -199,7 +272,7 @@ export const caseStudies = [
       ], results: ["Prototipo interattivo funzionante", "Mascotte con quattro espressioni", "Cristalli 3D in three.js", "Risposte libere interpretate da LLM", "Landing con pre-registrazione", "Contenuti social con Sir Maybe e Iki"],
     },
     en: {
-      tag: "Product · Pre-registration", shortTitle: "Ikigai Map", title: "Ikigai Map — a conversation that becomes a map",
+      tag: "Product · Pre-registration", shortTitle: "Ikigai Map", title: "Ikigai Map: a conversation that becomes a map",
       client: "Own product", place: "Working prototype · pre-registration open",
       stack: "HTML · JavaScript · three.js · LLM · Netlify Forms", role: "Concept, UX, visual direction, mascot and development",
       intro: "An ikigai test shaped as a chat: Iki asks eight questions, the answers light up four 3D crystals and whatever stays detached becomes a concrete mission.",

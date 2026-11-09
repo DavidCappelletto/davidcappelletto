@@ -97,3 +97,7 @@
 
 .cin-paused .cin-enter-1,.cin-paused .cin-enter-2,.cin-paused .cin-enter-3{animation:none!important;opacity:1;transform:none}
 .cin-motion-switch:disabled{cursor:default}
+
+/* Keep motion controls clear of the existing floating WhatsApp button. */
+.cin-motion-switch{left:24px;right:auto}
+@media(max-width:500px){.cin-motion-switch{left:12px;right:auto}}

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { trackEvent } from "./analytics";
+import CinematicHero from "./CinematicHero";
+import "./cinematic-hero.css";
 
 const WEB3FORMS_ACCESS_KEY = "a13ea1d8-0f49-4205-82d6-c1edfb444186";
 
@@ -639,141 +641,15 @@ export default function Home() {
         )}
       </nav>
 
-      <section
-        id="top"
-        style={{
-          backgroundImage: "url('/hero-bg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          color: "#fff",
-          paddingTop: 136,
-          paddingBottom: 96,
-          position: "relative",
+      <CinematicHero
+        t={t}
+        lang={lang}
+        onWhatsAppClick={() => {
+          trackEvent("click_whatsapp");
+          trackEvent("click_audit_gratuito");
+          window.open("https://wa.me/393481151160", "_blank", "noopener,noreferrer");
         }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(17,30,48,0.82)",
-            zIndex: 0,
-          }}
-        />
-        <div
-          className="hero-grid"
-          style={{
-            width: "min(1200px, 89vw)",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 40,
-            alignItems: "start",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          <div>
-            <div
-              style={{
-                marginBottom: 28,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                borderRadius: 999,
-                border: "1px solid rgba(255,255,255,.2)",
-                background: "rgba(255,255,255,.1)",
-                padding: "8px 16px",
-                fontSize: 14,
-              }}
-            >
-              <span
-                style={{
-                  height: 10,
-                  width: 10,
-                  borderRadius: 999,
-                  background: colors.teal,
-                  boxShadow: "0 0 0 0 rgba(43,168,154,.7)",
-                  animation: "pulse 1.8s infinite",
-                }}
-              />
-              <span data-it={copy.it.heroBadge} data-en={copy.en.heroBadge}>
-                {t.heroBadge}
-              </span>
-            </div>
-            <h1 className="hero-title" style={{ fontSize: 38, lineHeight: 1.1, margin: 0, fontWeight: 800 }}>
-              {t.heroTitleA}{" "}<span className="hero-title-b" style={{ color: colors.teal }}>{t.heroTitleB}.</span>
-            </h1>
-            <p style={{ marginTop: 24, maxWidth: 640, fontSize: 20, lineHeight: 1.55, color: "rgba(255,255,255,.9)" }}>
-              {t.heroSubtitle}
-            </p>
-            <div style={{ marginTop: 34, display: "flex", flexWrap: "wrap", gap: 14 }}>
-              <button
-                className="cta-hover-lift"
-                style={{
-                  border: "none",
-                  borderRadius: 999,
-                  background: colors.teal,
-                  color: "#fff",
-                  padding: "14px 28px",
-                  fontSize: 17,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  trackEvent("click_whatsapp");
-                  trackEvent("click_audit_gratuito");
-                  window.open("https://wa.me/393481151160", "_blank");
-                }}
-              >
-                {t.heroBtn1}
-              </button>
-              <a
-                href="#come-lavoro"
-                className="cta-hover-lift"
-                style={{
-                  borderRadius: 999,
-                  border: "1px solid rgba(255,255,255,.45)",
-                  color: "#fff",
-                  textDecoration: "none",
-                  padding: "14px 28px",
-                  fontSize: 17,
-                  fontWeight: 700,
-                }}
-              >
-                {t.heroBtn2}
-              </a>
-            </div>
-          </div>
-
-          <div
-            style={{
-              borderRadius: 18,
-              border: "1px solid rgba(255,255,255,.2)",
-              background: "rgba(255,255,255,.1)",
-              padding: 24,
-              backdropFilter: "blur(6px)",
-            }}
-          >
-            <p style={{ margin: "0 0 12px", textTransform: "uppercase", letterSpacing: ".08em", color: colors.tealLight, fontSize: 12 }}>
-              {t.approach}
-            </p>
-            <p className="hero-quote" style={{ margin: 0, fontSize: 19, lineHeight: 1.45, fontStyle: "italic" }}>
-              {t.quote}
-            </p>
-            <div className="hero-stats-grid" style={{ marginTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-              <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>
-                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>{t.stat1Value}</p>
-                <p style={{ margin: "4px 0 0", fontSize: 12.5, lineHeight: 1.35 }}>{t.stat1}</p>
-              </div>
-              <div style={{ borderRadius: 12, border: "1px solid rgba(255,255,255,.2)", background: "rgba(17,30,48,.35)", padding: 12 }}>
-                <p style={{ margin: 0, fontSize: 22, fontWeight: 800, color: colors.tealLight }}>1:1</p>
-                <p style={{ margin: "4px 0 0", fontSize: 12.5, lineHeight: 1.35 }}>{t.stat2}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      />
 
       <section style={{ background: colors.navyDeep, color: "#fff", padding: "96px 0" }}>
         <div className="problem-grid" style={{ width: "min(1200px, 89vw)", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr", gap: 36 }}>

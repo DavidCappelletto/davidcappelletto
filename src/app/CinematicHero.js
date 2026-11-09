@@ -9,14 +9,10 @@ import { useEffect, useRef, useState } from "react";
  */
 export default function CinematicHero({ t, lang, onWhatsAppClick }) {
   const text = lang === "en" ? {
-    micro: "Strategy · Experience · Technology", stage: "Illustration of design, web and AI automation",
-    system: "One connected system", caption: "From a problem to a simpler experience.",
-    contact: "One contact, always.", pause: "Pause", resume: "Resume", discover: "Discover more ↓",
+    stage: "My approach", pause: "Pause", resume: "Resume", discover: "Discover more ↓",
     pauseLabel: "Pause animations", resumeLabel: "Resume animations", reduced: "Motion reduced",
   } : {
-    micro: "Strategia · Esperienza · Tecnologia", stage: "Rappresentazione illustrativa di design, web e automazioni AI",
-    system: "Un unico sistema", caption: "Dal problema a un'esperienza più semplice.",
-    contact: "Un referente, sempre.", pause: "Pausa", resume: "Riprendi", discover: "Scopri di più ↓",
+    stage: "Il mio approccio", pause: "Pausa", resume: "Riprendi", discover: "Scopri di più ↓",
     pauseLabel: "Metti in pausa le animazioni", resumeLabel: "Riprendi le animazioni", reduced: "Movimento ridotto",
   };
   const stageRef = useRef(null);
@@ -100,49 +96,24 @@ export default function CinematicHero({ t, lang, onWhatsAppClick }) {
             </button>
             <a className="cin-secondary" href="#come-lavoro">{t.heroBtn2}</a>
           </div>
-          <p className="cin-micro cin-enter-3">{text.micro}</p>
         </div>
 
         <div className="cin-stage" ref={stageRef} onPointerMove={onMove} onPointerLeave={onLeave} role="group" aria-label={text.stage}>
           <div className="cin-orbit" aria-hidden="true" />
           <div className="cin-orbit cin-orbit-two" aria-hidden="true" />
-          <div className="cin-float-label cin-float-top" aria-hidden="true">
-            <strong>UX / WEB / AI</strong><small>{text.system}</small>
-          </div>
           <div className="cin-glass">
-            <div className="cin-card-heading">
-              <div className="cin-suite">
-                <img src="/logo.png" alt="" width="23" height="23" decoding="async" />
-                <strong>Digital Suite</strong>
+            <p className="cin-tiny">{t.approach}</p>
+            <p className="cin-quote">{t.quote}</p>
+            <div className="cin-stats">
+              <div className="cin-stat">
+                <strong>{t.stat1Value}</strong>
+                <span>{t.stat1}</span>
               </div>
-              <span className="cin-online"><i /> Connected</span>
-            </div>
-            <div className="cin-card-content">
-              <p className="cin-tiny">Creative systems</p>
-              <h2>Design. Build. Automate.</h2>
-              <p className="cin-card-caption">{text.caption}</p>
-              <div className="cin-flow" aria-hidden="true">
-                <div className="cin-node"><span>✦</span>Design</div>
-                <div className="cin-connection" />
-                <div className="cin-node"><span>⌘</span>Web</div>
-                <div className="cin-connection" />
-                <div className="cin-node"><span>↗</span>AI</div>
-              </div>
-              <div className="cin-info" aria-hidden="true">
-                <div className="cin-info-block">
-                  <p>Digital experience</p>
-                  <div className="cin-chart"><i /><i /><i /><i /><i /><i /></div>
-                </div>
-                <div className="cin-info-block">
-                  <p>Connected workflows</p>
-                  <div className="cin-lines"><i /><i /><i /></div>
-                </div>
+              <div className="cin-stat">
+                <strong>1:1</strong>
+                <span>{t.stat2}</span>
               </div>
             </div>
-          </div>
-          <div className="cin-float-label cin-float-bottom" aria-hidden="true">
-            <img src="/profile.png" alt="" width="26" height="26" loading="lazy" decoding="async" />
-            <strong>{text.contact}</strong>
           </div>
         </div>
       </div>

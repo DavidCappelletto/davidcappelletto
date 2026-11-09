@@ -1,4 +1,4 @@
-/* Cinematic Hero — exclusively scoped to .cin-* so the rest of the site remains unchanged. */
+/* Cinematic Hero: exclusively scoped to .cin-* so the rest of the site remains unchanged. */
 .cin-hero{--cin-deep:#101E31;--cin-teal:#2BA89A;--cin-light:#79dfd1;--cin-ease:cubic-bezier(.16,1,.3,1);position:relative;isolation:isolate;overflow:hidden;min-height:100svh;background:radial-gradient(circle at 85% 35%,#27485b 0%,#13263d 39%,#0c1b2c 80%);color:#f6fbff}
 .cin-hero *{box-sizing:border-box}
 .cin-ambient,.cin-photo,.cin-shade,.cin-grid,.cin-aura{position:absolute;inset:0;pointer-events:none}
@@ -101,3 +101,27 @@
 /* Keep motion controls clear of the existing floating WhatsApp button. */
 .cin-motion-switch{left:24px;right:auto}
 @media(max-width:500px){.cin-motion-switch{left:12px;right:auto}}
+
+/* Approach card (sostituisce la "Digital Suite" illustrativa) */
+.cin-glass{padding:30px 30px 26px}
+.cin-glass .cin-tiny{color:#79dfd1;font-size:11px;letter-spacing:.16em}
+.cin-quote{margin:14px 0 0;font-size:clamp(18px,1.55vw,23px);line-height:1.42;font-weight:600;letter-spacing:-.02em;color:#f2f9fb}
+.cin-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.cin-stat{padding:14px;border-radius:14px;background:rgba(9,36,50,.55);border:1px solid rgba(127,215,205,.16)}
+.cin-stat strong{display:block;font-size:24px;font-weight:800;color:#79dfd1;letter-spacing:-.03em}
+.cin-stat span{display:block;margin-top:6px;font-size:12.5px;line-height:1.45;color:#c4dbe0}
+@media(max-width:900px){
+  .cin-layout{min-height:0;justify-content:flex-start;padding-bottom:64px}
+  .cin-stage{min-height:0;margin-top:30px;width:100%;transform:none;perspective:none}
+  .cin-orbit{display:none}
+  .cin-glass{width:100%;max-width:520px;transform:none;animation:none;padding:20px;border-radius:18px}
+  .cin-quote{font-size:16px}
+  .cin-stats{margin-top:16px;gap:10px}
+  .cin-stat{padding:11px}.cin-stat strong{font-size:20px}.cin-stat span{font-size:11.5px}
+}
+@media(max-width:500px){
+  .cin-layout{padding-bottom:60px}
+  .cin-stage{margin-top:26px}
+  .cin-glass{padding:16px}.cin-glass .cin-tiny{font-size:9px}
+  .cin-quote{font-size:15px;margin-top:10px}
+}

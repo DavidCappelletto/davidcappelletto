@@ -18,6 +18,8 @@ const copy = {
       "Per professionisti e piccole imprese. Prima trovo dove perdi contatti e ore di lavoro, poi intervengo solo lì.",
     heroBtn1: "Scrivimi su WhatsApp",
     heroBtn2: "Come lavoro →",
+    heroNote: "Primo confronto gratuito: 20 minuti, senza impegno.",
+    heroWorkLabel: "Lavori recenti",
     approach: "Il mio approccio",
     quote:
       "Non parto dagli strumenti, parto da come lavori. Se la risposta onesta è \"per ora non serve niente\", te lo dico.",
@@ -201,6 +203,8 @@ const copy = {
       "For professionals and small businesses. First I find where you lose leads and hours, then I fix only that.",
     heroBtn1: "Message me on WhatsApp",
     heroBtn2: "How I work →",
+    heroNote: "First call is free: 20 minutes, no commitment.",
+    heroWorkLabel: "Recent work",
     approach: "My approach",
     quote:
       "I don't start from tools, I start from how you work. If the honest answer is \"nothing for now\", I'll tell you.",

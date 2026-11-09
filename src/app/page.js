@@ -11,11 +11,11 @@ const copy = {
   it: {
     navLinks: ["Progetti", "Come lavoro", "Servizi"],
     ctaMini: "Mini Audit Gratuito",
-    heroBadge: "Siti · SEO locale · Automazioni AI",
-    heroTitleA: "Siti che portano clienti.",
-    heroTitleB: "Automazioni che ti ridanno tempo",
+    heroBadge: "Sono David, consulente digitale ad Aviano (PN)",
+    heroTitleA: "Il tuo sito non ti porta contatti?",
+    heroTitleB: "Trovo il perché, poi lo sistemo",
     heroSubtitle:
-      "Per professionisti e piccole imprese. Prima trovo dove perdi contatti e ore di lavoro, poi intervengo solo lì.",
+      "Siti, SEO locale e automazioni AI per professionisti e piccole imprese. Prima la diagnosi, poi solo gli interventi che servono davvero.",
     heroBtn1: "Scrivimi su WhatsApp",
     heroBtn2: "Come lavoro →",
     heroNote: "Primo confronto gratuito: 20 minuti, senza impegno.",
@@ -196,11 +196,11 @@ const copy = {
   en: {
     navLinks: ["Projects", "How I work", "Services"],
     ctaMini: "Free Mini Audit",
-    heroBadge: "Websites · Local SEO · AI automation",
-    heroTitleA: "Websites that bring clients.",
-    heroTitleB: "Automations that give you time back",
+    heroBadge: "I'm David, digital consultant in Aviano, Italy",
+    heroTitleA: "Your website isn't bringing in leads?",
+    heroTitleB: "I find out why, then I fix it",
     heroSubtitle:
-      "For professionals and small businesses. First I find where you lose leads and hours, then I fix only that.",
+      "Websites, local SEO and AI automation for professionals and small businesses. Diagnosis first, then only the work you actually need.",
     heroBtn1: "Message me on WhatsApp",
     heroBtn2: "How I work →",
     heroNote: "First call is free: 20 minutes, no commitment.",

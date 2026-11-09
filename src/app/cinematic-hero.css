@@ -11,9 +11,9 @@
   linear-gradient(180deg,rgba(15,29,48,.55) 0%,rgba(15,29,48,0) 18%)}
 
 .hp-shell{max-width:1200px;margin:0 auto;padding:0 40px;min-height:inherit;display:flex;align-items:center}
-.hp-copy{position:relative;z-index:3;max-width:560px;padding:130px 0 90px}
-.hp-kicker{margin:0 0 20px;color:#8fe3d6;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-.hp-title{margin:0;font-size:clamp(40px,4.6vw,66px);line-height:1.04;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+.hp-copy{position:relative;z-index:3;max-width:600px;padding:130px 0 90px}
+.hp-kicker{margin:0 0 18px;color:#8fe3d6;font-size:16px;font-weight:600;letter-spacing:0}
+.hp-title{margin:0;font-size:clamp(38px,4vw,58px);line-height:1.04;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
 .hp-title>span{display:block}
 .hp-accent{color:#6fdccc}
 .hp-desc{margin:22px 0 0;max-width:470px;color:#d3e0ea;font-size:17px;line-height:1.6}
@@ -54,8 +54,8 @@
   .hp-fade{display:none}
   .hp-shell{display:block;padding:0 22px;min-height:0;margin-top:-38px;position:relative;z-index:3}
   .hp-copy{padding:0 0 44px;max-width:620px}
-  .hp-kicker{font-size:11px;margin-bottom:12px}
-  .hp-title{font-size:clamp(34px,9vw,52px)}
+  .hp-kicker{font-size:14px;margin-bottom:10px}
+  .hp-title{font-size:clamp(31px,8.2vw,48px)}
   .hp-desc{font-size:15px;margin-top:16px}
   .hp-actions{margin-top:22px;gap:16px}
   .hp-primary{padding:14px 18px;font-size:14px}

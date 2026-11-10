@@ -90,27 +90,30 @@ function today() {
    quando la funzione riparte. Si conserva solo un contatore legato a un'impronta, mai testi o indirizzi.
    Se l'archivio non è raggiungibile (per esempio in locale) si ripiega su contatori in memoria:
    meglio un limite meno preciso che un'app bloccata. */
+const STORE_MODES = ["strong", "eventual"]; // si prova la lettura sempre aggiornata, poi quella normale
+let storeMode = 0;
 let storePromise = null;
 let storeKind = "memoria";
+let storeProblem = null;
 function store() {
+  if (storeMode >= STORE_MODES.length) return Promise.resolve(null);
   if (!storePromise) {
+    const consistency = STORE_MODES[storeMode];
     storePromise = import("@netlify/blobs")
       .then((m) => {
-        const s = m.getStore({ name: "mappa-ikigai", consistency: "strong" });
-        storeKind = "blobs";
+        const s = m.getStore({ name: "mappa-ikigai", consistency });
+        storeKind = "blobs-" + consistency;
         return s;
       })
       .catch((e) => {
-        storeProblem = `apertura: ${e?.name || "errore"} ${String(e?.message || "").slice(0, 120)}`;
+        storeFailed("apertura", e);
         return null;
       });
   }
   return storePromise;
 }
-const memQuota = new Map();
-let storeProblem = null;
 // L'archivio non deve mai tenere in attesa la persona: oltre il tempo limite si va avanti con la memoria.
-function inTime(promise, ms = 2500) {
+function inTime(promise, ms = 2000) {
   let timer;
   const late = new Promise((_, rej) => {
     timer = setTimeout(() => rej(Object.assign(new Error("tempo scaduto"), { name: "Timeout" })), ms);
@@ -118,22 +121,26 @@ function inTime(promise, ms = 2500) {
   return Promise.race([promise, late]).finally(() => clearTimeout(timer));
 }
 function storeFailed(what, e) {
-  storeProblem = `${what}: ${e?.name || "errore"} ${String(e?.message || "").slice(0, 120)}`;
-  console.error(`[iki] archivio in ${storeProblem}`);
+  storeProblem = `${STORE_MODES[storeMode] || ""} ${what}: ${e?.name || "errore"} ${String(e?.message || "").slice(0, 120)}`;
+  console.error(`[iki] archivio, ${storeProblem}`);
+  storeMode += 1; // alla prossima chiamata si prova il modo successivo, poi solo memoria
+  storePromise = null;
   storeKind = "memoria";
-  storePromise = Promise.resolve(null); // per questa istanza si resta sulla memoria
 }
+// Il conteggio buono è il più alto tra memoria e archivio: la memoria è precisa finché la funzione resta
+// accesa, l'archivio fa da paracadute quando riparte (e può arrivare con qualche secondo di ritardo).
+const memQuota = new Map();
 async function readCount(key) {
+  const mem = memQuota.get(key) || 0;
   const s = await store();
-  if (s) {
-    try {
-      const v = await inTime(s.get(key, { type: "json" }));
-      return Number(v?.n) || 0;
-    } catch (e) {
-      storeFailed("lettura", e);
-    }
+  if (!s) return mem;
+  try {
+    const v = await inTime(s.get(key, { type: "json" }));
+    return Math.max(mem, Number(v?.n) || 0);
+  } catch (e) {
+    storeFailed("lettura", e);
+    return mem;
   }
-  return memQuota.get(key) || 0;
 }
 async function writeCount(key, n) {
   memQuota.set(key, n);

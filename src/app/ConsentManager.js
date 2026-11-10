@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Clarity from "@microsoft/clarity";
+import { useSiteLang } from "./useSiteLang";
+import { localePath } from "./i18n";
 
 const CONSENT_KEY = "dc_analytics_consent";
 const GA_ID = "G-MBWPX09G1C";
@@ -30,7 +32,21 @@ function loadAnalytics() {
   window.__dcClarityReady = true;
 }
 
+const BANNER = {
+  it: {
+    text: "Usiamo cookie tecnici necessari al funzionamento del sito e, solo con il tuo consenso, cookie di analisi (Google Analytics, Microsoft Clarity) per capire come viene usato il sito.",
+    accept: "Accetta",
+    reject: "Rifiuta",
+  },
+  en: {
+    text: "We use technical cookies needed for the site to work and, only with your consent, analytics cookies (Google Analytics, Microsoft Clarity) to understand how the site is used.",
+    accept: "Accept",
+    reject: "Reject",
+  },
+};
+
 export default function ConsentManager() {
+  const [lang] = useSiteLang();
   const [status, setStatus] = useState("loading");
 
   useEffect(() => {
@@ -60,6 +76,7 @@ export default function ConsentManager() {
   };
 
   if (status !== "pending") return null;
+  const c = BANNER[lang] || BANNER.it;
 
   return (
     <div
@@ -79,11 +96,9 @@ export default function ConsentManager() {
       }}
     >
       <p style={{ margin: 0, color: "#4A5F78", fontSize: 13.5, lineHeight: 1.55 }}>
-        Usiamo cookie tecnici necessari al funzionamento del sito e, solo con il tuo consenso,
-        cookie di analisi (Google Analytics, Microsoft Clarity) per capire come viene usato il
-        sito.{" "}
+        {c.text}{" "}
         <a
-          href="/privacy"
+          href={localePath("/privacy", lang)}
           style={{ color: "#1E7E73" }}
         >
           Privacy Policy
@@ -104,7 +119,7 @@ export default function ConsentManager() {
             flex: 1,
           }}
         >
-          Accetta
+          {c.accept}
         </button>
         <button
           onClick={reject}
@@ -120,7 +135,7 @@ export default function ConsentManager() {
             flex: 1,
           }}
         >
-          Rifiuta
+          {c.reject}
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { localePath } from "../i18n";
 import { caseStudies, categoryLabels, colors, getStatus, localizeCaseStudy } from "./_data";
 import { SiteHeader, SiteFooter, SiteContactSection, ImageWithFallback, LangProvider, useLang } from "./_site-parts";
 
@@ -37,7 +38,7 @@ function ProjectCard({ project, lang, readMore, media }) {
   const item = localizeCaseStudy(project, lang);
   return (
     <article className="portfolio-card">
-      <Link href={`/progetti/${item.slug}`} aria-label={item.title} className="portfolio-card-link" />
+      <Link href={localePath(`/progetti/${item.slug}`, lang)} aria-label={item.title} className="portfolio-card-link" />
       <div className="portfolio-card-media">
         <ImageWithFallback src={item.imageSrc} alt={item.shortTitle || item.title} />
         <span>{media}</span>

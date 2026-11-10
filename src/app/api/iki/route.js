@@ -16,7 +16,7 @@ const LIMITS = {
   ipPerDay: Number(process.env.IKIGAI_LIMIT_IP_DAY || 150), // chiamate a Claude per persona al giorno
   allPerDay: Number(process.env.IKIGAI_LIMIT_DAY || 4000), // tetto giornaliero complessivo
   checksPerDay: 40, // tentativi di codice per persona al giorno
-  person: Number(process.env.IKIGAI_LIMIT_PERSONA || 120), // chiamate a Claude per persona, a vita
+  person: Number(process.env.IKIGAI_LIMIT_PERSONA || 120), // chiamate a Claude per persona (codice + dispositivo)
   month: Number(process.env.IKIGAI_LIMIT_MESE || 3000), // tetto mensile complessivo
 };
 
@@ -85,75 +85,17 @@ function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
-/* ---------- tetti che durano ----------
-   Il tetto a vita per persona e quello mensile stanno su Netlify Blobs, così non si azzerano
-   quando la funzione riparte. Si conserva solo un contatore legato a un'impronta, mai testi o indirizzi.
-   Se l'archivio non è raggiungibile (per esempio in locale) si ripiega su contatori in memoria:
-   meglio un limite meno preciso che un'app bloccata. */
-const STORE_MODES = ["strong", "eventual"]; // si prova la lettura sempre aggiornata, poi quella normale
-let storeMode = 0;
-let storePromise = null;
-let storeKind = "memoria";
-let storeProblem = null;
-function store() {
-  if (storeMode >= STORE_MODES.length) return Promise.resolve(null);
-  if (!storePromise) {
-    const consistency = STORE_MODES[storeMode];
-    storePromise = import("@netlify/blobs")
-      .then((m) => {
-        // Next modifica fetch per la sua cache: all'archivio si passa quello originale, senza cache.
-        const plain = globalThis._nextOriginalFetch || globalThis.fetch?._nextOriginalFetch || globalThis.fetch;
-        const direct = (input, init) => plain(input, { ...init, cache: "no-store" });
-        const s = m.getStore({ name: "mappa-ikigai", consistency, fetch: direct });
-        storeKind = "blobs-" + consistency;
-        return s;
-      })
-      .catch((e) => {
-        storeFailed("apertura", e);
-        return null;
-      });
-  }
-  return storePromise;
-}
-// L'archivio non deve mai tenere in attesa la persona: oltre il tempo limite si va avanti con la memoria.
-function inTime(promise, ms = 2000) {
-  let timer;
-  const late = new Promise((_, rej) => {
-    timer = setTimeout(() => rej(Object.assign(new Error("tempo scaduto"), { name: "Timeout" })), ms);
-  });
-  return Promise.race([promise, late]).finally(() => clearTimeout(timer));
-}
-function storeFailed(what, e) {
-  storeProblem = `${STORE_MODES[storeMode] || ""} ${what}: ${e?.name || "errore"} ${String(e?.message || "").slice(0, 120)}`;
-  console.error(`[iki] archivio, ${storeProblem}`);
-  storeMode += 1; // alla prossima chiamata si prova il modo successivo, poi solo memoria
-  storePromise = null;
-  storeKind = "memoria";
-}
-// Il conteggio buono è il più alto tra memoria e archivio: la memoria è precisa finché la funzione resta
-// accesa, l'archivio fa da paracadute quando riparte (e può arrivare con qualche secondo di ritardo).
+/* ---------- tetti per persona e per mese ----------
+   Contatori in memoria, come quelli giornalieri: valgono finché l'istanza della funzione resta accesa
+   e ripartono da zero quando Netlify la riavvia. Netlify Blobs, provato per farli durare, da questa
+   funzione non risponde (le letture restano appese), quindi per ora non si usa: per un tetto che dura
+   davvero serve un piccolo database. Il tetto vero ai costi resta il limite di spesa nella console Anthropic. */
 const memQuota = new Map();
 async function readCount(key) {
-  const mem = memQuota.get(key) || 0;
-  const s = await store();
-  if (!s) return mem;
-  try {
-    const v = await inTime(s.get(key, { type: "json" }));
-    return Math.max(mem, Number(v?.n) || 0);
-  } catch (e) {
-    storeFailed("lettura", e);
-    return mem;
-  }
+  return memQuota.get(key) || 0;
 }
 async function writeCount(key, n) {
   memQuota.set(key, n);
-  const s = await store();
-  if (!s) return;
-  try {
-    await inTime(s.setJSON(key, { n, ultimo: today() }));
-  } catch (e) {
-    storeFailed("scrittura", e);
-  }
 }
 function personKey(code, device, who) {
   const dev = typeof device === "string" && /^[a-zA-Z0-9-]{16,64}$/.test(device) ? device : who;
@@ -355,8 +297,7 @@ export async function POST(req) {
 }
 
 // Controllo di salute: senza parametri dice solo che il servizio c'è.
-// Con ?prova=CODICE fa una chiamata minima a Claude e riporta il modello in uso, dove stanno i contatori
-// (archivio: "blobs" se durano, "memoria" se no) e quante chiamate sono state usate nel mese.
+// Con ?prova=CODICE fa una chiamata minima a Claude e riporta il modello in uso e le chiamate contate nel mese.
 export async function GET(req) {
   const h = { "Cache-Control": "no-store" };
   const code = normCode(new URL(req.url).searchParams.get("prova"));
@@ -373,10 +314,10 @@ export async function GET(req) {
     const tempi = { contatori_ms: t1 - t0, claude_ms: Date.now() - t1 };
     console.log(`[iki] prova ok: ${JSON.stringify(tempi)} ${workingModel}`);
     return Response.json(
-      { ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, archivio: storeKind, problemaArchivio: storeProblem, mese: { usate: mese, tetto: LIMITS.month }, persona: { tetto: LIMITS.person } },
+      { ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, mese: { usate: mese, tetto: LIMITS.month }, persona: { tetto: LIMITS.person } },
       { headers: h }
     );
   } catch (e) {
-    return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY, archivio: storeKind, problemaArchivio: storeProblem }, { headers: h });
+    return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY }, { headers: h });
   }
 }

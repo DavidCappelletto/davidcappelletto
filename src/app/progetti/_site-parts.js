@@ -5,11 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { colors } from "./_data";
 import { trackEvent } from "../analytics";
+import { useSiteLang } from "../useSiteLang";
 
 const LangContext = createContext({ lang: "it", setLang: () => {} });
 
 export function LangProvider({ children }) {
-  const [lang, setLang] = useState("it");
+  const [lang, setLang] = useSiteLang();
   return <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>;
 }
 

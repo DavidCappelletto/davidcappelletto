@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSiteLang } from "./useSiteLang";
 import { trackEvent } from "./analytics";
 import CinematicHero from "./CinematicHero";
 import "./cinematic-hero.css";
@@ -392,7 +393,7 @@ const colors = {
 };
 
 export default function Home() {
-  const [lang, setLang] = useState("it");
+  const [lang, setLang] = useSiteLang();
   const [scrolled, setScrolled] = useState(false);
   const [logoRotation, setLogoRotation] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -929,7 +930,7 @@ export default function Home() {
                 fontSize: 15,
               }}
             >
-              Parliamo del tuo progetto →
+              {lang === "en" ? "Let's talk about your project →" : "Parliamo del tuo progetto →"}
             </a>
           </div>
         </div>
@@ -1198,10 +1199,10 @@ export default function Home() {
 
           <div className="footer-right" style={{ justifySelf: "start", textAlign: "left" }}>
             <p style={{ margin: 0, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>
-              Aviano (PN) · Lavoro anche da remoto
+              {t.footerRight.split(" / ")[0]}
             </p>
             <p style={{ margin: "4px 0 0", color: "rgba(255,255,255,0.3)", fontSize: 12 }}>
-              UX · SEO Locale · Automazioni AI
+              {t.footerRight.split(" / ")[1]}
             </p>
             <a
               href="/privacy"

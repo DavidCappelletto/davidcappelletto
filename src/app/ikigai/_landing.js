@@ -2,42 +2,100 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSiteLang } from "../useSiteLang";
 
 const PRIVACY = "/privacy";
 
-const steps = [
-  {
-    n: "01",
-    h: "Rispondi a otto domande",
-    p: "Iki te le fa una alla volta, in chat. Scegli tra le risposte proposte oppure scrivi con parole tue.",
-    img: "/projects/ikigai/chat.webp",
+const COPY = {
+  it: {
+    steps: [
+      { n: "01", h: "Rispondi a otto domande", p: "Iki te le fa una alla volta, in chat. Scegli tra le risposte proposte oppure scrivi con parole tue.", img: "/projects/ikigai/chat.webp" },
+      { n: "02", h: "I cristalli si accendono", p: "Passioni, talenti, lavoro e bisogni del mondo diventano quattro cristalli. Quello che resta staccato ti mostra subito cosa manca.", img: "/projects/ikigai/cristalli.webp" },
+      { n: "03", h: "Una missione per colmare il vuoto", p: "Iki ti propone azioni concrete. Missione dopo missione, il cristallo centrale si completa.", img: "/projects/ikigai/missione.webp" },
+    ],
+    circles: ["Quello che ami", "Quello in cui sei bravo", "Quello di cui il mondo ha bisogno", "Quello per cui puoi essere pagato"],
+    topCta: "Pre-registrati",
+    eyebrow: "MAPPA IKIGAI · IN ARRIVO",
+    h1: "Le tue energie vanno nel posto giusto?",
+    lead: "Otto domande, quattro cristalli e Iki che ti accompagna. Vedi subito cosa manca nel tuo ikigai e ricevi missioni concrete per colmarlo.",
+    langNote: "",
+    video: "Video di presentazione di Mappa Ikigai",
+    howEyebrow: "COME FUNZIONA",
+    howH2: "Una conversazione che diventa una mappa",
+    whatEyebrow: "COS'È L'IKIGAI",
+    whatH2: "Il motivo per cui ti alzi la mattina",
+    whatP: "Ikigai è una parola giapponese che indica, più o meno, ciò che dà senso alle tue giornate. La versione più diffusa lo disegna come l'incontro di quattro cerchi: è una rielaborazione occidentale, ma è un ottimo strumento per farsi le domande giuste. In Mappa Ikigai ogni cerchio è un cristallo.",
+    ikiAlt: "Iki, la mascotte di Mappa Ikigai",
+    ikiH2: "Ti accompagna Iki",
+    ikiP: "Un piccolo spirito con quattro cristalli in testa. Fa le domande, ascolta le risposte e ti propone le missioni. È curioso, gentile e un po' permaloso: chiamarli \"gemme\" non è una buona idea.",
+    finalH2: "Vuoi provarla tra i primi?",
+    footBy: "Mappa Ikigai è ideata e sviluppata da",
+    footProject: "Il progetto",
+    footCode: "Hai un codice d'invito? Entra",
+    form: {
+      doneTitle: "Ci sei!",
+      doneText: "Ti scrivo appena Mappa Ikigai è pronta da provare. Nel frattempo Iki lucida i cristalli.",
+      title: "Pre-registrati e provala tra i primi",
+      honeypot: "Non compilare",
+      name: "Nome",
+      namePh: "Come ti chiami?",
+      emailPh: "nome@email.it",
+      consentA: "Accetto di ricevere un'email quando Mappa Ikigai sarà disponibile e ho letto la",
+      sending: "Invio…",
+      submit: "Pre-registrati",
+      error: "Qualcosa non è andato. Riprova tra poco.",
+      note: "Niente spam: solo l'avviso di apertura. Puoi cancellarti quando vuoi.",
+    },
   },
-  {
-    n: "02",
-    h: "I cristalli si accendono",
-    p: "Passioni, talenti, lavoro e bisogni del mondo diventano quattro cristalli. Quello che resta staccato ti mostra subito cosa manca.",
-    img: "/projects/ikigai/cristalli.webp",
+  en: {
+    steps: [
+      { n: "01", h: "Answer eight questions", p: "Iki asks them one at a time, in a chat. Pick one of the suggested answers or write in your own words.", img: "/projects/ikigai/chat.webp" },
+      { n: "02", h: "The crystals light up", p: "Passions, talents, work and what the world needs become four crystals. The one left apart shows you right away what is missing.", img: "/projects/ikigai/cristalli.webp" },
+      { n: "03", h: "A mission to fill the gap", p: "Iki suggests concrete actions. Mission after mission, the central crystal comes together.", img: "/projects/ikigai/missione.webp" },
+    ],
+    circles: ["What you love", "What you are good at", "What the world needs", "What you can be paid for"],
+    topCta: "Pre-register",
+    eyebrow: "MAPPA IKIGAI · COMING SOON",
+    h1: "Is your energy going to the right place?",
+    lead: "Eight questions, four crystals and Iki by your side. See right away what is missing from your ikigai and get concrete missions to fill the gap.",
+    langNote: "The app is in Italian for now. An English version will follow.",
+    video: "Mappa Ikigai presentation video",
+    howEyebrow: "HOW IT WORKS",
+    howH2: "A conversation that becomes a map",
+    whatEyebrow: "WHAT IKIGAI IS",
+    whatH2: "The reason you get up in the morning",
+    whatP: "Ikigai is a Japanese word that roughly means what gives meaning to your days. The best-known version draws it as four overlapping circles: a Western reinterpretation, but a great tool for asking yourself the right questions. In Mappa Ikigai every circle is a crystal.",
+    ikiAlt: "Iki, the Mappa Ikigai mascot",
+    ikiH2: "Iki comes with you",
+    ikiP: "A small spirit with four crystals on its head. It asks the questions, listens to your answers and suggests missions. Curious, kind and a little touchy: calling them \"gems\" is not a good idea.",
+    finalH2: "Want to be among the first to try it?",
+    footBy: "Mappa Ikigai is designed and built by",
+    footProject: "The project",
+    footCode: "Have an invite code? Come in",
+    form: {
+      doneTitle: "You're in!",
+      doneText: "I'll email you as soon as Mappa Ikigai is ready to try. Meanwhile Iki is polishing the crystals.",
+      title: "Pre-register and be among the first to try it",
+      honeypot: "Do not fill in",
+      name: "Name",
+      namePh: "What's your name?",
+      emailPh: "name@email.com",
+      consentA: "I agree to receive an email when Mappa Ikigai is available and I have read the",
+      sending: "Sending…",
+      submit: "Pre-register",
+      error: "Something went wrong. Please try again shortly.",
+      note: "No spam: just the launch notice. You can unsubscribe anytime.",
+    },
   },
-  {
-    n: "03",
-    h: "Una missione per colmare il vuoto",
-    p: "Iki ti propone azioni concrete. Missione dopo missione, il cristallo centrale si completa.",
-    img: "/projects/ikigai/missione.webp",
-  },
-];
+};
 
-const circles = [
-  { c: "#FF4F8B", t: "Quello che ami" },
-  { c: "#4F9DFF", t: "Quello in cui sei bravo" },
-  { c: "#22E0A4", t: "Quello di cui il mondo ha bisogno" },
-  { c: "#FFB02E", t: "Quello per cui puoi essere pagato" },
-];
+const CIRCLE_COLORS = ["#FF4F8B", "#4F9DFF", "#22E0A4", "#FFB02E"];
 
 function encode(data) {
   return Object.keys(data).map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k])).join("&");
 }
 
-function PreForm({ id }) {
+function PreForm({ id, f: tf }) {
   const [state, setState] = useState("idle");
 
   function fonteVisita() {
@@ -79,8 +137,8 @@ function PreForm({ id }) {
       <div className="mk-form mk-done" id={id}>
         <img src="/ikigai/iki.png" alt="" width="88" height="96" />
         <div>
-          <strong>Ci sei!</strong>
-          <p>Ti scrivo appena Mappa Ikigai è pronta da provare. Nel frattempo Iki lucida i cristalli.</p>
+          <strong>{tf.doneTitle}</strong>
+          <p>{tf.doneText}</p>
         </div>
       </div>
     );
@@ -88,64 +146,70 @@ function PreForm({ id }) {
 
   return (
     <form className="mk-form" id={id} onSubmit={onSubmit} name="preregistrazione-ikigai">
-      <p className="mk-form-title">Pre-registrati e provala tra i primi</p>
+      <p className="mk-form-title">{tf.title}</p>
       <input type="hidden" name="form-name" value="preregistrazione-ikigai" />
       <p className="mk-hp" aria-hidden="true">
-        <label>Non compilare<input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
+        <label>{tf.honeypot}<input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
       </p>
       <label className="mk-field">
-        <span>Nome</span>
-        <input name="nome" type="text" autoComplete="given-name" placeholder="Come ti chiami?" maxLength={60} />
+        <span>{tf.name}</span>
+        <input name="nome" type="text" autoComplete="given-name" placeholder={tf.namePh} maxLength={60} />
       </label>
       <label className="mk-field">
         <span>Email *</span>
-        <input name="email" type="email" required autoComplete="email" placeholder="nome@email.it" maxLength={120} />
+        <input name="email" type="email" required autoComplete="email" placeholder={tf.emailPh} maxLength={120} />
       </label>
       <label className="mk-check">
         <input name="consenso" type="checkbox" required />
         <span>
-          Accetto di ricevere un&apos;email quando Mappa Ikigai sarà disponibile e ho letto la{" "}
+          {tf.consentA}{" "}
           <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
         </span>
       </label>
       <button type="submit" disabled={state === "sending"}>
-        {state === "sending" ? "Invio…" : "Pre-registrati"}
+        {state === "sending" ? tf.sending : tf.submit}
       </button>
-      {state === "error" && <p className="mk-err">Qualcosa non è andato. Riprova tra poco.</p>}
-      <p className="mk-note">Niente spam: solo l&apos;avviso di apertura. Puoi cancellarti quando vuoi.</p>
+      {state === "error" && <p className="mk-err">{tf.error}</p>}
+      <p className="mk-note">{tf.note}</p>
     </form>
   );
 }
 
 export default function IkigaiLanding() {
+  const [lang, setLang] = useSiteLang();
+  const t = COPY[lang] || COPY.it;
   return (
     <main className="mk" id="top">
       <div className="mk-stars" aria-hidden="true" />
       <header className="mk-top">
         <a href="#top" className="mk-home" aria-label="Mappa Ikigai"><img src="/ikigai/iki.png" alt="" width="40" height="44" /><span>Mappa <b>Ikigai</b></span></a>
-        <a href="#pre" className="mk-top-cta">Pre-registrati</a>
+        <div className="mk-top-right">
+          <div className="mk-lang" role="group" aria-label="Lingua / Language">
+            <button type="button" aria-pressed={lang === "it"} onClick={() => setLang("it")}>IT</button>
+            <button type="button" aria-pressed={lang === "en"} onClick={() => setLang("en")}>EN</button>
+          </div>
+          <a href="#pre" className="mk-top-cta">{t.topCta}</a>
+        </div>
       </header>
 
       <section className="mk-hero">
         <div className="mk-hero-copy">
-          <p className="mk-eyebrow">MAPPA IKIGAI · IN ARRIVO</p>
-          <h1>Le tue energie vanno nel posto giusto?</h1>
-          <p className="mk-lead">
-            Otto domande, quattro cristalli e Iki che ti accompagna. Vedi subito cosa manca nel tuo ikigai e
-            ricevi missioni concrete per colmarlo.
-          </p>
-          <PreForm id="pre" />
+          <p className="mk-eyebrow">{t.eyebrow}</p>
+          <h1>{t.h1}</h1>
+          <p className="mk-lead">{t.lead}</p>
+          {t.langNote && <p className="mk-langnote">{t.langNote}</p>}
+          <PreForm id="pre" f={t.form} />
         </div>
-        <div className="mk-phone" aria-label="Video di presentazione di Mappa Ikigai">
+        <div className="mk-phone" aria-label={t.video}>
           <video src="/ikigai/reel.mp4" poster="/ikigai/poster.jpg" controls playsInline preload="metadata" />
         </div>
       </section>
 
       <section className="mk-section">
-        <p className="mk-eyebrow">COME FUNZIONA</p>
-        <h2>Una conversazione che diventa una mappa</h2>
+        <p className="mk-eyebrow">{t.howEyebrow}</p>
+        <h2>{t.howH2}</h2>
         <div className="mk-steps">
-          {steps.map((s) => (
+          {t.steps.map((s) => (
             <article key={s.n} className="mk-step">
               <img src={s.img} alt={s.h} loading="lazy" width="1600" height="1000" />
               <span>{s.n}</span>
@@ -158,42 +222,35 @@ export default function IkigaiLanding() {
 
       <section className="mk-section mk-ikigai">
         <div>
-          <p className="mk-eyebrow">COS&apos;È L&apos;IKIGAI</p>
-          <h2>Il motivo per cui ti alzi la mattina</h2>
-          <p>
-            Ikigai è una parola giapponese che indica, più o meno, ciò che dà senso alle tue giornate. La versione
-            più diffusa lo disegna come l&apos;incontro di quattro cerchi: è una rielaborazione occidentale, ma è un
-            ottimo strumento per farsi le domande giuste. In Mappa Ikigai ogni cerchio è un cristallo.
-          </p>
+          <p className="mk-eyebrow">{t.whatEyebrow}</p>
+          <h2>{t.whatH2}</h2>
+          <p>{t.whatP}</p>
         </div>
         <ul className="mk-circles">
-          {circles.map((c) => (
-            <li key={c.t}><i style={{ background: c.c }} />{c.t}</li>
+          {t.circles.map((label, i) => (
+            <li key={label}><i style={{ background: CIRCLE_COLORS[i] }} />{label}</li>
           ))}
         </ul>
       </section>
 
       <section className="mk-section mk-iki">
-        <img src="/ikigai/iki.png" alt="Iki, la mascotte di Mappa Ikigai" width="200" height="218" loading="lazy" />
+        <img src="/ikigai/iki.png" alt={t.ikiAlt} width="200" height="218" loading="lazy" />
         <div>
-          <h2>Ti accompagna Iki</h2>
-          <p>
-            Un piccolo spirito con quattro cristalli in testa. Fa le domande, ascolta le risposte e ti propone le
-            missioni. È curioso, gentile e un po&apos; permaloso: chiamarli &quot;gemme&quot; non è una buona idea.
-          </p>
+          <h2>{t.ikiH2}</h2>
+          <p>{t.ikiP}</p>
         </div>
       </section>
 
       <section className="mk-section mk-final">
-        <h2>Vuoi provarla tra i primi?</h2>
-        <PreForm id="pre-2" />
+        <h2>{t.finalH2}</h2>
+        <PreForm id="pre-2" f={t.form} />
       </section>
 
       <footer className="mk-foot">
         <p>
-          Mappa Ikigai è ideata e sviluppata da <Link href="/">David Cappelletto</Link> ·{" "}
-          <Link href="/progetti/mappa-ikigai">Il progetto</Link> ·{" "}
-          <a href="/ikigai/app">Hai un codice d&apos;invito? Entra</a> ·{" "}
+          {t.footBy} <Link href="/">David Cappelletto</Link> ·{" "}
+          <Link href="/progetti/mappa-ikigai">{t.footProject}</Link> ·{" "}
+          <a href="/ikigai/app">{t.footCode}</a> ·{" "}
           <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
         </p>
       </footer>
@@ -206,6 +263,11 @@ export default function IkigaiLanding() {
         .mk>*{position:relative}
         .mk-top{display:flex;justify-content:space-between;align-items:center;width:min(1160px,92vw);margin:0 auto;padding:22px 0}
         .mk-home{display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none;font-weight:700;font-size:19px;letter-spacing:-.02em}.mk-home img{width:40px;height:auto;filter:drop-shadow(0 0 12px rgba(185,194,255,.45))}.mk-home b{font-weight:800;color:var(--lilac)}
+        .mk-top-right{display:flex;align-items:center;gap:12px}
+        .mk-lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px}
+        .mk-lang button{font:inherit;font-size:12px;font-weight:700;border:0;border-radius:999px;padding:6px 10px;background:transparent;color:var(--muted);cursor:pointer}
+        .mk-lang button[aria-pressed="true"]{background:var(--fg);color:#14131C}
+        .mk-langnote{margin:-14px 0 22px;color:var(--lilac);font-size:14px}
         .mk-top-cta{color:#14131C;background:var(--cta);text-decoration:none;font-weight:800;font-size:13px;padding:9px 14px;border-radius:999px}
         .mk-hero{width:min(1160px,92vw);margin:0 auto;padding:24px 0 72px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
         .mk-eyebrow{margin:0 0 14px;color:var(--lilac);font-size:12px;font-weight:800;letter-spacing:.16em}

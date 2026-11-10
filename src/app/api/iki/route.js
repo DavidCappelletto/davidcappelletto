@@ -100,20 +100,37 @@ function store() {
         storeKind = "blobs";
         return s;
       })
-      .catch(() => null);
+      .catch((e) => {
+        storeProblem = `apertura: ${e?.name || "errore"} ${String(e?.message || "").slice(0, 120)}`;
+        return null;
+      });
   }
   return storePromise;
 }
 const memQuota = new Map();
+let storeProblem = null;
+// L'archivio non deve mai tenere in attesa la persona: oltre il tempo limite si va avanti con la memoria.
+function inTime(promise, ms = 2500) {
+  let timer;
+  const late = new Promise((_, rej) => {
+    timer = setTimeout(() => rej(Object.assign(new Error("tempo scaduto"), { name: "Timeout" })), ms);
+  });
+  return Promise.race([promise, late]).finally(() => clearTimeout(timer));
+}
+function storeFailed(what, e) {
+  storeProblem = `${what}: ${e?.name || "errore"} ${String(e?.message || "").slice(0, 120)}`;
+  console.error(`[iki] archivio in ${storeProblem}`);
+  storeKind = "memoria";
+  storePromise = Promise.resolve(null); // per questa istanza si resta sulla memoria
+}
 async function readCount(key) {
   const s = await store();
   if (s) {
     try {
-      const v = await s.get(key, { type: "json" });
+      const v = await inTime(s.get(key, { type: "json" }));
       return Number(v?.n) || 0;
     } catch (e) {
-      console.error(`[iki] archivio in lettura: ${e?.name || e}`);
-      storeKind = "memoria";
+      storeFailed("lettura", e);
     }
   }
   return memQuota.get(key) || 0;
@@ -123,10 +140,9 @@ async function writeCount(key, n) {
   const s = await store();
   if (!s) return;
   try {
-    await s.setJSON(key, { n, ultimo: today() });
+    await inTime(s.setJSON(key, { n, ultimo: today() }));
   } catch (e) {
-    console.error(`[iki] archivio in scrittura: ${e?.name || e}`);
-    storeKind = "memoria";
+    storeFailed("scrittura", e);
   }
 }
 function personKey(code, device, who) {
@@ -340,17 +356,17 @@ export async function GET(req) {
   if (!codes.includes(code)) return bad("invite_invalid", 403);
   const t0 = Date.now();
   if (!(bump(`${today()}:ip:${clientId(req)}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
+  const mese = await readCount(monthKey());
   const t1 = Date.now();
   try {
     const t = await claude({ messages: [{ role: "user", content: "Rispondi solo con la parola: ok" }], maxTokens: 5, temperature: 0 });
     const tempi = { contatori_ms: t1 - t0, claude_ms: Date.now() - t1 };
     console.log(`[iki] prova ok: ${JSON.stringify(tempi)} ${workingModel}`);
-    const mese = await readCount(monthKey());
     return Response.json(
-      { ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, archivio: storeKind, mese: { usate: mese, tetto: LIMITS.month }, persona: { tetto: LIMITS.person } },
+      { ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, archivio: storeKind, problemaArchivio: storeProblem, mese: { usate: mese, tetto: LIMITS.month }, persona: { tetto: LIMITS.person } },
       { headers: h }
     );
   } catch (e) {
-    return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY }, { headers: h });
+    return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY, archivio: storeKind, problemaArchivio: storeProblem }, { headers: h });
   }
 }

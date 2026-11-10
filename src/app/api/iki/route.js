@@ -16,6 +16,8 @@ const LIMITS = {
   ipPerDay: Number(process.env.IKIGAI_LIMIT_IP_DAY || 150), // chiamate a Claude per persona al giorno
   allPerDay: Number(process.env.IKIGAI_LIMIT_DAY || 4000), // tetto giornaliero complessivo
   checksPerDay: 40, // tentativi di codice per persona al giorno
+  person: Number(process.env.IKIGAI_LIMIT_PERSONA || 120), // chiamate a Claude per persona, a vita
+  month: Number(process.env.IKIGAI_LIMIT_MESE || 3000), // tetto mensile complessivo
 };
 
 const PERSONA =
@@ -81,6 +83,65 @@ function bump(key, max) {
 }
 function today() {
   return new Date().toISOString().slice(0, 10);
+}
+
+/* ---------- tetti che durano ----------
+   Il tetto a vita per persona e quello mensile stanno su Netlify Blobs, così non si azzerano
+   quando la funzione riparte. Si conserva solo un contatore legato a un'impronta, mai testi o indirizzi.
+   Se l'archivio non è raggiungibile (per esempio in locale) si ripiega su contatori in memoria:
+   meglio un limite meno preciso che un'app bloccata. */
+let storePromise = null;
+let storeKind = "memoria";
+function store() {
+  if (!storePromise) {
+    storePromise = import("@netlify/blobs")
+      .then((m) => {
+        const s = m.getStore({ name: "mappa-ikigai", consistency: "strong" });
+        storeKind = "blobs";
+        return s;
+      })
+      .catch(() => null);
+  }
+  return storePromise;
+}
+const memQuota = new Map();
+async function readCount(key) {
+  const s = await store();
+  if (s) {
+    try {
+      const v = await s.get(key, { type: "json" });
+      return Number(v?.n) || 0;
+    } catch (e) {
+      console.error(`[iki] archivio in lettura: ${e?.name || e}`);
+      storeKind = "memoria";
+    }
+  }
+  return memQuota.get(key) || 0;
+}
+async function writeCount(key, n) {
+  memQuota.set(key, n);
+  const s = await store();
+  if (!s) return;
+  try {
+    await s.setJSON(key, { n, ultimo: today() });
+  } catch (e) {
+    console.error(`[iki] archivio in scrittura: ${e?.name || e}`);
+    storeKind = "memoria";
+  }
+}
+function personKey(code, device, who) {
+  const dev = typeof device === "string" && /^[a-zA-Z0-9-]{16,64}$/.test(device) ? device : who;
+  return "persona/" + createHash("sha256").update(`mappa-ikigai:persona:${code}:${dev}`).digest("hex").slice(0, 32);
+}
+function monthKey() {
+  return "mese/" + today().slice(0, 7);
+}
+// Dice se la persona può ancora parlare con Claude; il consumo si registra solo a chiamata riuscita.
+async function quota(pKey) {
+  const mKey = monthKey();
+  const [p, m] = await Promise.all([readCount(pKey), readCount(mKey)]);
+  const stop = m >= LIMITS.month ? "quota_month" : p >= LIMITS.person ? "quota_person" : null;
+  return { stop, spend: () => Promise.all([writeCount(pKey, p + 1), writeCount(mKey, m + 1)]) };
 }
 
 /* ---------- Claude ---------- */
@@ -252,9 +313,12 @@ export async function POST(req) {
   if (!codes.includes(code)) return bad("invite_invalid", 403);
   if (!(bump(`${day}:ip:${who}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
   if (!(bump(`${day}:tutti`, LIMITS.allPerDay))) return bad("rate_limited", 429);
+  const q = await quota(personKey(code, body?.device, who));
+  if (q.stop) return bad(q.stop, 429);
 
   try {
     const result = await TASKS[task](body.data || {});
+    await q.spend();
     return Response.json({ result }, { headers: { "Cache-Control": "no-store" } });
   } catch (e) {
     const c = e?.code || "busy";
@@ -265,7 +329,8 @@ export async function POST(req) {
 }
 
 // Controllo di salute: senza parametri dice solo che il servizio c'è.
-// Con ?prova=CODICE fa una chiamata minima a Claude e riporta il modello in uso (conta nei limiti).
+// Con ?prova=CODICE fa una chiamata minima a Claude e riporta il modello in uso, dove stanno i contatori
+// (archivio: "blobs" se durano, "memoria" se no) e quante chiamate sono state usate nel mese.
 export async function GET(req) {
   const h = { "Cache-Control": "no-store" };
   const code = normCode(new URL(req.url).searchParams.get("prova"));
@@ -280,7 +345,11 @@ export async function GET(req) {
     const t = await claude({ messages: [{ role: "user", content: "Rispondi solo con la parola: ok" }], maxTokens: 5, temperature: 0 });
     const tempi = { contatori_ms: t1 - t0, claude_ms: Date.now() - t1 };
     console.log(`[iki] prova ok: ${JSON.stringify(tempi)} ${workingModel}`);
-    return Response.json({ ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi }, { headers: h });
+    const mese = await readCount(monthKey());
+    return Response.json(
+      { ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, archivio: storeKind, mese: { usate: mese, tetto: LIMITS.month }, persona: { tetto: LIMITS.person } },
+      { headers: h }
+    );
   } catch (e) {
     return Response.json({ ok: false, errore: e?.code || "busy", problema: lastProblem, chiave: !!process.env.IKIGAI_ANTHROPIC_KEY }, { headers: h });
   }

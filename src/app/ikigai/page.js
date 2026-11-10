@@ -1,10 +1,11 @@
 import IkigaiLanding from "./_landing";
+import { alternatesFor } from "../i18n";
 
 export const metadata = {
   title: "Mappa Ikigai: pre-registrati | David Cappelletto",
   description:
     "Otto domande, quattro cristalli e Iki che ti accompagna: scopri cosa manca nel tuo ikigai. Mappa Ikigai è in arrivo, pre-registrati per provarla tra i primi.",
-  alternates: { canonical: "/ikigai" },
+  alternates: alternatesFor("/ikigai", "it"),
   openGraph: {
     title: "Mappa Ikigai: in arrivo",
     description: "Le tue energie vanno nel posto giusto? Pre-registrati per provare Mappa Ikigai tra i primi.",

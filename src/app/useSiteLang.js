@@ -1,62 +1,31 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-
-const KEY = "dc-lang";
-const EVENT = "dc-lang-change";
-
-function readStored() {
-  try {
-    const v = window.localStorage.getItem(KEY);
-    return v === "en" || v === "it" ? v : null;
-  } catch {
-    return null;
-  }
-}
+import { useCallback, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { langFromPath, switchPath } from "./i18n";
 
 /**
- * Lingua del sito condivisa tra tutte le pagine.
- * Ordine: ?lang=en|it nell'URL, poi la scelta salvata, poi italiano.
+ * La lingua dipende dall'indirizzo: /en/... è inglese, il resto italiano.
+ * Così ogni pagina arriva già tradotta dal server, senza cambi dopo il caricamento.
+ * setLang porta alla stessa pagina nell'altra lingua.
  */
 export function useSiteLang() {
-  const [lang, setLangState] = useState("it");
-
-  useEffect(() => {
-    let initial = null;
-    try {
-      const q = new URLSearchParams(window.location.search).get("lang");
-      if (q === "en" || q === "it") initial = q;
-    } catch {}
-    initial = initial || readStored() || "it";
-    if (initial !== "it") setLangState(initial);
-    try {
-      window.localStorage.setItem(KEY, initial);
-    } catch {}
-
-    const onChange = (e) => setLangState(e.detail);
-    const onStorage = (e) => {
-      if (e.key === KEY && (e.newValue === "it" || e.newValue === "en")) setLangState(e.newValue);
-    };
-    window.addEventListener(EVENT, onChange);
-    window.addEventListener("storage", onStorage);
-    return () => {
-      window.removeEventListener(EVENT, onChange);
-      window.removeEventListener("storage", onStorage);
-    };
-  }, []);
+  const pathname = usePathname() || "/";
+  const router = useRouter();
+  const lang = langFromPath(pathname);
 
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  const setLang = useCallback((next) => {
-    if (next !== "it" && next !== "en") return;
-    try {
-      window.localStorage.setItem(KEY, next);
-    } catch {}
-    setLangState(next);
-    window.dispatchEvent(new CustomEvent(EVENT, { detail: next }));
-  }, []);
+  const setLang = useCallback(
+    (next) => {
+      if (next === lang || (next !== "it" && next !== "en")) return;
+      const hash = typeof window !== "undefined" ? window.location.hash : "";
+      router.push(switchPath(pathname, next) + hash);
+    },
+    [lang, pathname, router]
+  );
 
   return [lang, setLang];
 }

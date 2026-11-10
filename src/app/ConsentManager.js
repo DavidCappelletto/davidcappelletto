@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Clarity from "@microsoft/clarity";
 import { useSiteLang } from "./useSiteLang";
+import { localePath } from "./i18n";
 
 const CONSENT_KEY = "dc_analytics_consent";
 const GA_ID = "G-MBWPX09G1C";
@@ -97,7 +98,7 @@ export default function ConsentManager() {
       <p style={{ margin: 0, color: "#4A5F78", fontSize: 13.5, lineHeight: 1.55 }}>
         {c.text}{" "}
         <a
-          href="/privacy"
+          href={localePath("/privacy", lang)}
           style={{ color: "#1E7E73" }}
         >
           Privacy Policy

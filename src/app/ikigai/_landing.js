@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSiteLang } from "../useSiteLang";
+import { localePath } from "../i18n";
 
-const PRIVACY = "/privacy";
 
 const COPY = {
   it: {
@@ -95,7 +95,7 @@ function encode(data) {
   return Object.keys(data).map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k])).join("&");
 }
 
-function PreForm({ id, f: tf }) {
+function PreForm({ id, f: tf, lang }) {
   const [state, setState] = useState("idle");
 
   function fonteVisita() {
@@ -163,7 +163,7 @@ function PreForm({ id, f: tf }) {
         <input name="consenso" type="checkbox" required />
         <span>
           {tf.consentA}{" "}
-          <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+          <a href={localePath("/privacy", lang)} target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
         </span>
       </label>
       <button type="submit" disabled={state === "sending"}>
@@ -198,7 +198,7 @@ export default function IkigaiLanding() {
           <h1>{t.h1}</h1>
           <p className="mk-lead">{t.lead}</p>
           {t.langNote && <p className="mk-langnote">{t.langNote}</p>}
-          <PreForm id="pre" f={t.form} />
+          <PreForm id="pre" f={t.form} lang={lang} />
         </div>
         <div className="mk-phone" aria-label={t.video}>
           <video src="/ikigai/reel.mp4" poster="/ikigai/poster.jpg" controls playsInline preload="metadata" />
@@ -243,15 +243,15 @@ export default function IkigaiLanding() {
 
       <section className="mk-section mk-final">
         <h2>{t.finalH2}</h2>
-        <PreForm id="pre-2" f={t.form} />
+        <PreForm id="pre-2" f={t.form} lang={lang} />
       </section>
 
       <footer className="mk-foot">
         <p>
-          {t.footBy} <Link href="/">David Cappelletto</Link> ·{" "}
-          <Link href="/progetti/mappa-ikigai">{t.footProject}</Link> ·{" "}
+          {t.footBy} <Link href={localePath("/", lang)}>David Cappelletto</Link> ·{" "}
+          <Link href={localePath("/progetti/mappa-ikigai", lang)}>{t.footProject}</Link> ·{" "}
           <a href="/ikigai/app">{t.footCode}</a> ·{" "}
-          <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          <a href={localePath("/privacy", lang)} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
         </p>
       </footer>
 

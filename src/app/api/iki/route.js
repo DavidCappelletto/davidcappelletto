@@ -101,7 +101,10 @@ function store() {
     const consistency = STORE_MODES[storeMode];
     storePromise = import("@netlify/blobs")
       .then((m) => {
-        const s = m.getStore({ name: "mappa-ikigai", consistency });
+        // Next modifica fetch per la sua cache: all'archivio si passa quello originale, senza cache.
+        const plain = globalThis._nextOriginalFetch || globalThis.fetch?._nextOriginalFetch || globalThis.fetch;
+        const direct = (input, init) => plain(input, { ...init, cache: "no-store" });
+        const s = m.getStore({ name: "mappa-ikigai", consistency, fetch: direct });
         storeKind = "blobs-" + consistency;
         return s;
       })

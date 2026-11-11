@@ -133,6 +133,7 @@ body{background:var(--bg);color:var(--star);font-family:var(--comic);font-size:1
 .help p{margin:0;color:#D6D9EB;font-size:15.5px;line-height:1.5}
 .help h3{margin-top:4px}
 .ver{margin:6px 0 0;font-size:12px;color:var(--muted);text-align:center}
+.ver a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}.ver a:hover,.ver a:focus-visible{color:var(--star)}
 
 /* preferenze di lettura e movimento */
 html.big .balloon{font-size:22px}html.big .chip{font-size:17px}html.big #input{font-size:18px}html.big .result{font-size:17px}
@@ -1613,6 +1614,8 @@ function renderMenu(){
   b.appendChild(acts2);
   b.appendChild(el("p","fine","Risposte, missioni e opzioni restano salvate solo in questo browser. Per l'analisi e la chat il testo passa dal server di Mappa Ikigai a Claude (Anthropic) e non viene conservato: resta solo un contatore anonimo delle chiacchierate usate."));
   b.appendChild(el("p","ver","Mappa Ikigai · versione 1.0"));
+  /* firma: unico rimando all'autore, niente donazioni né pagamenti */
+  var by=el("p","ver","Ideata e costruita da ");var bya=el("a",null,"David Cappelletto");bya.href="https://davidcappelletto.it/";bya.target="_blank";bya.rel="noopener";by.appendChild(bya);b.appendChild(by);
 }
 
 /* ===================== immagine da salvare ===================== */
@@ -1643,7 +1646,7 @@ async function saveImage(btn,toast){
       x.fillStyle="#ECEEF8";x.font='700 32px "Baloo 2", sans-serif';x.fillText(z.nome,X+42,Y);
       x.fillStyle=STC[st];x.font='800 26px "Baloo 2", sans-serif';x.fillText(LAB[st],X+250,Y);
     });
-    x.fillStyle="#7E84A3";x.font='600 24px "Baloo 2", sans-serif';x.fillText("Creato con Iki · Mappa Ikigai",80,1316);
+    x.fillStyle="#7E84A3";x.font='600 24px "Baloo 2", sans-serif';x.fillText("Creato con Iki · Mappa Ikigai · davidcappelletto.it/ikigai",80,1316);
     var blob=await new Promise(function(res){c.toBlob(res,"image/png");});
     if(!blob)throw {code:"bad_request"};
     await downloadsApi.save({filename:"cristallo-ikigai.png",data:blob});

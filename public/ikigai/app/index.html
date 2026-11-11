@@ -343,9 +343,9 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
         <h3>Le missioni</h3>
         <p>Sono azioni concrete. Quando ne completi una e la spunti in Percorso, il suo frammento si avvicina al centro e i cristalli collegati diventano più luminosi.</p>
         <h3>Parlare con Iki</h3>
-        <p>Il test, i cristalli e le missioni funzionano per tutti. Con un codice d'invito Iki usa anche Claude, un modello di intelligenza artificiale di Anthropic, per leggere le risposte scritte con parole tue, preparare missioni su misura e chiacchierare con te. Le chiacchierate incluse nell'invito sono limitate: quando finiscono, il percorso continua con i consigli già pronti. Se vuoi parlargli a voce, usa il microfono della tastiera del telefono.</p>
+        <p>Mappa Ikigai è gratuita. Iki usa Claude, un modello di intelligenza artificiale di Anthropic, per leggere le risposte scritte con parole tue, preparare missioni su misura e chiacchierare con te. Le chiacchierate incluse sono limitate: quando finiscono, il percorso continua con i consigli già pronti e, se vuoi andare avanti, puoi <a href="https://davidcappelletto.it/#contatti" target="_blank" rel="noopener" style="color:#B9C2FF">scrivere a David</a>, che ti manda un codice gratuito. Se vuoi parlargli a voce, usa il microfono della tastiera del telefono.</p>
         <h3>I tuoi dati</h3>
-        <p>Risposte, missioni e opzioni restano salvate solo in questo browser. Se usi un codice d'invito, per l'analisi e la chat il testo che serve passa dal server di Mappa Ikigai a Claude (Anthropic) e non viene conservato: resta solo un contatore anonimo delle chiacchierate usate. Non scrivere dati sensibili. Puoi cancellare tutto dal menu Opzioni. <a href="https://www.iubenda.com/privacy-policy/65493035" target="_blank" rel="noopener" style="color:#B9C2FF">Privacy Policy</a></p>
+        <p>Risposte, missioni e opzioni restano salvate solo in questo browser. Per l'analisi e la chat il testo che serve passa dal server di Mappa Ikigai a Claude (Anthropic) e non viene conservato: resta solo un contatore anonimo delle chiacchierate usate. Non scrivere dati sensibili. Puoi cancellare tutto dal menu Opzioni. <a href="https://www.iubenda.com/privacy-policy/65493035" target="_blank" rel="noopener" style="color:#B9C2FF">Privacy Policy</a></p>
       </div>
     </div>
   </section>
@@ -952,12 +952,18 @@ var INV_KEY="mappa-ikigai-invito",DEV_KEY="mappa-ikigai-dispositivo",API_URL="/a
 var deviceId="";
 try{deviceId=localStorage.getItem(DEV_KEY)||"";if(!/^[a-zA-Z0-9-]{16,64}$/.test(deviceId)){deviceId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"d-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,14)+Math.random().toString(36).slice(2,14);localStorage.setItem(DEV_KEY,deviceId);}}catch(e){}
 function aiErr(c){var e=new Error(c);e.code=c;return e;}
+/* Conteggio delle chiacchierate anche sul dispositivo: quello del server riparte quando la funzione si riavvia */
+var USE_KEY="mappa-ikigai-uso",CONTACT_URL="https://davidcappelletto.it/#contatti";
+function useRead(code){try{var u=JSON.parse(localStorage.getItem(USE_KEY)||"{}")[code||"-"];return u&&typeof u.n==="number"?u:{n:0,max:0};}catch(e){return {n:0,max:0};}}
+function useAdd(code,max){try{var all=JSON.parse(localStorage.getItem(USE_KEY)||"{}"),u=all[code||"-"]||{n:0,max:0};u.n=(u.n||0)+1;if(max>0)u.max=max;all[code||"-"]=u;localStorage.setItem(USE_KEY,JSON.stringify(all));}catch(e){}}
 async function apiCall(task,code,data){
   var r,j=null;
+  if(task!=="check"){var u=useRead(code);if(u.max>0&&u.n>=u.max)throw aiErr("quota_person");}
   try{r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({task:task,code:code,device:deviceId,data:data||{}})});}
   catch(e){throw aiErr("network");}
   try{j=await r.json();}catch(e){}
   if(!r.ok||!j||j.error)throw aiErr((j&&j.error)||("http_"+r.status));
+  if(task!=="check")useAdd(code,Number(j.tetto)||0);
   return j.result;
 }
 /* Iki ragiona con Claude attraverso la funzione del sito: l'app manda dati, i prompt stanno sul server */
@@ -966,9 +972,10 @@ downloadsApi={save:function(o){return new Promise(function(res){
   var u=URL.createObjectURL(o.data),a=document.createElement("a");a.href=u;a.download=o.filename||"immagine.png";
   document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove();res();},400);
 });}};
-/* Il percorso funziona per tutti senza Claude. Con un codice d'invito Iki legge le risposte libere,
-   scrive missioni su misura e chiacchiera. Se Claude non è più disponibile (codice non valido,
-   chiacchierate incluse finite, budget del mese finito) si torna ai consigli già pronti senza rompere nulla. */
+/* Iki con Claude è gratis e aperto a tutti: legge le risposte libere, scrive missioni su misura e chiacchiera,
+   con un numero di chiacchierate incluse a persona. Quando finiscono Iki invita a scrivere a David, che può
+   mandare un codice per continuare (sempre gratis). Se Claude non è disponibile (chiacchierate finite,
+   budget del mese finito) si torna ai consigli già pronti senza rompere nulla. */
 var HARD_STOP=["invite_invalid","not_configured","no_credit","quota_person","quota_month"];
 var aiWhy="";
 function aiDrop(e){
@@ -978,10 +985,10 @@ function aiDrop(e){
   return true;
 }
 function whyLine(){
-  if(aiWhy==="quota_person")return "Abbiamo usato tutte le chiacchierate incluse nel tuo invito. Il tuo cristallo e le missioni restano qui, e puoi continuare il percorso.";
+  if(aiWhy==="quota_person")return "Abbiamo usato tutte le chiacchierate incluse. Il tuo cristallo e le missioni restano qui. Se vuoi continuare a parlare con me, scrivi a David: è gratis, ti manda un codice per andare avanti.";
   if(aiWhy==="invite_invalid")return "Il tuo codice d'invito non è più valido, quindi per ora non posso chiacchierare. Il percorso continua lo stesso con i consigli già pronti.";
   if(aiWhy)return "Per questo mese ho finito le energie per chiacchierare. Il percorso continua lo stesso: il tuo cristallo resta salvato qui.";
-  return "Per chiacchierare con me serve un codice d'invito: se ce l'hai, inseriscilo dal menu in alto. Intanto il tuo cristallo resta salvato qui.";
+  return "In questo momento non riesco a chiacchierare. Il percorso continua lo stesso: il tuo cristallo resta salvato qui.";
 }
 
 /* ===================== utilità ===================== */
@@ -1599,12 +1606,12 @@ function renderMenu(){
   var help=el("button","btn","Come funziona");help.type="button";help.onclick=function(){openSheet("helpSheet");};
   var acts2=el("div","actions");acts2.appendChild(help);
   if(!sampleFn&&mode==="chat"){
-    var inv=el("button","btn","Ho un codice d'invito");inv.type="button";
+    var inv=el("button","btn","Ho un codice");inv.type="button";
     inv.onclick=function(){if(busy)return;closeSheet("menuSheet");busy=true;clearAnswers();hideComposer();enterCode().then(function(){busy=false;chatMode();});};
     acts2.appendChild(inv);
   }
   b.appendChild(acts2);
-  b.appendChild(el("p","fine","Risposte, missioni e opzioni restano salvate solo in questo browser. Se hai un codice d'invito, per l'analisi e la chat il testo passa dal server di Mappa Ikigai a Claude (Anthropic) e non viene conservato: resta solo un contatore anonimo delle chiacchierate usate."));
+  b.appendChild(el("p","fine","Risposte, missioni e opzioni restano salvate solo in questo browser. Per l'analisi e la chat il testo passa dal server di Mappa Ikigai a Claude (Anthropic) e non viene conservato: resta solo un contatore anonimo delle chiacchierate usate."));
   b.appendChild(el("p","ver","Mappa Ikigai · versione 1.0"));
 }
 
@@ -1753,6 +1760,10 @@ function chatMode(){
     var q1=weak?"Come faccio rientrare il frammento "+ZONES[w].nome+"?":"Come tengo il cristallo allineato?";
     add(weak?"Rinforza "+ZONES[w].nome:"Tienilo allineato",function(){chatSend(q1);},"go");
     add("Nuove missioni",function(){chatSend("Dammi nuove missioni");});
+  }else if(aiWhy==="quota_person"){
+    /* chiacchierate incluse finite: contatto diretto con David, oppure il codice che ha mandato */
+    add("Scrivi a David",function(){try{window.open(CONTACT_URL,"_blank","noopener");}catch(e){location.href=CONTACT_URL;}},"go");
+    add("Ho un codice",function(){busy=true;clearAnswers();hideComposer();enterCode().then(function(){busy=false;chatMode();});});
   }else{
     add("Esplora i cristalli",exploreMenu,"go");
     add("Apri il percorso",function(){pathBtn.click();});
@@ -1886,7 +1897,7 @@ function askCode(){
     clearAnswers();
     var n=chip("Lascia stare","ghost");n.onclick=function(){clearAnswers();hideComposer();input.removeAttribute("autocapitalize");meSay("Lascia stare");res(null);};
     answers.appendChild(n);
-    showComposer("Codice d'invito…");input.oninput=null;input.setAttribute("autocapitalize","characters");input.setAttribute("autocomplete","off");
+    showComposer("Codice…");input.oninput=null;input.setAttribute("autocapitalize","characters");input.setAttribute("autocomplete","off");
     setTimeout(function(){try{input.focus({preventScroll:true});}catch(_){}},60);
     pendingText=function(v){clearAnswers();hideComposer();input.removeAttribute("autocapitalize");meSay(v.toUpperCase());res(v.trim());};
   });
@@ -1896,7 +1907,7 @@ async function acceptCode(v){
   try{localStorage.setItem(INV_KEY,v);}catch(e){}
   sampleFn=makeAI(v);aiWhy="";
 }
-/* L'app è aperta a tutti. Il codice d'invito (salvato, o nel link come ?codice=…) accende Iki con Claude */
+/* L'app e Iki con Claude sono aperti a tutti. Un codice (salvato, o nel link come ?codice=…) dà più chiacchierate */
 async function gate(){
   var saved="",linked="";
   try{saved=localStorage.getItem(INV_KEY)||"";}catch(e){}
@@ -1910,17 +1921,18 @@ async function gate(){
       if(tries[i]===saved&&e.code==="invite_invalid"){try{localStorage.removeItem(INV_KEY);}catch(_){}}
     }
   }
+  sampleFn=makeAI("");
 }
 /* Inserimento del codice a mano: dalla schermata iniziale o dal menu */
 async function enterCode(){
-  await say("Scrivi qui sotto il codice d'invito che hai ricevuto.",{keep:true});
+  await say("Scrivi qui sotto il codice che ti ha mandato David.",{keep:true});
   while(true){
     var v=await askCode();
     if(v===null)return false;
     var t=thinking();
     try{
       await acceptCode(v);await dismiss(t);
-      await say("Perfetto! Da adesso posso leggere le tue parole e chiacchierare con te.",{mood:"happy"});
+      await say("Perfetto! Possiamo continuare a chiacchierare.",{mood:"happy"});
       return true;
     }catch(e){
       await dismiss(t);iki(null);
@@ -1938,10 +1950,8 @@ async function boot(){
   await say(saved?"Bentornato! Il tuo cristallo ti aspetta.":"Ciao! Sono Iki. Ti accompagno a scoprire dove si incontrano le cose che contano per te.",{keep:true,gesture:"wave",hold:true});
   while(true){
     var opts=saved?["Riprendi il mio cristallo","Ricomincia da capo","Come funziona"]:["Iniziamo","Come funziona"];
-    if(!sampleFn)opts.push("Ho un codice d'invito");
     var c=await choose(opts);
     if(c==="Come funziona"){openSheet("helpSheet");continue;}
-    if(c==="Ho un codice d'invito"){await enterCode();await say("Cosa facciamo?",{keep:true});continue;}
     if(c==="Iniziamo")return newTest();
     if(c==="Riprendi il mio cristallo")return resume();
     await say("Sicuro? Il cristallo che hai adesso andrà perso.",{keep:true});

@@ -80,7 +80,7 @@ function PreForm({ id }) {
         <img src="/ikigai/iki.png" alt="" width="88" height="96" />
         <div>
           <strong>Ci sei!</strong>
-          <p>Ti scrivo appena ho un codice d&apos;invito per te. Nel frattempo puoi già fare il percorso: <a href="/ikigai/app">apri Mappa Ikigai</a>.</p>
+          <p>Ti scrivo con un codice per continuare a chiacchierare con Iki. Intanto l&apos;app è già aperta: <a href="/ikigai/app">apri Mappa Ikigai</a>.</p>
         </div>
       </div>
     );
@@ -88,8 +88,8 @@ function PreForm({ id }) {
 
   return (
     <form className="mk-form" id={id} onSubmit={onSubmit} name="preregistrazione-ikigai">
-      <p className="mk-form-title">Vuoi anche chiacchierare con Iki?</p>
-      <p className="mk-form-sub">Il percorso è aperto a tutti. La chat con Iki, che legge le tue parole e scrive missioni su misura, è a inviti: lascia l&apos;email e ti mando un codice.</p>
+      <p className="mk-form-title">Vuoi più chiacchierate con Iki?</p>
+      <p className="mk-form-sub">Mappa Ikigai è gratuita e aperta a tutti, chat con Iki compresa. Le chiacchierate incluse sono limitate: se le finisci, lascia l&apos;email e ti mando un codice per continuare, sempre gratis.</p>
       <input type="hidden" name="form-name" value="preregistrazione-ikigai" />
       <p className="mk-hp" aria-hidden="true">
         <label>Non compilare<input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
@@ -105,7 +105,7 @@ function PreForm({ id }) {
       <label className="mk-check">
         <input name="consenso" type="checkbox" required />
         <span>
-          Accetto di ricevere un&apos;email con il codice d&apos;invito di Mappa Ikigai e ho letto la{" "}
+          Accetto di ricevere un&apos;email con il codice di Mappa Ikigai e ho letto la{" "}
           <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
         </span>
       </label>

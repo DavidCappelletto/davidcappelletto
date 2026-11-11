@@ -16,7 +16,8 @@ const LIMITS = {
   ipPerDay: Number(process.env.IKIGAI_LIMIT_IP_DAY || 150), // chiamate a Claude per persona al giorno
   allPerDay: Number(process.env.IKIGAI_LIMIT_DAY || 4000), // tetto giornaliero complessivo
   checksPerDay: 40, // tentativi di codice per persona al giorno
-  person: Number(process.env.IKIGAI_LIMIT_PERSONA || 120), // chiamate a Claude per persona (codice + dispositivo)
+  person: Number(process.env.IKIGAI_LIMIT_PERSONA || 120), // chiamate a Claude per chi ha un codice (codice + dispositivo)
+  open: Number(process.env.IKIGAI_LIMIT_APERTO || 60), // chiamate a Claude gratuite per chi entra senza codice (dispositivo)
   month: Number(process.env.IKIGAI_LIMIT_MESE || 3000), // tetto mensile complessivo
 };
 
@@ -105,11 +106,11 @@ function monthKey() {
   return "mese/" + today().slice(0, 7);
 }
 // Dice se la persona può ancora parlare con Claude; il consumo si registra solo a chiamata riuscita.
-async function quota(pKey) {
+async function quota(pKey, max) {
   const mKey = monthKey();
   const [p, m] = await Promise.all([readCount(pKey), readCount(mKey)]);
-  const stop = m >= LIMITS.month ? "quota_month" : p >= LIMITS.person ? "quota_person" : null;
-  return { stop, spend: () => Promise.all([writeCount(pKey, p + 1), writeCount(mKey, m + 1)]) };
+  const stop = m >= LIMITS.month ? "quota_month" : p >= max ? "quota_person" : null;
+  return { stop, max, spend: () => Promise.all([writeCount(pKey, p + 1), writeCount(mKey, m + 1)]) };
 }
 
 /* ---------- Claude ---------- */
@@ -276,18 +277,18 @@ export async function POST(req) {
   }
 
   if (!Object.hasOwn(TASKS, task)) return bad("bad_request");
-  const codes = validCodes();
-  if (!codes.length) return bad("not_configured", 503);
-  if (!codes.includes(code)) return bad("invite_invalid", 403);
+  // Iki è gratis e aperto a tutti: senza codice (o con un codice non riconosciuto) vale il tetto gratuito.
+  // Un codice valido, che David manda a chi lo contatta, apre un tetto più alto e separato.
+  const invited = !!code && validCodes().includes(code);
   if (!(bump(`${day}:ip:${who}`, LIMITS.ipPerDay))) return bad("rate_limited", 429);
   if (!(bump(`${day}:tutti`, LIMITS.allPerDay))) return bad("rate_limited", 429);
-  const q = await quota(personKey(code, body?.device, who));
+  const q = await quota(personKey(invited ? code : "", body?.device, who), invited ? LIMITS.person : LIMITS.open);
   if (q.stop) return bad(q.stop, 429);
 
   try {
     const result = await TASKS[task](body.data || {});
     await q.spend();
-    return Response.json({ result }, { headers: { "Cache-Control": "no-store" } });
+    return Response.json({ result, tetto: q.max }, { headers: { "Cache-Control": "no-store" } });
   } catch (e) {
     const c = e?.code || "busy";
     console.error(`[iki] ${task}: ${c}`);
@@ -314,7 +315,7 @@ export async function GET(req) {
     const tempi = { contatori_ms: t1 - t0, claude_ms: Date.now() - t1 };
     console.log(`[iki] prova ok: ${JSON.stringify(tempi)} ${workingModel}`);
     return Response.json(
-      { ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, mese: { usate: mese, tetto: LIMITS.month }, persona: { tetto: LIMITS.person } },
+      { ok: true, modello: workingModel, risposta: t.slice(0, 20), tempi, mese: { usate: mese, tetto: LIMITS.month }, persona: { tetto: LIMITS.person, gratis: LIMITS.open } },
       { headers: h }
     );
   } catch (e) {

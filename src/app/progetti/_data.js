@@ -55,6 +55,137 @@ export const caseStudies = [
     },
   },
   {
+    "slug": "maybe-design",
+    "category": "featured",
+    "status": "progress",
+    "featured": true,
+    "imageSrc": "/projects/maybe-design/cover.webp",
+    "it": {
+      "tag": "Prodotto indipendente · Beta privata",
+      "shortTitle": "Maybe Design",
+      "title": "Maybe Design: dal re-design fotografico a un prodotto digitale",
+      "client": "Prodotto digitale indipendente",
+      "place": "Beta Family & Friends a invito · landing in preparazione",
+      "stack": "React · TypeScript · Vite · Express · Supabase · Render · AI generativa",
+      "role": "Product strategy, UX/UI, sviluppo e coordinamento QA",
+      "intro": "Una web app per esplorare il re-design di ambienti partendo da fotografie reali. Un prodotto in beta privata, progettato per scegliere uno stile, confrontare le trasformazioni e perfezionarle per versioni successive.",
+      "cardText": "Dal primo scatto alle modifiche progressive: UX/UI, generazione AI e controllo delle versioni.",
+      "facts": [
+        "Beta privata a invito",
+        "UX mobile-first",
+        "Generazione e versioni"
+      ],
+      "sections": [
+        {
+          "h": "Il problema non è immaginare. È vedere.",
+          "body": "Prima di acquistare un arredo o avviare un intervento, capire come potrebbe cambiare un ambiente non è semplice. Maybe Design nasce per trasformare una fotografia in un punto di partenza concreto per provare idee, senza confondere una simulazione con un progetto esecutivo.",
+          "image": "/projects/maybe-design/interface-desktop.webp",
+          "mediaLabel": "Schermata autentica · pre-beta offline 0.6"
+        },
+        {
+          "h": "Una foto prima di tutto",
+          "body": "L’esperienza segue la decisione naturale: partire dall’ambiente, scegliere il tipo di trasformazione e aggiungere stile e indicazioni. Nella UI la fotografia ha priorità su testo e impostazioni. L’immagine mostra una schermata della precedente pre-beta offline, non la beta attualmente distribuita.",
+          "image": "/projects/maybe-design/upload-real.webp",
+          "mediaLabel": "Flusso di caricamento · pre-beta offline 0.6"
+        },
+        {
+          "h": "Le idee cambiano, la versione resta",
+          "body": "Il flusso progettato permette di confrontare originale e risultato e continuare a modificare la versione selezionata, senza perdere il percorso compiuto. Le schermate qui documentano i componenti della pre-beta offline; non rappresentano una generazione AI effettiva.",
+          "image": "/projects/maybe-design/compare-real.webp",
+          "mediaLabel": "Modulo confronto · schermata reale 0.6"
+        },
+        {
+          "h": "La stessa attenzione, su smartphone",
+          "body": "Layout, comandi e gerarchie sono pensati anche per chi usa l’app dal telefono: foto ben visibili, passaggi ordinati, azioni riconoscibili. La beta più recente prosegue il lavoro su generazioni, cronologia e archivio cloud; la schermata è ancora della versione offline 0.6.",
+          "image": "/projects/maybe-design/interface-mobile.webp",
+          "mediaLabel": "Vista mobile · pre-beta offline 0.6"
+        },
+        {
+          "h": "Dall’interfaccia al prodotto reale",
+          "body": "L’MVP si è evoluto in un’app React con backend Express, Supabase per account e progetti cloud e Render per lo staging. I test Family & Friends verificano accessi, continuità dei progetti, crediti e limiti di costo. Il prodotto non è ancora aperto al pubblico.",
+          "image": "/projects/maybe-design/cover.webp",
+          "mediaLabel": "Composizione grafica · screenshot 0.6"
+        },
+        {
+          "h": "Due destinatari, una landing separata",
+          "body": "La comunicazione accompagna privati che vogliono esplorare casa propria e professionisti interessati a proporre alternative visive. La landing B2C/B2B è preparata separatamente dalla beta, ma non è pubblica: prima servono casi fotografici autorizzati, privacy definitiva e verifica dei moduli.",
+          "image": "/projects/maybe-design/cover.webp",
+          "mediaLabel": "Brand e presentazione · screenshot 0.6"
+        }
+      ],
+      "results": [
+        "Flusso UX da foto a trasformazione",
+        "Re-design e iterazioni nella beta privata",
+        "Interfaccia responsive, priorità alle immagini",
+        "Account, crediti e progetti cloud in collaudo",
+        "Landing B2C/B2B separata dalla beta",
+        "Nessuna disponibilità pubblica dichiarata"
+      ]
+    },
+    "en": {
+      "tag": "Independent product · Private beta",
+      "shortTitle": "Maybe Design",
+      "title": "Maybe Design: from photographic redesign to a digital product",
+      "client": "Independent digital product",
+      "place": "Invite-only Family & Friends beta · landing in progress",
+      "stack": "React · TypeScript · Vite · Express · Supabase · Render · Generative AI",
+      "role": "Product strategy, UX/UI, development and QA coordination",
+      "intro": "A web app for exploring room redesigns from real photographs. In private beta, it is designed to let people choose a style, compare transformations and refine each result across successive versions.",
+      "cardText": "From the first photograph to progressive edits: UX/UI, AI generation and version control.",
+      "facts": [
+        "Invite-only private beta",
+        "Mobile-first UX",
+        "Generation and versions"
+      ],
+      "sections": [
+        {
+          "h": "The challenge is seeing, not imagining",
+          "body": "Before buying furniture or renovating, it is hard to see how a real room could change. Maybe Design uses a photograph as the starting point for exploring ideas, while keeping visual simulations separate from build-ready plans.",
+          "image": "/projects/maybe-design/interface-desktop.webp",
+          "mediaLabel": "Authentic screen · offline pre-beta 0.6"
+        },
+        {
+          "h": "Start with the photograph",
+          "body": "The experience follows a natural sequence: pick a room, choose a transformation and add style preferences and instructions. Photography takes priority over controls and copy. This is an earlier offline pre-beta screenshot, not the current online beta.",
+          "image": "/projects/maybe-design/upload-real.webp",
+          "mediaLabel": "Photo upload · offline pre-beta 0.6"
+        },
+        {
+          "h": "Keep the progress, change the idea",
+          "body": "The designed workflow compares the original and the result, then lets people refine the selected version instead of restarting. The screen documents a comparison component from the offline preview, not an actual AI-generated result.",
+          "image": "/projects/maybe-design/compare-real.webp",
+          "mediaLabel": "Comparison UI · authentic 0.6 screen"
+        },
+        {
+          "h": "Designed for the phone, too",
+          "body": "The mobile interface keeps photographs visible and actions clear, with a deliberate order for each decision. The newer beta continues the work on generations, project history and cloud storage; this screen still comes from offline version 0.6.",
+          "image": "/projects/maybe-design/interface-mobile.webp",
+          "mediaLabel": "Mobile UI · offline pre-beta 0.6"
+        },
+        {
+          "h": "Beyond the interface",
+          "body": "The MVP evolved into a React app with an Express backend, Supabase accounts and cloud projects, and staging on Render. Family & Friends tests focus on account access, project continuity, credits and cost safeguards. The app is not publicly available.",
+          "image": "/projects/maybe-design/cover.webp",
+          "mediaLabel": "Brand composition · 0.6 screenshots"
+        },
+        {
+          "h": "One product, two audiences",
+          "body": "The planned marketing landing separates homeowners exploring their own spaces from professionals presenting visual alternatives. It remains separate from the private beta and unpublished until rights-cleared image cases, final privacy terms and form checks are complete.",
+          "image": "/projects/maybe-design/cover.webp",
+          "mediaLabel": "Brand and product presentation · 0.6"
+        }
+      ],
+      "results": [
+        "Photo-to-redesign UX workflow",
+        "Private-beta redesign and iterations",
+        "Responsive interface with photography first",
+        "Accounts, credits and cloud projects in testing",
+        "Separate B2C/B2B landing in progress",
+        "No misleading claim of public availability"
+      ]
+    }
+  },
+  {
     slug: "infermiera-althea", category: "featured", status: "preview", featured: true,
     imageSrc: "/projects/althea/cover.webp",
     it: {

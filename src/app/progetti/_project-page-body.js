@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { localePath } from "../i18n";
 import { colors, getStatus, localizeCaseStudy } from "./_data";
 import { SiteHeader, SiteFooter, SiteContactSection, ImageWithFallback, LangProvider, useLang } from "./_site-parts";
 
@@ -30,7 +31,7 @@ function ProjectPageInner({ cs, next }) {
       <section className="project-hero">
         <div className="project-shell project-hero-grid">
           <div>
-            <Link href="/progetti" className="back-link">{t.all}</Link>
+            <Link href={localePath("/progetti", lang)} className="back-link">{t.all}</Link>
             <p className="project-kicker">{project.tag}</p>
             <h1>{project.shortTitle || project.title}</h1>
             <p className="project-intro">{project.intro}</p>
@@ -74,8 +75,8 @@ function ProjectPageInner({ cs, next }) {
         </section>
 
         <nav className="project-next">
-          <Link href={`/progetti/${nextProject.slug}`}><small>{t.next}</small><strong>{nextProject.shortTitle || nextProject.title} →</strong></Link>
-          <Link href="/#contatti" className="project-contact">{t.contact}</Link>
+          <Link href={localePath(`/progetti/${nextProject.slug}`, lang)}><small>{t.next}</small><strong>{nextProject.shortTitle || nextProject.title} →</strong></Link>
+          <Link href={localePath("/#contatti", lang)} className="project-contact">{t.contact}</Link>
         </nav>
       </div>
 

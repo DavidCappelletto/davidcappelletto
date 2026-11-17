@@ -1,10 +1,11 @@
 "use client";
+import { localePath } from "./i18n";
 
 /**
  * Hero della home: persona in primo piano e lavori veri accanto.
  * Usa /hero-bg.jpg (foto) e gli screenshot reali in /hero/.
  */
-export default function CinematicHero({ t, onWhatsAppClick }) {
+export default function CinematicHero({ t, lang, onWhatsAppClick }) {
   const work = (t.caseCards || []).slice(0, 3);
 
   return (
@@ -35,7 +36,7 @@ export default function CinematicHero({ t, onWhatsAppClick }) {
               <ul>
                 {work.map((c) => (
                   <li key={c.slug}>
-                    <a href={`/progetti/${c.slug}`}>{c.title}</a>
+                    <a href={localePath(`/progetti/${c.slug}`, lang)}>{c.title}</a>
                   </li>
                 ))}
               </ul>

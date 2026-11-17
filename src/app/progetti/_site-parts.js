@@ -5,11 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { colors } from "./_data";
 import { trackEvent } from "../analytics";
+import { useSiteLang } from "../useSiteLang";
+import { localePath } from "../i18n";
 
 const LangContext = createContext({ lang: "it", setLang: () => {} });
 
 export function LangProvider({ children }) {
-  const [lang, setLang] = useState("it");
+  const [lang, setLang] = useSiteLang();
   return <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>;
 }
 
@@ -61,7 +63,7 @@ export function SiteHeader() {
   const [logoRotation, setLogoRotation] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = nav[lang];
-  const miniAuditHref = pathname === "/progetti" ? "#mini-audit" : "/#mini-audit";
+  const miniAuditHref = /\/progetti$/.test(pathname || "") ? "#mini-audit" : localePath("/#mini-audit", lang);
 
   useEffect(() => {
     const onScroll = () => {
@@ -74,9 +76,9 @@ export function SiteHeader() {
   }, []);
 
   const navLinks = [
-    { href: "/#casi-reali", label: t.navLinks[0] },
-    { href: "/#come-lavoro", label: t.navLinks[1] },
-    { href: "/#servizi", label: t.navLinks[2] },
+    { href: localePath("/#casi-reali", lang), label: t.navLinks[0] },
+    { href: localePath("/#come-lavoro", lang), label: t.navLinks[1] },
+    { href: localePath("/#servizi", lang), label: t.navLinks[2] },
   ];
 
   return (
@@ -91,7 +93,7 @@ export function SiteHeader() {
       }}
     >
       <div style={{ width: "min(1200px, 89vw)", margin: "0 auto", height: 80, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Link href="/" style={{ fontSize: 19, fontWeight: 700, color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 10 }}>
+        <Link href={localePath("/", lang)} style={{ fontSize: 19, fontWeight: 700, color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 10 }}>
           <img src="/logo.png" alt="Logo David Cappelletto" width={34} height={34} style={{ height: 34, width: "auto", filter: "invert(1)", transform: `rotate(${logoRotation}deg)`, transition: "transform 0.05s linear" }} />
           <span>David Cappelletto</span>
         </Link>
@@ -163,16 +165,16 @@ export function SiteFooter() {
         </div>
 
         <div style={{ display: "inline-flex", flexWrap: "wrap", gap: 14, color: "rgba(255,255,255,0.4)", fontSize: 13 }}>
-          <Link href="/#casi-reali" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[0]}</Link>
-          <Link href="/#come-lavoro" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[1]}</Link>
-          <Link href="/#servizi" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[2]}</Link>
-          <Link href="/#contatti" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.contacts}</Link>
+          <Link href={localePath("/#casi-reali", lang)} style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[0]}</Link>
+          <Link href={localePath("/#come-lavoro", lang)} style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[1]}</Link>
+          <Link href={localePath("/#servizi", lang)} style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.navLinks[2]}</Link>
+          <Link href={localePath("/#contatti", lang)} style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>{t.contacts}</Link>
         </div>
 
         <div style={{ textAlign: "left" }}>
           <p style={{ margin: 0, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>{lang === "en" ? "Aviano (PN), Italy · Also working remotely" : "Aviano (PN) · Lavoro anche da remoto"}</p>
           <p style={{ margin: "4px 0 0", color: "rgba(255,255,255,0.3)", fontSize: 12 }}>{lang === "en" ? "UX · Local SEO · AI Automations" : "UX · SEO Locale · Automazioni AI"}</p>
-          <a href="/privacy" style={{ display: "inline-block", marginTop: 6, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>Privacy Policy</a>
+          <a href={localePath("/privacy", lang)} style={{ display: "inline-block", marginTop: 6, color: "rgba(255,255,255,0.3)", fontSize: 12 }}>Privacy Policy</a>
         </div>
       </div>
 

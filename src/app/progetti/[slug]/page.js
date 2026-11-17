@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudy, localizeCaseStudy } from "../_data";
 import ProjectPageBody from "../_project-page-body";
+import { alternatesFor } from "../../i18n";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -14,6 +15,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${localized.title} | David Cappelletto`,
     description: localized.intro,
+    alternates: alternatesFor(`/progetti/${cs.slug}`, "it"),
   };
 }
 

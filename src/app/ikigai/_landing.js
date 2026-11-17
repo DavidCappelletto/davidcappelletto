@@ -80,7 +80,7 @@ function PreForm({ id }) {
         <img src="/ikigai/iki.png" alt="" width="88" height="96" />
         <div>
           <strong>Ci sei!</strong>
-          <p>Ti scrivo appena Mappa Ikigai è pronta da provare. Nel frattempo Iki lucida i cristalli.</p>
+          <p>Ti scrivo con un codice per continuare a chiacchierare con Iki. Intanto l&apos;app è già aperta: <a href="/ikigai/app">apri Mappa Ikigai</a>.</p>
         </div>
       </div>
     );
@@ -88,7 +88,8 @@ function PreForm({ id }) {
 
   return (
     <form className="mk-form" id={id} onSubmit={onSubmit} name="preregistrazione-ikigai">
-      <p className="mk-form-title">Pre-registrati e provala tra i primi</p>
+      <p className="mk-form-title">Vuoi più chiacchierate con Iki?</p>
+      <p className="mk-form-sub">Mappa Ikigai è gratuita e aperta a tutti, chat con Iki compresa. Le chiacchierate incluse sono limitate: se le finisci, lascia l&apos;email e ti mando un codice per continuare, sempre gratis.</p>
       <input type="hidden" name="form-name" value="preregistrazione-ikigai" />
       <p className="mk-hp" aria-hidden="true">
         <label>Non compilare<input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
@@ -104,15 +105,15 @@ function PreForm({ id }) {
       <label className="mk-check">
         <input name="consenso" type="checkbox" required />
         <span>
-          Accetto di ricevere un&apos;email quando Mappa Ikigai sarà disponibile e ho letto la{" "}
+          Accetto di ricevere un&apos;email con il codice di Mappa Ikigai e ho letto la{" "}
           <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
         </span>
       </label>
       <button type="submit" disabled={state === "sending"}>
-        {state === "sending" ? "Invio…" : "Pre-registrati"}
+        {state === "sending" ? "Invio…" : "Chiedi il codice"}
       </button>
       {state === "error" && <p className="mk-err">Qualcosa non è andato. Riprova tra poco.</p>}
-      <p className="mk-note">Niente spam: solo l&apos;avviso di apertura. Puoi cancellarti quando vuoi.</p>
+      <p className="mk-note">Niente spam: solo l&apos;email con il codice. Puoi cancellarti quando vuoi.</p>
     </form>
   );
 }
@@ -123,16 +124,20 @@ export default function IkigaiLanding() {
       <div className="mk-stars" aria-hidden="true" />
       <header className="mk-top">
         <a href="#top" className="mk-home" aria-label="Mappa Ikigai"><img src="/ikigai/iki.png" alt="" width="40" height="44" /><span>Mappa <b>Ikigai</b></span></a>
-        <a href="#pre" className="mk-top-cta">Pre-registrati</a>
+        <a href="/ikigai/app" className="mk-top-cta">Provala ora</a>
       </header>
 
       <section className="mk-hero">
         <div className="mk-hero-copy">
-          <p className="mk-eyebrow">MAPPA IKIGAI · IN ARRIVO</p>
+          <p className="mk-eyebrow">MAPPA IKIGAI · PROVALA GRATIS</p>
           <h1>Le tue energie vanno nel posto giusto?</h1>
           <p className="mk-lead">
             Otto domande, quattro cristalli e Iki che ti accompagna. Vedi subito cosa manca nel tuo ikigai e
             ricevi missioni concrete per colmarlo.
+          </p>
+          <p className="mk-go">
+            <a href="/ikigai/app" className="mk-go-btn">Inizia il percorso</a>
+            <span>Gratis, senza registrazione. Le risposte restano sul tuo telefono.</span>
           </p>
           <PreForm id="pre" />
         </div>
@@ -185,7 +190,10 @@ export default function IkigaiLanding() {
       </section>
 
       <section className="mk-section mk-final">
-        <h2>Vuoi provarla tra i primi?</h2>
+        <h2>Pronto a vedere il tuo cristallo?</h2>
+        <p className="mk-go mk-go-center">
+          <a href="/ikigai/app" className="mk-go-btn">Inizia il percorso</a>
+        </p>
         <PreForm id="pre-2" />
       </section>
 
@@ -193,7 +201,7 @@ export default function IkigaiLanding() {
         <p>
           Mappa Ikigai è ideata e sviluppata da <Link href="/">David Cappelletto</Link> ·{" "}
           <Link href="/progetti/mappa-ikigai">Il progetto</Link> ·{" "}
-          <a href="/ikigai/app">Hai un codice d&apos;invito? Entra</a> ·{" "}
+          <a href="/ikigai/app">Apri l&apos;app</a> ·{" "}
           <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
         </p>
       </footer>
@@ -206,6 +214,13 @@ export default function IkigaiLanding() {
         .mk>*{position:relative}
         .mk-top{display:flex;justify-content:space-between;align-items:center;width:min(1160px,92vw);margin:0 auto;padding:22px 0}
         .mk-home{display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none;font-weight:700;font-size:19px;letter-spacing:-.02em}.mk-home img{width:40px;height:auto;filter:drop-shadow(0 0 12px rgba(185,194,255,.45))}.mk-home b{font-weight:800;color:var(--lilac)}
+        .mk-go{display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin:22px 0 26px}
+        .mk-go-center{align-items:center}
+        .mk-go-btn{display:inline-block;color:#14131C;background:var(--cta);text-decoration:none;font-weight:800;font-size:17px;padding:15px 26px;border-radius:999px}
+        .mk-go-btn:hover{filter:brightness(1.06)}
+        .mk-go span{color:var(--muted);font-size:14px}
+        .mk-form-sub{color:var(--muted);font-size:14px;line-height:1.5;margin:0 0 4px}
+        .mk-done a{color:var(--lilac)}
         .mk-top-cta{color:#14131C;background:var(--cta);text-decoration:none;font-weight:800;font-size:13px;padding:9px 14px;border-radius:999px}
         .mk-hero{width:min(1160px,92vw);margin:0 auto;padding:24px 0 72px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
         .mk-eyebrow{margin:0 0 14px;color:var(--lilac);font-size:12px;font-weight:800;letter-spacing:.16em}

@@ -58,7 +58,7 @@ const copy = {
       ["03", "Lo costruiamo insieme", "Implemento io o ti affianco passo passo, mantenendo il progetto coerente con gli obiettivi."],
     ],
     casesTag: "Progetti",
-    casesTitle: "Quattro progetti. Problemi diversi, stesso metodo.",
+    casesTitle: "Cinque progetti. Problemi diversi, stesso metodo.",
     casesReadMore: "Leggi il progetto →",
     casesAllBtn: "Tutti i progetti →",
     caseCards: [
@@ -74,6 +74,22 @@ const copy = {
           "CMS per blog e landing",
           "SEO tecnico e tracking",
         ],
+      },
+      {
+        "slug": "maybe-design",
+        "tag": "Prodotto · Beta privata",
+        "title": "Maybe Design",
+        "place": "UX/UI · AI · web app",
+        "imageSrc": "/projects/maybe-design/cover.webp",
+        "status": "In fase di test",
+        "statusNote": "Beta privata",
+        "statusColor": "#EFB652",
+        "statusProgress": "64%",
+        "results": [
+          "Re-design da fotografie",
+          "Versioni e confronto",
+          "UX mobile-first"
+        ]
       },
       {
         slug: "infermiera-althea",
@@ -243,7 +259,7 @@ const copy = {
       ["03", "We build it together", "I implement directly or support you step by step, keeping the project aligned with your goals."],
     ],
     casesTag: "Projects",
-    casesTitle: "Four projects. Different problems, same method.",
+    casesTitle: "Five projects. Different problems, same method.",
     casesReadMore: "Read the case study →",
     casesAllBtn: "All case studies →",
     caseCards: [
@@ -259,6 +275,22 @@ const copy = {
           "CMS for blog and landing pages",
           "Technical SEO and tracking",
         ],
+      },
+      {
+        "slug": "maybe-design",
+        "tag": "Product · Private beta",
+        "title": "Maybe Design",
+        "place": "UX/UI · AI · web app",
+        "imageSrc": "/projects/maybe-design/cover.webp",
+        "status": "In testing",
+        "statusNote": "Private beta",
+        "statusColor": "#EFB652",
+        "statusProgress": "64%",
+        "results": [
+          "Photo-based redesign",
+          "Versions and comparison",
+          "Mobile-first UX"
+        ]
       },
       {
         slug: "infermiera-althea",

@@ -12,7 +12,7 @@ const ui = {
     title: "Cosa faccio con i tuoi dati.",
     intro:
       "Questa pagina spiega quali dati raccoglie davidcappelletto.it, perché, con quali servizi e per quanto tempo. Vale per tutto il sito, compresa la pagina di pre-registrazione a Mappa Ikigai.",
-    updated: "Ultimo aggiornamento: 8 novembre 2026",
+    updated: "Ultimo aggiornamento: 17 novembre 2026",
     summaryTitle: "In breve",
     summaryHead: ["Quando", "Quali dati", "Perché", "Base giuridica", "Per quanto"],
     summary: [
@@ -34,6 +34,7 @@ const ui = {
         p: [
           "Il sito è ospitato da Netlify. Quando visiti una pagina, i server di Netlify ricevono in automatico alcuni dati tecnici: indirizzo IP, tipo di browser e sistema operativo, pagina richiesta, data e ora. Servono a mostrarti il sito, a misurarne il funzionamento e a difenderlo da abusi.",
           "Base giuridica: il mio legittimo interesse ad avere un sito che funziona ed è sicuro. Questi dati restano nei log tecnici di Netlify per il tempo previsto dal servizio e non li uso per profilarti.",
+          "Per contare le visite in forma aggregata uso Cloudflare Web Analytics (Cloudflare). Non usa cookie, non salva nulla nel tuo browser e non ti riconosce tra una visita e l'altra: mi dice solo quante pagine vengono viste, da dove arrivano i visitatori e con che tipo di dispositivo. Base giuridica: il mio legittimo interesse a sapere come viene usato il sito.",
         ],
       },
       {
@@ -82,7 +83,7 @@ const ui = {
       {
         h: "Chi riceve i dati",
         p: [
-          "I dati sono trattati da me e dai fornitori che ho citato: Netlify, Web3Forms, Google (Gmail e Analytics), Microsoft (Clarity) e Meta (WhatsApp). Agiscono come responsabili del trattamento o come titolari autonomi secondo le loro condizioni. Non vendo né cedo i tuoi dati.",
+          "I dati sono trattati da me e dai fornitori che ho citato: Netlify, Cloudflare, Web3Forms, Google (Gmail e Analytics), Microsoft (Clarity) e Meta (WhatsApp). Agiscono come responsabili del trattamento o come titolari autonomi secondo le loro condizioni. Non vendo né cedo i tuoi dati.",
           "Alcuni di questi fornitori hanno sede negli Stati Uniti. Il trasferimento avviene sulla base dell'EU-US Data Privacy Framework, per i fornitori che vi aderiscono, o delle clausole contrattuali standard approvate dalla Commissione europea.",
         ],
       },
@@ -109,7 +110,7 @@ const ui = {
     title: "What I do with your data.",
     intro:
       "This page explains which data davidcappelletto.it collects, why, with which services and for how long. It covers the whole site, including the Mappa Ikigai pre-registration page.",
-    updated: "Last updated: 8 November 2026",
+    updated: "Last updated: 17 November 2026",
     summaryTitle: "At a glance",
     summaryHead: ["When", "Which data", "Why", "Legal basis", "How long"],
     summary: [
@@ -131,6 +132,7 @@ const ui = {
         p: [
           "The site is hosted by Netlify. When you open a page, Netlify's servers automatically receive some technical data: IP address, browser and operating system, requested page, date and time. It is used to serve the site, monitor how it runs and protect it from abuse.",
           "Legal basis: my legitimate interest in a working, secure website. This data stays in Netlify's technical logs for the period the service provides and is not used to profile you.",
+          "To count visits in aggregate I use Cloudflare Web Analytics (Cloudflare). It sets no cookies, stores nothing in your browser and does not recognise you across visits: it only tells me how many pages are viewed, where visitors come from and what kind of device they use. Legal basis: my legitimate interest in knowing how the site is used.",
         ],
       },
       {
@@ -177,7 +179,7 @@ const ui = {
       {
         h: "Who receives the data",
         p: [
-          "The data is processed by me and by the providers listed above: Netlify, Web3Forms, Google (Gmail and Analytics), Microsoft (Clarity) and Meta (WhatsApp). They act as processors or as independent controllers under their own terms. I never sell or share your data.",
+          "The data is processed by me and by the providers listed above: Netlify, Cloudflare, Web3Forms, Google (Gmail and Analytics), Microsoft (Clarity) and Meta (WhatsApp). They act as processors or as independent controllers under their own terms. I never sell or share your data.",
           "Some of these providers are based in the United States. Transfers rely on the EU-US Data Privacy Framework, for providers certified under it, or on the standard contractual clauses approved by the European Commission.",
         ],
       },

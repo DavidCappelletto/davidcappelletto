@@ -1,5 +1,6 @@
 import "@fontsource-variable/dm-sans";
 import "./globals.css";
+import Script from "next/script";
 import ConsentManager from "./ConsentManager";
 
 const DESCRIPTION =
@@ -99,6 +100,12 @@ export default function RootLayout({ children }) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <ConsentManager />
         {children}
+        {/* Cloudflare Web Analytics: cookieless, no personal data, so it loads without consent */}
+        <Script
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "c43081b93cdf4e8f8eb9fd55fff82ec7"}'
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

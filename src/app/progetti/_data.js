@@ -79,8 +79,8 @@ export const caseStudies = [
         {
           "h": "Il problema non è immaginare. È vedere.",
           "body": "Prima di acquistare un arredo o avviare un intervento, capire come potrebbe cambiare un ambiente non è semplice. Maybe Design nasce per trasformare una fotografia in un punto di partenza concreto per provare idee, senza confondere una simulazione con un progetto esecutivo.",
-          "image": "/projects/maybe-design/interface-desktop.webp",
-          "mediaLabel": "Schermata autentica · pre-beta offline 0.6"
+          "image": "/projects/maybe-design/beta-entry-desktop.webp",
+          "mediaLabel": "Accesso beta Family & Friends · schermata QA reale"
         },
         {
           "h": "Una foto prima di tutto",
@@ -96,9 +96,9 @@ export const caseStudies = [
         },
         {
           "h": "La stessa attenzione, su smartphone",
-          "body": "Layout, comandi e gerarchie sono pensati anche per chi usa l’app dal telefono: foto ben visibili, passaggi ordinati, azioni riconoscibili. La beta più recente prosegue il lavoro su generazioni, cronologia e archivio cloud; la schermata è ancora della versione offline 0.6.",
-          "image": "/projects/maybe-design/interface-mobile.webp",
-          "mediaLabel": "Vista mobile · pre-beta offline 0.6"
+          "body": "La beta Family & Friends accoglie anche chi entra dal telefono: nome, presa visione della privacy e indicazioni per ritrovare il proprio profilo. Questa è una schermata autentica dell’accesso alla beta, acquisita durante il QA; le schermate del flusso di re-design qui presenti restano della precedente 0.6 e saranno sostituite appena disponibili quelle nuove.",
+          "image": "/projects/maybe-design/beta-entry-mobile.webp",
+          "mediaLabel": "Accesso mobile · beta Family & Friends"
         },
         {
           "h": "Dall’interfaccia al prodotto reale",
@@ -141,8 +141,8 @@ export const caseStudies = [
         {
           "h": "The challenge is seeing, not imagining",
           "body": "Before buying furniture or renovating, it is hard to see how a real room could change. Maybe Design uses a photograph as the starting point for exploring ideas, while keeping visual simulations separate from build-ready plans.",
-          "image": "/projects/maybe-design/interface-desktop.webp",
-          "mediaLabel": "Authentic screen · offline pre-beta 0.6"
+          "image": "/projects/maybe-design/beta-entry-desktop.webp",
+          "mediaLabel": "Family & Friends beta entry · authentic QA screen"
         },
         {
           "h": "Start with the photograph",
@@ -158,9 +158,9 @@ export const caseStudies = [
         },
         {
           "h": "Designed for the phone, too",
-          "body": "The mobile interface keeps photographs visible and actions clear, with a deliberate order for each decision. The newer beta continues the work on generations, project history and cloud storage; this screen still comes from offline version 0.6.",
-          "image": "/projects/maybe-design/interface-mobile.webp",
-          "mediaLabel": "Mobile UI · offline pre-beta 0.6"
+          "body": "The Family & Friends beta welcomes phone users with a name field, privacy acknowledgement and account recovery guidance. This authentic beta-entry screen was captured during QA. The redesign workflow screens shown here still come from the earlier 0.6 preview and will be replaced as soon as new captures are available.",
+          "image": "/projects/maybe-design/beta-entry-mobile.webp",
+          "mediaLabel": "Mobile entry · Family & Friends beta"
         },
         {
           "h": "Beyond the interface",
@@ -229,9 +229,9 @@ export const caseStudies = [
       role: "Analisi, progettazione del flusso e sviluppo", intro: "Un’automazione per rendere tracciabile il percorso fra appuntamento, promemoria e conferma.",
       cardText: "Un flusso operativo in costruzione e validazione sul campo.", facts: ["Flusso anonimo", "Controlli", "WIP dichiarato"],
       sections: [
-        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/cover.svg", mediaLabel: "Appuntamento · input" },
+        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/input.svg", mediaLabel: "Appuntamento · input" },
         { h: "Tradurre il lavoro in regole", body: "Tempi, eccezioni, consensi e casi incompleti diventano un flusso leggibile. L’automazione deve sapere anche quando fermarsi e chiedere controllo umano.", image: "/projects/dentista/flow.svg", mediaLabel: "Regole · verifica" },
-        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validazione" },
+        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/validation.svg", mediaLabel: "WIP · validazione" },
       ], results: ["Processo mappato", "Dati pubblici anonimi", "Regole ed eccezioni esplicite", "Controllo umano previsto", "WIP dichiarato", "Risultati da misurare"],
     },
     en: {
@@ -240,9 +240,9 @@ export const caseStudies = [
       role: "Analysis, workflow design and development", intro: "An automation making the path from appointment to reminder and confirmation traceable.",
       cardText: "An operational flow under construction and field validation.", facts: ["Anonymous flow", "Checks", "WIP declared"],
       sections: [
-        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/cover.svg", mediaLabel: "Appointment · input" },
+        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/input.svg", mediaLabel: "Appointment · input" },
         { h: "Turn work into rules", body: "Timing, exceptions, consent and incomplete cases become a readable flow. Automation must know when to request human review.", image: "/projects/dentista/flow.svg", mediaLabel: "Rules · checks" },
-        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validation" },
+        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/validation.svg", mediaLabel: "WIP · validation" },
       ], results: ["Process mapped", "Public data anonymised", "Rules and exceptions explicit", "Human review included", "WIP declared", "Results to measure"],
     },
   },

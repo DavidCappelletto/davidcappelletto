@@ -68,8 +68,8 @@ export const caseStudies = [
       "place": "Beta Family & Friends a invito · landing in preparazione",
       "stack": "React · TypeScript · Vite · Express · Supabase · Render · AI generativa",
       "role": "Product strategy, UX/UI, sviluppo e coordinamento QA",
-      "intro": "Una web app per esplorare il re-design di ambienti partendo da fotografie reali. Un prodotto in beta privata, progettato per scegliere uno stile, confrontare le trasformazioni e perfezionarle per versioni successive.",
-      "cardText": "Dal primo scatto alle modifiche progressive: UX/UI, generazione AI e controllo delle versioni.",
+      "intro": "Una web app in beta privata per esplorare il re-design di ambienti da una foto, confrontare le versioni e ottenere, quando disponibile, una prima stima orientativa dei costi.",
+      "cardText": "Dalla foto alle idee: re-design, confronto delle versioni e prime stime economiche indicative.",
       "facts": [
         "Beta privata a invito",
         "UX mobile-first",
@@ -101,8 +101,8 @@ export const caseStudies = [
           "mediaLabel": "Vista mobile · pre-beta offline 0.6"
         },
         {
-          "h": "Dall’interfaccia al prodotto reale",
-          "body": "L’MVP si è evoluto in un’app React con backend Express, Supabase per account e progetti cloud e Render per lo staging. I test Family & Friends verificano accessi, continuità dei progetti, crediti e limiti di costo. Il prodotto non è ancora aperto al pubblico.",
+          "h": "Dall’immagine a una prima stima dei costi",
+          "body": "Oltre alle trasformazioni fotografiche, Maybe Design può offrire una stima economica orientativa, quando l’analisi è disponibile. Non si tratta di un preventivo: materiali, misure, interventi e fattibilità vanno verificati con professionisti. Il prodotto resta in beta privata, con backend Express, Supabase e staging Render.",
           "image": "/projects/maybe-design/cover.webp",
           "mediaLabel": "Composizione grafica · screenshot 0.6"
         },
@@ -116,6 +116,7 @@ export const caseStudies = [
       "results": [
         "Flusso UX da foto a trasformazione",
         "Re-design e iterazioni nella beta privata",
+        "Stime orientative dei costi quando disponibili",
         "Interfaccia responsive, priorità alle immagini",
         "Account, crediti e progetti cloud in collaudo",
         "Landing B2C/B2B separata dalla beta",
@@ -130,8 +131,8 @@ export const caseStudies = [
       "place": "Invite-only Family & Friends beta · landing in progress",
       "stack": "React · TypeScript · Vite · Express · Supabase · Render · Generative AI",
       "role": "Product strategy, UX/UI, development and QA coordination",
-      "intro": "A web app for exploring room redesigns from real photographs. In private beta, it is designed to let people choose a style, compare transformations and refine each result across successive versions.",
-      "cardText": "From the first photograph to progressive edits: UX/UI, AI generation and version control.",
+      "intro": "A private-beta web app for exploring redesign ideas from a photograph, comparing versions and, when available, receiving an indicative cost estimate.",
+      "cardText": "From photo to new ideas: redesign, version comparisons and indicative cost estimates.",
       "facts": [
         "Invite-only private beta",
         "Mobile-first UX",
@@ -163,8 +164,8 @@ export const caseStudies = [
           "mediaLabel": "Mobile UI · offline pre-beta 0.6"
         },
         {
-          "h": "Beyond the interface",
-          "body": "The MVP evolved into a React app with an Express backend, Supabase accounts and cloud projects, and staging on Render. Family & Friends tests focus on account access, project continuity, credits and cost safeguards. The app is not publicly available.",
+          "h": "Beyond the image: indicative cost estimates",
+          "body": "When analysis is available, Maybe Design can add an indicative cost estimate to photographic redesign. It is not a professional quote: measurements, materials, work and feasibility need independent verification. The app remains in private beta with Express, Supabase and Render staging.",
           "image": "/projects/maybe-design/cover.webp",
           "mediaLabel": "Brand composition · 0.6 screenshots"
         },
@@ -178,6 +179,7 @@ export const caseStudies = [
       "results": [
         "Photo-to-redesign UX workflow",
         "Private-beta redesign and iterations",
+        "Indicative cost estimates when available",
         "Responsive interface with photography first",
         "Accounts, credits and cloud projects in testing",
         "Separate B2C/B2B landing in progress",

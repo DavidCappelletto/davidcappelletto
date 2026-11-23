@@ -88,7 +88,7 @@ const copy = {
         "results": [
           "Re-design da fotografie",
           "Versioni e confronto",
-          "UX mobile-first"
+          "Stime indicative dei costi"
         ]
       },
       {
@@ -289,7 +289,7 @@ const copy = {
         "results": [
           "Photo-based redesign",
           "Versions and comparison",
-          "Mobile-first UX"
+          "Indicative cost estimates"
         ]
       },
       {

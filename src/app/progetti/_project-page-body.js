@@ -34,6 +34,7 @@ function ProjectPageInner({ cs, next }) {
             <p className="project-kicker">{project.tag}</p>
             <h1>{project.shortTitle || project.title}</h1>
             <p className="project-intro">{project.intro}</p>
+            {cs.slug === "maybe-design" && <Link href="/maybe-design" className="project-visit">{lang === "it" ? "Scopri Maybe Design ↗" : "Explore Maybe Design ↗"}</Link>}
             {outbound && <a className="project-visit" href={outbound} target="_blank" rel="noopener noreferrer">{project.appLinkLabel || t.visit}</a>}
           </div>
           <div className="project-meta">

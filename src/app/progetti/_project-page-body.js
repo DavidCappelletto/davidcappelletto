@@ -34,6 +34,7 @@ function ProjectPageInner({ cs, next }) {
             <p className="project-kicker">{project.tag}</p>
             <h1>{project.shortTitle || project.title}</h1>
             <p className="project-intro">{project.intro}</p>
+            {cs.slug === "maybe-design" && <Link href="/maybe-design" className="project-visit">{lang === "it" ? "Scopri Maybe Design ↗" : "Explore Maybe Design ↗"}</Link>}
             {outbound && <a className="project-visit" href={outbound} target="_blank" rel="noopener noreferrer">{project.appLinkLabel || t.visit}</a>}
           </div>
           <div className="project-meta">
@@ -55,8 +56,8 @@ function ProjectPageInner({ cs, next }) {
       <div className="project-cover"><ImageWithFallback src={project.imageSrc} alt={project.shortTitle || project.title} /></div>
 
       {cs.slug === "maybe-design" && <p className="media-provenance project-shell">{lang === "it"
-        ? "Le viste di accesso documentano la beta Family & Friends. Le altre schermate sono della pre-beta offline 0.6 e saranno sostituite appena disponibili quelle nuove. Non mostrano una trasformazione AI reale."
-        : "Entry screens document the Family & Friends beta. Other screens come from offline pre-beta 0.6 and will be replaced as new captures become available. They do not show an actual AI transformation."}</p>}
+        ? "Test creativo outdoor al Lago di Carezza · fotografia originale e risultato V1 della beta."
+        : "Outdoor creative test at Lake Carezza · original photograph and V1 from the beta."}</p>}
 
       <div className="project-content">
         {project.sections.map((section, index) => (
@@ -98,6 +99,7 @@ function ProjectPageInner({ cs, next }) {
         .project-maybe-design .process-media,.project-dentista-automazione .process-media{display:flex;flex-direction:column;justify-content:flex-end}
         .project-maybe-design .process-media img,.project-dentista-automazione .process-media img{height:calc(100% - 40px)}
         @media(max-width:767px){.project-maybe-design .process-media{aspect-ratio:1.35}.project-maybe-design .process-media:has(img[src$="beta-entry-mobile.webp"]){aspect-ratio:390/860;max-height:520px}.project-dentista-automazione .process-media{aspect-ratio:960/660}.project-shell{width:94vw}.project-hero{padding:22px 0 13px}.project-hero-grid{grid-template-columns:1fr;gap:12px}.project-kicker{margin-top:14px;font-size:8px}.project-hero h1{font-size:38px;margin:8px 0 3px}.project-intro{display:block;font-size:13px;line-height:1.52;margin:11px 0}.project-visit{margin-top:5px;padding:8px 11px;font-size:10px}.project-meta{gap:5px}.project-meta>div{padding:8px 7px;border-radius:8px}.project-meta svg{width:16px;height:16px;margin-bottom:6px}.project-meta small{font-size:6px}.project-meta strong{font-size:8px;line-height:1.2}.project-cover{height:230px;min-height:230px}.project-content{width:94vw;padding:16px 0 28px}.process-row{padding:18px 0}.process-index{font-size:7px;margin-bottom:8px}.process-grid,.process-row:nth-child(even) .process-grid{grid-template-columns:1fr;gap:11px}.process-row:nth-child(even) .process-media{order:2}.process-row:nth-child(even) .process-copy{order:1}.process-media{height:230px;min-height:0;aspect-ratio:auto;border-radius:9px;background:#e9eef0}.process-media img{object-fit:contain}.process-media figcaption{left:9px;bottom:8px;font-size:7px}.process-copy h2{font-size:21px;margin:0 0 6px}.process-copy p{font-size:12.5px;line-height:1.48}.project-results{margin-top:12px;padding:16px;border-radius:10px}.project-results h2{font-size:22px;margin-bottom:10px}.project-results ul{gap:7px 12px}.project-results li{font-size:10px;padding-top:6px}.project-next{margin-top:20px}.project-next strong{font-size:12px}.project-contact{padding:8px 10px;font-size:9px}}
+        .project-maybe-design .process-media{height:auto;aspect-ratio:auto}.project-maybe-design .process-media img{height:auto;max-height:580px}
       `}</style>
     </main>
   );

@@ -47,8 +47,8 @@ export default function CinematicHero({ t, onWhatsAppClick }) {
       <div className="hp-screens" aria-hidden="true">
         <figure className="hp-maybe">
           <div className="hp-bar"><i /><i /><i /></div>
-          <img src="/projects/maybe-design/beta-entry-mobile.webp" alt="" width="390" height="844" decoding="async" />
-          <figcaption>Maybe Design <span>Beta</span></figcaption>
+          <img src="/projects/maybe-design/carezza-phone.webp" alt="" width="256" height="311" decoding="async" />
+          <figcaption>Maybe Design</figcaption>
         </figure>
         <figure className="hp-shot hp-shot-diama">
           <div className="hp-bar"><i /><i /><i /></div>

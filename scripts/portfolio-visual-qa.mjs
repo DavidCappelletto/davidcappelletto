@@ -8,7 +8,7 @@ await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const report = [];
 try {
-  for (const width of [320, 390, 768, 1440]) {
+  for (const width of [320, 375, 390, 430, 768, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -33,7 +33,7 @@ try {
         assert.ok(await page.locator('a[href="/progetti/maybe-design"]').count());
       }
       if (path.endsWith('maybe-design')) {
-        await page.getByText(/Le viste di accesso documentano/).waitFor();
+        await page.getByText(/Test creativo outdoor al Lago/).waitFor();
       }
       if (path.endsWith('dentista-automazione')) {
         // Verify SVG text stays within its viewBox, independent of image scaling.
@@ -61,7 +61,7 @@ try {
       if (await menu.isVisible()) await menu.click();
       await page.getByRole('button', { name: 'EN', exact: true }).filter({ visible: true }).click();
       if (await menu.isVisible()) await menu.click();
-      if (path.endsWith('maybe-design')) await page.getByText(/Entry screens document/).waitFor();
+      if (path.endsWith('maybe-design')) await page.getByText(/Outdoor creative test at Lake/).waitFor();
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `English overflow: ${path}`);
       await page.screenshot({ path: `${out}/${width}-${path === '/' ? 'home' : path.split('/').at(-1)}-en.png`, fullPage: true });
       report.push({ width, path, language: 'en', status: 'PASS' });

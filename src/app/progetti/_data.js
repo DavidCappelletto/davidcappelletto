@@ -59,17 +59,17 @@ export const caseStudies = [
     "category": "featured",
     "status": "progress",
     "featured": true,
-    "imageSrc": "/projects/maybe-design/cover.webp",
+    "imageSrc": "/projects/maybe-design/carezza-pair.webp",
     "it": {
       "tag": "Prodotto indipendente · Beta privata",
       "shortTitle": "Maybe Design",
       "title": "Maybe Design: dal re-design fotografico a un prodotto digitale",
       "client": "Prodotto digitale indipendente",
-      "place": "Beta Family & Friends a invito · landing in preparazione",
+      "place": "Beta Family & Friends a invito",
       "stack": "React · TypeScript · Vite · Express · Supabase · Render · AI generativa",
       "role": "Product strategy, UX/UI, sviluppo e coordinamento QA",
-      "intro": "Una web app per esplorare il re-design di ambienti partendo da fotografie reali. Un prodotto in beta privata, progettato per scegliere uno stile, confrontare le trasformazioni e perfezionarle per versioni successive.",
-      "cardText": "Dal primo scatto alle modifiche progressive: UX/UI, generazione AI e controllo delle versioni.",
+      "intro": "Una web app in beta privata per esplorare il re-design di ambienti da una foto, confrontare le versioni e ottenere, quando disponibile, una prima stima orientativa dei costi.",
+      "cardText": "Dalla foto alle idee: re-design, confronto delle versioni e prime stime economiche indicative.",
       "facts": [
         "Beta privata a invito",
         "UX mobile-first",
@@ -77,45 +77,28 @@ export const caseStudies = [
       ],
       "sections": [
         {
-          "h": "Il problema non è immaginare. È vedere.",
-          "body": "Prima di acquistare un arredo o avviare un intervento, capire come potrebbe cambiare un ambiente non è semplice. Maybe Design nasce per trasformare una fotografia in un punto di partenza concreto per provare idee, senza confondere una simulazione con un progetto esecutivo.",
-          "image": "/projects/maybe-design/beta-entry-desktop.webp",
-          "mediaLabel": "Accesso beta Family & Friends · schermata QA reale"
+          "h": "Dal lago al villaggio di Natale",
+          "body": "Nel test creativo outdoor al Lago di Carezza, la richiesta «Un villaggio di natale» trasforma la riva innevata in un villaggio illuminato. La vista Affiancate conserva la foto di partenza accanto alla proposta V1.",
+          "image": "/projects/maybe-design/carezza-stacked.webp",
+          "mediaLabel": "Affiancate · originale e risultato V1"
         },
         {
-          "h": "Una foto prima di tutto",
-          "body": "L’esperienza segue la decisione naturale: partire dall’ambiente, scegliere il tipo di trasformazione e aggiungere stile e indicazioni. Nella UI la fotografia ha priorità su testo e impostazioni. L’immagine mostra una schermata della precedente pre-beta offline, non la beta attualmente distribuita.",
-          "image": "/projects/maybe-design/upload-real.webp",
-          "mediaLabel": "Flusso di caricamento · pre-beta offline 0.6"
+          "h": "Confrontare dal telefono",
+          "body": "La modalità Slider permette di scorrere tra le immagini. I due comandi Zoom aprono separatamente originale e risultato per valutarne i dettagli prima di perfezionare una versione.",
+          "image": "/projects/maybe-design/carezza-slider.webp",
+          "mediaLabel": "Slider e zoom · schermata mobile"
         },
         {
-          "h": "Le idee cambiano, la versione resta",
-          "body": "Il flusso progettato permette di confrontare originale e risultato e continuare a modificare la versione selezionata, senza perdere il percorso compiuto. Le schermate qui documentano i componenti della pre-beta offline; non rappresentano una generazione AI effettiva.",
-          "image": "/projects/maybe-design/compare-real.webp",
-          "mediaLabel": "Modulo confronto · schermata reale 0.6"
-        },
-        {
-          "h": "La stessa attenzione, su smartphone",
-          "body": "La beta Family & Friends accoglie anche chi entra dal telefono: nome, presa visione della privacy e indicazioni per ritrovare il proprio profilo. Questa è una schermata autentica dell’accesso alla beta, acquisita durante il QA; le schermate del flusso di re-design qui presenti restano della precedente 0.6 e saranno sostituite appena disponibili quelle nuove.",
-          "image": "/projects/maybe-design/beta-entry-mobile.webp",
-          "mediaLabel": "Accesso mobile · beta Family & Friends"
-        },
-        {
-          "h": "Dall’interfaccia al prodotto reale",
-          "body": "L’MVP si è evoluto in un’app React con backend Express, Supabase per account e progetti cloud e Render per lo staging. I test Family & Friends verificano accessi, continuità dei progetti, crediti e limiti di costo. Il prodotto non è ancora aperto al pubblico.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Composizione grafica · screenshot 0.6"
-        },
-        {
-          "h": "Due destinatari, una landing separata",
-          "body": "La comunicazione accompagna privati che vogliono esplorare casa propria e professionisti interessati a proporre alternative visive. La landing B2C/B2B è preparata separatamente dalla beta, ma non è pubblica: prima servono casi fotografici autorizzati, privacy definitiva e verifica dei moduli.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Brand e presentazione · screenshot 0.6"
+          "h": "Leggere la stima insieme alla sua affidabilità",
+          "body": "In questo paesaggio le superfici non sono misurate. L’intervallo 0–0 € con affidabilità bassa non consente di quantificare un intervento. Per valutare i costi servono misure e un preventivo professionale.",
+          "image": "/projects/maybe-design/carezza-estimate.webp",
+          "mediaLabel": "Stima AI · superfici non misurate"
         }
       ],
       "results": [
         "Flusso UX da foto a trasformazione",
         "Re-design e iterazioni nella beta privata",
+        "Stime orientative dei costi quando disponibili",
         "Interfaccia responsive, priorità alle immagini",
         "Account, crediti e progetti cloud in collaudo",
         "Landing B2C/B2B separata dalla beta",
@@ -127,11 +110,11 @@ export const caseStudies = [
       "shortTitle": "Maybe Design",
       "title": "Maybe Design: from photographic redesign to a digital product",
       "client": "Independent digital product",
-      "place": "Invite-only Family & Friends beta · landing in progress",
+      "place": "Invite-only Family & Friends beta",
       "stack": "React · TypeScript · Vite · Express · Supabase · Render · Generative AI",
       "role": "Product strategy, UX/UI, development and QA coordination",
-      "intro": "A web app for exploring room redesigns from real photographs. In private beta, it is designed to let people choose a style, compare transformations and refine each result across successive versions.",
-      "cardText": "From the first photograph to progressive edits: UX/UI, AI generation and version control.",
+      "intro": "A private-beta web app for exploring redesign ideas from a photograph, comparing versions and, when available, receiving an indicative cost estimate.",
+      "cardText": "From photo to new ideas: redesign, version comparisons and indicative cost estimates.",
       "facts": [
         "Invite-only private beta",
         "Mobile-first UX",
@@ -139,48 +122,31 @@ export const caseStudies = [
       ],
       "sections": [
         {
-          "h": "The challenge is seeing, not imagining",
-          "body": "Before buying furniture or renovating, it is hard to see how a real room could change. Maybe Design uses a photograph as the starting point for exploring ideas, while keeping visual simulations separate from build-ready plans.",
-          "image": "/projects/maybe-design/beta-entry-desktop.webp",
-          "mediaLabel": "Family & Friends beta entry · authentic QA screen"
+          "h": "From Lake Carezza to a Christmas village",
+          "body": "In this outdoor creative test, a request for a Christmas village transformed the snowy lakeshore into a village lit for the evening. The comparison keeps the original photograph alongside version one.",
+          "image": "/projects/maybe-design/carezza-stacked.webp",
+          "mediaLabel": "Original photograph and generated V1"
         },
         {
-          "h": "Start with the photograph",
-          "body": "The experience follows a natural sequence: pick a room, choose a transformation and add style preferences and instructions. Photography takes priority over controls and copy. This is an earlier offline pre-beta screenshot, not the current online beta.",
-          "image": "/projects/maybe-design/upload-real.webp",
-          "mediaLabel": "Photo upload · offline pre-beta 0.6"
+          "h": "Comparing on a phone",
+          "body": "The slider reveals the changes. Separate zoom controls let you inspect the original and the result before refining a version.",
+          "image": "/projects/maybe-design/carezza-slider.webp",
+          "mediaLabel": "Slider and zoom · mobile interface"
         },
         {
-          "h": "Keep the progress, change the idea",
-          "body": "The designed workflow compares the original and the result, then lets people refine the selected version instead of restarting. The screen documents a comparison component from the offline preview, not an actual AI-generated result.",
-          "image": "/projects/maybe-design/compare-real.webp",
-          "mediaLabel": "Comparison UI · authentic 0.6 screen"
-        },
-        {
-          "h": "Designed for the phone, too",
-          "body": "The Family & Friends beta welcomes phone users with a name field, privacy acknowledgement and account recovery guidance. This authentic beta-entry screen was captured during QA. The redesign workflow screens shown here still come from the earlier 0.6 preview and will be replaced as soon as new captures are available.",
-          "image": "/projects/maybe-design/beta-entry-mobile.webp",
-          "mediaLabel": "Mobile entry · Family & Friends beta"
-        },
-        {
-          "h": "Beyond the interface",
-          "body": "The MVP evolved into a React app with an Express backend, Supabase accounts and cloud projects, and staging on Render. Family & Friends tests focus on account access, project continuity, credits and cost safeguards. The app is not publicly available.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Brand composition · 0.6 screenshots"
-        },
-        {
-          "h": "One product, two audiences",
-          "body": "The planned marketing landing separates homeowners exploring their own spaces from professionals presenting visual alternatives. It remains separate from the private beta and unpublished until rights-cleared image cases, final privacy terms and form checks are complete.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Brand and product presentation · 0.6"
+          "h": "Reading the estimate in context",
+          "body": "The surfaces in this landscape were never measured. The low-confidence €0–€0 range cannot establish a project cost. Reliable budgeting requires measurements and a professional quote.",
+          "image": "/projects/maybe-design/carezza-estimate.webp",
+          "mediaLabel": "AI estimate · unmeasured surfaces"
         }
       ],
       "results": [
         "Photo-to-redesign UX workflow",
         "Private-beta redesign and iterations",
+        "Indicative cost estimates when available",
         "Responsive interface with photography first",
         "Accounts, credits and cloud projects in testing",
-        "Separate B2C/B2B landing in progress",
+        "Separate B2C/B2B landing",
         "No misleading claim of public availability"
       ]
     }

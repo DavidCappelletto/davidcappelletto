@@ -17,6 +17,12 @@ export default function sitemap() {
       priority: 0.9,
     },
     {
+      url: `${base}/maybe-design`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${base}/ikigai`,
       lastModified: new Date(),
       changeFrequency: "weekly",

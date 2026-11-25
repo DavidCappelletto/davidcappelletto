@@ -53,7 +53,7 @@
   .hp-photo img{object-position:46% 18%}
   .hp-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,29,48,.78) 0%,rgba(15,29,48,0) 26%,rgba(15,29,48,0) 58%,rgba(15,29,48,.85) 86%,#0f1d30 100%)}
   .hp-fade{display:none}
-  .hp-shell{display:block;padding:0 22px;min-height:0;margin-top:-38px;position:relative;z-index:3}
+  .hp-shell{display:block;padding:0 22px;min-height:0;margin-top:-12px;position:relative;z-index:3}
   .hp-copy{padding:0 0 44px;max-width:620px}
   .hp-kicker{font-size:14px;margin-bottom:10px}
   .hp-title{font-size:clamp(31px,8.2vw,48px)}

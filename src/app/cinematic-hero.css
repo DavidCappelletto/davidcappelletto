@@ -63,11 +63,11 @@
   .hp-secondary{font-size:14px}
   .hp-work{margin-top:26px}
   .hp-screens{inset:auto 0 auto 0;top:0;height:clamp(320px,72vw,460px)}
-  .hp-maybe{display:block;position:absolute;left:12px;top:39%;width:clamp(85px,25vw,110px);margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.22);border-radius:9px;background:#f5f2eb;box-shadow:0 12px 30px rgba(0,0,0,.3);transform:rotate(-5deg)}
+  .hp-maybe{display:block;position:absolute;left:12px;top:32%;width:clamp(85px,25vw,110px);margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.22);border-radius:9px;background:#f5f2eb;box-shadow:0 12px 30px rgba(0,0,0,.3);transform:rotate(-5deg)}
   .hp-maybe img{display:block;width:100%;height:auto}
   .hp-maybe figcaption{display:flex;justify-content:space-between;align-items:center;gap:4px;padding:7px 8px;background:#132237;color:#fff;font-size:10px;font-weight:700}
   .hp-maybe figcaption span{color:#8fe3d6;font-size:8px}
-  .hp-shot-diama{left:auto;right:12px;bottom:auto;top:58%;width:clamp(130px,34vw,230px);border-radius:8px}
+  .hp-shot-diama{left:auto;right:12px;bottom:auto;top:55%;width:clamp(130px,34vw,230px);border-radius:8px}
   .hp-bar{padding:4px 6px;gap:3px}.hp-bar i{width:5px;height:5px}
   .hp-phone{right:16px;bottom:auto;top:24%;width:clamp(60px,15vw,100px);border-radius:12px;border-width:3px}
 }

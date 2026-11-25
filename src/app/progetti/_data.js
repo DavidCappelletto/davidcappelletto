@@ -59,13 +59,13 @@ export const caseStudies = [
     "category": "featured",
     "status": "progress",
     "featured": true,
-    "imageSrc": "/projects/maybe-design/cover.webp",
+    "imageSrc": "/projects/maybe-design/carezza-pair.webp",
     "it": {
       "tag": "Prodotto indipendente · Beta privata",
       "shortTitle": "Maybe Design",
       "title": "Maybe Design: dal re-design fotografico a un prodotto digitale",
       "client": "Prodotto digitale indipendente",
-      "place": "Beta Family & Friends a invito · landing in preparazione",
+      "place": "Beta Family & Friends a invito",
       "stack": "React · TypeScript · Vite · Express · Supabase · Render · AI generativa",
       "role": "Product strategy, UX/UI, sviluppo e coordinamento QA",
       "intro": "Una web app in beta privata per esplorare il re-design di ambienti da una foto, confrontare le versioni e ottenere, quando disponibile, una prima stima orientativa dei costi.",
@@ -77,40 +77,22 @@ export const caseStudies = [
       ],
       "sections": [
         {
-          "h": "Il problema non è immaginare. È vedere.",
-          "body": "Prima di acquistare un arredo o avviare un intervento, capire come potrebbe cambiare un ambiente non è semplice. Maybe Design nasce per trasformare una fotografia in un punto di partenza concreto per provare idee, senza confondere una simulazione con un progetto esecutivo.",
-          "image": "/projects/maybe-design/interface-desktop.webp",
-          "mediaLabel": "Schermata autentica · pre-beta offline 0.6"
+          "h": "Dal lago al villaggio di Natale",
+          "body": "Nel test creativo outdoor al Lago di Carezza, la richiesta «Un villaggio di natale» trasforma la riva innevata in un villaggio illuminato. La vista Affiancate conserva la foto di partenza accanto alla proposta V1.",
+          "image": "/projects/maybe-design/carezza-stacked.webp",
+          "mediaLabel": "Affiancate · originale e risultato V1"
         },
         {
-          "h": "Una foto prima di tutto",
-          "body": "L’esperienza segue la decisione naturale: partire dall’ambiente, scegliere il tipo di trasformazione e aggiungere stile e indicazioni. Nella UI la fotografia ha priorità su testo e impostazioni. L’immagine mostra una schermata della precedente pre-beta offline, non la beta attualmente distribuita.",
-          "image": "/projects/maybe-design/upload-real.webp",
-          "mediaLabel": "Flusso di caricamento · pre-beta offline 0.6"
+          "h": "Confrontare dal telefono",
+          "body": "La modalità Slider permette di scorrere tra le immagini. I due comandi Zoom aprono separatamente originale e risultato per valutarne i dettagli prima di perfezionare una versione.",
+          "image": "/projects/maybe-design/carezza-slider.webp",
+          "mediaLabel": "Slider e zoom · schermata mobile"
         },
         {
-          "h": "Le idee cambiano, la versione resta",
-          "body": "Il flusso progettato permette di confrontare originale e risultato e continuare a modificare la versione selezionata, senza perdere il percorso compiuto. Le schermate qui documentano i componenti della pre-beta offline; non rappresentano una generazione AI effettiva.",
-          "image": "/projects/maybe-design/compare-real.webp",
-          "mediaLabel": "Modulo confronto · schermata reale 0.6"
-        },
-        {
-          "h": "La stessa attenzione, su smartphone",
-          "body": "Layout, comandi e gerarchie sono pensati anche per chi usa l’app dal telefono: foto ben visibili, passaggi ordinati, azioni riconoscibili. La beta più recente prosegue il lavoro su generazioni, cronologia e archivio cloud; la schermata è ancora della versione offline 0.6.",
-          "image": "/projects/maybe-design/interface-mobile.webp",
-          "mediaLabel": "Vista mobile · pre-beta offline 0.6"
-        },
-        {
-          "h": "Dall’immagine a una prima stima dei costi",
-          "body": "Oltre alle trasformazioni fotografiche, Maybe Design può offrire una stima economica orientativa, quando l’analisi è disponibile. Non si tratta di un preventivo: materiali, misure, interventi e fattibilità vanno verificati con professionisti. Il prodotto resta in beta privata, con backend Express, Supabase e staging Render.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Composizione grafica · screenshot 0.6"
-        },
-        {
-          "h": "Due destinatari, una landing separata",
-          "body": "La comunicazione accompagna privati che vogliono esplorare casa propria e professionisti interessati a proporre alternative visive. La landing B2C/B2B è preparata separatamente dalla beta, ma non è pubblica: prima servono casi fotografici autorizzati, privacy definitiva e verifica dei moduli.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Brand e presentazione · screenshot 0.6"
+          "h": "Leggere la stima insieme alla sua affidabilità",
+          "body": "In questo paesaggio le superfici non sono misurate. L’intervallo 0–0 € con affidabilità bassa non consente di quantificare un intervento. Per valutare i costi servono misure e un preventivo professionale.",
+          "image": "/projects/maybe-design/carezza-estimate.webp",
+          "mediaLabel": "Stima AI · superfici non misurate"
         }
       ],
       "results": [
@@ -128,7 +110,7 @@ export const caseStudies = [
       "shortTitle": "Maybe Design",
       "title": "Maybe Design: from photographic redesign to a digital product",
       "client": "Independent digital product",
-      "place": "Invite-only Family & Friends beta · landing in progress",
+      "place": "Invite-only Family & Friends beta",
       "stack": "React · TypeScript · Vite · Express · Supabase · Render · Generative AI",
       "role": "Product strategy, UX/UI, development and QA coordination",
       "intro": "A private-beta web app for exploring redesign ideas from a photograph, comparing versions and, when available, receiving an indicative cost estimate.",
@@ -140,40 +122,22 @@ export const caseStudies = [
       ],
       "sections": [
         {
-          "h": "The challenge is seeing, not imagining",
-          "body": "Before buying furniture or renovating, it is hard to see how a real room could change. Maybe Design uses a photograph as the starting point for exploring ideas, while keeping visual simulations separate from build-ready plans.",
-          "image": "/projects/maybe-design/interface-desktop.webp",
-          "mediaLabel": "Authentic screen · offline pre-beta 0.6"
+          "h": "From Lake Carezza to a Christmas village",
+          "body": "In this outdoor creative test, a request for a Christmas village transformed the snowy lakeshore into a village lit for the evening. The comparison keeps the original photograph alongside version one.",
+          "image": "/projects/maybe-design/carezza-stacked.webp",
+          "mediaLabel": "Original photograph and generated V1"
         },
         {
-          "h": "Start with the photograph",
-          "body": "The experience follows a natural sequence: pick a room, choose a transformation and add style preferences and instructions. Photography takes priority over controls and copy. This is an earlier offline pre-beta screenshot, not the current online beta.",
-          "image": "/projects/maybe-design/upload-real.webp",
-          "mediaLabel": "Photo upload · offline pre-beta 0.6"
+          "h": "Comparing on a phone",
+          "body": "The slider reveals the changes. Separate zoom controls let you inspect the original and the result before refining a version.",
+          "image": "/projects/maybe-design/carezza-slider.webp",
+          "mediaLabel": "Slider and zoom · mobile interface"
         },
         {
-          "h": "Keep the progress, change the idea",
-          "body": "The designed workflow compares the original and the result, then lets people refine the selected version instead of restarting. The screen documents a comparison component from the offline preview, not an actual AI-generated result.",
-          "image": "/projects/maybe-design/compare-real.webp",
-          "mediaLabel": "Comparison UI · authentic 0.6 screen"
-        },
-        {
-          "h": "Designed for the phone, too",
-          "body": "The mobile interface keeps photographs visible and actions clear, with a deliberate order for each decision. The newer beta continues the work on generations, project history and cloud storage; this screen still comes from offline version 0.6.",
-          "image": "/projects/maybe-design/interface-mobile.webp",
-          "mediaLabel": "Mobile UI · offline pre-beta 0.6"
-        },
-        {
-          "h": "Beyond the image: indicative cost estimates",
-          "body": "When analysis is available, Maybe Design can add an indicative cost estimate to photographic redesign. It is not a professional quote: measurements, materials, work and feasibility need independent verification. The app remains in private beta with Express, Supabase and Render staging.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Brand composition · 0.6 screenshots"
-        },
-        {
-          "h": "One product, two audiences",
-          "body": "The planned marketing landing separates homeowners exploring their own spaces from professionals presenting visual alternatives. It remains separate from the private beta and unpublished until rights-cleared image cases, final privacy terms and form checks are complete.",
-          "image": "/projects/maybe-design/cover.webp",
-          "mediaLabel": "Brand and product presentation · 0.6"
+          "h": "Reading the estimate in context",
+          "body": "The surfaces in this landscape were never measured. The low-confidence €0–€0 range cannot establish a project cost. Reliable budgeting requires measurements and a professional quote.",
+          "image": "/projects/maybe-design/carezza-estimate.webp",
+          "mediaLabel": "AI estimate · unmeasured surfaces"
         }
       ],
       "results": [
@@ -182,7 +146,7 @@ export const caseStudies = [
         "Indicative cost estimates when available",
         "Responsive interface with photography first",
         "Accounts, credits and cloud projects in testing",
-        "Separate B2C/B2B landing in progress",
+        "Separate B2C/B2B landing",
         "No misleading claim of public availability"
       ]
     }
@@ -231,9 +195,9 @@ export const caseStudies = [
       role: "Analisi, progettazione del flusso e sviluppo", intro: "Un’automazione per rendere tracciabile il percorso fra appuntamento, promemoria e conferma.",
       cardText: "Un flusso operativo in costruzione e validazione sul campo.", facts: ["Flusso anonimo", "Controlli", "WIP dichiarato"],
       sections: [
-        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/cover.svg", mediaLabel: "Appuntamento · input" },
+        { h: "Partire dai dati che esistono davvero", body: "Il lavoro parte dal modo in cui lo studio registra gli appuntamenti e dalle informazioni necessarie. Il caso pubblico non mostra nomi, numeri o dati sanitari.", image: "/projects/dentista/input.svg", mediaLabel: "Appuntamento · input" },
         { h: "Tradurre il lavoro in regole", body: "Tempi, eccezioni, consensi e casi incompleti diventano un flusso leggibile. L’automazione deve sapere anche quando fermarsi e chiedere controllo umano.", image: "/projects/dentista/flow.svg", mediaLabel: "Regole · verifica" },
-        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validazione" },
+        { h: "Validare prima di chiamarlo risultato", body: "Il progetto è ancora in costruzione. Tempi risparmiati e riduzione delle assenze verranno aggiunti soltanto dopo una verifica sul campo.", image: "/projects/dentista/validation.svg", mediaLabel: "WIP · validazione" },
       ], results: ["Processo mappato", "Dati pubblici anonimi", "Regole ed eccezioni esplicite", "Controllo umano previsto", "WIP dichiarato", "Risultati da misurare"],
     },
     en: {
@@ -242,9 +206,9 @@ export const caseStudies = [
       role: "Analysis, workflow design and development", intro: "An automation making the path from appointment to reminder and confirmation traceable.",
       cardText: "An operational flow under construction and field validation.", facts: ["Anonymous flow", "Checks", "WIP declared"],
       sections: [
-        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/cover.svg", mediaLabel: "Appointment · input" },
+        { h: "Start from real data", body: "The work begins with how appointments are recorded and the minimum required data. The public case never shows names, numbers or health information.", image: "/projects/dentista/input.svg", mediaLabel: "Appointment · input" },
         { h: "Turn work into rules", body: "Timing, exceptions, consent and incomplete cases become a readable flow. Automation must know when to request human review.", image: "/projects/dentista/flow.svg", mediaLabel: "Rules · checks" },
-        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/cover.svg", mediaLabel: "WIP · validation" },
+        { h: "Validate before claiming results", body: "The project is still being built. Saved time and reduced no-shows will be added only after field verification.", image: "/projects/dentista/validation.svg", mediaLabel: "WIP · validation" },
       ], results: ["Process mapped", "Public data anonymised", "Rules and exceptions explicit", "Human review included", "WIP declared", "Results to measure"],
     },
   },

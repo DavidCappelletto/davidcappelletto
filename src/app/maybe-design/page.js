@@ -10,7 +10,7 @@ export const metadata = {
     description: "Una foto, nuove possibilità. Trasformazioni, versioni e stime orientative. Beta privata su invito.",
     url: "https://davidcappelletto.it/maybe-design",
     siteName: "David Cappelletto", locale: "it_IT", type: "website",
-    images: [{ url: "/projects/maybe-design/cover.webp", width: 1440, height: 900, alt: "Maybe Design, anteprima del prodotto" }]
+    images: [{ url: "/projects/maybe-design/carezza-pair.webp", width: 1228, height: 409, alt: "Lago di Carezza, foto originale e villaggio natalizio generato" }]
   }
 };
 const EMAIL = "contact@davidcappelletto.it";
@@ -35,8 +35,8 @@ export default function MaybeDesignLanding() {
           <p className="mdm-note">L&apos;invito non è automatico. La richiesta si invia dal tuo programma email.</p>
         </div>
         <figure className="mdm-hero-picture">
-          <img src="/projects/maybe-design/cover.webp" alt="Presentazione grafica Maybe Design con screenshot del prototipo" width="1440" height="900" />
-          <figcaption>Anteprima grafica del prodotto · schermate della pre-beta 0.6. Non è una trasformazione AI reale.</figcaption>
+          <picture><source media="(max-width: 600px)" srcSet="/projects/maybe-design/carezza-stacked.webp"/><img src="/projects/maybe-design/carezza-pair.webp" alt="Lago di Carezza innevato e villaggio natalizio generato nella versione V1" width="1228" height="409"/></picture>
+          <figcaption>Lago di Carezza · test creativo outdoor nella beta. Dalla fotografia originale al villaggio natalizio.</figcaption>
         </figure>
       </section>
 
@@ -61,19 +61,16 @@ export default function MaybeDesignLanding() {
           <h2>La fotografia è il punto di partenza. <em>Le scelte sono tue.</em></h2>
           <p>L&apos;esperienza parte dall&apos;ambiente e dalle tue indicazioni. Puoi cambiare direzione, confrontare più versioni e proseguire su quella che preferisci.</p>
         </div>
-        <div className="mdm-showcase-grid">
-          <figure><img src="/projects/maybe-design/interface-desktop.webp" alt="Interfaccia originale della pre-beta 0.6 con caricamento foto e area di confronto" width="1280" height="860"/><figcaption>Schermata reale · pre-beta offline 0.6, non la beta attuale</figcaption></figure>
-          <div className="mdm-showcase-side">
-            <figure><img src="/projects/maybe-design/interface-mobile.webp" alt="Versione smartphone della pre-beta 0.6" width="390" height="844"/><figcaption>Vista mobile · pre-beta offline 0.6</figcaption></figure>
-            <div className="mdm-proof"><span>PRIMA / DOPO</span><h3>Il risultato parla da solo.</h3><p>Le coppie fotografiche realizzate dalla beta attuale saranno mostrate qui quando saranno disponibili e autorizzate. Non sostituiamo risultati reali con simulazioni inventate.</p></div>
-          </div>
+        <div className="mdm-mobile-detail">
+          <figure><img src="/projects/maybe-design/carezza-slider.webp" alt="Controlli Slider, Affiancate e Zoom sopra il risultato V1" width="640" height="778"/></figure>
+          <div><h3>Guarda cosa cambia, anche dal telefono.</h3><p>Scorri il confronto con Slider, oppure scegli Affiancate per tenere entrambe le foto in vista. Ingrandisci i dettagli e scegli cosa perfezionare nella prossima versione.</p></div>
         </div>
       </section>
 
       <section className="mdm-estimate" id="stima">
         <div className="mdm-shell mdm-estimate-grid">
           <div><p className="mdm-kicker">OLTRE LA VISUALIZZAZIONE</p><h2>Come potrebbe diventare. <em>E quanto potrebbe costare.</em></h2><p>Maybe Design può affiancare alla trasformazione una <strong>stima economica indicativa</strong>, quando i dati e l&apos;analisi lo permettono. È un primo riferimento per valutare un&apos;idea, non una cifra definitiva.</p><p className="mdm-legal">La stima non è un preventivo. Misure, materiali, manodopera, vincoli e fattibilità richiedono verifiche professionali.</p></div>
-          <aside className="mdm-estimate-card"><span>UNA PRIMA VALUTAZIONE · NON UN PREVENTIVO</span><h3>Più elementi per decidere.</h3><div className="mdm-estimate-row"><small>01</small><strong>Arredi e complementi</strong><b>↗</b></div><div className="mdm-estimate-row"><small>02</small><strong>Materiali e finiture</strong><b>↗</b></div><div className="mdm-estimate-row"><small>03</small><strong>Interventi ipotizzati</strong><b>↗</b></div><p>Voci illustrative, non importi calcolati su un ambiente reale.</p></aside>
+          <figure className="mdm-real-estimate"><img src="/projects/maybe-design/carezza-estimate.webp" alt="Stima V1 da 0 a 0 euro con affidabilità bassa" width="640" height="312"/><figcaption>Nel test outdoor le superfici non sono misurate. Lo 0–0 € segnala che da questa foto non si ricava un costo utilizzabile.</figcaption></figure>
         </div>
       </section>
 
